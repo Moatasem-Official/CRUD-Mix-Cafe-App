@@ -1,16 +1,56 @@
-# mix_cafe_app
+# Mix Cafe App
 
-A new Flutter project.
+Mix Cafe App is an in-progress Flutter application designed to deliver a seamless and engaging user experience for cafe customers and administrators. The project is currently under active development.
+
+## Project Status
+
+🚧 **This project is not yet complete. Features and UI are subject to change as development continues.**
+
+## Features (Planned)
+
+- User authentication (Admin & Customer)
+- Role selection
+- Customer registration and login
+- Password recovery
+- Home screen and navigation
+- Responsive design for multiple platforms (Web, Android, iOS, Desktop)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this project locally:
 
-A few resources to get you started if this is your first Flutter project:
+1. **Clone the repository:**
+   ```sh
+   git clone <repository-url>
+   cd Mix_Cafe_App
+   ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. **Install dependencies:**
+   ```sh
+   flutter pub get
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. **Run the app:**
+   ```sh
+   flutter run
+   ```
+
+## Folder Structure
+
+- `lib/` — Main application code
+- `assets/` — Fonts and images
+- `web/`, `android/`, `ios/`, `linux/`, `macos/`, `windows/` — Platform-specific code
+
+## Resources
+
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Flutter Cookbook](https://docs.flutter.dev/cookbook)
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for suggestions or improvements.
+
+---
+
+*This README will be updated as the project progresses.*
