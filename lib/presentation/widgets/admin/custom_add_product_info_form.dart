@@ -1,31 +1,46 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/custom_product_offer_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/custom_upload_image_container.dart';
 
-class CustomAddProductInformationForm extends StatelessWidget {
-  const CustomAddProductInformationForm({
+class CustomAddProductInformationForm extends StatefulWidget {
+  CustomAddProductInformationForm({
     super.key,
     required GlobalKey<FormState> formKey,
     required TextEditingController nameController,
     required TextEditingController descController,
     required TextEditingController priceController,
+    required TextEditingController offerPriceController,
     required String? imageUrl,
+    this.offerImageUrl,
+    this.isHasOffer = false,
   }) : _formKey = formKey,
        _nameController = nameController,
        _descController = descController,
        _priceController = priceController,
+       _offerPriceController = offerPriceController,
        _imageUrl = imageUrl;
 
   final GlobalKey<FormState> _formKey;
   final TextEditingController _nameController;
   final TextEditingController _descController;
   final TextEditingController _priceController;
+  final TextEditingController _offerPriceController;
   final String? _imageUrl;
+  bool isHasOffer = false;
+  final String? offerImageUrl;
 
+  @override
+  State<CustomAddProductInformationForm> createState() =>
+      _CustomAddProductInformationFormState();
+}
+
+class _CustomAddProductInformationFormState
+    extends State<CustomAddProductInformationForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: widget._formKey,
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -34,7 +49,7 @@ class CustomAddProductInformationForm extends StatelessWidget {
             // اسم المنتج
             Material(
               child: TextFormField(
-                controller: _nameController,
+                controller: widget._nameController,
                 decoration: const InputDecoration(
                   labelText: 'Product Name',
                   border: OutlineInputBorder(),
@@ -49,7 +64,7 @@ class CustomAddProductInformationForm extends StatelessWidget {
             // وصف المنتج
             Material(
               child: TextFormField(
-                controller: _descController,
+                controller: widget._descController,
                 decoration: const InputDecoration(
                   labelText: 'Product description',
                   border: OutlineInputBorder(),
@@ -65,7 +80,7 @@ class CustomAddProductInformationForm extends StatelessWidget {
             // السعر
             Material(
               child: TextFormField(
-                controller: _priceController,
+                controller: widget._priceController,
                 decoration: const InputDecoration(
                   labelText: 'Price (EGP)',
                   border: OutlineInputBorder(),
@@ -85,27 +100,45 @@ class CustomAddProductInformationForm extends StatelessWidget {
             const SizedBox(height: 16),
 
             // اختيار الصورة (في الوقت الحالي: رابط)
-            DottedBorder(
-              options: RectDottedBorderOptions(
-                dashPattern: [10, 5],
-                strokeWidth: 2,
-                color: Colors.grey,
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+            CustomUplaodImageContainer(imageUrl: widget._imageUrl),
+            const SizedBox(height: 16),
+            Row(
+              spacing: 8,
+              children: [
+                Switch(
+                  activeColor: Color.fromARGB(255, 165, 101, 56),
+                  inactiveThumbColor: Color.fromARGB(255, 177, 133, 102),
+                  inactiveTrackColor: Color.fromARGB(255, 200, 180, 166),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  trackOutlineColor: WidgetStateProperty.all(
+                    Color.fromARGB(255, 200, 180, 166),
+                  ),
+                  value: widget.isHasOffer,
+                  onChanged: (value) {
+                    setState(() {
+                      widget.isHasOffer = value;
+                    });
+                  },
                 ),
-                padding: const EdgeInsets.all(8),
-                child: Center(
-                  child: Text(
-                    _imageUrl ?? 'No Image Selected',
-                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                const Text(
+                  'Product Has Offer ?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF6F4E37),
                   ),
                 ),
-              ),
+              ],
             ),
+            const SizedBox(height: 16),
+
+            // صورة العرض (في الوقت الحالي: رابط)
+            if (widget.isHasOffer)
+              CustomWidgetIfProductHasOffer(
+                offerImageUrl: widget.offerImageUrl,
+                offerController: widget._offerPriceController,
+              ),
+
             const SizedBox(height: 24),
 
             // زر الإضافة
@@ -113,7 +146,7 @@ class CustomAddProductInformationForm extends StatelessWidget {
               child: CustomButton(
                 buttonText: 'Add Product',
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (widget._formKey.currentState!.validate()) {}
                 },
               ),
             ),

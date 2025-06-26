@@ -1,9 +1,5 @@
-import 'dart:ui' as BorderType;
-
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_add_product_info_form.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
 
 class ProductInformationForm extends StatefulWidget {
   const ProductInformationForm({super.key});
@@ -50,6 +46,7 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               nameController: _nameController,
               descController: _descController,
               priceController: _priceController,
+              offerPriceController: TextEditingController(),
               imageUrl: _imageUrl,
             ),
           ],
