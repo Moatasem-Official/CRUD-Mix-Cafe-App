@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/constants/app_images.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/custom_adding_category_form.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_categ_listview_builder.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_categories_appbar.dart';
 
@@ -16,7 +17,16 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return const CustomAddingCategoryForm();
+            },
+          );
+        },
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),

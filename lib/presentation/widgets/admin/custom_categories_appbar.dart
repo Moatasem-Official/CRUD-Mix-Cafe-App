@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
-
+  const CustomAppBar({super.key, this.onPressed});
+  final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,15 +45,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  'Add Category',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.w700,
-                  ),
+                onPressed: onPressed,
+                child: Row(
+                  spacing: 10,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.add, color: Colors.white, size: 30),
+                    const Text(
+                      'Add Category',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        letterSpacing: 2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

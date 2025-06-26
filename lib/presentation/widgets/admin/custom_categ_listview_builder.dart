@@ -33,6 +33,13 @@ class CustomCategoriesListViewBuilder extends StatelessWidget {
                   color: const Color.fromARGB(255, 165, 101, 56),
                 ),
               ),
+              subtitle: const Text(
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                softWrap: true,
+                'Category Description',
+                style: TextStyle(fontSize: 14),
+              ),
               title: Text(
                 'Category $index',
                 style: const TextStyle(
