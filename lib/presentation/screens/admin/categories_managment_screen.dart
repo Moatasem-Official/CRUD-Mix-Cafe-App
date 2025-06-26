@@ -36,7 +36,13 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            CustomCategoriesListViewBuilder(),
+            CustomCategoriesListViewBuilder(
+              onTab: () => Navigator.pushNamed(
+                context,
+                '/categoryProducts',
+                arguments: 'categoryName',
+              ),
+            ),
           ],
         ),
       ),

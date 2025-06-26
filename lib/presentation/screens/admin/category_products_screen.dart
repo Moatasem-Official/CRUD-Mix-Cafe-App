@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/constants/app_images.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_categ_listview_builder.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_categories_appbar.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_product_templete.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
-  const CategoryProductsScreen({super.key});
+  const CategoryProductsScreen({super.key, required this.categoryName});
+
+  final String categoryName;
 
   @override
   State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
@@ -56,7 +57,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomCategoriesAppBar(
-        title: 'Category Products',
+        title: widget.categoryName,
         buttonText: 'Add Product',
         onPressed: () {},
       ),

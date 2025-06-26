@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomCategoriesListViewBuilder extends StatelessWidget {
-  const CustomCategoriesListViewBuilder({super.key});
+  const CustomCategoriesListViewBuilder({super.key, this.onTab});
+
+  final Function()? onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class CustomCategoriesListViewBuilder extends StatelessWidget {
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.all(16.0),
-              onTap: () {},
+              onTap: onTab,
               leading: IconButton(
                 iconSize: 30,
                 tooltip: 'Delete',
