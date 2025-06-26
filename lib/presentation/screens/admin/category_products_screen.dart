@@ -59,7 +59,8 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
       appBar: CustomCategoriesAppBar(
         title: widget.categoryName,
         buttonText: 'Add Product',
-        onPressed: () {},
+        onPressed: () =>
+            Navigator.of(context).pushNamed('/productInformationForm'),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
