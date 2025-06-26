@@ -17,7 +17,9 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(
+      appBar: CustomCategoriesAppBar(
+        title: 'Categories',
+        buttonText: 'Add Category',
         onPressed: () {
           showModalBottomSheet<void>(
             context: context,
