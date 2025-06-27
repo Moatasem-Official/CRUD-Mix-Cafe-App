@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/categories_managment_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/category_products_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/orders_managment_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/product_information_form.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_forget_password_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_login_screen.dart';
@@ -17,6 +18,7 @@ class AppRouter {
   static const String categoriesManagment = '/categories_managment';
   static const String categoryProducts = '/categoryProducts';
   static const String productInformationForm = '/productInformationForm';
+  static const String ordersManagment = '/ordersManagment';
   static const String customerLogin = '/customerLogin';
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
@@ -43,6 +45,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ProductInformationForm(),
         );
+      case ordersManagment:
+        return MaterialPageRoute(builder: (_) => const OrdersManagmentScreen());
       case customerLogin:
         return MaterialPageRoute(builder: (_) => const CustomerLoginScreen());
       case customerSignUp:
