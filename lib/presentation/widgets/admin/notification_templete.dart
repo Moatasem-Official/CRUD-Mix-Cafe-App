@@ -54,10 +54,12 @@ class NotificationCard extends StatelessWidget {
                 // العنوان
                 Text(
                   title,
+                  maxLines: 2,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF4E342E),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -65,10 +67,12 @@ class NotificationCard extends StatelessWidget {
                 // المحتوى
                 Text(
                   body,
+                  maxLines: 3,
                   style: const TextStyle(
                     fontSize: 15,
                     height: 1.4,
                     color: Color(0xFF333333),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(height: 10),
