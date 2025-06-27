@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_orders_drop_menu_item.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/custom_orders_tab_bar_item.dart';
 
-class CustomOrdersManagmentAppBar extends StatelessWidget
+class CustomOrdersManagmentAppBar extends StatefulWidget
     implements PreferredSizeWidget {
-  const CustomOrdersManagmentAppBar({super.key});
+  const CustomOrdersManagmentAppBar({super.key, required this.onTabSelected});
+
+  final Function(String) onTabSelected;
+
+  @override
+  State<CustomOrdersManagmentAppBar> createState() =>
+      _CustomOrdersManagmentAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 160);
+}
+
+class _CustomOrdersManagmentAppBarState
+    extends State<CustomOrdersManagmentAppBar> {
+  String selectedTab = 'All';
+
+  final List<String> tabs = [
+    'All',
+    'Pending',
+    'In Progress',
+    'Delivered',
+    'Cancelled',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,50 +73,32 @@ class CustomOrdersManagmentAppBar extends StatelessWidget
               ),
             ),
           ),
-          Text(
-            'Sort By',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF6F4E37),
-            ),
-          ),
-          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-            child: Row(
-              children: const [
-                Expanded(
-                  child: CustomOrdersDropdownMenuItem(
-                    menuHintText: 'Status',
-                    label1: 'Pending',
-                    label2: 'In Progress',
-                    label3: 'Delivered',
-                    value1: 'Pending',
-                    value2: 'In Progress',
-                    value3: 'Delivered',
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: CustomOrdersDropdownMenuItem(
-                    menuHintText: 'Date',
-                    label1: 'Today',
-                    label2: 'This Week',
-                    label3: 'This Month',
-                    value1: 'Today',
-                    value2: 'This Week',
-                    value3: 'This Month',
-                  ),
-                ),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: Row(
+                children: tabs.map((tabText) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: CustomOrdersTabBarItem(
+                      itemText: tabText,
+                      isSelected: selectedTab == tabText,
+                      onTap: () {
+                        setState(() {
+                          selectedTab = tabText;
+                        });
+                        widget.onTabSelected(tabText);
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ],
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 220);
 }
