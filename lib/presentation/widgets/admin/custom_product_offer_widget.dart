@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_add_product_info_form.dart';
 
 class CustomWidgetIfProductHasOffer extends StatelessWidget {
   const CustomWidgetIfProductHasOffer({
