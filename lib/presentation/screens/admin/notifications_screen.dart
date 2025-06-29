@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Notifications_Screen_Widgets/notification_form.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Notifications_Screen_Widgets/notification_templete.dart';
+import '../../widgets/admin/Notifications_Screen_Widgets/notification_form.dart';
+import '../../widgets/admin/Notifications_Screen_Widgets/notification_templete.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});

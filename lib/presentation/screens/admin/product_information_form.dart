@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_add_product_info_form.dart';
+import '../../widgets/admin/Products_Screen_Widgets/custom_add_product_info_form.dart';
 
 class ProductInformationForm extends StatefulWidget {
   const ProductInformationForm({super.key});

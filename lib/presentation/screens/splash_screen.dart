@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_images.dart';
+import '../../constants/app_images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

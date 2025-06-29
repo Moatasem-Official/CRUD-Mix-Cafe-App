@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_images.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/admin_home_screen.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_text_field.dart';
+import '../../../constants/app_images.dart';
+import 'admin_home_screen.dart';
+import '../../widgets/admin/custom_button.dart';
+import '../../widgets/admin/custom_text_field.dart';
 
 class AdminLoginScreen extends StatefulWidget {
   const AdminLoginScreen({super.key});

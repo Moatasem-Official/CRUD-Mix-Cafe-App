@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/cafe_settings_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/admin_account_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/security_settings_container.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/cafe_settings_container.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/admin_account_container.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/security_settings_container.dart';
 
 class AdminSettingsScreen extends StatefulWidget {
   const AdminSettingsScreen({super.key});

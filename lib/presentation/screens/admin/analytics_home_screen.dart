@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mix_cafe_app/constants/app_images.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_title_of_popular_items.dart';
+import '../../../constants/app_images.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_container.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_title_of_popular_items.dart';
 
 class AnalyticsHomeScreen extends StatelessWidget {
   AnalyticsHomeScreen({super.key});

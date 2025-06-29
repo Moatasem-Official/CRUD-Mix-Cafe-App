@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_images.dart';
-import 'package:mix_cafe_app/presentation/widgets/User_Role_Screen_Widgets/custom_user_role_container.dart';
+import '../../constants/app_images.dart';
+import '../widgets/User_Role_Screen_Widgets/custom_user_role_container.dart';
 
 class SelectUserRoleScreen extends StatefulWidget {
   const SelectUserRoleScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Categories_Screen_Widgets/custom_adding_category_form.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Categories_Screen_Widgets/custom_categ_listview_builder.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Categories_Screen_Widgets/custom_categories_appbar.dart';
+import '../../widgets/admin/Categories_Screen_Widgets/custom_adding_category_form.dart';
+import '../../widgets/admin/Categories_Screen_Widgets/custom_categ_listview_builder.dart';
+import '../../widgets/admin/Categories_Screen_Widgets/custom_categories_appbar.dart';
 
 class CategoriesManagmentScreen extends StatefulWidget {
   const CategoriesManagmentScreen({super.key});

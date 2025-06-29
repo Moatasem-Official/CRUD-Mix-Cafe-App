@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_product_offer_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_upload_image_container.dart';
+import '../custom_button.dart';
+import 'custom_product_offer_widget.dart';
+import 'custom_upload_image_container.dart';
 
 class CustomAddProductInformationForm extends StatefulWidget {
   CustomAddProductInformationForm({

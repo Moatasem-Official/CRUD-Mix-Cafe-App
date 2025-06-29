@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/admin_home_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/admin_settings_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/analytics_home_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/categories_managment_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/category_products_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/notifications_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/orders_managment_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/product_information_form.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_forget_password_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_login_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_sign_up_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/home_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/admin_login_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/select_user_role_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/splash_screen.dart';
+import 'presentation/screens/admin/admin_home_screen.dart';
+import 'presentation/screens/admin/admin_settings_screen.dart';
+import 'presentation/screens/admin/analytics_home_screen.dart';
+import 'presentation/screens/admin/categories_managment_screen.dart';
+import 'presentation/screens/admin/category_products_screen.dart';
+import 'presentation/screens/admin/notifications_screen.dart';
+import 'presentation/screens/admin/orders_managment_screen.dart';
+import 'presentation/screens/admin/product_information_form.dart';
+import 'presentation/screens/customers/customer_forget_password_screen.dart';
+import 'presentation/screens/customers/customer_login_screen.dart';
+import 'presentation/screens/customers/customer_sign_up_screen.dart';
+import 'presentation/screens/home_screen.dart';
+import 'presentation/screens/admin/admin_login_screen.dart';
+import 'presentation/screens/select_user_role_screen.dart';
+import 'presentation/screens/splash_screen.dart';
 
 class AppRouter {
   static const String splash = '/';

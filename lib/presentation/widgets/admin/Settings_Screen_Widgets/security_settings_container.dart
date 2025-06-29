@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/custom_cafe_settings_row.dart';
+import 'custom_cafe_settings_row.dart';
 
 class SecuritySettingsContainer extends StatelessWidget {
   const SecuritySettingsContainer({super.key});

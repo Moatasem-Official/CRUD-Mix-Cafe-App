@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/activate_orders_with_switch_row.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/custom_cafe_settings_row.dart';
+import 'activate_orders_with_switch_row.dart';
+import 'custom_cafe_settings_row.dart';
 
 class CafeSettingsContainer extends StatelessWidget {
   const CafeSettingsContainer({
