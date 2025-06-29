@@ -7,81 +7,101 @@ class CustomCategoriesAppBar extends StatelessWidget
     required this.onPressed,
     required this.title,
     required this.buttonText,
+    this.onChange,
+    this.onSubmitted,
   });
   final String? title;
   final String? buttonText;
   final Function()? onPressed;
+  final Function(String searchValue)? onChange;
+  final Function(String searchValue)? onSubmitted;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 25),
         Container(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 16),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF8B5E3C), // Dark Coffee
-                Color(0xFFA9746E), // Lighter Coffee
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.brown.withOpacity(0.3),
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
+            color: const Color(0xFFFDF9F6), // soft cream background
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: SafeArea(
-            child: Center(
-              child: Text(
-                title ?? 'Title',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.2,
+          child: Column(
+            children: [
+              // 🟤 Centered Title
+              Center(
+                child: Text(
+                  title ?? 'Dashboard',
+                  style: const TextStyle(
+                    color: Color(0xFF6F4E37),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.0,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
+              const SizedBox(height: 16),
+
+              // 🔍 Search Field with centered hint
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.07),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                height: 48,
+                alignment: Alignment.center,
+                child: TextField(
+                  onChanged: onChange,
+                  onSubmitted: onSubmitted,
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: InputDecoration(
+                    hintText: 'Search for Category of $title ...',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                    prefixIcon: Icon(Icons.search, color: Colors.brown),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 20),
+
+        const SizedBox(height: 24),
+
+        // 🟠 Modern Button Theme
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SizedBox(
             width: double.infinity,
             height: 50,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 154, 97, 57),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: MaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
+            child: ElevatedButton.icon(
               onPressed: onPressed,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.add, color: Colors.white, size: 30),
-                  const SizedBox(width: 10),
-                  Text(
-                    buttonText ?? '',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+              icon: const Icon(Icons.add, color: Colors.white, size: 26),
+              label: Text(
+                buttonText ?? 'Add New',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.1,
+                  color: Colors.white,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF6F4E37), // rich coffee tone
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
             ),
           ),

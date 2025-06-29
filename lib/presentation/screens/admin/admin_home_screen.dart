@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'admin_settings_screen.dart';
 import 'analytics_home_screen.dart';
 import 'categories_managment_screen.dart';
-import 'orders_managment_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/orders_managment_screen.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 class AdminHomeScreen extends StatefulWidget {

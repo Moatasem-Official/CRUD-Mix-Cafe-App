@@ -58,6 +58,8 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
       backgroundColor: Colors.white,
       appBar: CustomCategoriesAppBar(
         title: widget.categoryName,
+        onChange: (searchValue) => print(searchValue),
+        onSubmitted: (searchValue) => print(searchValue),
         buttonText: 'Add Product',
         onPressed: () =>
             Navigator.of(context).pushNamed('/productInformationForm'),
