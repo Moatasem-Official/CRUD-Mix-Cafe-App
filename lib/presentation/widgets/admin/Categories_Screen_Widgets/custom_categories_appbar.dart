@@ -15,20 +15,42 @@ class CustomCategoriesAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppBar(
-          automaticallyImplyLeading: true,
-          surfaceTintColor: Colors.white,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: Text(
-            title!,
-            style: TextStyle(
-              color: Color(0xFF6F4E37),
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF8B5E3C), // Dark Coffee
+                Color(0xFFA9746E), // Lighter Coffee
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.brown.withOpacity(0.3),
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
           ),
-          elevation: 0,
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: SafeArea(
+            child: Center(
+              child: Text(
+                title ?? 'Title',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 20),
         Padding(
@@ -37,7 +59,7 @@ class CustomCategoriesAppBar extends StatelessWidget
             width: double.infinity,
             height: 50,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 154, 97, 57),
+              color: const Color.fromARGB(255, 154, 97, 57),
               borderRadius: BorderRadius.circular(10),
             ),
             child: MaterialButton(
@@ -46,13 +68,13 @@ class CustomCategoriesAppBar extends StatelessWidget
               ),
               onPressed: onPressed,
               child: Row(
-                spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.add, color: Colors.white, size: 30),
+                  const SizedBox(width: 10),
                   Text(
-                    buttonText!,
-                    style: TextStyle(
+                    buttonText ?? '',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       letterSpacing: 2,
@@ -69,5 +91,5 @@ class CustomCategoriesAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(170);
+  Size get preferredSize => const Size.fromHeight(190);
 }

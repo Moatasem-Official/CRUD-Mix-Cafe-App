@@ -15,50 +15,65 @@ class CustomCategoriesListViewBuilder extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 245, 242, 238),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+          child: Material(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(15),
               onTap: onTab,
-              leading: IconButton(
-                iconSize: 30,
-                tooltip: 'Delete',
-                color: const Color.fromARGB(255, 165, 101, 56),
-                onPressed: () {},
-                icon: Icon(
-                  Icons.delete,
-                  color: const Color.fromARGB(255, 165, 101, 56),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFDFBFA),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-              ),
-              subtitle: const Text(
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                softWrap: true,
-                'Category Description',
-                style: TextStyle(fontSize: 14),
-              ),
-              title: Text(
-                'Category $index',
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 165, 101, 56),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              trailing: IconButton(
-                iconSize: 30,
-                color: const Color.fromARGB(255, 165, 101, 56),
-                tooltip: 'Edit',
-                onPressed: () {},
-                icon: Icon(
-                  Icons.edit,
-                  color: const Color.fromARGB(255, 165, 101, 56),
+                child: Row(
+                  children: [
+                    IconButton(
+                      iconSize: 28,
+                      tooltip: 'Delete',
+                      onPressed: () {},
+                      icon: const Icon(Icons.delete),
+                      color: const Color(0xFFA56538),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Category $index',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFA56538),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Category Description',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF5C5C5C),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    IconButton(
+                      iconSize: 28,
+                      tooltip: 'Edit',
+                      onPressed: () {},
+                      icon: const Icon(Icons.edit),
+                      color: const Color(0xFFA56538),
+                    ),
+                  ],
                 ),
               ),
             ),

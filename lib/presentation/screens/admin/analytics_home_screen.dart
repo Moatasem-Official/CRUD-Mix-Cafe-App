@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';
-import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_container.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_title_of_popular_items.dart';
 
 class AnalyticsHomeScreen extends StatelessWidget {
@@ -60,18 +60,12 @@ class AnalyticsHomeScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 237, 237, 237),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.notifications,
-                color: Color.fromARGB(255, 165, 101, 56),
-              ),
+            tooltip: 'Notifications',
+            style: ButtonStyle(
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
             ),
             onPressed: () => Navigator.of(context).pushNamed('/notifications'),
+            icon: CustomNotificationsNumStack(),
           ),
         ],
       ),
@@ -80,30 +74,7 @@ class AnalyticsHomeScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
-              child: Row(
-                spacing: 10,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomAnalysisContainer(
-                    icon: FontAwesomeIcons.cartShopping,
-                    analysisNumber: '1,000',
-                    title: 'Orders',
-                  ),
-                  CustomAnalysisContainer(
-                    icon: FontAwesomeIcons.chartBar,
-                    analysisNumber: '1,000 \$',
-                    title: 'Sales',
-                  ),
-                  CustomAnalysisContainer(
-                    icon: FontAwesomeIcons.users,
-                    analysisNumber: '1,000',
-                    title: 'Users',
-                  ),
-                ],
-              ),
-            ),
+            CustomAnalysisContainersRow(),
             CustomAnalysisChart(),
             CustomTitleOfPopularItems(),
             CustomMostPopularItemsGrid(items: data),
