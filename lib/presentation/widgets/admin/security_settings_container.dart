@@ -10,7 +10,7 @@ class SecuritySettingsContainer extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF2B1C13),
+        color: const Color.fromARGB(255, 165, 101, 56),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

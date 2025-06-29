@@ -129,7 +129,7 @@ class CustomChartContent extends StatelessWidget {
                     ? weeklySales
                     : (yearlySalesData[selectedYear] ?? []),
                 isCurved: true,
-                color: const Color(0xFF795548),
+                color: const Color.fromARGB(255, 165, 101, 56),
                 barWidth: 4,
                 belowBarData: BarAreaData(
                   show: true,
@@ -141,8 +141,8 @@ class CustomChartContent extends StatelessWidget {
                       FlDotCirclePainter(
                         radius: 5,
                         color: Colors.white,
-                        strokeWidth: 3,
-                        strokeColor: const Color(0xFF795548),
+                        strokeWidth: 1,
+                        strokeColor: const Color.fromARGB(255, 165, 101, 56),
                       ),
                 ),
               ),

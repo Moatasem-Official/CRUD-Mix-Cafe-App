@@ -29,13 +29,6 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.brown.withOpacity(0.08),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +63,11 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(Icons.circle, size: 12, color: Color(0xFF795548)),
+                  Icon(
+                    Icons.circle,
+                    size: 12,
+                    color: Color.fromARGB(255, 165, 101, 56),
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     'Sales (EGP)',

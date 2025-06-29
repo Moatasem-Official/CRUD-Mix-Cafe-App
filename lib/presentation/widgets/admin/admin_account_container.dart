@@ -10,7 +10,7 @@ class AdminAccountContainer extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFF2B1C13), // خلفية بنية داكنة
+        color: const Color.fromARGB(255, 165, 101, 56), // خلفية بنية داكنة
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

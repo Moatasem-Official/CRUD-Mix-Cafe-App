@@ -34,7 +34,7 @@ class _CustomChartHeaderContentState extends State<CustomChartHeaderContent> {
                 ? 'Weekly Sales Analytics'
                 : 'Yearly Sales Analytics (${widget.selectedYear})',
             style: TextStyle(
-              color: Color(0xFF4E342E),
+              color: Color.fromARGB(255, 165, 101, 56),
               fontSize: 22,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.5,
@@ -52,7 +52,7 @@ class _CustomChartHeaderContentState extends State<CustomChartHeaderContent> {
                     borderRadius: BorderRadius.circular(8),
                     icon: const Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.brown,
+                      color: Color.fromARGB(255, 165, 101, 56),
                     ),
                     iconSize: 32,
                     underline: const SizedBox(),
@@ -71,14 +71,14 @@ class _CustomChartHeaderContentState extends State<CustomChartHeaderContent> {
                         .toList(),
                     onChanged: (year) => widget.onYearChanged(year!),
                     style: TextStyle(
-                      color: Colors.brown.shade700,
+                      color: Color.fromARGB(255, 165, 101, 56),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ToggleButtons(
                   borderRadius: BorderRadius.circular(8),
                   selectedColor: Colors.white,
-                  fillColor: Colors.brown,
+                  fillColor: Color.fromARGB(255, 165, 101, 56),
                   color: Colors.brown.shade400,
                   constraints: const BoxConstraints(
                     minWidth: 60,

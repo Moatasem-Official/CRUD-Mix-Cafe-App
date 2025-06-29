@@ -69,5 +69,5 @@ class CustomCategoriesAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 120);
+  Size get preferredSize => const Size.fromHeight(170);
 }

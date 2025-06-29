@@ -15,7 +15,7 @@ class CustomCafeSettingsRowWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF3B2A1F),
+        color: const Color.fromARGB(255, 137, 86, 50),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

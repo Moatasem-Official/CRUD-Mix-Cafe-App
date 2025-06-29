@@ -24,7 +24,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
         title: const Text(
           'Admin Settings',
           style: TextStyle(
-            color: Color(0xFF6F4E37),
+            color: Color.fromARGB(255, 165, 101, 56),
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),

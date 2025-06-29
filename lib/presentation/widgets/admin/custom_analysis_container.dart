@@ -17,18 +17,9 @@ class CustomAnalysisContainer extends StatelessWidget {
     return Expanded(
       child: Container(
         height: 170,
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         decoration: BoxDecoration(
           color: const Color(0xFFEFEBE9),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: const Color(0xFFD7CCC8), width: 1.2),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.brown.withOpacity(0.15),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: Column(
           children: [
@@ -36,7 +27,7 @@ class CustomAnalysisContainer extends StatelessWidget {
             Container(
               height: 6,
               decoration: const BoxDecoration(
-                color: Color(0xFF6F4E37),
+                color: Color.fromARGB(255, 165, 101, 56),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
               ),
             ),
@@ -47,7 +38,7 @@ class CustomAnalysisContainer extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: const BoxDecoration(
-                color: Color(0xFF6F4E37),
+                color: Color.fromARGB(255, 165, 101, 56),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: Colors.white, size: 26),
@@ -71,7 +62,7 @@ class CustomAnalysisContainer extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Color(0xFF5D4037),
+                color: Color.fromARGB(255, 165, 101, 56),
               ),
             ),
           ],

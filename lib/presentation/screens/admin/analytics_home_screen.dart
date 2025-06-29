@@ -7,7 +7,37 @@ import 'package:mix_cafe_app/presentation/widgets/admin/custom_analysis_containe
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_title_of_popular_items.dart';
 
 class AnalyticsHomeScreen extends StatelessWidget {
-  const AnalyticsHomeScreen({super.key});
+  AnalyticsHomeScreen({super.key});
+
+  List<Map<String, dynamic>> data = [
+    {
+      'imagePath': Assets.mixCafeAdminImage,
+      'name': 'Cappuccino',
+      'description':
+          'Cappuccino is a coffee drink made from espresso and steamed milk, typically topped with a steamed milk foam.',
+      'price': 2.99,
+    },
+    {
+      'imagePath': Assets.mixCafeCustomerImage,
+      'name': 'Latte',
+      'description':
+          'Latte is a coffee drink made from espresso steamed milk foam.',
+      'price': 3.99,
+    },
+    {
+      'imagePath': Assets.mixCafeImageLogo,
+      'name': 'Espresso',
+      'description':
+          'Espresso is a coffee drink made from espresso and steamed milk, typically topped with foam.',
+      'price': 2.49,
+    },
+    {
+      'imagePath': Assets.mixCafeAdminImage,
+      'name': 'Cafe',
+      'description': 'Cafe spressofoam is a coffee drink made from espresso.',
+      'price': 1.99,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +52,7 @@ class AnalyticsHomeScreen extends StatelessWidget {
         title: const Text(
           'Mix Cafe Admin',
           style: TextStyle(
-            color: Color(0xFF6F4E37),
+            color: Color.fromARGB(255, 165, 101, 56),
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -36,7 +66,10 @@ class AnalyticsHomeScreen extends StatelessWidget {
                 color: Color.fromARGB(255, 237, 237, 237),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.notifications, color: Color(0xFF6F4E37)),
+              child: const Icon(
+                Icons.notifications,
+                color: Color.fromARGB(255, 165, 101, 56),
+              ),
             ),
             onPressed: () => Navigator.of(context).pushNamed('/notifications'),
           ),
@@ -73,13 +106,7 @@ class AnalyticsHomeScreen extends StatelessWidget {
             ),
             CustomAnalysisChart(),
             CustomTitleOfPopularItems(),
-            CustomMostPopularItemsGrid(
-              name: 'Cappuccino',
-              description:
-                  'Cappuccino is a coffee drink with espresso and steamed milk.',
-              price: '25.00',
-              imagePath: Assets.mixCafeAdminImage,
-            ),
+            CustomMostPopularItemsGrid(items: data),
           ],
         ),
       ),

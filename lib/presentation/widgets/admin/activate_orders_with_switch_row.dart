@@ -15,7 +15,7 @@ class ActivateOrdersWithSwitchRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF3B2A1F),
+        color: const Color.fromARGB(255, 137, 86, 50),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -29,7 +29,7 @@ class ActivateOrdersWithSwitchRow extends StatelessWidget {
             ),
           ),
           Switch(
-            activeTrackColor: const Color.fromARGB(255, 158, 90, 66),
+            activeTrackColor: const Color.fromARGB(255, 96, 57, 42),
             inactiveTrackColor: Colors.grey[300],
             value: isOrdersActivated,
             activeColor: Colors.brown[300],
