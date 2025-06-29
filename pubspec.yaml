@@ -13,6 +13,7 @@ dependencies:
   fl_chart: ^1.0.0
   flutter:
     sdk: flutter
+  flutter_rating_bar: ^4.0.1
   flutter_svg: ^2.2.0
   font_awesome_flutter: ^10.8.0
   local_hero_transform: ^1.0.6

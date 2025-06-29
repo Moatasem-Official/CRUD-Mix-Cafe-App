@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MostPopularItemsCard extends StatelessWidget {
   const MostPopularItemsCard({
@@ -100,6 +101,41 @@ class MostPopularItemsCard extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        RatingBarIndicator(
+                          rating: 4.5,
+                          itemBuilder: (context, index) =>
+                              Icon(Icons.star, color: Colors.amber),
+                          itemCount: 5,
+                          itemSize: 20.0,
+                          direction: Axis.horizontal,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "4.5",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white, // White for rating
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 20,
+                      itemBuilder: (context, _) =>
+                          Icon(Icons.star, color: Colors.amber),
+                      onRatingUpdate: (rating) {
+                        print(rating); // تقدر تحفظها أو تبعتها لـ backend
+                      },
                     ),
                   ],
                 ),

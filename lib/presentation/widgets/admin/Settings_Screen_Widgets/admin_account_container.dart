@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_admin_account_row.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/custom_admin_account_row.dart';
 
 class AdminAccountContainer extends StatelessWidget {
   const AdminAccountContainer({super.key});

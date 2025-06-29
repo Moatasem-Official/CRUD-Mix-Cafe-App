@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/data/model/weekly_and_yearly_sales_data_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_chart_content.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_chart_header_content.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_chart_content.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_chart_header_content.dart';
 
 class CustomAnalysisChart extends StatefulWidget {
   const CustomAnalysisChart({super.key});

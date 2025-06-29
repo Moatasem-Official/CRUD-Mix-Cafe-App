@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_order_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_orders_screen_appbar.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/custom_order_container.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/custom_orders_screen_appbar.dart';
 
 class OrdersManagmentScreen extends StatefulWidget {
   const OrdersManagmentScreen({super.key});
