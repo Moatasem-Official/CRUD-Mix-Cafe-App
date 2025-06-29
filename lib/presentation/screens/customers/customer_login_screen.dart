@@ -57,7 +57,12 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   ),
                 ],
               ),
-              CustomButton(buttonText: 'Login', onPressed: () {}),
+              CustomButton(
+                buttonText: 'Login',
+                onPressed: () {
+                  print('Customer UI Screens Have Not Been Designed Yet !');
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

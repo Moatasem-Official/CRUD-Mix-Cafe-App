@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/constants/app_images.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/admin_home_screen.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/custom_text_field.dart';
 
@@ -46,7 +47,15 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
               const SizedBox(height: 20),
               CustomTextField(hintText: 'Email'),
               CustomTextField(hintText: 'Password'),
-              CustomButton(buttonText: 'LOGIN', onPressed: () {}),
+              CustomButton(
+                buttonText: 'LOGIN',
+                onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const AdminHomeScreen(),
+                  ),
+                  (route) => false,
+                ),
+              ),
             ],
           ),
         ),
