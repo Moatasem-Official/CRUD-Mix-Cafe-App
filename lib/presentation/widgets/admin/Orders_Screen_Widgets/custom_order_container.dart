@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/constants/app_images.dart';
 import '../custom_button.dart';
 
 class CustomOrderContainerTemplete extends StatelessWidget {
-  const CustomOrderContainerTemplete({
+  CustomOrderContainerTemplete({
     super.key,
     required this.customerName,
     required this.orderId,
@@ -17,52 +18,91 @@ class CustomOrderContainerTemplete extends StatelessWidget {
   final String time;
   final String status;
 
+  var isVip = true;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 6,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // --- العنوان وصورة العميل والحالة ---
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Left side: customer info
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    customerName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black87,
+              // صورة العميل
+              CircleAvatar(
+                radius: 24,
+                backgroundImage: AssetImage(
+                  Assets.mixCafeAdminImage,
+                ), // أو NetworkImage
+                backgroundColor: Colors.grey.shade200,
+              ),
+              const SizedBox(width: 12),
+
+              // اسم العميل + تفاصيل الطلب
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          customerName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        if (isVip)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.amber.shade100,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Text(
+                              'VIP',
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Order ID: $orderId',
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Date: $date',
-                    style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Time: $time',
-                    style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      'Order ID: $orderId',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
-              // Right side: Status badge
+              // بادج الحالة
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -72,8 +112,8 @@ class CustomOrderContainerTemplete extends StatelessWidget {
                   color: status == 'Pending'
                       ? const Color(0xFFFFF4D6)
                       : status == 'In Progress'
-                      ? Color(0xFFE0F0FF)
-                      : Color(0xFFE6FFED),
+                      ? const Color(0xFFE0F0FF)
+                      : const Color(0xFFE6FFED),
                   border: Border.all(
                     color: status == 'Pending'
                         ? const Color(0xFFF9C400)
@@ -86,21 +126,73 @@ class CustomOrderContainerTemplete extends StatelessWidget {
                 child: Text(
                   status,
                   style: TextStyle(
-                    color: status == 'Pending'
-                        ? Color(0xFFC58F00)
-                        : status == 'In Progress'
-                        ? Color(0xFF4285F4)
-                        : Color(0xFF34A853),
-                    fontWeight: FontWeight.w500,
                     fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: status == 'Pending'
+                        ? const Color(0xFFC58F00)
+                        : status == 'In Progress'
+                        ? const Color(0xFF4285F4)
+                        : const Color(0xFF34A853),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          Divider(color: Colors.grey.shade300), // Product list
-          CustomButton(buttonText: 'View Details', onPressed: () {}),
+
+          const SizedBox(height: 10),
+
+          // التاريخ والوقت
+          Row(
+            children: [
+              Icon(
+                Icons.calendar_today_outlined,
+                size: 18,
+                color: Colors.grey.shade400,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Date: $date',
+                style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+              ),
+              const SizedBox(width: 12),
+              Icon(Icons.access_time, size: 18, color: Colors.grey.shade400),
+              const SizedBox(width: 6),
+              Text(
+                time,
+                style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: TextButton(
+              style: ButtonStyle(
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                padding: WidgetStateProperty.all(EdgeInsets.zero),
+              ),
+              onPressed: () {},
+              child: Row(
+                spacing: 5,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'View Details',
+                    style: TextStyle(
+                      color: Colors.brown,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: Colors.brown,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
