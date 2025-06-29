@@ -18,7 +18,7 @@ class CustomAnalysisContainer extends StatelessWidget {
       child: Container(
         height: 170,
         decoration: BoxDecoration(
-          color: const Color(0xFFEFEBE9),
+          color: const Color.fromARGB(255, 244, 238, 236),
           borderRadius: BorderRadius.circular(18),
         ),
         child: Column(

@@ -23,6 +23,23 @@ class CustomChartContent extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: LineChart(
           LineChartData(
+            lineTouchData: LineTouchData(
+              touchTooltipData: LineTouchTooltipData(
+                getTooltipColor: (touchedSpot) =>
+                    Color.fromARGB(255, 165, 101, 56), // لون المربع
+                getTooltipItems: (touchedSpots) {
+                  return touchedSpots.map((spot) {
+                    return LineTooltipItem(
+                      '${spot.y} \$',
+                      const TextStyle(
+                        color: Colors.white, // لون التكست
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }).toList();
+                },
+              ),
+            ),
             gridData: FlGridData(
               show: true,
               drawVerticalLine: true,
