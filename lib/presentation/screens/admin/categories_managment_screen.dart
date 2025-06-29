@@ -19,6 +19,8 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
       appBar: CustomCategoriesAppBar(
         title: 'Categories',
         buttonText: 'Add Category',
+        onChange: (searchValue) => print(searchValue),
+        onSubmitted: (searchValue) => print(searchValue),
         onPressed: () {
           showModalBottomSheet<void>(
             context: context,

@@ -19,33 +19,34 @@ class CustomProductTemplate extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Card(
-        elevation: 0,
-        color: const Color.fromARGB(255, 255, 250, 231),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 2,
+        color: const Color(0xFFFDF9F3),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shadowColor: Colors.brown.withOpacity(0.1),
         child: Container(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(14),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Image
+              // 📷 Product Image
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   imagePath,
-                  width: 100,
-                  height: 100,
+                  width: 90,
+                  height: 90,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
-                    width: 100,
-                    height: 100,
+                    width: 90,
+                    height: 90,
                     color: Colors.grey[300],
                     child: const Icon(Icons.broken_image, color: Colors.grey),
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 14),
 
-              // Text info
+              // 📝 Info Section
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,47 +54,67 @@ class CustomProductTemplate extends StatelessWidget {
                     Text(
                       productName,
                       maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        overflow: TextOverflow.ellipsis,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF5D4037),
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 6),
                     Text(
                       productDescription,
                       maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black54,
-                        overflow: TextOverflow.ellipsis,
+                        height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '${productPrice.toStringAsFixed(2)} EGP',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.green,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.local_offer,
+                          size: 18,
+                          color: Colors.green,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${productPrice.toStringAsFixed(2)} EGP',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
+
+              // 🛠️ Action Buttons
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.delete),
-                    color: Colors.red,
-                    onPressed: () {},
+                  Tooltip(
+                    message: 'Delete',
+                    child: IconButton(
+                      icon: const Icon(Icons.delete_outline),
+                      color: Colors.redAccent,
+                      onPressed: () {},
+                    ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    color: Colors.green,
-                    onPressed: () {},
+                  const SizedBox(height: 6),
+                  Tooltip(
+                    message: 'Edit',
+                    child: IconButton(
+                      icon: const Icon(Icons.edit_outlined),
+                      color: Colors.deepOrange,
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),

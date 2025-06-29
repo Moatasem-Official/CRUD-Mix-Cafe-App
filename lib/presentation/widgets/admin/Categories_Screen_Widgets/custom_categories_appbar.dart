@@ -19,11 +19,10 @@ class CustomCategoriesAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 25),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 30, 20, 16),
           decoration: BoxDecoration(
-            color: const Color(0xFFFDF9F6), // soft cream background
+            color: const Color(0xFFFDF9F6),
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
@@ -31,22 +30,44 @@ class CustomCategoriesAppBar extends StatelessWidget
           ),
           child: Column(
             children: [
-              // 🟤 Centered Title
-              Center(
-                child: Text(
-                  title ?? 'Dashboard',
-                  style: const TextStyle(
-                    color: Color(0xFF6F4E37),
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.0,
+              const SizedBox(height: 25),
+              // 🔙 Title with optional Back Icon
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (title != 'Categories')
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: Color(0xFF6F4E37),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        title ?? 'Dashboard',
+                        style: const TextStyle(
+                          color: Color(0xFF6F4E37),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                  if (title != 'Categories')
+                    const SizedBox(width: 48), // space to balance the row
+                ],
               ),
+
               const SizedBox(height: 16),
 
-              // 🔍 Search Field with centered hint
+              // 🔍 Search Field
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -67,8 +88,11 @@ class CustomCategoriesAppBar extends StatelessWidget
                   textAlignVertical: TextAlignVertical.top,
                   decoration: InputDecoration(
                     hintText: 'Search for Category of $title ...',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
-                    prefixIcon: Icon(Icons.search, color: Colors.brown),
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                    prefixIcon: const Icon(Icons.search, color: Colors.brown),
                     border: InputBorder.none,
                   ),
                 ),
@@ -79,7 +103,7 @@ class CustomCategoriesAppBar extends StatelessWidget
 
         const SizedBox(height: 24),
 
-        // 🟠 Modern Button Theme
+        // 🟠 Button
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SizedBox(
@@ -98,7 +122,7 @@ class CustomCategoriesAppBar extends StatelessWidget
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF6F4E37), // rich coffee tone
+                backgroundColor: const Color(0xFF6F4E37),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
