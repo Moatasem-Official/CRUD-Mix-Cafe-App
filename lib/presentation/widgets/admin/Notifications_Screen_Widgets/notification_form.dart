@@ -10,13 +10,11 @@ class AdminAddNotificationTile extends StatefulWidget {
 
 class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
   final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _bodyController = TextEditingController();
+  final _userIdController = TextEditingController();
 
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _bodyController = TextEditingController();
-
-  final TextEditingController _userIdController = TextEditingController();
-
-  String _selectedTarget = 'all'; // ممكن تغيرها لاحقًا حسب المستخدمين
+  String _selectedTarget = 'all';
 
   @override
   Widget build(BuildContext context) {
@@ -26,57 +24,85 @@ class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          leading: const Icon(
+            Icons.notifications_active_outlined,
+            color: Color(0xFF6F4E37),
+          ),
           title: const Text(
-            'إضافة إشعار',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            'Send Notification',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Color(0xFF4E342E),
+            ),
           ),
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18.0,
+                vertical: 12,
+              ),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    // عنوان الإشعار
+                    // Notification Title
                     TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(
-                        labelText: 'عنوان الإشعار',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: 'Notification Title',
+                        prefixIcon: const Icon(Icons.title),
+                        filled: true,
+                        fillColor: Colors.brown.withOpacity(0.05),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      validator: (value) =>
-                          value == null || value.isEmpty ? 'مطلوب' : null,
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'This field is required'
+                          : null,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
 
-                    // محتوى الإشعار
+                    // Notification Body
                     TextFormField(
                       controller: _bodyController,
-                      decoration: const InputDecoration(
-                        labelText: 'محتوى الإشعار',
-                        border: OutlineInputBorder(),
-                      ),
                       maxLines: 3,
-                      validator: (value) =>
-                          value == null || value.isEmpty ? 'مطلوب' : null,
+                      decoration: InputDecoration(
+                        labelText: 'Message Body',
+                        prefixIcon: const Icon(Icons.message_outlined),
+                        filled: true,
+                        fillColor: Colors.brown.withOpacity(0.05),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'This field is required'
+                          : null,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
 
-                    // Dropdown لاختيار المستلم
+                    // Target Selector
                     DropdownButtonFormField<String>(
                       value: _selectedTarget,
-                      decoration: const InputDecoration(
-                        labelText: 'إرسال إلى',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: 'Send To',
+                        prefixIcon: const Icon(Icons.people_outline),
+                        filled: true,
+                        fillColor: Colors.brown.withOpacity(0.05),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       items: const [
                         DropdownMenuItem(
                           value: 'all',
-                          child: Text('كل المستخدمين'),
+                          child: Text('All Users'),
                         ),
                         DropdownMenuItem(
                           value: 'user_123',
-                          child: Text('مستخدم معيّن'),
+                          child: Text('Specific User'),
                         ),
                       ],
                       onChanged: (value) {
@@ -85,51 +111,79 @@ class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
                         });
                       },
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 14),
 
-                    _selectedTarget == 'user_123'
-                        ? Column(
-                            children: [
-                              TextFormField(
-                                controller: _userIdController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  labelText: 'ID المستخدم',
-                                  border: OutlineInputBorder(),
-                                ),
+                    // User ID Field (conditional)
+                    if (_selectedTarget == 'user_123')
+                      Column(
+                        children: [
+                          TextFormField(
+                            controller: _userIdController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'User ID',
+                              prefixIcon: const Icon(Icons.numbers),
+                              filled: true,
+                              fillColor: Colors.brown.withOpacity(0.05),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              const SizedBox(height: 16),
-                            ],
-                          )
-                        : const SizedBox(),
-                    // زر إرسال
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.send),
-                      label: const Text('إرسال الإشعار'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6F4E37),
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(double.infinity, 50),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // هنا تقدر تخزن البيانات في Firestore
-                          debugPrint('✅ Title: ${_titleController.text}');
-                          debugPrint('✅ Body: ${_bodyController.text}');
-                          debugPrint('✅ Target: $_selectedTarget');
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('تم إرسال الإشعار (محليًا)'),
                             ),
-                          );
+                            validator: (value) {
+                              if (_selectedTarget == 'user_123' &&
+                                  (value == null || value.isEmpty)) {
+                                return 'User ID is required';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 14),
+                        ],
+                      ),
 
-                          // تفريغ الحقول
-                          _titleController.clear();
-                          _bodyController.clear();
-                          setState(() => _selectedTarget = 'all');
-                        }
-                      },
+                    // Submit Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.send),
+                        label: const Text('Send Notification'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF6F4E37),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            debugPrint('📢 Title: ${_titleController.text}');
+                            debugPrint('📢 Body: ${_bodyController.text}');
+                            debugPrint('👤 Target: $_selectedTarget');
+                            if (_selectedTarget == 'user_123') {
+                              debugPrint(
+                                '🔍 User ID: ${_userIdController.text}',
+                              );
+                            }
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Notification sent locally'),
+                              ),
+                            );
+
+                            // Reset form
+                            _titleController.clear();
+                            _bodyController.clear();
+                            _userIdController.clear();
+                            setState(() => _selectedTarget = 'all');
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

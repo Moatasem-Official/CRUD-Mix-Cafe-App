@@ -78,6 +78,7 @@ class AnalyticsHomeScreen extends StatelessWidget {
             CustomAnalysisChart(),
             CustomTitleOfPopularItems(),
             CustomMostPopularItemsGrid(items: data),
+            const SizedBox(height: 16),
           ],
         ),
       ),

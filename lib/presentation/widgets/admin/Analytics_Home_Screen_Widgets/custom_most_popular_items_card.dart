@@ -123,20 +123,6 @@ class MostPopularItemsCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 20,
-                      itemBuilder: (context, _) =>
-                          Icon(Icons.star, color: Colors.amber),
-                      onRatingUpdate: (rating) {
-                        print(rating); // تقدر تحفظها أو تبعتها لـ backend
-                      },
-                    ),
                   ],
                 ),
               ),

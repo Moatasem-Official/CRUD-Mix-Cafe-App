@@ -17,20 +17,19 @@ class CustomProductTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
       child: Card(
-        elevation: 2,
-        color: const Color(0xFFFDF9F3),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        shadowColor: Colors.brown.withOpacity(0.1),
+        color: const Color(0xFFFDF9F3), // خلفية كريمية ناعمة
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shadowColor: Colors.brown.withOpacity(0.15),
         child: Container(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(16),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 📷 Product Image
+              // 🖼️ Product Image
               ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(14),
                 child: Image.asset(
                   imagePath,
                   width: 90,
@@ -44,7 +43,7 @@ class CustomProductTemplate extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 14),
+              const SizedBox(width: 16),
 
               // 📝 Info Section
               Expanded(
@@ -56,9 +55,10 @@ class CustomProductTemplate extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF5D4037),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF6E4C2B), // لون كابتشينو غامق أنيق
+                        letterSpacing: 0.5,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -68,52 +68,70 @@ class CustomProductTemplate extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Colors.black54,
+                        color: Colors.black87,
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.local_offer,
-                          size: 18,
-                          color: Colors.green,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${productPrice.toStringAsFixed(2)} EGP',
-                          style: const TextStyle(
-                            fontSize: 16,
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.local_offer,
+                            size: 18,
                             color: Colors.green,
-                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 4),
+                          Text(
+                            '${productPrice.toStringAsFixed(2)} EGP',
+                            style: const TextStyle(
+                              fontSize: 15.5,
+                              color: Colors.green,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              // 🛠️ Action Buttons
+              // ⚙️ Action Buttons
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Tooltip(
-                    message: 'Delete',
-                    child: IconButton(
-                      icon: const Icon(Icons.delete_outline),
-                      color: Colors.redAccent,
-                      onPressed: () {},
+                    message: 'Edit Product',
+                    child: Material(
+                      shape: const CircleBorder(),
+                      color: Colors.orange.withOpacity(0.1),
+                      child: IconButton(
+                        icon: const Icon(Icons.edit_outlined),
+                        color: Colors.deepOrange,
+                        onPressed: () {},
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 10),
                   Tooltip(
-                    message: 'Edit',
-                    child: IconButton(
-                      icon: const Icon(Icons.edit_outlined),
-                      color: Colors.deepOrange,
-                      onPressed: () {},
+                    message: 'Delete Product',
+                    child: Material(
+                      shape: const CircleBorder(),
+                      color: Colors.redAccent.withOpacity(0.08),
+                      child: IconButton(
+                        icon: const Icon(Icons.delete_outline),
+                        color: Colors.redAccent,
+                        onPressed: () {},
+                      ),
                     ),
                   ),
                 ],

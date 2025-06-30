@@ -13,7 +13,7 @@ class CustomTitleOfPopularItems extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Most Popular Items',
+              'Best Saler Items',
               style: TextStyle(
                 color: Color.fromARGB(255, 165, 101, 56),
                 fontSize: 24,
