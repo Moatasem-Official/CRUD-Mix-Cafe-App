@@ -14,48 +14,69 @@ class CustomUserRoleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: double.infinity,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 253, 236, 224),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(imagePath, width: 100, height: 100),
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Container(
+          width: double.infinity,
+          height: 110,
+          decoration: BoxDecoration(
+            color: const Color(0xFFFDF4EF), // خلفية هادئة
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.brown.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 6),
               ),
-              Container(
-                width: 150,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 213, 120, 53),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  onPressed: () => onTap(),
-                  child: Text(
-                    buttonText,
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+            ],
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16),
+            onTap: onTap,
+            child: Row(
+              children: [
+                // الصورة
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      imagePath,
+                      width: 85,
+                      height: 85,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-            ],
+
+                // النص والزر
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 20,
+                    ),
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD37A43),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        buttonText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -12,38 +12,71 @@ class SelectUserRoleScreen extends StatefulWidget {
 class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(Assets.mixCafeImageLogo, width: 300, height: 300),
-              DefaultTextStyle(
-                style: const TextStyle(
-                  fontSize: 24,
-                  letterSpacing: 5,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF6F4E37),
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFFFF8F3), // خلفية كريمي ناعمة
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // شعار الكافيه
+                Center(
+                  child: Image.asset(
+                    Assets.mixCafeImageLogo,
+                    width: size.width * 0.6,
+                  ),
                 ),
-                child: Text('SELECT USER ROLE'),
-              ),
-              const SizedBox(height: 20),
-              CustomUserRoleContainer(
-                buttonText: 'ADMIN',
-                onTap: () => Navigator.pushNamed(context, '/adminLogin'),
-                imagePath: Assets.mixCafeAdminImage,
-              ),
-              const SizedBox(height: 20),
-              CustomUserRoleContainer(
-                buttonText: 'CUSTOMER',
-                onTap: () => Navigator.pushNamed(context, '/customerLogin'),
-                imagePath: Assets.mixCafeCustomerImage,
-              ),
-            ],
+
+                const SizedBox(height: 30),
+
+                // عنوان الصفحة
+                const Text(
+                  'Welcome To Mix Cafe',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF6F4E37),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Please Choose Your Role To Continue',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+
+                const SizedBox(height: 40),
+
+                // زر الأدمن
+                CustomUserRoleContainer(
+                  buttonText: 'ADMIN',
+                  onTap: () => Navigator.pushNamed(context, '/adminLogin'),
+                  imagePath: Assets.mixCafeAdminImage,
+                ),
+
+                const SizedBox(height: 24),
+
+                // زر العميل
+                CustomUserRoleContainer(
+                  buttonText: 'CUSTOMER',
+                  onTap: () => Navigator.pushNamed(context, '/customerLogin'),
+                  imagePath: Assets.mixCafeCustomerImage,
+                ),
+
+                const SizedBox(height: 40),
+
+                // توقيع خفيف تحت
+                const Text(
+                  'Made with ☕ by Mix Cafe',
+                  style: TextStyle(fontSize: 14, color: Colors.brown),
+                ),
+              ],
+            ),
           ),
         ),
       ),

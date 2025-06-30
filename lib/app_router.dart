@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/order_details_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
 import 'presentation/screens/admin/admin_settings_screen.dart';
 import 'presentation/screens/admin/analytics_home_screen.dart';
@@ -27,6 +28,7 @@ class AppRouter {
   static const String analyticsHome = '/analyticsHome';
   static const String adminHomeScreen = '/adminHomeScreen';
   static const String adminSettingsScreen = '/adminSettingsScreen';
+  static const String adminOrderDetailsScreen = '/adminOrderDetailsScreen';
   static const String customerLogin = '/customerLogin';
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
@@ -63,6 +65,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AdminSettingsScreen());
       case adminHomeScreen:
         return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
+      case adminOrderDetailsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AdminOrderDetailsScreen(),
+        );
       case customerLogin:
         return MaterialPageRoute(builder: (_) => const CustomerLoginScreen());
       case customerSignUp:

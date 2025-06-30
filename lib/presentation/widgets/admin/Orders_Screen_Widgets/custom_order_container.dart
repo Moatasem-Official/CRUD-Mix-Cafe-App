@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/constants/app_images.dart';
-import '../custom_button.dart';
 
 class CustomOrderContainerTemplete extends StatelessWidget {
   CustomOrderContainerTemplete({
@@ -10,6 +9,7 @@ class CustomOrderContainerTemplete extends StatelessWidget {
     required this.date,
     required this.status,
     required this.time,
+    required this.onPressed,
   });
 
   final String customerName;
@@ -17,6 +17,7 @@ class CustomOrderContainerTemplete extends StatelessWidget {
   final String date;
   final String time;
   final String status;
+  final Function() onPressed;
 
   var isVip = true;
 
@@ -170,7 +171,7 @@ class CustomOrderContainerTemplete extends StatelessWidget {
                 overlayColor: WidgetStateProperty.all(Colors.transparent),
                 padding: WidgetStateProperty.all(EdgeInsets.zero),
               ),
-              onPressed: () {},
+              onPressed: onPressed,
               child: Row(
                 spacing: 5,
                 crossAxisAlignment: CrossAxisAlignment.end,

@@ -118,6 +118,9 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                   date: orders[index]['date'],
                   status: orders[index]['status'],
                   time: orders[index]['time'],
+                  onPressed: () => Navigator.of(
+                    context,
+                  ).pushNamed('/adminOrderDetailsScreen'),
                 );
               },
             ),
