@@ -14,64 +14,91 @@ class CustomWidgetIfProductHasOffer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           child: DottedBorder(
             options: RectDottedBorderOptions(
-              dashPattern: [10, 10],
+              dashPattern: [10, 6],
               strokeWidth: 5,
-              color: Colors.grey,
+              color: const Color(0xFFB6855E),
             ),
             child: Container(
               width: double.infinity,
-              height: 200,
-              padding: const EdgeInsets.all(8),
+              height: 180,
+              color: const Color(0xFFFDF9F6),
               child: Center(
                 child: offerImageUrl == null
-                    ? const Column(
+                    ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.image, size: 50, color: Color(0xFF6F4E37)),
+                        children: const [
+                          Icon(
+                            Icons.image_outlined,
+                            size: 50,
+                            color: Color(0xFFB6855E),
+                          ),
+                          SizedBox(height: 8),
                           Text(
                             'Upload Offer Image',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Color(0xFF6F4E37),
-                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFB6855E),
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
                       )
-                    : Text(
-                        offerImageUrl,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Text(
+                          offerImageUrl!,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        Material(
-          child: TextFormField(
-            controller: offerController,
-            decoration: const InputDecoration(
-              labelText: 'Offer Price (EGP)',
-              border: OutlineInputBorder(),
+        const SizedBox(height: 20),
+
+        const Text(
+          "Offer Price",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Color(0xFFB6855E),
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextFormField(
+          controller: offerController,
+          keyboardType: TextInputType.number,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter Offer Price';
+            }
+            if (double.tryParse(value) == null) {
+              return 'Enter Valid Offer Price';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            hintText: 'e.g. 39.99',
+            filled: true,
+            fillColor: Colors.white,
+            prefixIcon: const Icon(Icons.local_offer, color: Color(0xFF6F4E37)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.brown),
+              borderRadius: BorderRadius.circular(12),
             ),
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Enter Offer Price';
-              }
-              if (double.tryParse(value) == null) {
-                return 'Enter Valid Offer Price';
-              }
-              return null;
-            },
           ),
         ),
       ],

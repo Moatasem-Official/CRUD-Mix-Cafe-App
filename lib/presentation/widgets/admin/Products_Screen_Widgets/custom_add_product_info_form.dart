@@ -42,112 +42,141 @@ class _CustomAddProductInformationFormState
     return Form(
       key: widget._formKey,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // اسم المنتج
-            Material(
-              child: TextFormField(
-                controller: widget._nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Product Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter product name'
-                    : null,
+            const Text(
+              "Add New Product",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFB6855E),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
+
+            // اسم المنتج
+            _buildStyledField(
+              controller: widget._nameController,
+              label: 'Product Name',
+              validatorMessage: 'Please enter product name',
+            ),
 
             // وصف المنتج
-            Material(
-              child: TextFormField(
-                controller: widget._descController,
-                decoration: const InputDecoration(
-                  labelText: 'Product description',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter product description'
-                    : null,
-              ),
+            _buildStyledField(
+              controller: widget._descController,
+              label: 'Product Description',
+              maxLines: 3,
+              validatorMessage: 'Please enter product description',
             ),
-            const SizedBox(height: 16),
 
             // السعر
-            Material(
-              child: TextFormField(
-                controller: widget._priceController,
-                decoration: const InputDecoration(
-                  labelText: 'Price (EGP)',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter Price';
-                  }
-                  if (double.tryParse(value) == null) {
-                    return 'Enter Valid Price';
-                  }
-                  return null;
-                },
-              ),
+            _buildStyledField(
+              controller: widget._priceController,
+              label: 'Price (EGP)',
+              keyboardType: TextInputType.number,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter Price';
+                }
+                if (double.tryParse(value) == null) {
+                  return 'Enter Valid Price';
+                }
+                return null;
+              },
             ),
+
             const SizedBox(height: 16),
 
-            // اختيار الصورة (في الوقت الحالي: رابط)
+            // تحميل صورة المنتج
+            const Text(
+              "Upload Product Image",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                color: Color(0xFFB6855E),
+              ),
+            ),
+            const SizedBox(height: 8),
             CustomUplaodImageContainer(imageUrl: widget._imageUrl),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 20),
+
+            // Switch العرض
             Row(
-              spacing: 8,
               children: [
                 Switch(
-                  activeColor: Color.fromARGB(255, 165, 101, 56),
-                  inactiveThumbColor: Color.fromARGB(255, 177, 133, 102),
-                  inactiveTrackColor: Color.fromARGB(255, 200, 180, 166),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  trackOutlineColor: WidgetStateProperty.all(
-                    Color.fromARGB(255, 200, 180, 166),
-                  ),
                   value: widget.isHasOffer,
                   onChanged: (value) {
-                    setState(() {
-                      widget.isHasOffer = value;
-                    });
+                    setState(() => widget.isHasOffer = value);
                   },
+                  activeColor: const Color(0xFF8B5E3C), // بني غني
+                  inactiveThumbColor: const Color(0xFFD7B899), // بيج ناعم
+                  inactiveTrackColor: const Color(
+                    0xFFF3E3D3,
+                  ), // بيج أفتح لمسار التراك
+                  trackOutlineColor: WidgetStateProperty.all(
+                    const Color(0xFFDCC6B1), // تحديد بسيط للمسار
+                  ),
+                  splashRadius: 20,
                 ),
+                const SizedBox(width: 8),
                 const Text(
-                  'Product Has Offer ?',
+                  "Has Offer ?",
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color: Color(0xFF6F4E37),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-
-            // صورة العرض (في الوقت الحالي: رابط)
-            if (widget.isHasOffer)
+            // تفاصيل العرض
+            if (widget.isHasOffer) ...[
+              const SizedBox(height: 16),
+              const Text(
+                "Offer Details",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Color(0xFFB6855E),
+                ),
+              ),
+              const SizedBox(height: 8),
               CustomWidgetIfProductHasOffer(
                 offerImageUrl: widget.offerImageUrl,
                 offerController: widget._offerPriceController,
               ),
+            ],
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 28),
 
-            // زر الإضافة
+            // زر إضافة المنتج
             Center(
-              child: CustomButton(
-                buttonText: 'Add Product',
+              child: FilledButton.icon(
                 onPressed: () {
-                  if (widget._formKey.currentState!.validate()) {}
+                  if (widget._formKey.currentState!.validate()) {
+                    // Logic Here
+                  }
                 },
+                icon: const Icon(Icons.add_circle_outline),
+                label: const Text("Add Product"),
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFFB6855E),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
@@ -155,4 +184,36 @@ class _CustomAddProductInformationFormState
       ),
     );
   }
+}
+
+Widget _buildStyledField({
+  required TextEditingController controller,
+  required String label,
+  int maxLines = 1,
+  TextInputType keyboardType = TextInputType.text,
+  String? Function(String?)? validator,
+  String? validatorMessage,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      maxLines: maxLines,
+      validator:
+          validator ??
+          (value) => value == null || value.isEmpty ? validatorMessage : null,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: Colors.white,
+        labelStyle: const TextStyle(color: Colors.brown),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.brown),
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    ),
+  );
 }

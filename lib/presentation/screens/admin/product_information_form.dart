@@ -20,20 +20,32 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70),
+        child: AppBar(
+          backgroundColor: const Color(0xFFB6855E), // كابتشينو ناعم
+          elevation: 2,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+          ),
+          centerTitle: true,
+          title: const Text(
+            'Product Information',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+              letterSpacing: 1.1,
+            ),
+          ),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
         ),
-        title: const Text(
-          'Product Information',
-          style: TextStyle(fontSize: 24, color: Colors.white),
-        ),
-        backgroundColor: const Color.fromARGB(255, 154, 97, 57),
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-        surfaceTintColor: const Color.fromARGB(255, 154, 97, 57),
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
