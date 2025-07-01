@@ -29,11 +29,21 @@ class ActivateOrdersWithSwitchRow extends StatelessWidget {
             ),
           ),
           Switch(
-            activeTrackColor: const Color.fromARGB(255, 96, 57, 42),
-            inactiveTrackColor: Colors.grey[300],
+            activeColor: const Color.fromARGB(255, 219, 162, 118), // بني غني
+            inactiveThumbColor: const Color.fromARGB(
+              255,
+              106,
+              75,
+              44,
+            ), // بيج ناعم
+            inactiveTrackColor: const Color(
+              0xFFF3E3D3,
+            ), // بيج أفتح لمسار التراك
+            trackOutlineColor: WidgetStateProperty.all(
+              const Color(0xFFDCC6B1), // تحديد بسيط للمسار
+            ),
+            splashRadius: 20,
             value: isOrdersActivated,
-            activeColor: Colors.brown[300],
-            inactiveThumbColor: Colors.grey,
             onChanged: onOrdersSwitchChanged,
           ),
         ],

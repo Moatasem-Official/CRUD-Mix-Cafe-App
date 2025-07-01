@@ -79,7 +79,7 @@ class CustomProductTemplate extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.1),
+                        color: const Color(0xFF8B4513).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
@@ -88,14 +88,14 @@ class CustomProductTemplate extends StatelessWidget {
                           const Icon(
                             Icons.local_offer,
                             size: 18,
-                            color: Colors.green,
+                            color: Color(0xFF8B4513),
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '${productPrice.toStringAsFixed(2)} EGP',
                             style: const TextStyle(
                               fontSize: 15.5,
-                              color: Colors.green,
+                              color: Color(0xFF8B4513),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -115,7 +115,10 @@ class CustomProductTemplate extends StatelessWidget {
                       shape: const CircleBorder(),
                       color: Colors.orange.withOpacity(0.1),
                       child: IconButton(
-                        icon: const Icon(Icons.edit_outlined),
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: Color(0xFF8B4513),
+                        ),
                         color: Colors.deepOrange,
                         onPressed: () {},
                       ),
@@ -128,7 +131,10 @@ class CustomProductTemplate extends StatelessWidget {
                       shape: const CircleBorder(),
                       color: Colors.redAccent.withOpacity(0.08),
                       child: IconButton(
-                        icon: const Icon(Icons.delete_outline),
+                        icon: const Icon(
+                          Icons.delete_outline,
+                          color: Color(0xFF8B4513),
+                        ),
                         color: Colors.redAccent,
                         onPressed: () {},
                       ),

@@ -23,7 +23,7 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: AppBar(
-          backgroundColor: const Color(0xFFB6855E), // كابتشينو ناعم
+          backgroundColor: const Color(0xFF8B4513), // كابتشينو ناعم
           elevation: 2,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),

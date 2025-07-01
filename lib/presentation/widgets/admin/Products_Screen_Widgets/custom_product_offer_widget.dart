@@ -22,7 +22,7 @@ class CustomWidgetIfProductHasOffer extends StatelessWidget {
             options: RectDottedBorderOptions(
               dashPattern: [10, 6],
               strokeWidth: 5,
-              color: const Color(0xFFB6855E),
+              color: const Color(0xFF8B4513),
             ),
             child: Container(
               width: double.infinity,
@@ -36,14 +36,14 @@ class CustomWidgetIfProductHasOffer extends StatelessWidget {
                           Icon(
                             Icons.image_outlined,
                             size: 50,
-                            color: Color(0xFFB6855E),
+                            color: Color(0xFF8B4513),
                           ),
                           SizedBox(height: 8),
                           Text(
                             'Upload Offer Image',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Color(0xFFB6855E),
+                              color: Color(0xFF8B4513),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -73,7 +73,7 @@ class CustomWidgetIfProductHasOffer extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16,
-            color: Color(0xFFB6855E),
+            color: Color(0xFF8B4513),
           ),
         ),
         const SizedBox(height: 8),
@@ -93,10 +93,10 @@ class CustomWidgetIfProductHasOffer extends StatelessWidget {
             hintText: 'e.g. 39.99',
             filled: true,
             fillColor: Colors.white,
-            prefixIcon: const Icon(Icons.local_offer, color: Color(0xFF6F4E37)),
+            prefixIcon: const Icon(Icons.local_offer, color: Color(0xFF8B4513)),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.brown),
+              borderSide: const BorderSide(color: Color(0xFF8B4513)),
               borderRadius: BorderRadius.circular(12),
             ),
           ),

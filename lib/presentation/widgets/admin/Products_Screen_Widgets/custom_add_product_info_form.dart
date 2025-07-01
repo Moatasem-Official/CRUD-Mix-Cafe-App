@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../custom_button.dart';
 import 'custom_product_offer_widget.dart';
 import 'custom_upload_image_container.dart';
 
@@ -51,7 +50,7 @@ class _CustomAddProductInformationFormState
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFB6855E),
+                color: Color(0xFF8B4513),
               ),
             ),
             const SizedBox(height: 20),
@@ -95,7 +94,7 @@ class _CustomAddProductInformationFormState
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
-                color: Color(0xFFB6855E),
+                color: Color(0xFF8B4513),
               ),
             ),
             const SizedBox(height: 8),
@@ -127,7 +126,7 @@ class _CustomAddProductInformationFormState
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF6F4E37),
+                    color: Color(0xFF8B4513),
                   ),
                 ),
               ],
@@ -140,7 +139,7 @@ class _CustomAddProductInformationFormState
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
-                  color: Color(0xFFB6855E),
+                  color: Color(0xFF8B4513),
                 ),
               ),
               const SizedBox(height: 8),
@@ -163,8 +162,7 @@ class _CustomAddProductInformationFormState
                 icon: const Icon(Icons.add_circle_outline),
                 label: const Text("Add Product"),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFFB6855E),
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFF8B4513),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 14,
@@ -207,10 +205,10 @@ Widget _buildStyledField({
         labelText: label,
         filled: true,
         fillColor: Colors.white,
-        labelStyle: const TextStyle(color: Colors.brown),
+        labelStyle: const TextStyle(color: Color(0xFF8B4513)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.brown),
+          borderSide: const BorderSide(color: Color(0xFF8B4513)),
           borderRadius: BorderRadius.circular(12),
         ),
       ),

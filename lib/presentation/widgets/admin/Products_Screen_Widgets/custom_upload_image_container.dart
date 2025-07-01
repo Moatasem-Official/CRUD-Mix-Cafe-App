@@ -13,7 +13,7 @@ class CustomUplaodImageContainer extends StatelessWidget {
         options: RectDottedBorderOptions(
           dashPattern: [10, 10],
           strokeWidth: 5,
-          color: const Color(0xFFB6855E),
+          color: const Color(0xFF8B4513),
         ),
         child: Container(
           width: double.infinity,
@@ -24,12 +24,12 @@ class CustomUplaodImageContainer extends StatelessWidget {
                 ? const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.image, size: 50, color: Color(0xFFB6855E)),
+                      Icon(Icons.image, size: 50, color: Color(0xFF8B4513)),
                       Text(
                         'Upload Product Image',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color(0xFFB6855E),
+                          color: Color(0xFF8B4513),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
