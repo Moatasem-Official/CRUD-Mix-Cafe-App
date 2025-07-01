@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/product_information_form.dart';
 import '../../../constants/app_images.dart';
-import '../../widgets/admin/Categories_Screen_Widgets/custom_categories_appbar.dart';
 import '../../widgets/admin/Products_Screen_Widgets/custom_product_templete.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
-  const CategoryProductsScreen({super.key, required this.categoryName});
-
-  final String categoryName;
+  const CategoryProductsScreen({super.key});
 
   @override
   State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
@@ -56,14 +54,29 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomCategoriesAppBar(
-        title: widget.categoryName,
-        onChange: (searchValue) => print(searchValue),
-        onSubmitted: (searchValue) => print(searchValue),
-        buttonText: 'Add Product',
-        onPressed: () =>
-            Navigator.of(context).pushNamed('/productInformationForm'),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 16, right: 16),
+        child: FloatingActionButton.extended(
+          backgroundColor: const Color(0xFFA0522D), // بني جذاب
+          elevation: 4,
+          icon: const Icon(Icons.add, size: 22, color: Colors.white),
+          label: const Text(
+            "إضافة منتج",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProductInformationForm()),
+            );
+          },
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -86,6 +99,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
               },
               itemCount: products.length,
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

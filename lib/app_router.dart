@@ -47,10 +47,7 @@ class AppRouter {
           builder: (_) => const CategoriesManagmentScreen(),
         );
       case categoryProducts:
-        final categoryName = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (_) => CategoryProductsScreen(categoryName: categoryName),
-        );
+        return MaterialPageRoute(builder: (_) => CategoryProductsScreen());
       case productInformationForm:
         return MaterialPageRoute(
           builder: (_) => const ProductInformationForm(),
