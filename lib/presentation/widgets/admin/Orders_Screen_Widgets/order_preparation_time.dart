@@ -16,8 +16,9 @@ class OrderPreparationTime extends StatelessWidget {
       readOnly: true,
       decoration: InputDecoration(
         labelText: "Estimated Preparation Time",
+        labelStyle: const TextStyle(color: Color(0xFF8B4513)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        prefixIcon: const Icon(Icons.timer, color: Colors.brown),
+        prefixIcon: const Icon(Icons.timer, color: Color(0xFF8B4513)),
         filled: true,
         fillColor: const Color(0xFFFDF9F6),
       ),

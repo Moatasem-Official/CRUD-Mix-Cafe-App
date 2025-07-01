@@ -22,7 +22,10 @@ class CustomOrdersAppBar extends StatelessWidget
           elevation: 0,
           centerTitle: true,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.brown),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Color(0xFF8B4513),
+            ),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: const Text(
@@ -30,7 +33,7 @@ class CustomOrdersAppBar extends StatelessWidget
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.brown,
+              color: Color(0xFF8B4513),
             ),
           ),
         ),

@@ -62,7 +62,7 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.brown,
+                color: Color(0xFF8B4513),
               ),
             ),
             const SizedBox(height: 12),
@@ -108,7 +108,7 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                   },
                 ),
                 const SizedBox(height: 12),
-                DeleteOrderButton(),
+                DeleteOrderButton(onDelete: () {}),
               ],
             ),
           ],

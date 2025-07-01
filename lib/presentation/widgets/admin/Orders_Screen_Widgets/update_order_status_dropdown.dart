@@ -21,28 +21,28 @@ class UpdateOrderStatusDropdown extends StatelessWidget {
         fillColor: const Color(0xFFFDF9F6), // soft beige background
         labelText: "Update Order Status",
         labelStyle: const TextStyle(
-          color: Colors.brown,
+          color: Color(0xFF8B4513),
           fontWeight: FontWeight.bold,
         ),
-        prefixIcon: const Icon(Icons.sync, color: Colors.brown),
+        prefixIcon: const Icon(Icons.sync, color: Color(0xFF8B4513)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Colors.brown),
+          borderSide: const BorderSide(color: Color(0xFF8B4513)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Colors.brown),
+          borderSide: const BorderSide(color: Color(0xFF8B4513)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Colors.orange, width: 2),
+          borderSide: const BorderSide(color: Color(0xFF8B4513), width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
         ),
       ),
-      icon: const Icon(Icons.arrow_drop_down_circle, color: Colors.brown),
+      icon: const Icon(Icons.arrow_drop_down_circle, color: Color(0xFF8B4513)),
       dropdownColor: const Color(0xFFFFFAF0),
       items: statusOptions.map((String status) {
         return DropdownMenuItem<String>(

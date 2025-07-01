@@ -13,16 +13,10 @@ class SaveOrderPreparationTimeButton extends StatelessWidget {
     return FilledButton.icon(
       onPressed: () {
         if (estimatedDuration == null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text("Please select a preparation time first."),
-              backgroundColor: Colors.red[400],
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              duration: const Duration(seconds: 2),
-            ),
+          _showCustomSnackBar(
+            context,
+            message: "Please select a preparation time first.",
+            isError: true,
           );
         } else {
           final preparationDuration = Duration(
@@ -30,32 +24,52 @@ class SaveOrderPreparationTimeButton extends StatelessWidget {
             minutes: estimatedDuration!.minute,
           );
 
-          // هنا ممكن تحفظها في قاعدة البيانات أو أي مكان تاني
-          print(formatDuration(preparationDuration));
+          final durationText = formatDuration(preparationDuration);
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                "Preparation time set to ${formatDuration(preparationDuration)}",
-              ),
-              backgroundColor: Colors.brown[400],
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              duration: const Duration(seconds: 2),
-            ),
+          // TODO: Save to Firebase or use elsewhere
+          print("Preparation time set to: $durationText");
+
+          _showCustomSnackBar(
+            context,
+            message: "Preparation time set to $durationText",
+            isError: false,
           );
         }
       },
-      icon: const Icon(Icons.timer_outlined),
+      icon: const Icon(Icons.timer_outlined, size: 20),
       label: const Text("Save Preparation Time"),
       style: FilledButton.styleFrom(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: const Color(0xFF8B4513),
         foregroundColor: Colors.white,
-        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  void _showCustomSnackBar(
+    BuildContext context, {
+    required String message,
+    required bool isError,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              isError ? Icons.error_outline : Icons.check_circle_outline,
+              color: Colors.white,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Expanded(child: Text(message)),
+          ],
+        ),
+        backgroundColor: isError ? Colors.red[400] : Colors.green[600],
+        behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
