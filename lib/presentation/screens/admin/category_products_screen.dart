@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/product_information_form.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/add_product_information_form.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/Products_Screen_Widgets/custom_product_templete.dart';
 

@@ -23,7 +23,7 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
         title: const Text(
           'Categories Management',
           style: TextStyle(
-            color: Color(0xFF5C3D2E),
+            color: Color(0xFF8B4513),
             fontSize: 26,
             fontWeight: FontWeight.bold,
           ),

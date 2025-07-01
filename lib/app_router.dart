@@ -7,7 +7,7 @@ import 'presentation/screens/admin/categories_managment_screen.dart';
 import 'presentation/screens/admin/category_products_screen.dart';
 import 'presentation/screens/admin/notifications_screen.dart';
 import 'presentation/screens/admin/orders_managment_screen.dart';
-import 'presentation/screens/admin/product_information_form.dart';
+import 'presentation/screens/admin/add_product_information_form.dart';
 import 'presentation/screens/customers/customer_forget_password_screen.dart';
 import 'presentation/screens/customers/customer_login_screen.dart';
 import 'presentation/screens/customers/customer_sign_up_screen.dart';
