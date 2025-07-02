@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1048408314340",
+    "project_id": "mix-cafe-app",
+    "storage_bucket": "mix-cafe-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048408314340:android:262f677b2870a41622b7f1",
+        "android_client_info": {
+          "package_name": "com.example.mix_cafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb1fmt2olvY7PnNL0HRxhsvL0pB3InN_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
