@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/order_details_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
 import 'presentation/screens/admin/admin_settings_screen.dart';
 import 'presentation/screens/admin/analytics_home_screen.dart';
@@ -11,7 +12,6 @@ import 'presentation/screens/admin/add_product_information_form.dart';
 import 'presentation/screens/customers/customer_forget_password_screen.dart';
 import 'presentation/screens/customers/customer_login_screen.dart';
 import 'presentation/screens/customers/customer_sign_up_screen.dart';
-import 'presentation/screens/home_screen.dart';
 import 'presentation/screens/admin/admin_login_screen.dart';
 import 'presentation/screens/select_user_role_screen.dart';
 import 'presentation/screens/splash_screen.dart';
@@ -32,7 +32,7 @@ class AppRouter {
   static const String customerLogin = '/customerLogin';
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
-  static const String home = '/home';
+  static const String customerHomeScreen = '/customerHomeScreen';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -74,8 +74,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CustomerForgetPasswordScreen(),
         );
-      case home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case customerHomeScreen:
+        return MaterialPageRoute(builder: (_) => CustomerHomeScreen());
       default:
         return null;
     }

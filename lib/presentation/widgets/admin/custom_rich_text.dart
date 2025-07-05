@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomRichText extends StatefulWidget {
-  const CustomRichText({super.key});
+class CustomRichText extends StatelessWidget {
+  const CustomRichText({super.key, required this.checked, this.onChanged});
 
-  @override
-  State<CustomRichText> createState() => _CustomRichTextState();
-}
-
-class _CustomRichTextState extends State<CustomRichText> {
-  var checked = false;
+  final bool checked;
+  final Function(bool?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +14,7 @@ class _CustomRichTextState extends State<CustomRichText> {
         children: [
           Checkbox(
             value: checked,
-            onChanged: (value) {
-              setState(() {
-                checked = value!;
-              });
-            },
+            onChanged: onChanged,
             activeColor: Color.fromARGB(255, 165, 101, 56),
             checkColor: Colors.white,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

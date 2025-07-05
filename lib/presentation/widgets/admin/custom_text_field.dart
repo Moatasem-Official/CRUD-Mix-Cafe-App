@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
-    this.validator,
-    this.onFieldSubmitted,
     this.controller,
     required this.hintText,
+    required this.validator,
   });
 
   final String? Function(String?)? validator;
-  final String? Function(String?)? onFieldSubmitted;
   final TextEditingController? controller;
   final String hintText;
 
@@ -31,7 +29,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
         ),
-        child: TextField(
+        child: TextFormField(
+          controller: widget.controller,
+          validator: widget.validator,
           autofillHints: widget.hintText == 'Email'
               ? [AutofillHints.email]
               : null,
