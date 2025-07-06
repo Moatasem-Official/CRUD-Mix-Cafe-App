@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/admin/Products_Screen_Widgets/custom_add_product_info_form.dart';
+import '../../widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_add_product_info_form.dart';
 
 class ProductInformationForm extends StatefulWidget {
   const ProductInformationForm({super.key});
@@ -14,8 +14,21 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _discountPercentageController =
+      TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _startDiscountController =
+      TextEditingController();
+  final TextEditingController _endDiscountController = TextEditingController();
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
+  TimeOfDay? _timeStartPicked;
+  TimeOfDay? _timeEndPicked;
+  DateTime? _startDate; // تاريخ بداية الخصم
+  DateTime? _endDate; // تاريخ نهاية الخصم
 
   String? _imageUrl; // في الوقت الحالي نعتبر الصورة رابط
+  bool isHasDiscount = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +71,56 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               nameController: _nameController,
               descController: _descController,
               priceController: _priceController,
-              offerPriceController: TextEditingController(),
+              discountPercentageController: _discountPercentageController,
               imageUrl: _imageUrl,
+              onSwitchChanged: (value) {
+                setState(() {
+                  isHasDiscount = value;
+                });
+              },
+              isHasDiscount: isHasDiscount,
+              quantityController: _quantityController,
+              startDiscountController: _startDiscountController,
+              endDiscountController: _endDiscountController,
+              startDateController: _startDateController,
+              endDateController: _endDateController,
+              onImageSelected: (image) {
+                setState(() {
+                  _imageUrl = image;
+                });
+              },
+              onStartDatePicked: (onStartDatePicked) {
+                setState(() {
+                  _startDate = onStartDatePicked;
+                  _startDateController.text =
+                      "${onStartDatePicked.year}-${onStartDatePicked.month.toString().padLeft(2, '0')}-${onStartDatePicked.day.toString().padLeft(2, '0')}";
+                });
+              },
+              onEndDatePicked: (onEndDatePicked) {
+                setState(() {
+                  _endDate = onEndDatePicked;
+                  _endDateController.text =
+                      "${onEndDatePicked.year}-${onEndDatePicked.month.toString().padLeft(2, '0')}-${onEndDatePicked.day.toString().padLeft(2, '0')}";
+                });
+              },
+              onStartTimePicked: (onStartTimePicked) {
+                setState(() {
+                  _timeStartPicked = onStartTimePicked;
+                  _startDiscountController.text = onStartTimePicked.format(
+                    context,
+                  );
+                });
+              },
+              onEndTimePicked: (onEndTimePicked) {
+                setState(() {
+                  _timeEndPicked = onEndTimePicked;
+                  _endDiscountController.text = onEndTimePicked.format(context);
+                });
+              },
+              timeStartPicked: _timeStartPicked ?? TimeOfDay.now(),
+              timeEndPicked: _timeEndPicked ?? TimeOfDay.now(),
+              startDate: _startDate ?? DateTime.now(),
+              endDate: _endDate ?? DateTime.now().add(const Duration(days: 7)),
             ),
           ],
         ),

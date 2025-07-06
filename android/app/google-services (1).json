@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1048408314340",
+    "project_id": "mix-cafe-app",
+    "storage_bucket": "mix-cafe-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048408314340:android:262f677b2870a41622b7f1",
+        "android_client_info": {
+          "package_name": "com.example.mix_cafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048408314340-bfior216o39htb9i6mhfq41kvq6mg6lt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mix_cafe",
+            "certificate_hash": "2a67503e901f995632fe7e1dd64a672db631101c"
+          }
+        },
+        {
+          "client_id": "1048408314340-np9hbob7akkm1snffnt0di7ldetcr6qu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb1fmt2olvY7PnNL0HRxhsvL0pB3InN_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048408314340-mjtejc6hid6hhntvq0om35uoljira1rv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1048408314340-2bnt3nosgf0n2bomlk34a416li1nl1do.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mixCafeApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

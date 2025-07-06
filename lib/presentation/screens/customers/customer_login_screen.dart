@@ -258,47 +258,6 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Row(
-                    children: [
-                      Expanded(child: Divider(thickness: 1)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("or"),
-                      ),
-                      Expanded(child: Divider(thickness: 1)),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    icon: const FaIcon(
-                      FontAwesomeIcons.google,
-                      color: Color(0xFF8B4513),
-                      size: 20,
-                    ),
-                    label: const Text(
-                      'Continue with Google',
-                      style: TextStyle(
-                        color: Color(0xFF8B4513),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    onPressed: () {
-                      print("Google Sign In Triggered");
-                      // مكان استدعاء Firebase Google SignIn
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(color: Color(0xFF8B4513)),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 14,
-                        horizontal: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
