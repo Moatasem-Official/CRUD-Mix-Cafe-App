@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_container.dart';
+import 'custom_analysis_container.dart';
 
 class CustomAnalysisContainersRow extends StatelessWidget {
   const CustomAnalysisContainersRow({super.key});

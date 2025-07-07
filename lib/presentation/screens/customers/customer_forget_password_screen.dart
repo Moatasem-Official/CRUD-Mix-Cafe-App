@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import '../../../data/services/auth/auth_service.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/custom_button.dart';
 import '../../widgets/admin/custom_text_field.dart';

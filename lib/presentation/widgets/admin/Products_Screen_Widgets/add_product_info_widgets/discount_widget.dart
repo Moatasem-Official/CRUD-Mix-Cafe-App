@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_date_field.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_styled_field.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_time_field.dart';
+import 'custom_date_field.dart';
+import 'custom_styled_field.dart';
+import 'custom_time_field.dart';
 
 class DiscountWidget extends StatelessWidget {
   DiscountWidget({
     super.key,
     required this.discountPercentageController,
     required this.startDateController,
-    required this.startDiscountController,
     required this.endDateController,
-    required this.endDiscountController,
     required this.startDate,
     required this.endDate,
     required this.timeStartPicked,
@@ -19,13 +17,15 @@ class DiscountWidget extends StatelessWidget {
     required this.onEndDatePicked,
     required this.onStartTimePicked,
     required this.onEndTimePicked,
+    required this.startTimeController,
+    required this.endTimeController,
   });
 
   final TextEditingController discountPercentageController;
   final TextEditingController startDateController;
-  final TextEditingController startDiscountController;
+  final TextEditingController startTimeController;
   final TextEditingController endDateController;
-  final TextEditingController endDiscountController;
+  final TextEditingController endTimeController;
   DateTime startDate;
   DateTime endDate;
   TimeOfDay timeStartPicked;
@@ -73,7 +73,7 @@ class DiscountWidget extends StatelessWidget {
           onDatePicked: onStartDatePicked,
         ),
         CustomTimeField(
-          controller: startDiscountController,
+          controller: startTimeController,
           label: 'Start Discount Time',
           context: context,
           selectedTime: timeStartPicked,
@@ -87,7 +87,7 @@ class DiscountWidget extends StatelessWidget {
           onDatePicked: onEndDatePicked,
         ),
         CustomTimeField(
-          controller: endDiscountController,
+          controller: endTimeController,
           label: 'End Discount Time',
           context: context,
           selectedTime: timeEndPicked,

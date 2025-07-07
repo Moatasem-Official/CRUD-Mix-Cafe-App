@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import '../../../data/services/auth/auth_service.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/custom_button.dart';
 import '../../widgets/admin/custom_text_field.dart';

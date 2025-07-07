@@ -1,6 +1,6 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/category_products_screen.dart';
+import 'category_products_screen.dart';
 
 class CategoriesManagmentScreen extends StatefulWidget {
   const CategoriesManagmentScreen({super.key});
@@ -67,11 +67,21 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
             Expanded(
               child: TabBarView(
                 children: [
-                  CategoryProductsScreen(),
-                  CategoryProductsScreen(),
-                  CategoryProductsScreen(),
-                  CategoryProductsScreen(),
-                  CategoryProductsScreen(),
+                  CategoryProductsScreen(
+                    categoryId: 0, // مثال
+                  ),
+                  CategoryProductsScreen(
+                    categoryId: 1, // مثال
+                  ),
+                  CategoryProductsScreen(
+                    categoryId: 2, // مثال
+                  ),
+                  CategoryProductsScreen(
+                    categoryId: 3, // مثال
+                  ),
+                  CategoryProductsScreen(
+                    categoryId: 4, // مثال
+                  ),
                 ],
               ),
             ),

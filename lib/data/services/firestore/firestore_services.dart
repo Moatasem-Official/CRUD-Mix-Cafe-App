@@ -1,31 +1,55 @@
 import 'dart:io';
-
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
+import '../../model/product_model.dart';
+import '../cloudinary/cloudinary_services.dart';
 
 class FirestoreServices {
-  Future<void> addProduct(
-    String name,
-    String description,
-    double price,
-    int quantity,
-    String image,
-    String category,
-    DateTime? startDiscount,
-    DateTime? endDiscount,
+  Future<void> addProduct({
+    required int categoryId,
+    required String name,
+    required String description,
+    required double price,
+    required int quantity,
+    required String image,
+    String? startDiscountDate,
+    String? endDiscountDate,
+    String? startDiscountTime,
+    String? endDiscountTime,
     double? discountPercentage,
-    bool hasDiscount,
-    bool isAvailable,
-  ) async {
+    required bool hasDiscount,
+    required bool isAvailable,
+  }) async {
     try {
+      final categories = ['Sandwichs', 'Pizzas', 'Crepes', 'Meals', 'Drinks'];
+      final categoryName = categories[categoryId];
+
       final CollectionReference collection = FirebaseFirestore.instance
+          .collection('categories')
+          .doc(categoryName)
           .collection('products');
+
       final CloudinaryServices cloudinaryServices = CloudinaryServices();
       final imageUrl = await cloudinaryServices.uploadImageToCloudinary(
-        File(image), // Replace with actual image file path
+        File(image),
       );
-      await collection.add({
+
+      DateTime? parseDateTime(String? date, String? time) {
+        if (date == null || date.isEmpty || time == null || time.isEmpty) {
+          return null;
+        }
+        try {
+          final input = "$date $time";
+          final format = DateFormat("yyyy-MM-dd h:mm a");
+          return format.parse(input);
+        } catch (e) {
+          print("❌ Failed to parse datetime: $e");
+          return null;
+        }
+      }
+
+      final Map<String, dynamic> productData = {
+        'category': categoryName,
         'name': name,
         'description': description,
         'price': price,
@@ -33,15 +57,21 @@ class FirestoreServices {
         'isAvailable': isAvailable,
         'imageUrl': imageUrl ?? '',
         'hasDiscount': hasDiscount,
-        'startDiscount': startDiscount != null
-            ? Timestamp.fromDate(startDiscount)
-            : null,
-        'endDiscount': endDiscount != null
-            ? Timestamp.fromDate(endDiscount)
-            : null,
-        'discountedPrice': price * (1 - (discountPercentage ?? 0.0) / 100),
         'timestamp': FieldValue.serverTimestamp(),
-      });
+      };
+
+      if (hasDiscount) {
+        final start = parseDateTime(startDiscountDate, startDiscountTime);
+        final end = parseDateTime(endDiscountDate, endDiscountTime);
+
+        productData.addAll({
+          'startDiscount': start != null ? Timestamp.fromDate(start) : null,
+          'endDiscount': end != null ? Timestamp.fromDate(end) : null,
+          'discountedPrice': price * (1 - (discountPercentage ?? 0.0) / 100),
+        });
+      }
+
+      await collection.add(productData);
     } catch (e) {
       print('Error adding item: $e');
       throw Exception('Failed to add item: $e');

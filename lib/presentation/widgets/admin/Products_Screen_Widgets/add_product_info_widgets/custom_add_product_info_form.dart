@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/discount_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/without_discount_widget.dart';
+import 'discount_widget.dart';
+import 'without_discount_widget.dart';
 
 class CustomAddProductInformationForm extends StatefulWidget {
   CustomAddProductInformationForm({
@@ -11,8 +11,6 @@ class CustomAddProductInformationForm extends StatefulWidget {
     required this.priceController,
     required this.discountPercentageController,
     required this.quantityController,
-    required this.startDiscountController,
-    required this.endDiscountController,
     required this.startDateController,
     required this.endDateController,
     required this.timeStartPicked,
@@ -27,6 +25,10 @@ class CustomAddProductInformationForm extends StatefulWidget {
     required this.onEndDatePicked,
     required this.onStartTimePicked,
     required this.onEndTimePicked,
+    required this.categoryId,
+    required this.onAddProduct,
+    required this.startTimeController,
+    required this.endTimeController,
   });
 
   final GlobalKey<FormState> formKey;
@@ -35,10 +37,11 @@ class CustomAddProductInformationForm extends StatefulWidget {
   final TextEditingController priceController;
   final TextEditingController discountPercentageController;
   final TextEditingController quantityController;
-  final TextEditingController startDiscountController;
-  final TextEditingController endDiscountController;
   final TextEditingController startDateController;
   final TextEditingController endDateController;
+  final TextEditingController startTimeController;
+  final TextEditingController endTimeController;
+  final int categoryId;
   TimeOfDay? timeStartPicked;
   TimeOfDay? timeEndPicked;
   DateTime? startDate;
@@ -51,6 +54,7 @@ class CustomAddProductInformationForm extends StatefulWidget {
   final Function(DateTime onEndDatePicked) onEndDatePicked;
   final Function(TimeOfDay onStartTimePicked) onStartTimePicked;
   final Function(TimeOfDay onEndTimePicked) onEndTimePicked;
+  final Function() onAddProduct;
 
   @override
   State<CustomAddProductInformationForm> createState() =>
@@ -113,9 +117,9 @@ class _CustomAddProductInformationFormState
                 discountPercentageController:
                     widget.discountPercentageController,
                 startDateController: widget.startDateController,
-                startDiscountController: widget.startDiscountController,
+                startTimeController: widget.startTimeController,
                 endDateController: widget.endDateController,
-                endDiscountController: widget.endDiscountController,
+                endTimeController: widget.endTimeController,
                 startDate: widget.startDate ?? DateTime.now(),
                 endDate:
                     widget.endDate ??
@@ -136,7 +140,27 @@ class _CustomAddProductInformationFormState
               child: FilledButton.icon(
                 onPressed: () {
                   if (widget.formKey.currentState!.validate()) {
-                    // Logic Here
+                    widget.formKey.currentState!.save();
+                    widget.onAddProduct();
+                    // هنا يمكنك إضافة الكود لإضافة المنتج إلى قاعدة البيانات
+                    // على سبيل المثال، يمكنك استدعاء دالة من FirestoreServices
+                    // لإضافة المنتج باستخدام البيانات التي تم جمعها من النموذج.
+                    // مثال:
+                    // FirestoreServices().addProduct(
+                    //   categoryId: 0, // يجب تعديل هذا حسب الفئة المختارة
+                    //   name: widget.nameController.text,
+                    //   description: widget.descController.text,
+                    //   price: double.parse(widget.priceController.text),
+                    //   quantity: int.parse(widget.quantityController.text),
+                    //   image: widget.imageUrl ?? '',
+                    //   startDiscount: widget.startDate,
+                    //   endDiscount: widget.endDate,
+                    //   discountPercentage: double.tryParse(
+                    //     widget.discountPercentageController.text,
+                    //   ),
+                    //   hasDiscount: widget.isHasDiscount,
+                    //   isAvailable: true, // أو أي قيمة أخرى حسب الحاجة
+                    // );
                   }
                 },
                 icon: const Icon(Icons.add_circle_outline),

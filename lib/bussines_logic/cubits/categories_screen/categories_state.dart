@@ -7,8 +7,6 @@ sealed class CategoriesState extends Equatable {
   List<Object> get props => [];
 }
 
-final class CategoriesInitial extends CategoriesState {}
-
 final class CategoriesLoading extends CategoriesState {}
 
 final class CategoriesLoaded extends CategoriesState {

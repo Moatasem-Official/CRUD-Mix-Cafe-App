@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/order_details_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_home_screen.dart';
+import 'presentation/screens/admin/order_details_screen.dart';
+import 'presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
 import 'presentation/screens/admin/admin_settings_screen.dart';
 import 'presentation/screens/admin/analytics_home_screen.dart';
@@ -47,10 +47,16 @@ class AppRouter {
           builder: (_) => const CategoriesManagmentScreen(),
         );
       case categoryProducts:
-        return MaterialPageRoute(builder: (_) => CategoryProductsScreen());
+        return MaterialPageRoute(
+          builder: (_) => CategoryProductsScreen(
+            categoryId: settings.arguments as int, // Pass the category ID
+          ),
+        );
       case productInformationForm:
         return MaterialPageRoute(
-          builder: (_) => const ProductInformationForm(),
+          builder: (_) => ProductInformationForm(
+            categoryId: settings.arguments as int, // Pass the category ID
+          ),
         );
       case ordersManagment:
         return MaterialPageRoute(builder: (_) => const OrdersManagmentScreen());

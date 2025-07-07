@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/confirm_order_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/custom_order_total_price_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/custom_orders_app_bar.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/customer_details_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/delete_order_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_information_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_preparation_time.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_products.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/save_order_preparation_time_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/update_order_status_dropdown.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/confirm_order_button.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/custom_order_total_price_container.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/custom_orders_app_bar.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/customer_details_card.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/delete_order_button.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/order_information_card.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/order_preparation_time.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/order_products.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/save_order_preparation_time_button.dart';
+import '../../widgets/admin/Orders_Screen_Widgets/update_order_status_dropdown.dart';
 
 class AdminOrderDetailsScreen extends StatefulWidget {
   const AdminOrderDetailsScreen({super.key});

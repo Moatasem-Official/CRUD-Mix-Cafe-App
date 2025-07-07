@@ -2,7 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import '../../../data/services/auth/auth_service.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/custom_button.dart';
 import '../../widgets/admin/custom_text_field.dart';

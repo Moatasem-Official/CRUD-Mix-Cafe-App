@@ -22,6 +22,7 @@ class CustomTimeField extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
         readOnly: true,
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: const TextStyle(color: Color(0xFF8B4513)),
@@ -30,9 +31,6 @@ class CustomTimeField extends StatelessWidget {
           filled: true,
           fillColor: const Color(0xFFFDF9F6),
         ),
-        controller: TextEditingController(
-          text: selectedTime != null ? selectedTime?.format(context) : "",
-        ),
         onTap: () async {
           TimeOfDay now = TimeOfDay.now();
           TimeOfDay? picked = await showTimePicker(
@@ -40,6 +38,7 @@ class CustomTimeField extends StatelessWidget {
             initialTime: selectedTime ?? now,
           );
           if (picked != null) {
+            controller.text = picked.format(context);
             onTimePicked(picked);
           }
         },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_styled_field.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_upload_image_container.dart';
+import 'custom_styled_field.dart';
+import '../custom_upload_image_container.dart';
 
 class WithoutDiscountWidget extends StatelessWidget {
   const WithoutDiscountWidget({

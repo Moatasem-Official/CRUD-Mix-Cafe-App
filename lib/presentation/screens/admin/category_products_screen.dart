@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/screens/admin/add_product_information_form.dart';
+import 'add_product_information_form.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/Products_Screen_Widgets/custom_product_templete.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
-  const CategoryProductsScreen({super.key});
+  const CategoryProductsScreen({super.key, required this.categoryId});
+
+  final int categoryId;
 
   @override
   State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
@@ -71,7 +73,12 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const ProductInformationForm()),
+              MaterialPageRoute(
+                builder: (_) => ProductInformationForm(
+                  categoryId:
+                      widget.categoryId, // يجب تعديل هذا حسب الفئة المختارة
+                ),
+              ),
             );
           },
         ),

@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../data/services/firestore/firestore_services.dart';
 
 part 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
-  CategoriesCubit() : super(CategoriesInitial());
+  CategoriesCubit() : super(CategoriesLoading());
 
   final FirestoreServices _firestoreServices = FirestoreServices();
 

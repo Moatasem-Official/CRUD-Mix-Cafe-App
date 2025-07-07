@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
 import '../../widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_add_product_info_form.dart';
 
 class ProductInformationForm extends StatefulWidget {
-  const ProductInformationForm({super.key});
+  const ProductInformationForm({super.key, required this.categoryId});
+
+  final int categoryId;
 
   @override
   State<ProductInformationForm> createState() => _ProductInformationFormState();
@@ -17,11 +20,10 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
   final TextEditingController _discountPercentageController =
       TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _startDiscountController =
-      TextEditingController();
-  final TextEditingController _endDiscountController = TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
+  final TextEditingController _startTimeController = TextEditingController();
+  final TextEditingController _endTimeController = TextEditingController();
   TimeOfDay? _timeStartPicked;
   TimeOfDay? _timeEndPicked;
   DateTime? _startDate; // تاريخ بداية الخصم
@@ -29,6 +31,7 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
 
   String? _imageUrl; // في الوقت الحالي نعتبر الصورة رابط
   bool isHasDiscount = false;
+  bool isAvailable = true; // حالة التوفر الافتراضية
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +83,8 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               },
               isHasDiscount: isHasDiscount,
               quantityController: _quantityController,
-              startDiscountController: _startDiscountController,
-              endDiscountController: _endDiscountController,
+              startTimeController: _startTimeController,
+              endTimeController: _endTimeController,
               startDateController: _startDateController,
               endDateController: _endDateController,
               onImageSelected: (image) {
@@ -106,21 +109,46 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               onStartTimePicked: (onStartTimePicked) {
                 setState(() {
                   _timeStartPicked = onStartTimePicked;
-                  _startDiscountController.text = onStartTimePicked.format(
-                    context,
-                  );
+                  _startTimeController.text = onStartTimePicked.format(context);
                 });
               },
               onEndTimePicked: (onEndTimePicked) {
                 setState(() {
                   _timeEndPicked = onEndTimePicked;
-                  _endDiscountController.text = onEndTimePicked.format(context);
+                  _endTimeController.text = onEndTimePicked.format(context);
                 });
               },
               timeStartPicked: _timeStartPicked ?? TimeOfDay.now(),
               timeEndPicked: _timeEndPicked ?? TimeOfDay.now(),
               startDate: _startDate ?? DateTime.now(),
               endDate: _endDate ?? DateTime.now().add(const Duration(days: 7)),
+              categoryId: widget.categoryId, // هنا يمكنك تحديد الفئة المناسبة
+              onAddProduct: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  FirestoreServices().addProduct(
+                    categoryId:
+                        widget.categoryId, // يجب تعديل هذا حسب الفئة المختارة
+                    name: _nameController.text,
+                    description: _descController.text,
+                    price: double.parse(_priceController.text),
+                    quantity: int.parse(_quantityController.text),
+                    image: _imageUrl ?? '',
+                    startDiscountDate: _startDateController.text,
+                    endDiscountDate: _endDateController.text,
+                    startDiscountTime: _startTimeController.text,
+                    endDiscountTime: _endTimeController.text,
+                    discountPercentage: double.tryParse(
+                      _discountPercentageController.text,
+                    ),
+                    hasDiscount: isHasDiscount,
+                    isAvailable: isAvailable, // أو أي قيمة أخرى حسب الحاجة
+                  );
+                }
+                Navigator.of(
+                  context,
+                ).pop(); // العودة إلى الشاشة السابقة بعد الإضافة
+              },
             ),
           ],
         ),

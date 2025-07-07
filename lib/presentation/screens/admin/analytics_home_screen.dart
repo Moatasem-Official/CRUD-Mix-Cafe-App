@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
+import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
 import '../../../constants/app_images.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';

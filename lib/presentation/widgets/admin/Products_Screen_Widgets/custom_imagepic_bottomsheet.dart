@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/helpers/image_helper.dart';
+import '../../../../data/helpers/image_helper.dart';
 
 Future<void> showCustomImagePicBottomSheet(
   BuildContext context, {

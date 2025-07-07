@@ -22,6 +22,7 @@ class CustomDateField extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
         readOnly: true,
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: const TextStyle(color: Color(0xFF8B4513)),
@@ -29,11 +30,6 @@ class CustomDateField extends StatelessWidget {
           prefixIcon: const Icon(Icons.date_range, color: Color(0xFF8B4513)),
           filled: true,
           fillColor: const Color(0xFFFDF9F6),
-        ),
-        controller: TextEditingController(
-          text: selectedDate != null
-              ? "${selectedDate?.year}-${selectedDate?.month.toString().padLeft(2, '0')}-${selectedDate?.day.toString().padLeft(2, '0')}"
-              : "",
         ),
         onTap: () async {
           DateTime now = DateTime.now();
@@ -44,6 +40,8 @@ class CustomDateField extends StatelessWidget {
             lastDate: DateTime(now.year + 5),
           );
           if (picked != null) {
+            controller.text =
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             onDatePicked(picked);
           }
         },

@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_imagepic_bottomsheet.dart';
+import 'custom_imagepic_bottomsheet.dart';
 
 class CustomUplaodImageContainer extends StatelessWidget {
   final String? imageUrl;
@@ -24,8 +26,8 @@ class CustomUplaodImageContainer extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: imageUrl != null
-            ? Image.network(
-                imageUrl!,
+            ? Image.file(
+                File(imageUrl!),
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
