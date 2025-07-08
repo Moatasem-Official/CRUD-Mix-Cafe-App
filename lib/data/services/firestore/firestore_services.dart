@@ -24,10 +24,11 @@ class FirestoreServices {
       final categories = ['Sandwichs', 'Pizzas', 'Crepes', 'Meals', 'Drinks'];
       final categoryName = categories[categoryId];
 
-      final CollectionReference collection = FirebaseFirestore.instance
+      final docRef = FirebaseFirestore.instance
           .collection('categories')
           .doc(categoryName)
-          .collection('products');
+          .collection('products')
+          .doc();
 
       final CloudinaryServices cloudinaryServices = CloudinaryServices();
       final imageUrl = await cloudinaryServices.uploadImageToCloudinary(
@@ -49,6 +50,7 @@ class FirestoreServices {
       }
 
       final Map<String, dynamic> productData = {
+        'id': docRef.id,
         'category': categoryName,
         'name': name,
         'description': description,
@@ -71,22 +73,34 @@ class FirestoreServices {
         });
       }
 
-      await collection.add(productData);
+      await docRef.set(productData);
     } catch (e) {
       print('Error adding item: $e');
       throw Exception('Failed to add item: $e');
     }
   }
 
-  Future<List<ProductModel>> getProducts() async {
+  Future<List<ProductModel>> getProducts(int categoryId) async {
     try {
       final CollectionReference collection = FirebaseFirestore.instance
+          .collection('categories')
+          .doc(
+            categoryId == 0
+                ? 'Sandwichs'
+                : categoryId == 1
+                ? 'Pizzas'
+                : categoryId == 2
+                ? 'Crepes'
+                : categoryId == 3
+                ? 'Meals'
+                : 'Drinks',
+          )
           .collection('products');
       final QuerySnapshot snapshot = await collection.get();
       return snapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
         return ProductModel(
-          id: doc.id,
+          id: data['id'] ?? '',
           name: data['name'] ?? '',
           description: data['description'] ?? '',
           price: (data['price'] as num?)?.toDouble() ?? 0.0,
@@ -150,10 +164,22 @@ class FirestoreServices {
     }
   }
 
-  Future<void> deleteItem(String id, String collection) async {
+  Future<void> deleteItem(String id, int categoryId) async {
     try {
       final DocumentReference document = FirebaseFirestore.instance
-          .collection(collection)
+          .collection('categories')
+          .doc(
+            categoryId == 0
+                ? 'Sandwichs'
+                : categoryId == 1
+                ? 'Pizzas'
+                : categoryId == 2
+                ? 'Crepes'
+                : categoryId == 3
+                ? 'Meals'
+                : 'Drinks',
+          )
+          .collection('products')
           .doc(id);
       await document.delete();
     } catch (e) {

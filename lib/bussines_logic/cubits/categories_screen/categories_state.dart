@@ -10,7 +10,7 @@ sealed class CategoriesState extends Equatable {
 final class CategoriesLoading extends CategoriesState {}
 
 final class CategoriesLoaded extends CategoriesState {
-  final List<String> categories;
+  final List<ProductModel> categories;
   const CategoriesLoaded(this.categories);
 
   @override

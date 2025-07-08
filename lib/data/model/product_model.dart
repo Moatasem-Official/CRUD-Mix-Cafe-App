@@ -1,19 +1,21 @@
 class ProductModel {
-  String name;
-  String description;
-  double price;
-  int quantity;
-  bool isAvailable;
-  String imageUrl;
-  String category;
-  bool hasDiscount;
-  DateTime startDiscount;
-  DateTime endDiscount;
-  double discountPercentage;
-  double discountedPrice;
-  DateTime timestamp;
+  final String id;
+  final String name;
+  final String description;
+  final double price;
+  final int quantity;
+  final bool isAvailable;
+  final String imageUrl;
+  final String category;
+  final bool hasDiscount;
+  final DateTime? startDiscount;
+  final DateTime? endDiscount;
+  final double discountPercentage;
+  final double discountedPrice;
+  final DateTime? timestamp;
 
   ProductModel({
+    required this.id,
     required this.name,
     required this.description,
     required this.price,
@@ -22,13 +24,10 @@ class ProductModel {
     required this.imageUrl,
     required this.category,
     this.hasDiscount = false,
-    DateTime? startDiscount,
-    DateTime? endDiscount,
+    this.startDiscount,
+    this.endDiscount,
     this.discountPercentage = 0.0,
-    double? discountedPrice, required String id,
-  }) : startDiscount = startDiscount ?? DateTime.now(),
-       endDiscount = endDiscount ?? DateTime.now().add(Duration(days: 7)),
-       discountedPrice =
-           discountedPrice ?? price * (1 - discountPercentage / 100),
-       timestamp = DateTime.now();
+    this.discountedPrice = 0.0,
+    this.timestamp,
+  });
 }

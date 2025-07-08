@@ -1,5 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/categories_screen/categories_cubit.dart';
 import 'category_products_screen.dart';
 
 class CategoriesManagmentScreen extends StatefulWidget {
@@ -43,23 +45,14 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
                 radius: 100,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                 tabs: const [
-                  Tab(
-                    icon: Icon(Icons.fastfood),
-                    text: "سندويتشات",
-                  ), // ✅ أفضل تمثيل للسندويتشات
-                  Tab(icon: Icon(Icons.local_pizza), text: "بيتزا"), // ✅ ممتازة
+                  Tab(icon: Icon(Icons.fastfood), text: "سندويتشات"),
+                  Tab(icon: Icon(Icons.local_pizza), text: "بيتزا"),
                   Tab(
                     icon: Icon(Icons.breakfast_dining, size: 28),
                     text: "كريب",
-                  ), // ✅ تمثل وجبة مميزة
-                  Tab(
-                    icon: Icon(Icons.dinner_dining),
-                    text: "وجبات",
-                  ), // ✅ تمثل أطباق رئيسية
-                  Tab(
-                    icon: Icon(Icons.local_drink),
-                    text: "مشروبات",
-                  ), // ✅ تمثل مشروبات رئيسية
+                  ),
+                  Tab(icon: Icon(Icons.dinner_dining), text: "وجبات"),
+                  Tab(icon: Icon(Icons.local_drink), text: "مشروبات"),
                 ],
               ),
             ),
@@ -67,20 +60,25 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
             Expanded(
               child: TabBarView(
                 children: [
-                  CategoryProductsScreen(
-                    categoryId: 0, // مثال
+                  BlocProvider(
+                    create: (context) => CategoriesCubit()..getProducts(0),
+                    child: CategoryProductsScreen(categoryId: 0),
                   ),
-                  CategoryProductsScreen(
-                    categoryId: 1, // مثال
+                  BlocProvider(
+                    create: (context) => CategoriesCubit()..getProducts(1),
+                    child: CategoryProductsScreen(categoryId: 1),
                   ),
-                  CategoryProductsScreen(
-                    categoryId: 2, // مثال
+                  BlocProvider(
+                    create: (context) => CategoriesCubit()..getProducts(2),
+                    child: CategoryProductsScreen(categoryId: 2),
                   ),
-                  CategoryProductsScreen(
-                    categoryId: 3, // مثال
+                  BlocProvider(
+                    create: (context) => CategoriesCubit()..getProducts(3),
+                    child: CategoryProductsScreen(categoryId: 3),
                   ),
-                  CategoryProductsScreen(
-                    categoryId: 4, // مثال
+                  BlocProvider(
+                    create: (context) => CategoriesCubit()..getProducts(4),
+                    child: CategoryProductsScreen(categoryId: 4),
                   ),
                 ],
               ),

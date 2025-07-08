@@ -34,6 +34,20 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
   bool isAvailable = true; // حالة التوفر الافتراضية
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _descController.dispose();
+    _priceController.dispose();
+    _discountPercentageController.dispose();
+    _quantityController.dispose();
+    _startDateController.dispose();
+    _endDateController.dispose();
+    _startTimeController.dispose();
+    _endTimeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -126,6 +140,16 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               onAddProduct: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
+                  if (_imageUrl == null || _imageUrl!.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please select an image for the product.',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
                   FirestoreServices().addProduct(
                     categoryId:
                         widget.categoryId, // يجب تعديل هذا حسب الفئة المختارة
@@ -144,10 +168,13 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
                     hasDiscount: isHasDiscount,
                     isAvailable: isAvailable, // أو أي قيمة أخرى حسب الحاجة
                   );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Product added successfully!'),
+                    ),
+                  );
+                  Navigator.of(context).pop(); // العودة إلى الشاشة السابقة
                 }
-                Navigator.of(
-                  context,
-                ).pop(); // العودة إلى الشاشة السابقة بعد الإضافة
               },
             ),
           ],

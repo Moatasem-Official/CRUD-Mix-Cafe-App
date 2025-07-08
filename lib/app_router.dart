@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/categories_screen/categories_cubit.dart';
 import 'presentation/screens/admin/order_details_screen.dart';
 import 'presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
@@ -43,9 +45,7 @@ class AppRouter {
       case adminLogin:
         return MaterialPageRoute(builder: (_) => const AdminLoginScreen());
       case categoriesManagment:
-        return MaterialPageRoute(
-          builder: (_) => const CategoriesManagmentScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => CategoriesManagmentScreen());
       case categoryProducts:
         return MaterialPageRoute(
           builder: (_) => CategoryProductsScreen(
