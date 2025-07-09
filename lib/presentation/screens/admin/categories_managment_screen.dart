@@ -20,6 +20,7 @@ class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
       backgroundColor: const Color(0xFFF9F6F1), // خلفية كريمية ناعمة
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         elevation: 0,
         centerTitle: true,
         title: const Text(

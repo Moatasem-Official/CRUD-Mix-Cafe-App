@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'custom_admin_account_row.dart';
 
 class AdminAccountContainer extends StatelessWidget {
-  const AdminAccountContainer({super.key});
+  const AdminAccountContainer({super.key, required this.adminEmail});
+
+  final String adminEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +27,7 @@ class AdminAccountContainer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          // الاسم
-          CustomAdminAccountRowWidget(
-            icon: Icons.person,
-            text: 'Admin Name',
-            onTap: () {},
-          ),
-          const SizedBox(height: 12),
-          // الإيميل
-          CustomAdminAccountRowWidget(
-            icon: Icons.email,
-            text: 'Admin Email',
-            onTap: () {},
-          ),
+          CustomAdminAccountRowWidget(icon: Icons.email, text: adminEmail),
         ],
       ),
     );

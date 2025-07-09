@@ -7,10 +7,20 @@ class CafeSettingsContainer extends StatelessWidget {
     super.key,
     required this.isOrdersActivated,
     required this.onOrdersSwitchChanged,
+    this.onPublicNumberTap,
+    this.onWorkingHoursTap,
+    this.publicContactNumber,
+    this.startWorkingHours,
+    this.endWorkingHours,
   });
 
   final bool isOrdersActivated;
+  final String? publicContactNumber;
+  final String? startWorkingHours;
+  final String? endWorkingHours;
   final void Function(bool) onOrdersSwitchChanged;
+  final void Function()? onPublicNumberTap;
+  final void Function()? onWorkingHoursTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +52,15 @@ class CafeSettingsContainer extends StatelessWidget {
           // Public Contact Number
           CustomCafeSettingsRowWidget(
             icon: Icons.phone,
-            text: 'Public Contact Number',
+            text: publicContactNumber ?? 'Public Contact Number',
+            onTap: onPublicNumberTap,
           ),
           const SizedBox(height: 12),
           // Working Hours Display
           CustomCafeSettingsRowWidget(
             icon: Icons.access_time,
-            text: 'Working Hours Display',
+            text: '$startWorkingHours - $endWorkingHours',
+            onTap: onWorkingHoursTap,
           ),
         ],
       ),

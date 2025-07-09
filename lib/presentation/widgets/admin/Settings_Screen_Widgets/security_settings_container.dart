@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'custom_cafe_settings_row.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/custom_admin_account_row.dart';
 
 class SecuritySettingsContainer extends StatelessWidget {
-  const SecuritySettingsContainer({super.key});
+  const SecuritySettingsContainer({
+    super.key,
+    required this.onLogoutPressed,
+    required this.onResetPasswordPressed,
+  });
+
+  final Function() onLogoutPressed;
+  final Function() onResetPasswordPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +32,21 @@ class SecuritySettingsContainer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          CustomCafeSettingsRowWidget(icon: Icons.lock, text: 'Reset Password'),
+          GestureDetector(
+            onTap: onResetPasswordPressed,
+            child: CustomAdminAccountRowWidget(
+              icon: Icons.lock,
+              text: 'Reset Password',
+            ),
+          ),
           const SizedBox(height: 12),
-          CustomCafeSettingsRowWidget(icon: Icons.logout, text: 'LOG OUT'),
+          GestureDetector(
+            onTap: onLogoutPressed,
+            child: CustomAdminAccountRowWidget(
+              icon: Icons.logout,
+              text: 'LOG OUT',
+            ),
+          ),
         ],
       ),
     );

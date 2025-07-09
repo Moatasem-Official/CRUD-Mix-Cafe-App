@@ -1,4 +1,5 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'errors_handler.dart';
@@ -111,11 +112,11 @@ class AuthService {
     }
   }
 
-  Future<void> updateEmail(String newEmail) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      await user.updateEmail(newEmail);
-    }
+  Future<void> updateField(String fieldName, dynamic newValue) async {
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid);
+    await docRef.update({fieldName: newValue});
   }
 
   Future<void> updateDisplayName(String newDisplayName) async {

@@ -5,10 +5,12 @@ class CustomCafeSettingsRowWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
+    this.onTap,
   });
 
   final String text;
   final IconData icon;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,10 @@ class CustomCafeSettingsRowWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(text, style: const TextStyle(color: Colors.white)),
+          ),
+          IconButton(
+            onPressed: onTap,
+            icon: const Icon(Icons.edit, color: Colors.white),
           ),
         ],
       ),

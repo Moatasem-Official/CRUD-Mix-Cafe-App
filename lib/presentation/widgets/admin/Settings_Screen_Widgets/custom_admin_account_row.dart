@@ -5,12 +5,10 @@ class CustomAdminAccountRowWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
-    this.onTap,
   });
 
   final String text;
   final IconData icon;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +23,13 @@ class CustomAdminAccountRowWidget extends StatelessWidget {
           Icon(icon, color: Colors.white70),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(text, style: const TextStyle(color: Colors.white)),
-          ),
-          IconButton(
-            icon: const Icon(Icons.edit, color: Colors.white),
-            onPressed: onTap,
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: Colors.white,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         ],
       ),

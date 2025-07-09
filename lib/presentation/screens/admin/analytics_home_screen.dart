@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../data/services/auth/auth_service.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
 import '../../../constants/app_assets.dart';
@@ -40,8 +39,6 @@ class AnalyticsHomeScreen extends StatelessWidget {
     },
   ];
 
-  final AuthService _authService = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,13 +58,6 @@ class AnalyticsHomeScreen extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.exit_to_app, color: Colors.black),
-          onPressed: () async {
-            await _authService.signOut();
-            Navigator.of(context).pushReplacementNamed('/adminLogin');
-          },
-        ),
         actions: [
           IconButton(
             tooltip: 'Notifications',

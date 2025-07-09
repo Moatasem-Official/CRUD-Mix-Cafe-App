@@ -143,7 +143,6 @@ class CustomProductTemplate extends StatelessWidget {
                     ),
                   ),
 
-                  // ⚙️ Action Buttons
                   Column(
                     children: [
                       Tooltip(
