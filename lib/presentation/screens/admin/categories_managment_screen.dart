@@ -1,7 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/categories_screen/categories_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'category_products_screen.dart';
 
 class CategoriesManagmentScreen extends StatefulWidget {

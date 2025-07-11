@@ -1,94 +1,30 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'errors_handler.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> signInWithEmailAndPassword(
-    BuildContext context,
-    String email,
-    String password,
-  ) async {
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      ErrorsHandler.showSignInError(context, e.code);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('حدث خطأ ما. يرجى المحاولة لاحقًا')),
-      );
-    }
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   Future<void> createUserWithEmailAndPassword(
-    BuildContext context,
     String email,
     String password,
   ) async {
-    try {
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      ErrorsHandler.showSignUpError(context, e.code);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('حدث خطأ ما. يرجى المحاولة لاحقًا')),
-      );
-    }
+    final credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
   }
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
-  Future<void> sendPasswordResetEmail(
-    BuildContext context,
-    String email,
-  ) async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      const snackBar = SnackBar(
-        /// need to set following properties for best effect of awesome_snackbar_content
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: 'تم إرسال رابط إعادة تعيين كلمة المرور',
-          message:
-              'إذا كان البريد مسجل لدينا، سيتم إرسال رابط إعادة تعيين كلمة المرور',
-
-          /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-          contentType: ContentType.success,
-        ),
-      );
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(snackBar);
-    } catch (e) {
-      const snackBar = SnackBar(
-        /// need to set following properties for best effect of awesome_snackbar_content
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: 'خطأ في إرسال رابط إعادة تعيين كلمة المرور',
-          message:
-              'حدث خطأ أثناء محاولة إرسال رابط إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى لاحقًا',
-
-          /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-          contentType: ContentType.failure,
-        ),
-      );
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(snackBar);
-    }
+  Future<void> sendPasswordResetEmail(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 
   Future<void> sendEmailVerification() async {

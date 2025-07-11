@@ -1,13 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../data/model/user_model.dart';
-import '../../../data/services/auth/auth_service.dart';
-import '../../../constants/app_assets.dart';
-import '../../widgets/admin/custom_button.dart';
-import '../../widgets/admin/custom_rich_text.dart';
-import '../../widgets/admin/custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
+import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
+import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/cusomer_sign_up_screen_content/cusomer_sign_up_screen_content.dart';
 
 class CustomerSignUpScreen extends StatefulWidget {
   const CustomerSignUpScreen({super.key});
@@ -23,8 +20,6 @@ class _CustomerSignUpScreenState extends State<CustomerSignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
-  final AuthService _authService = AuthService();
-  final UserModel _userModel = UserModel();
   var agreementChecked = false;
   bool isLoading = false;
 
@@ -34,302 +29,187 @@ class _CustomerSignUpScreenState extends State<CustomerSignUpScreen> {
       children: [
         Scaffold(
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Image.asset(
-                    Assets.mixCafeImageLogo,
-                    width: 300,
-                    height: 300,
-                  ),
-                ),
-                Text(
-                  'SIGN UP',
-                  style: TextStyle(
-                    fontSize: 24,
-                    letterSpacing: 5,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF6F4E37),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? 'Please enter your name'
-                              : null;
-                        },
-                        hintText: 'Name',
-                        controller: _nameController,
-                      ),
-                      CustomTextField(
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? 'Please enter your email'
-                              : null;
-                        },
-                        hintText: 'Email',
-                        controller: _emailController,
-                      ),
-                      CustomTextField(
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? 'Please enter your password'
-                              : null;
-                        },
-                        hintText: 'Password',
-                        controller: _passwordController,
-                      ),
-                      CustomTextField(
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? 'Please enter your password'
-                              : null;
-                        },
-                        hintText: 'Confirm Password',
-                        controller: _confirmPasswordController,
-                      ),
-                      CustomRichText(
-                        checked: agreementChecked,
-                        onChanged: (value) =>
-                            setState(() => agreementChecked = value!),
-                      ),
-                      CustomButton(
-                        buttonText: 'SIGN UP',
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            _formKey.currentState!.save();
+          body: BlocConsumer<SignUpCubit, SignUpState>(
+            listener: (context, state) {
+              if (state is SignUpLoading) {
+                setState(() {
+                  isLoading = true;
+                });
+              } else if (state is SignUpSuccess) {
+                setState(() {
+                  isLoading = false;
+                });
+                final successSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Success',
+                  contentType: ContentType.success,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(successSnackBar);
+              } else if (state is SignUpError) {
+                setState(() {
+                  isLoading = false;
+                });
+                final errorSnackBar = CustomSnackBar(
+                  message: state.error,
+                  title: 'Error',
+                  contentType: ContentType.failure,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(errorSnackBar);
+              } else if (state is SignUpNoInternet) {
+                setState(() {
+                  isLoading = false;
+                });
+                final noInternetSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'No Internet',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(noInternetSnackBar);
+              } else if (state is SignUpEmailAlreadyInUse) {
+                setState(() {
+                  isLoading = false;
+                });
+                final emailInUseSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Email Already In Use',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(emailInUseSnackBar);
+              } else if (state is SignUpWeakPassword) {
+                setState(() {
+                  isLoading = false;
+                });
+                final weakPasswordSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Weak Password',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(weakPasswordSnackBar);
+              } else if (state is SignUpInvalidEmail) {
+                setState(() {
+                  isLoading = false;
+                });
+                final invalidEmailSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Invalid Email',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(invalidEmailSnackBar);
+              } else if (state is SignUpUserDisabled) {
+                setState(() {
+                  isLoading = false;
+                });
+                final userDisabledSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'User Disabled',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(userDisabledSnackBar);
+              } else if (state is SignUpTooManyRequests) {
+                setState(() {
+                  isLoading = false;
+                });
+                final tooManyRequestsSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Too Many Requests',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(tooManyRequestsSnackBar);
+              }
+            },
+            builder: (context, state) {
+              return CusomerSignUpScreenContent(
+                agreementChecked: agreementChecked,
+                confirmPasswordController: _confirmPasswordController,
+                emailController: _emailController,
+                formKey: _formKey,
+                nameController: _nameController,
+                passwordController: _passwordController,
+                onAgreementChanged: (value) {
+                  setState(() {
+                    agreementChecked = value!;
+                  });
+                },
+                onSignUpPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    _formKey.currentState!.save();
 
-                            if (_passwordController.text ==
-                                _confirmPasswordController.text) {
-                              if (!agreementChecked) {
-                                const snackBar = SnackBar(
-                                  /// need to set following properties for best effect of awesome_snackbar_content
-                                  elevation: 0,
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: Colors.transparent,
-                                  content: AwesomeSnackbarContent(
-                                    title: 'خطأ في التسجيل',
-                                    message:
-                                        'يجب عليك الموافقة على الشروط والأحكام للتسجيل',
+                    if (_passwordController.text ==
+                        _confirmPasswordController.text) {
+                      if (agreementChecked) {
+                        context.read<SignUpCubit>().signUp(
+                          _emailController.text.trim(),
+                          _passwordController.text.trim(),
+                          _nameController.text.trim(),
+                        );
+                      } else {
+                        const snackBar = SnackBar(
+                          /// need to set following properties for best effect of awesome_snackbar_content
+                          elevation: 0,
+                          behavior: SnackBarBehavior.floating,
+                          backgroundColor: Colors.transparent,
+                          content: AwesomeSnackbarContent(
+                            title: 'خطأ في التسجيل',
+                            message:
+                                'يجب عليك الموافقة على الشروط والأحكام للتسجيل',
+                            contentType: ContentType.failure,
+                          ),
+                        );
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(snackBar);
+                        setState(() {
+                          isLoading = false;
+                        });
 
-                                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                    contentType: ContentType.failure,
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                  ..hideCurrentSnackBar()
-                                  ..showSnackBar(snackBar);
-                                setState(() {
-                                  isLoading = false;
-                                });
-
-                                return;
-                              }
-
-                              try {
-                                // إنشاء الحساب
-                                await _authService
-                                    .createUserWithEmailAndPassword(
-                                      context,
-                                      _emailController.text.trim(),
-                                      _passwordController.text.trim(),
-                                    );
-
-                                final uid =
-                                    FirebaseAuth.instance.currentUser!.uid;
-
-                                // حفظ بيانات المستخدم في Firestore
-                                await FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(uid)
-                                    .set(
-                                      UserModel(
-                                        name: _nameController.text.trim(),
-                                        email: _emailController.text.trim(),
-                                        userRole: 'customer',
-                                      ).toJson(),
-                                    );
-
-                                // إرسال رابط التحقق
-                                try {
-                                  await FirebaseAuth.instance.currentUser!
-                                      .sendEmailVerification();
-
-                                  const snackBar = SnackBar(
-                                    /// need to set following properties for best effect of awesome_snackbar_content
-                                    elevation: 0,
-                                    behavior: SnackBarBehavior.floating,
-                                    backgroundColor: Colors.transparent,
-                                    content: AwesomeSnackbarContent(
-                                      title: 'رابط التحقق تم إرساله',
-                                      message:
-                                          'تم التسجيل بنجاح! تحقق من بريدك الإلكتروني الآن',
-
-                                      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                      contentType: ContentType.success,
-                                    ),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                    ..hideCurrentSnackBar()
-                                    ..showSnackBar(snackBar);
-
-                                  Navigator.of(
-                                    context,
-                                  ).pushReplacementNamed('/customerLogin');
-                                } catch (e) {
-                                  const snackBar = SnackBar(
-                                    /// need to set following properties for best effect of awesome_snackbar_content
-                                    elevation: 0,
-                                    behavior: SnackBarBehavior.floating,
-                                    backgroundColor: Colors.transparent,
-                                    content: AwesomeSnackbarContent(
-                                      title: 'خطأ في إرسال رابط التحقق',
-                                      message:
-                                          'حدث خطأ أثناء محاولة إرسال رابط التحقق إلى بريدك الإلكتروني. يرجى المحاولة مرة أخرى لاحقًا.',
-
-                                      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                      contentType: ContentType.failure,
-                                    ),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                    ..hideCurrentSnackBar()
-                                    ..showSnackBar(snackBar);
-                                } finally {
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                }
-
-                                Navigator.of(
-                                  context,
-                                ).pushReplacementNamed('/customerLogin');
-                              } on FirebaseAuthException catch (e) {
-                                String message = 'حدث خطأ أثناء التسجيل';
-                                if (e.code == 'email-already-in-use') {
-                                  message = 'البريد الإلكتروني مستخدم بالفعل';
-                                } else if (e.code == 'invalid-email') {
-                                  message = 'البريد الإلكتروني غير صالح';
-                                } else if (e.code == 'weak-password') {
-                                  message = 'كلمة المرور ضعيفة جداً';
-                                }
-
-                                final snackBar = SnackBar(
-                                  /// need to set following properties for best effect of awesome_snackbar_content
-                                  elevation: 0,
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: Colors.transparent,
-                                  content: AwesomeSnackbarContent(
-                                    title: 'خطأ في التسجيل',
-                                    message:
-                                        message, // Use the localized message here
-                                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                    contentType: ContentType.failure,
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                  ..hideCurrentSnackBar()
-                                  ..showSnackBar(snackBar);
-
-                                // Show error message
-                              } catch (e) {
-                                const snackBar = SnackBar(
-                                  /// need to set following properties for best effect of awesome_snackbar_content
-                                  elevation: 0,
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: Colors.transparent,
-                                  content: AwesomeSnackbarContent(
-                                    title: 'خطأ في التسجيل',
-                                    message:
-                                        'حدث خطأ غير متوقع أثناء التسجيل. يرجى المحاولة مرة أخرى لاحقًا.',
-
-                                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                    contentType: ContentType.failure,
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                  ..hideCurrentSnackBar()
-                                  ..showSnackBar(snackBar);
-                              } finally {
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              }
-                            } else {
-                              const snackBar = SnackBar(
-                                /// need to set following properties for best effect of awesome_snackbar_content
-                                elevation: 0,
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.transparent,
-                                content: AwesomeSnackbarContent(
-                                  title: 'خطأ في التسجيل',
-                                  message:
-                                      'كلمة المرور وتأكيد كلمة المرور غير متطابقتين. يرجى التحقق من المدخلات الخاصة بك.',
-
-                                  /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                  contentType: ContentType.failure,
-                                ),
-                              );
-                              ScaffoldMessenger.of(context)
-                                ..hideCurrentSnackBar()
-                                ..showSnackBar(snackBar);
-                              setState(() {
-                                isLoading = false;
-                              });
-                            }
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already have an account ? ',
-                      style: TextStyle(color: Colors.grey[600], fontSize: 16),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 165, 101, 56),
-                          fontSize: 14,
-                          letterSpacing: 2,
+                        return;
+                      }
+                    } else {
+                      const snackBar = SnackBar(
+                        /// need to set following properties for best effect of awesome_snackbar_content
+                        elevation: 0,
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        content: AwesomeSnackbarContent(
+                          title: 'خطأ في التسجيل',
+                          message:
+                              'كلمة المرور وتأكيد كلمة المرور غير متطابقتين. يرجى التحقق من المدخلات الخاصة بك.',
+                          contentType: ContentType.failure,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
+                      );
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  }
+                },
+              );
+            },
           ),
         ),
-        if (isLoading)
-          Container(
-            color: Colors.black.withOpacity(0.5), // ظل شفاف
-            child: Center(
-              child: Image.asset(
-                'assets/animations/Animation - 1751644034977.gif',
-                width: 250, // الحجم الذي تريده
-                height: 250,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
+        if (isLoading) WhenLoadingLogInWidget(),
       ],
     );
   }

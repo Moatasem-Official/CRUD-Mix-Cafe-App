@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/categories_screen/categories_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/Login_Screen/cubit/login_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/forget_password_screen/cubit/forget_password_cubit.dart';
 import 'presentation/screens/admin/order_details_screen.dart';
 import 'presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
@@ -43,7 +46,12 @@ class AppRouter {
       case selectUserRole:
         return MaterialPageRoute(builder: (_) => const SelectUserRoleScreen());
       case adminLogin:
-        return MaterialPageRoute(builder: (_) => const AdminLoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<LogInCubitCubit>(
+            create: (context) => LogInCubitCubit(),
+            child: AdminLoginScreen(),
+          ),
+        );
       case categoriesManagment:
         return MaterialPageRoute(builder: (_) => CategoriesManagmentScreen());
       case categoryProducts:
@@ -73,12 +81,25 @@ class AppRouter {
           builder: (_) => const AdminOrderDetailsScreen(),
         );
       case customerLogin:
-        return MaterialPageRoute(builder: (_) => const CustomerLoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<LoginCubit>(
+            create: (context) => LoginCubit(),
+            child: CustomerLoginScreen(),
+          ),
+        );
       case customerSignUp:
-        return MaterialPageRoute(builder: (_) => const CustomerSignUpScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<SignUpCubit>(
+            create: (context) => SignUpCubit(),
+            child: CustomerSignUpScreen(),
+          ),
+        );
       case forgetPassword:
         return MaterialPageRoute(
-          builder: (_) => const CustomerForgetPasswordScreen(),
+          builder: (_) => BlocProvider<ForgetPasswordCubit>(
+            create: (context) => ForgetPasswordCubit(),
+            child: CustomerForgetPasswordScreen(),
+          ),
         );
       case customerHomeScreen:
         return MaterialPageRoute(builder: (_) => CustomerHomeScreen());

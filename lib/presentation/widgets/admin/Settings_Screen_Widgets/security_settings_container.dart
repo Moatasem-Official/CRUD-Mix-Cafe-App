@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/custom_admin_account_row.dart';
 
 class SecuritySettingsContainer extends StatelessWidget {
-  const SecuritySettingsContainer({
-    super.key,
-    required this.onLogoutPressed,
-    required this.onResetPasswordPressed,
-  });
+  const SecuritySettingsContainer({super.key, required this.onLogoutPressed});
 
   final Function() onLogoutPressed;
-  final Function() onResetPasswordPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +21,12 @@ class SecuritySettingsContainer extends StatelessWidget {
           const Text(
             'Security',
             style: TextStyle(
-              color: Color(0xFFF5E4C3), // لون كريمي فاتح زي الصورة
+              color: Color(0xFFF5E4C3),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),
-          GestureDetector(
-            onTap: onResetPasswordPressed,
-            child: CustomAdminAccountRowWidget(
-              icon: Icons.lock,
-              text: 'Reset Password',
-            ),
-          ),
-          const SizedBox(height: 12),
           GestureDetector(
             onTap: onLogoutPressed,
             child: CustomAdminAccountRowWidget(

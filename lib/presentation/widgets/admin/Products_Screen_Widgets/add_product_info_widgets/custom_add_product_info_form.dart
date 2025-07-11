@@ -1,53 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/controllers/product_form_controller.dart';
 import 'discount_widget.dart';
 import 'without_discount_widget.dart';
 
 class CustomAddProductInformationForm extends StatefulWidget {
-  CustomAddProductInformationForm({
+  const CustomAddProductInformationForm({
     super.key,
-    required this.formKey,
-    required this.nameController,
-    required this.descController,
-    required this.priceController,
-    required this.discountPercentageController,
-    required this.quantityController,
-    required this.startDateController,
-    required this.endDateController,
-    required this.timeStartPicked,
-    required this.timeEndPicked,
-    required this.startDate,
-    required this.endDate,
-    required this.imageUrl,
-    required this.isHasDiscount,
+    required this.controller,
     required this.onSwitchChanged,
     required this.onImageSelected,
     required this.onStartDatePicked,
     required this.onEndDatePicked,
     required this.onStartTimePicked,
     required this.onEndTimePicked,
-    required this.categoryId,
     required this.onAddProduct,
-    required this.startTimeController,
-    required this.endTimeController,
+    required this.categoryId,
   });
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController nameController;
-  final TextEditingController descController;
-  final TextEditingController priceController;
-  final TextEditingController discountPercentageController;
-  final TextEditingController quantityController;
-  final TextEditingController startDateController;
-  final TextEditingController endDateController;
-  final TextEditingController startTimeController;
-  final TextEditingController endTimeController;
+  final ProductFormController controller;
   final int categoryId;
-  TimeOfDay? timeStartPicked;
-  TimeOfDay? timeEndPicked;
-  DateTime? startDate;
-  DateTime? endDate;
-  final String? imageUrl;
-  final bool isHasDiscount;
   final Function(bool value) onSwitchChanged;
   final void Function(String image) onImageSelected;
   final Function(DateTime onStartDatePicked) onStartDatePicked;
@@ -66,36 +37,33 @@ class _CustomAddProductInformationFormState
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formKey,
+      key: widget.controller.formKey,
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             WithoutDiscountWidget(
-              nameController: widget.nameController,
-              descController: widget.descController,
-              priceController: widget.priceController,
-              quantityController: widget.quantityController,
-              imageUrl: widget.imageUrl,
+              nameController: widget.controller.nameController,
+              descController: widget.controller.descController,
+              priceController: widget.controller.priceController,
+              quantityController: widget.controller.quantityController,
+              imageUrl: widget.controller.imageUrl,
               onImageSelected: widget.onImageSelected,
             ),
 
             const SizedBox(height: 20),
 
-            // Switch العرض
             Row(
               children: [
                 Switch(
-                  value: widget.isHasDiscount,
+                  value: widget.controller.isHasDiscount,
                   onChanged: widget.onSwitchChanged,
-                  activeColor: const Color(0xFF8B5E3C), // بني غني
-                  inactiveThumbColor: const Color(0xFFD7B899), // بيج ناعم
-                  inactiveTrackColor: const Color(
-                    0xFFF3E3D3,
-                  ), // بيج أفتح لمسار التراك
+                  activeColor: const Color(0xFF8B5E3C),
+                  inactiveThumbColor: const Color(0xFFD7B899),
+                  inactiveTrackColor: const Color(0xFFF3E3D3),
                   trackOutlineColor: WidgetStateProperty.all(
-                    const Color(0xFFDCC6B1), // تحديد بسيط للمسار
+                    const Color(0xFFDCC6B1),
                   ),
                   splashRadius: 20,
                 ),
@@ -111,21 +79,23 @@ class _CustomAddProductInformationFormState
               ],
             ),
             // تفاصيل العرض
-            if (widget.isHasDiscount) ...[
+            if (widget.controller.isHasDiscount) ...[
               const SizedBox(height: 16),
               DiscountWidget(
                 discountPercentageController:
-                    widget.discountPercentageController,
-                startDateController: widget.startDateController,
-                startTimeController: widget.startTimeController,
-                endDateController: widget.endDateController,
-                endTimeController: widget.endTimeController,
-                startDate: widget.startDate ?? DateTime.now(),
+                    widget.controller.discountPercentageController,
+                startDateController: widget.controller.startDateController,
+                startTimeController: widget.controller.startTimeController,
+                endDateController: widget.controller.endDateController,
+                endTimeController: widget.controller.endTimeController,
+                startDate: widget.controller.startDate ?? DateTime.now(),
                 endDate:
-                    widget.endDate ??
+                    widget.controller.endDate ??
                     DateTime.now().add(const Duration(days: 7)),
-                timeStartPicked: widget.timeStartPicked ?? TimeOfDay.now(),
-                timeEndPicked: widget.timeEndPicked ?? TimeOfDay.now(),
+                timeStartPicked:
+                    widget.controller.timeStartPicked ?? TimeOfDay.now(),
+                timeEndPicked:
+                    widget.controller.timeEndPicked ?? TimeOfDay.now(),
                 onStartDatePicked: widget.onStartDatePicked,
                 onEndDatePicked: widget.onEndDatePicked,
                 onStartTimePicked: widget.onStartTimePicked,
@@ -139,28 +109,9 @@ class _CustomAddProductInformationFormState
             Center(
               child: FilledButton.icon(
                 onPressed: () {
-                  if (widget.formKey.currentState!.validate()) {
-                    widget.formKey.currentState!.save();
+                  if (widget.controller.formKey.currentState!.validate()) {
+                    widget.controller.formKey.currentState!.save();
                     widget.onAddProduct();
-                    // هنا يمكنك إضافة الكود لإضافة المنتج إلى قاعدة البيانات
-                    // على سبيل المثال، يمكنك استدعاء دالة من FirestoreServices
-                    // لإضافة المنتج باستخدام البيانات التي تم جمعها من النموذج.
-                    // مثال:
-                    // FirestoreServices().addProduct(
-                    //   categoryId: 0, // يجب تعديل هذا حسب الفئة المختارة
-                    //   name: widget.nameController.text,
-                    //   description: widget.descController.text,
-                    //   price: double.parse(widget.priceController.text),
-                    //   quantity: int.parse(widget.quantityController.text),
-                    //   image: widget.imageUrl ?? '',
-                    //   startDiscount: widget.startDate,
-                    //   endDiscount: widget.endDate,
-                    //   discountPercentage: double.tryParse(
-                    //     widget.discountPercentageController.text,
-                    //   ),
-                    //   hasDiscount: widget.isHasDiscount,
-                    //   isAvailable: true, // أو أي قيمة أخرى حسب الحاجة
-                    // );
                   }
                 },
                 icon: const Icon(Icons.add_circle_outline),

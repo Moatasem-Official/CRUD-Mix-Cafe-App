@@ -1,8 +1,10 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import '../../../data/services/auth/auth_service.dart';
-import '../../../constants/app_assets.dart';
-import '../../widgets/admin/custom_button.dart';
-import '../../widgets/admin/custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/forget_password_screen/cubit/forget_password_cubit.dart';
+import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
+import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_forget_password_screen_content/customer_forget_password_screen_content.dart';
 
 class CustomerForgetPasswordScreen extends StatefulWidget {
   const CustomerForgetPasswordScreen({super.key});
@@ -16,8 +18,6 @@ class _CustomerForgetPasswordScreenState
     extends State<CustomerForgetPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final String _emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-  final AuthService _authService = AuthService();
   bool isLoading = false;
 
   @override
@@ -45,77 +45,81 @@ class _CustomerForgetPasswordScreenState
             elevation: 0,
           ),
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Center(
-                  child: Image.asset(
-                    Assets.mixCafeImageLogo,
-                    width: 300,
-                    height: 300,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Text(
-                    'Enter Your Email Address To Receive A Link To Reset Your Password',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF6F4E37),
-                    ),
-                  ),
-                ),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        validator: (value) {
-                          return RegExp(_emailPattern).hasMatch(value ?? '')
-                              ? null
-                              : 'Enter a valid email';
-                        },
-                        hintText: 'Email',
-                        controller: _emailController,
-                      ),
-                      CustomButton(
-                        buttonText: 'Submit',
-                        onPressed: () async {
-                          _formKey.currentState!.validate();
-                          setState(() => isLoading = true);
-                          _formKey.currentState!.save();
-                          if (_formKey.currentState!.validate()) {
-                            await _authService.sendPasswordResetEmail(
-                              context,
-                              _emailController.text,
-                            );
-                          }
-                          setState(() => isLoading = false);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+            listener: (context, state) {
+              if (state is ForgetPasswordSuccess) {
+                setState(() {
+                  isLoading = false;
+                });
+                final successSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Success',
+                  contentType: ContentType.success,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(successSnackBar);
+              } else if (state is ForgetPasswordError) {
+                setState(() {
+                  isLoading = false;
+                });
+                final errorSnackBar = CustomSnackBar(
+                  message: state.error,
+                  title: 'Error',
+                  contentType: ContentType.failure,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(errorSnackBar);
+              } else if (state is ForgetPasswordLoading) {
+                setState(() {
+                  isLoading = true;
+                });
+              } else if (state is ForgetPasswordNoInternet) {
+                setState(() => isLoading = false);
+                final noInternetSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'No Internet',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(noInternetSnackBar);
+              } else if (state is ForgetPasswordInvalidEmail) {
+                setState(() => isLoading = false);
+                final invalidEmailSnackBar = CustomSnackBar(
+                  message: state.message,
+                  title: 'Invalid Email',
+                  contentType: ContentType.warning,
+                );
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(invalidEmailSnackBar);
+              } else if (state is ForgetPasswordInitial) {
+                setState(() => isLoading = false);
+              } else {
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            builder: (context, state) {
+              return CustomerForgetPasswordScreenContent(
+                formKey: _formKey,
+                emailController: _emailController,
+                onSubmit: () {
+                  _formKey.currentState!.save();
+                  if (_formKey.currentState!.validate()) {
+                    context.read<ForgetPasswordCubit>().sendResetLink(
+                      _emailController.text.trim(),
+                    );
+                  }
+                },
+              );
+            },
           ),
         ),
-        if (isLoading)
-          Container(
-            color: Colors.black.withOpacity(0.5), // ظل شفاف
-            child: Center(
-              child: Image.asset(
-                'assets/animations/Animation - 1751644034977.gif',
-                width: 250, // الحجم الذي تريده
-                height: 250,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
+        if (isLoading) WhenLoadingLogInWidget(),
       ],
     );
   }

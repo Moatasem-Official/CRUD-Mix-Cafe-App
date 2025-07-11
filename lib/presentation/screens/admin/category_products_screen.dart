@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/categories_screen/categories_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/add_product_information_form.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_product_templete.dart';
 
@@ -48,7 +46,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
               context,
               MaterialPageRoute(
                 builder: (_) => BlocProvider.value(
-                  value: context.read<CategoriesCubit>(), // ضروري جدًا
+                  value: context.read<CategoriesCubit>(),
                   child: ProductInformationForm(categoryId: widget.categoryId),
                 ),
               ),
