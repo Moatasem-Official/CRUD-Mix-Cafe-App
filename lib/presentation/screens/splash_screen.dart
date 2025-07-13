@@ -20,38 +20,65 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _loadUserRoleAndNavigate() async {
+    // Warten Sie 2 Sekunden, damit der Splash-Screen sichtbar ist (gute UX)
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Prüfen Sie nach der Verzögerung, ob das Widget noch im Widget-Baum ist
+    if (!mounted) return;
+
     final currentUser = FirebaseAuth.instance.currentUser;
 
-    // إذا لم يوجد مستخدم، انتقل مباشرة لاختيار الدور
+    // Fall 1: Kein Benutzer ist angemeldet
     if (currentUser == null) {
-      await Future.delayed(const Duration(seconds: 2));
-      if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/selectUserRole');
       return;
     }
 
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser.uid)
-        .get();
+    // Fall 2: Ein Benutzer ist angemeldet, holen Sie seine Rolle
+    try {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
 
-    final role = userDoc.data()?['userRole'];
+      // Erneut prüfen, ob das Widget nach dem Firestore-Aufruf noch vorhanden ist
+      if (!mounted) return;
 
-    await Future.delayed(const Duration(seconds: 2));
+      // Sicherstellen, dass das Benutzerdokument existiert
+      if (userDoc.exists && userDoc.data() != null) {
+        final role = userDoc.data()!['userRole'];
 
-    if (!mounted) return;
-    Navigator.pushReplacementNamed(
-      context,
-      role == 'admin'
-          ? '/adminHomeScreen'
-          : role == 'admin' && !currentUser.emailVerified
-          ? '/adminLogin'
-          : role == 'customer' && currentUser.emailVerified
-          ? '/customerHomeScreen'
-          : role == 'customer' && !currentUser.emailVerified
-          ? '/customerLogin'
-          : '/selectUserRole',
-    );
+        if (role == 'admin') {
+          // Korrekte Navigation für Admins
+          if (currentUser.emailVerified) {
+            Navigator.pushReplacementNamed(context, '/adminHomeScreen');
+          } else {
+            // Dieser Fall war vorher unerreichbar
+            Navigator.pushReplacementNamed(context, '/adminLogin');
+          }
+        } else if (role == 'customer') {
+          // Korrekte Navigation für Kunden
+          if (currentUser.emailVerified) {
+            Navigator.pushReplacementNamed(context, '/customerProfileScreen');
+          } else {
+            Navigator.pushReplacementNamed(context, '/customerLogin');
+          }
+        } else {
+          // Die Rolle ist ungültig oder null
+          Navigator.pushReplacementNamed(context, '/selectUserRole');
+        }
+      } else {
+        // Das Benutzerdokument existiert nicht in Firestore
+        // Dies verhindert einen Absturz, wenn 'userRole' nicht gefunden wird
+        Navigator.pushReplacementNamed(context, '/selectUserRole');
+      }
+    } catch (e) {
+      // Fehler bei Firestore-Aufrufen (z.B. Netzwerkprobleme) abfangen
+      if (!mounted) return;
+      debugPrint("Fehler beim Laden der Benutzerdaten: $e");
+      // Leiten Sie den Benutzer zu einer sicheren Fallback-Seite
+      Navigator.pushReplacementNamed(context, '/selectUserRole');
+    }
   }
 
   @override

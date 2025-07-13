@@ -4,6 +4,7 @@ import 'package:mix_cafe_app/bussines_logic/cubits/admin/login_screen/cubit/log_
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/Login_Screen/cubit/login_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/forget_password_screen/cubit/forget_password_cubit.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/customer_profile_screen.dart';
 import 'presentation/screens/admin/order_details_screen.dart';
 import 'presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
@@ -38,6 +39,7 @@ class AppRouter {
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
   static const String customerHomeScreen = '/customerHomeScreen';
+  static const String customerProfileScreen = '/customerProfileScreen';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -103,6 +105,8 @@ class AppRouter {
         );
       case customerHomeScreen:
         return MaterialPageRoute(builder: (_) => CustomerHomeScreen());
+      case customerProfileScreen:
+        return MaterialPageRoute(builder: (_) => const CustomerProfileScreen());
       default:
         return null;
     }
