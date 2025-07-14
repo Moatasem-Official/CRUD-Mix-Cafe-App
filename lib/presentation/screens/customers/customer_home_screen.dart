@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_app_bar.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_featured_items_list_view.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_items_title_row.dart';
 import '../../../data/services/auth/auth_service.dart';
 
 class CustomerHomeScreen extends StatelessWidget {
@@ -9,32 +12,38 @@ class CustomerHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        automaticallyImplyLeading: true,
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: const Text(
-          'Customer Home',
-          style: TextStyle(
-            color: Color.fromARGB(255, 165, 101, 56),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(315),
+        child: CustomAppBar(),
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: CustomItemsTitleRow(title: 'Featured Items'),
           ),
-        ),
-        elevation: 0,
-        actions: [
-          IconButton(
-            tooltip: 'Notifications',
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.transparent),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: CustomFeaturedItemsListView(),
             ),
-            onPressed: () async {
-              await authService.signOut();
-              Navigator.of(context).pushReplacementNamed('/customerLogin');
-            },
-            icon: const Icon(Icons.exit_to_app, color: Colors.black),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverToBoxAdapter(child: CustomItemsTitleRow(title: 'Best Sellers')),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: CustomFeaturedItemsListView(),
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverToBoxAdapter(child: CustomItemsTitleRow(title: 'New Items')),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: CustomFeaturedItemsListView(),
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
         ],
       ),
     );
