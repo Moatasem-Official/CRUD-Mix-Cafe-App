@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (currentUser.emailVerified) {
             Navigator.pushReplacementNamed(
               context,
-              '/customerShowProductDetails',
+              '/customerSeeAllProductsScreen',
             );
           } else {
             Navigator.pushReplacementNamed(context, '/customerLogin');

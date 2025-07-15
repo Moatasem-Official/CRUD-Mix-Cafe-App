@@ -40,7 +40,7 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
             child: Container(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: ListView.builder(
-                itemCount: 10, // Example item count
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return CustomCartItemContainer();
                 },
