@@ -6,6 +6,7 @@ import 'package:mix_cafe_app/bussines_logic/cubits/customer/SignUp_Screen/cubit/
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/forget_password_screen/cubit/forget_password_cubit.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_cart_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_profile_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/customer_show_product_screen.dart';
 import 'presentation/screens/admin/order_details_screen.dart';
 import 'presentation/screens/customers/customer_home_screen.dart';
 import 'presentation/screens/admin/admin_home_screen.dart';
@@ -42,6 +43,8 @@ class AppRouter {
   static const String customerHomeScreen = '/customerHomeScreen';
   static const String customerProfileScreen = '/customerProfileScreen';
   static const String customerCartScreen = '/customerCartScreen';
+  static const String customerShowProductDetails =
+      '/customerShowProductDetails';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -111,6 +114,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const CustomerProfileScreen());
       case customerCartScreen:
         return MaterialPageRoute(builder: (_) => const CustomerCartScreen());
+      case customerShowProductDetails:
+        return MaterialPageRoute(
+          builder: (_) =>
+              const CustomerShowProductScreen(), // Placeholder for product details
+        );
       default:
         return null;
     }
