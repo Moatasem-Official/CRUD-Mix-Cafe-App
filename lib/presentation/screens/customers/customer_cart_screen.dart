@@ -37,17 +37,15 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListView.builder(
                 itemCount: 10,
-                itemBuilder: (context, index) {
-                  return CustomCartItemContainer();
-                },
+                itemBuilder: (context, index) => CustomCartItemContainer(),
               ),
             ),
           ),
-          Expanded(flex: 1, child: CustomCheckoutContainer()),
+          SafeArea(child: CustomCheckoutContainer()),
         ],
       ),
     );

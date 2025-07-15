@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/customer_home_navigation.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_see_all_products_screen.dart';
 import 'bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
@@ -50,6 +51,7 @@ class AppRouter {
   static const String customerSeeAllProductsScreen =
       '/customerSeeAllProductsScreen';
   static const String customerOrdersScreen = '/customerOrdersScreen';
+  static const String customerHomeNavigation = '/customerHomeNavigation';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -130,6 +132,10 @@ class AppRouter {
         );
       case customerOrdersScreen:
         return MaterialPageRoute(builder: (_) => const CustomerOrdersScreen());
+      case customerHomeNavigation:
+        return MaterialPageRoute(
+          builder: (_) => const CustomerHomeNavigation(),
+        );
       default:
         return null;
     }

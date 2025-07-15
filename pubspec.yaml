@@ -11,6 +11,7 @@ dependencies:
   bloc: ^9.0.0
   buttons_tabbar: ^1.3.15
   cloud_firestore: ^5.6.10
+  crystal_navigation_bar: ^1.0.4
   cupertino_icons: ^1.0.8
   device_preview: ^1.2.0
   dotted_border: ^3.0.1
@@ -28,6 +29,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   google_sign_in: ^7.1.0
   hydrated_bloc: ^10.0.0
+  iconly: ^1.0.1
   image_picker: ^1.1.2
   intl: ^0.20.2
   local_hero_transform: ^1.0.6
@@ -41,6 +43,12 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans-Regular.ttf
+          weight: 700
 
   assets:
     - assets/images/
