@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_addresses_row_item.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_language_row_item.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_notifications_row_item.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_support_row_item.dart';
+import '../../../constants/app_assets.dart';
+import '../../widgets/customer/customer_profile_screen/custom_account_addresses_row_item.dart';
+import '../../widgets/customer/customer_profile_screen/custom_account_language_row_item.dart';
+import '../../widgets/customer/customer_profile_screen/custom_account_notifications_row_item.dart';
+import '../../widgets/customer/customer_profile_screen/custom_account_support_row_item.dart';
 
 class CustomerProfileScreen extends StatefulWidget {
   const CustomerProfileScreen({super.key});

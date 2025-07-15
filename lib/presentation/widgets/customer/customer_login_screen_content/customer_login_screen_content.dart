@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_text_field.dart';
+import '../../../../constants/app_assets.dart';
+import '../../admin/custom_button.dart';
+import '../../admin/custom_text_field.dart';
 
 class CustomerLoginScreenContent extends StatelessWidget {
   const CustomerLoginScreenContent({

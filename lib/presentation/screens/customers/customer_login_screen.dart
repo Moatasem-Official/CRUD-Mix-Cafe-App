@@ -1,10 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/Login_Screen/cubit/login_cubit.dart';
-import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
-import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_login_screen_content/customer_login_screen_content.dart';
+import '../../../bussines_logic/cubits/customer/Login_Screen/cubit/login_cubit.dart';
+import '../../../data/helpers/custom_snack_bar.dart';
+import '../../../data/helpers/when_loading_widget.dart';
+import '../../widgets/customer/customer_login_screen_content/customer_login_screen_content.dart';
 import '../../../data/services/auth/auth_service.dart';
 
 class CustomerLoginScreen extends StatefulWidget {

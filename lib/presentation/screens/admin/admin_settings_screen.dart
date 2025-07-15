@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
-import 'package:mix_cafe_app/data/services/firestore/settings_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/admin_log_out.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/edit_contact_phone_num.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Settings_Screen_Widgets/edit_working_hours.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/firestore/settings_services.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/admin_log_out.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/edit_contact_phone_num.dart';
+import '../../widgets/admin/Settings_Screen_Widgets/edit_working_hours.dart';
 import '../../widgets/admin/Settings_Screen_Widgets/cafe_settings_container.dart';
 import '../../widgets/admin/Settings_Screen_Widgets/admin_account_container.dart';
 import '../../widgets/admin/Settings_Screen_Widgets/security_settings_container.dart';

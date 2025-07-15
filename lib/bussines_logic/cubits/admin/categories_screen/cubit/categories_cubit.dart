@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../../data/model/product_model.dart';
 import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'categories_state.dart';

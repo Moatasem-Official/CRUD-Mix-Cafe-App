@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_rich_text.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/custom_text_field.dart';
+import '../../../../constants/app_assets.dart';
+import '../../admin/custom_button.dart';
+import '../../admin/custom_rich_text.dart';
+import '../../admin/custom_text_field.dart';
 
 class CusomerSignUpScreenContent extends StatelessWidget {
   const CusomerSignUpScreenContent({

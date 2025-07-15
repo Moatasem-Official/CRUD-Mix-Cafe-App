@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_show_product_details/custom_quatity_control_container.dart';
+import 'custom_quatity_control_container.dart';
 
 class CustomProductDetailsContainer extends StatelessWidget {
   const CustomProductDetailsContainer({super.key});

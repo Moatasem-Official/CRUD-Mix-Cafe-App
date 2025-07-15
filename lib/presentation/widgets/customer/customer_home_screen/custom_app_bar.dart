@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_filter_row_item.dart';
+import '../../../../constants/app_assets.dart';
+import 'custom_filter_row_item.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});

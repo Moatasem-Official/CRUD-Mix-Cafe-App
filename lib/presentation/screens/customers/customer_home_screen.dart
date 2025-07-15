@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_app_bar.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_featured_items_list_view.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_items_title_row.dart';
+import '../../widgets/customer/customer_home_screen/custom_app_bar.dart';
+import '../../widgets/customer/customer_home_screen/custom_featured_items_list_view.dart';
+import '../../widgets/customer/customer_home_screen/custom_items_title_row.dart';
 import '../../../data/services/auth/auth_service.dart';
 
 class CustomerHomeScreen extends StatelessWidget {

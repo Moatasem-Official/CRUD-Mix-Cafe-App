@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
-import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Login_Screen/admin_login_screen_content.dart';
+import '../../../bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
+import '../../../data/helpers/custom_snack_bar.dart';
+import '../../widgets/admin/Login_Screen/admin_login_screen_content.dart';
 
 class AdminLoginScreen extends StatefulWidget {
   const AdminLoginScreen({super.key});

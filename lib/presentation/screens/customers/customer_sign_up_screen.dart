@@ -1,10 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
-import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
-import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/cusomer_sign_up_screen_content/cusomer_sign_up_screen_content.dart';
+import '../../../bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
+import '../../../data/helpers/custom_snack_bar.dart';
+import '../../../data/helpers/when_loading_widget.dart';
+import '../../widgets/customer/cusomer_sign_up_screen_content/cusomer_sign_up_screen_content.dart';
 
 class CustomerSignUpScreen extends StatefulWidget {
   const CustomerSignUpScreen({super.key});

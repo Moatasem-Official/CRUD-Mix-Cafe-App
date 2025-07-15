@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_product_container.dart';
+import '../../../../constants/app_assets.dart';
+import 'custom_product_container.dart';
 
 class CustomFeaturedItemsListView extends StatelessWidget {
   const CustomFeaturedItemsListView({super.key});

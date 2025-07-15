@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/controllers/product_form_controller.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../controllers/product_form_controller.dart';
+import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_add_product_info_form.dart';
 
 class ProductInformationForm extends StatefulWidget {

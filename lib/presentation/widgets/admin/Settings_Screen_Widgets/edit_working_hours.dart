@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import '../../../../data/services/auth/auth_service.dart';
 
 class EditWorkingHours extends StatelessWidget {
   EditWorkingHours({

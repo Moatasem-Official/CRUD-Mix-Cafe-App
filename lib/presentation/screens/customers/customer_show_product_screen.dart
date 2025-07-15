@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
-import 'package:mix_cafe_app/constants/app_assets.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_show_product_details/custom_back_botton.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_show_product_details/custom_bottom_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_show_product_details/custom_product_details_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_show_product_details/custom_quatity_control_container.dart';
+import '../../../constants/app_assets.dart';
+import '../../widgets/customer/customer_show_product_details/custom_back_botton.dart';
+import '../../widgets/customer/customer_show_product_details/custom_bottom_button.dart';
+import '../../widgets/customer/customer_show_product_details/custom_product_details_container.dart';
 
 class CustomerShowProductScreen extends StatelessWidget {
   const CustomerShowProductScreen({super.key});

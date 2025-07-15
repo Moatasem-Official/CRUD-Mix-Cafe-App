@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import '../../../../../data/services/auth/auth_service.dart';
 
 part 'login_state.dart';
 

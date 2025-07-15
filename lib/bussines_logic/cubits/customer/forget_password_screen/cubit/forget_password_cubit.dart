@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+
+import '../../../../../data/services/auth/auth_service.dart';
 
 part 'forget_password_state.dart';
 

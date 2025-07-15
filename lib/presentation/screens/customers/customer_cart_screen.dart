@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_cart_screen/custom_cart_item_container.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_cart_screen/custom_checkout_container.dart';
+import '../../widgets/customer/customer_cart_screen/custom_cart_item_container.dart';
+import '../../widgets/customer/customer_cart_screen/custom_checkout_container.dart';
 
 class CustomerCartScreen extends StatefulWidget {
   const CustomerCartScreen({super.key});
