@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
         } else if (role == 'customer') {
           // Korrekte Navigation für Kunden
           if (currentUser.emailVerified) {
-            Navigator.pushReplacementNamed(context, '/customerHomeScreen');
+            Navigator.pushReplacementNamed(context, '/customerCartScreen');
           } else {
             Navigator.pushReplacementNamed(context, '/customerLogin');
           }
