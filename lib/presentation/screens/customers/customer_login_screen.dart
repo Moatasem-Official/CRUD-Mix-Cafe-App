@@ -55,7 +55,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   ..showSnackBar(successSnackBar);
                 Navigator.of(
                   context,
-                ).pushReplacementNamed('/CustomerSeeAllProductsScreen');
+                ).pushReplacementNamed('/customerOrdersScreen');
               } else if (state is LoginError) {
                 setState(() {
                   isLoading = false;
