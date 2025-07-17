@@ -29,11 +29,12 @@ class CustomProductContainer extends StatelessWidget {
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
-            child: Image.asset(
-              productImage,
-              height: 150,
-              width: double.infinity,
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/animations/Animation - 1751644034977.gif',
               fit: BoxFit.cover,
+              width: double.infinity,
+              height: 120,
+              image: productImage,
             ),
           ),
           const SizedBox(height: 8),

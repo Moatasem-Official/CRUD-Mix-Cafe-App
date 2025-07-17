@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
 import '../../../constants/app_assets.dart';
 import '../../widgets/customer/customer_profile_screen/custom_account_addresses_row_item.dart';
 import '../../widgets/customer/customer_profile_screen/custom_account_language_row_item.dart';
@@ -37,7 +38,6 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
             children: [
               const SizedBox(height: 50),
               SizedBox(
-                height: 250,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -104,7 +104,6 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: SizedBox(
-                  height: 320,
                   child: Column(
                     children: [
                       Align(
@@ -185,7 +184,6 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: SizedBox(
-                  height: 200,
                   child: Column(
                     children: [
                       Align(
@@ -279,14 +277,26 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: CustomAccountSupportRowItem(
-                      title: 'Logout',
-                      backgroundColor: const Color.fromARGB(255, 225, 225, 225),
-                      iconColor: const Color.fromARGB(255, 238, 47, 47),
-                      textColor: const Color.fromARGB(255, 190, 69, 69),
-                      icon: Icons.logout_rounded,
+                  child: InkWell(
+                    onTap: () {
+                      final AuthService authService = AuthService();
+                      authService.signOut();
+                      Navigator.pushReplacementNamed(context, '/customerLogin');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      child: CustomAccountSupportRowItem(
+                        title: 'Logout',
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          225,
+                          225,
+                          225,
+                        ),
+                        iconColor: const Color.fromARGB(255, 238, 47, 47),
+                        textColor: const Color.fromARGB(255, 190, 69, 69),
+                        icon: Icons.logout_rounded,
+                      ),
                     ),
                   ),
                 ),

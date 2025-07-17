@@ -5,7 +5,6 @@ import 'package:mix_cafe_app/presentation/screens/customers/customer_cart_screen
 import 'package:mix_cafe_app/presentation/screens/customers/customer_home_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_profile_screen.dart';
-import 'package:iconly/iconly.dart';
 
 enum _SelectedTab { home, favorite, add, search, profile }
 

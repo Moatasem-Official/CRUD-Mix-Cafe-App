@@ -10,7 +10,7 @@ class CustomerOrdersAppBar extends StatelessWidget
     return AppBar(
       backgroundColor: const Color.fromARGB(255, 255, 253, 251),
       elevation: 0,
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
       iconTheme: const IconThemeData(color: Colors.black),
       surfaceTintColor: const Color.fromARGB(255, 255, 253, 251),
       title: const Text(

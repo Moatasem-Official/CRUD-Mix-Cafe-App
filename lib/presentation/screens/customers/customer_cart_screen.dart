@@ -20,6 +20,7 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
           253,
           251,
         ), // لون بيج فاتح
+        automaticallyImplyLeading: false,
         elevation: 0,
         title: const Text(
           'Your Cart',
@@ -33,20 +34,22 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
         surfaceTintColor: const Color.fromARGB(255, 255, 253, 251),
       ),
       backgroundColor: const Color.fromARGB(255, 255, 253, 251), // لون بيج فاتح
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => CustomCartItemContainer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) => CustomCartItemContainer(),
+                ),
               ),
             ),
-          ),
-          SafeArea(child: CustomCheckoutContainer()),
-        ],
+            CustomCheckoutContainer(),
+          ],
+        ),
       ),
     );
   }

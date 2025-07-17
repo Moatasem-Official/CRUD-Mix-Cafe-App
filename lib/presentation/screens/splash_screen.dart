@@ -49,13 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
         final role = userDoc.data()!['userRole'];
 
         if (role == 'admin') {
-          // Korrekte Navigation für Admins
-          if (currentUser.emailVerified) {
-            Navigator.pushReplacementNamed(context, '/adminHomeScreen');
-          } else {
-            // Dieser Fall war vorher unerreichbar
-            Navigator.pushReplacementNamed(context, '/adminLogin');
-          }
+          Navigator.pushReplacementNamed(context, '/adminHomeScreen');
         } else if (role == 'customer') {
           // Korrekte Navigation für Kunden
           if (currentUser.emailVerified) {

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rxdart/rxdart.dart';
 import '../../model/product_model.dart';
 import '../cloudinary/cloudinary_services.dart';
 
@@ -19,6 +20,9 @@ class FirestoreServices {
     double? discountPercentage,
     required bool hasDiscount,
     required bool isAvailable,
+    required bool isFeatured,
+    required bool isNew,
+    required bool isBestSeller,
   }) async {
     try {
       final categories = ['Sandwichs', 'Pizzas', 'Crepes', 'Meals', 'Drinks'];
@@ -59,6 +63,9 @@ class FirestoreServices {
         'isAvailable': isAvailable,
         'imageUrl': imageUrl ?? '',
         'hasDiscount': hasDiscount,
+        'isFeatured': isFeatured,
+        'isNew': isNew,
+        'isBestSeller': isBestSeller,
         'timestamp': FieldValue.serverTimestamp(),
       };
 
@@ -106,6 +113,9 @@ class FirestoreServices {
           price: (data['price'] as num?)?.toDouble() ?? 0.0,
           quantity: (data['quantity'] as num?)?.toInt() ?? 0,
           isAvailable: data['isAvailable'] ?? false,
+          isFeatured: data['isFeatured'] ?? false,
+          isNew: data['isNew'] ?? false,
+          isBestSeller: data['isBestSeller'] ?? false,
           imageUrl: data['imageUrl'] ?? '',
           category: data['category'] ?? '',
           hasDiscount: data['hasDiscount'] ?? false,
@@ -120,6 +130,58 @@ class FirestoreServices {
       print('Error fetching items: $e');
       throw Exception('Failed to fetch items: $e');
     }
+  }
+
+  Stream<List<ProductModel>> getAllProductsStreamFromAllCategories() {
+    final List<String> categoryNames = [
+      'Sandwichs',
+      'Pizzas',
+      'Crepes',
+      'Meals',
+      'Drinks',
+    ];
+
+    // نحول كل كاتيجوري لستريم من المنتجات
+    final List<Stream<List<ProductModel>>> streams = categoryNames.map((
+      category,
+    ) {
+      final collection = FirebaseFirestore.instance
+          .collection('categories')
+          .doc(category)
+          .collection('products');
+
+      return collection.snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) {
+          final data = doc.data();
+          return ProductModel(
+            id: data['id'] ?? '',
+            name: data['name'] ?? '',
+            description: data['description'] ?? '',
+            price: (data['price'] as num?)?.toDouble() ?? 0.0,
+            quantity: (data['quantity'] as num?)?.toInt() ?? 0,
+            isAvailable: data['isAvailable'] ?? false,
+            isFeatured: data['isFeatured'] ?? false,
+            isNew: data['isNew'] ?? false,
+            isBestSeller: data['isBestSeller'] ?? false,
+            imageUrl: data['imageUrl'] ?? '',
+            category: data['category'] ?? '',
+            hasDiscount: data['hasDiscount'] ?? false,
+            startDiscount: (data['startDiscount'] as Timestamp?)?.toDate(),
+            endDiscount: (data['endDiscount'] as Timestamp?)?.toDate(),
+            discountPercentage:
+                (data['discountPercentage'] as num?)?.toDouble() ?? 0.0,
+            discountedPrice:
+                (data['discountedPrice'] as num?)?.toDouble() ?? 0.0,
+          );
+        }).toList();
+      });
+    }).toList();
+
+    // ندمج كل الستريمز مع بعض باستخدام combineLatest
+    return Rx.combineLatestList<List<ProductModel>>(streams).map((listOfLists) {
+      // دمج كل القوائم في ليست واحدة
+      return listOfLists.expand((list) => list).toList();
+    });
   }
 
   Future<void> updateProduct(
@@ -264,6 +326,38 @@ class FirestoreServices {
     } catch (e) {
       print('Error fetching orders by status: $e');
       throw Exception('Failed to fetch orders by status: $e');
+    }
+  }
+
+  Future searchProducts(String query) async {
+    try {
+      final CollectionReference collection = FirebaseFirestore.instance
+          .collection('products');
+      final QuerySnapshot snapshot = await collection
+          .where('name', isEqualTo: query)
+          .get();
+      return snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      print('Error searching products: $e');
+      throw Exception('Failed to search products: $e');
+    }
+  }
+
+  Future getProductsByCategory(String category) async {
+    try {
+      final CollectionReference collection = FirebaseFirestore.instance
+          .collection('categories')
+          .doc(category)
+          .collection('products');
+      final QuerySnapshot snapshot = await collection.get();
+      return snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      print('Error fetching products by category: $e');
+      throw Exception('Failed to fetch products by category: $e');
     }
   }
 }

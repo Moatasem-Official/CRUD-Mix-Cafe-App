@@ -7,7 +7,6 @@ class CustomAddProductInformationForm extends StatefulWidget {
   const CustomAddProductInformationForm({
     super.key,
     required this.controller,
-    required this.onSwitchChanged,
     required this.onImageSelected,
     required this.onStartDatePicked,
     required this.onEndDatePicked,
@@ -15,11 +14,18 @@ class CustomAddProductInformationForm extends StatefulWidget {
     required this.onEndTimePicked,
     required this.onAddProduct,
     required this.categoryId,
+    required this.onHasDiscountSwitchChanged,
+    required this.onIsNewSwitchChanged,
+    required this.onIsFeaturedSwitchChanged,
+    required this.onIsBestSwitchChanged,
   });
 
   final ProductFormController controller;
   final int categoryId;
-  final Function(bool value) onSwitchChanged;
+  final Function(bool value) onHasDiscountSwitchChanged;
+  final Function(bool value) onIsNewSwitchChanged;
+  final Function(bool value) onIsFeaturedSwitchChanged;
+  final Function(bool value) onIsBestSwitchChanged;
   final void Function(String image) onImageSelected;
   final Function(DateTime onStartDatePicked) onStartDatePicked;
   final Function(DateTime onEndDatePicked) onEndDatePicked;
@@ -57,8 +63,83 @@ class _CustomAddProductInformationFormState
             Row(
               children: [
                 Switch(
+                  value: widget.controller.isNew,
+                  onChanged: widget.onIsNewSwitchChanged,
+                  activeColor: const Color(0xFF8B5E3C),
+                  inactiveThumbColor: const Color(0xFFD7B899),
+                  inactiveTrackColor: const Color(0xFFF3E3D3),
+                  trackOutlineColor: WidgetStateProperty.all(
+                    const Color(0xFFDCC6B1),
+                  ),
+                  splashRadius: 20,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  "Is New ?",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF8B4513),
+                  ),
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                Switch(
+                  value: widget.controller.isFeatured,
+                  onChanged: widget.onIsFeaturedSwitchChanged,
+                  activeColor: const Color(0xFF8B5E3C),
+                  inactiveThumbColor: const Color(0xFFD7B899),
+                  inactiveTrackColor: const Color(0xFFF3E3D3),
+                  trackOutlineColor: WidgetStateProperty.all(
+                    const Color(0xFFDCC6B1),
+                  ),
+                  splashRadius: 20,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  "Is Featured ?",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF8B4513),
+                  ),
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                Switch(
+                  value: widget.controller.isBest,
+                  onChanged: widget.onIsBestSwitchChanged,
+                  activeColor: const Color(0xFF8B5E3C),
+                  inactiveThumbColor: const Color(0xFFD7B899),
+                  inactiveTrackColor: const Color(0xFFF3E3D3),
+                  trackOutlineColor: WidgetStateProperty.all(
+                    const Color(0xFFDCC6B1),
+                  ),
+                  splashRadius: 20,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  "Is Best ?",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF8B4513),
+                  ),
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                Switch(
                   value: widget.controller.isHasDiscount,
-                  onChanged: widget.onSwitchChanged,
+                  onChanged: widget.onHasDiscountSwitchChanged,
                   activeColor: const Color(0xFF8B5E3C),
                   inactiveThumbColor: const Color(0xFFD7B899),
                   inactiveTrackColor: const Color(0xFFF3E3D3),

@@ -116,7 +116,18 @@ class CustomerLoginScreenContent extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            GestureDetector(
+              onTap: () => Navigator.of(context).pushNamed('/adminLogin'),
+              child: Text(
+                'I Am Admin',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown,
+                ),
+              ),
+            ),
           ],
         ),
       ),

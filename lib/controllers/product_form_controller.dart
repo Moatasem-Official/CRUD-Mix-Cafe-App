@@ -15,6 +15,9 @@ class ProductFormController {
   String? imageUrl;
   bool isHasDiscount = false;
   bool isAvailable = true;
+  bool isFeatured = false;
+  bool isNew = false;
+  bool isBest = false;
 
   TimeOfDay? timeStartPicked;
   TimeOfDay? timeEndPicked;

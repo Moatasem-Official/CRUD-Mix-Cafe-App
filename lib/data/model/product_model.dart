@@ -5,6 +5,9 @@ class ProductModel {
   final double price;
   final int quantity;
   final bool isAvailable;
+  final bool isFeatured;
+  final bool isNew;
+  final bool isBestSeller;
   final String imageUrl;
   final String category;
   final bool hasDiscount;
@@ -21,6 +24,9 @@ class ProductModel {
     required this.price,
     required this.quantity,
     required this.isAvailable,
+    required this.isFeatured,
+    required this.isNew,
+    required this.isBestSeller,
     required this.imageUrl,
     required this.category,
     this.hasDiscount = false,

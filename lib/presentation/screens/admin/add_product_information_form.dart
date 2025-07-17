@@ -64,9 +64,24 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
             const SizedBox(height: 20),
             CustomAddProductInformationForm(
               controller: _formController,
-              onSwitchChanged: (value) {
+              onHasDiscountSwitchChanged: (value) {
                 setState(() {
                   _formController.isHasDiscount = value;
+                });
+              },
+              onIsFeaturedSwitchChanged: (value) {
+                setState(() {
+                  _formController.isFeatured = value;
+                });
+              },
+              onIsNewSwitchChanged: (value) {
+                setState(() {
+                  _formController.isNew = value;
+                });
+              },
+              onIsBestSwitchChanged: (value) {
+                setState(() {
+                  _formController.isBest = value;
                 });
               },
               onImageSelected: (image) {
@@ -136,6 +151,9 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
                     ),
                     hasDiscount: _formController.isHasDiscount,
                     isAvailable: _formController.isAvailable,
+                    isFeatured: _formController.isFeatured,
+                    isNew: _formController.isNew,
+                    isBestSeller: _formController.isBest,
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
