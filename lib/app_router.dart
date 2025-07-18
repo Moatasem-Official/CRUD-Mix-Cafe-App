@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
+import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_home_navigation.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_see_all_products_screen.dart';
@@ -123,13 +124,18 @@ class AppRouter {
       case customerCartScreen:
         return MaterialPageRoute(builder: (_) => const CustomerCartScreen());
       case customerShowProductDetails:
+        final ProductModel product = settings.arguments as ProductModel;
         return MaterialPageRoute(
-          builder: (_) =>
-              const CustomerShowProductScreen(), // Placeholder for product details
+          builder: (_) => CustomerShowProductScreen(
+            productModel: product,
+          ), // Placeholder for product details
         );
       case customerSeeAllProductsScreen:
+        final List<ProductModel> allCategoryProducts =
+            settings.arguments as List<ProductModel>;
         return MaterialPageRoute(
-          builder: (_) => const CustomerSeeAllProductsScreen(),
+          builder: (_) =>
+              CustomerSeeAllProductsScreen(products: allCategoryProducts),
         );
       case customerOrdersScreen:
         return MaterialPageRoute(builder: (_) => const CustomerOrdersScreen());

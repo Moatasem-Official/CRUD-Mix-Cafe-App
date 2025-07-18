@@ -30,7 +30,7 @@ class CustomCheckoutContainer extends StatelessWidget {
             height: 52,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[600],
+                backgroundColor: const Color(0xFFC58B3E),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

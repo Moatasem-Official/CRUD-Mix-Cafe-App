@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductModel {
   final String id;
   final String name;
@@ -36,4 +38,30 @@ class ProductModel {
     this.discountedPrice = 0.0,
     this.timestamp,
   });
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    id: json['id'] ?? '',
+    name: json['name'] ?? '',
+    description: json['description'] ?? '',
+    price: (json['price'] as num?)?.toDouble() ?? 0.0,
+    quantity: (json['quantity'] as num?)?.toInt() ?? 0,
+    isAvailable: json['isAvailable'] ?? false,
+    isFeatured: json['isFeatured'] ?? false,
+    isNew: json['isNew'] ?? false,
+    isBestSeller: json['isBestSeller'] ?? false,
+    imageUrl: json['imageUrl'] ?? '',
+    category: json['category'] ?? '',
+    hasDiscount: json['hasDiscount'] ?? false,
+    startDiscount: json['startDiscount'] != null
+        ? (json['startDiscount'] as Timestamp).toDate()
+        : null,
+    endDiscount: json['endDiscount'] != null
+        ? (json['endDiscount'] as Timestamp).toDate()
+        : null,
+    discountPercentage: json['discountPercentage']?.toDouble() ?? 0.0,
+    discountedPrice: json['discountedPrice']?.toDouble() ?? 0.0,
+    timestamp: json['timestamp'] != null
+        ? (json['timestamp'] as Timestamp).toDate()
+        : null,
+  );
 }

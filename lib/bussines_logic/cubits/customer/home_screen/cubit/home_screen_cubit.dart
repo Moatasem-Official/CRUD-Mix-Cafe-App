@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/physics.dart';
 
 import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
@@ -71,8 +72,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   Future<void> searchProducts(String query) async {
     emit(HomeScreenLoading());
     try {
-      final products = await _firestore.searchProducts(query);
-      emit(HomeScreenSuccess(products));
+      final products = await _firestore.searchProductsFromAllCategories(query);
+      emit(HomeScreenSearch(products));
     } catch (e) {
       emit(HomeScreenError(e.toString()));
     }
@@ -82,7 +83,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     emit(HomeScreenLoading());
     try {
       final products = await _firestore.getProductsByCategory(category);
-      emit(HomeScreenSuccess(products));
+      emit(HomeScreenFilter(products));
     } catch (e) {
       emit(HomeScreenError(e.toString()));
     }

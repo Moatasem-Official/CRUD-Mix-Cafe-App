@@ -3,7 +3,28 @@ import '../../../../constants/app_assets.dart';
 import 'custom_filter_row_item.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    required this.onSearchChanged,
+    required this.onFilterAllTapped,
+    required this.onFilterSandwichesTapped,
+    required this.onFilterPizzasTapped,
+    required this.onFilterCrepesTapped,
+    required this.onFilterMealsTapped,
+    required this.onFilterDrinksTapped,
+    required this.onFilterDesertsTapped,
+    required this.selectedFilter,
+  });
+
+  final Function(String) onSearchChanged;
+  final Function() onFilterAllTapped;
+  final Function() onFilterSandwichesTapped;
+  final Function() onFilterPizzasTapped;
+  final Function() onFilterCrepesTapped;
+  final Function() onFilterMealsTapped;
+  final Function() onFilterDrinksTapped;
+  final Function() onFilterDesertsTapped;
+  final String selectedFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -106,12 +127,7 @@ class CustomAppBar extends StatelessWidget {
                 hintText: 'Search for food, drinks, or more...',
                 hintStyle: TextStyle(color: Colors.grey.shade600),
               ),
-              onSubmitted: (value) {
-                // Handle search action
-              },
-              onChanged: (value) {
-                // Handle search input changes
-              },
+              onChanged: onSearchChanged,
             ),
           ),
         ),
@@ -124,16 +140,52 @@ class CustomAppBar extends StatelessWidget {
               CustomFilterRowItem(
                 filterName: 'All',
                 filterIcon: Icons.fastfood,
+                filterId: 0,
+                isSelected: selectedFilter == 'All',
+                onTap: onFilterAllTapped,
               ),
               CustomFilterRowItem(
-                filterName: 'Sndwiches',
+                filterName: 'Sandwiches',
                 filterIcon: Icons.local_drink,
+                filterId: 1,
+                isSelected: selectedFilter == 'Sandwiches',
+                onTap: onFilterSandwichesTapped,
               ),
               CustomFilterRowItem(
                 filterName: 'Pizza',
                 filterIcon: Icons.local_pizza,
+                filterId: 2,
+                isSelected: selectedFilter == 'Pizzas',
+                onTap: onFilterPizzasTapped,
               ),
-              CustomFilterRowItem(filterName: 'Crepes', filterIcon: Icons.cake),
+              CustomFilterRowItem(
+                filterName: 'Crepes',
+                filterIcon: Icons.cake,
+                filterId: 3,
+                isSelected: selectedFilter == 'Crepes',
+                onTap: onFilterCrepesTapped,
+              ),
+              CustomFilterRowItem(
+                filterName: 'Meals',
+                filterIcon: Icons.fastfood,
+                filterId: 4,
+                isSelected: selectedFilter == 'Meals',
+                onTap: onFilterMealsTapped,
+              ),
+              CustomFilterRowItem(
+                filterName: 'Drinks',
+                filterIcon: Icons.local_drink,
+                filterId: 5,
+                isSelected: selectedFilter == 'Drinks',
+                onTap: () {},
+              ),
+              CustomFilterRowItem(
+                filterName: 'Desserts',
+                filterIcon: Icons.cake,
+                filterId: 6,
+                isSelected: selectedFilter == 'Desserts',
+                onTap: onFilterDesertsTapped,
+              ),
             ],
           ),
         ),

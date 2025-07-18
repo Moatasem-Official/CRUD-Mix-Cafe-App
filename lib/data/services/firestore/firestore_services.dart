@@ -329,32 +329,81 @@ class FirestoreServices {
     }
   }
 
-  Future searchProducts(String query) async {
+  Future<List<ProductModel>> searchProductsFromAllCategories(
+    String query,
+  ) async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
-          .collection('products');
-      final QuerySnapshot snapshot = await collection
-          .where('name', isEqualTo: query)
-          .get();
-      return snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      final List<String> categoryNames = [
+        'Sandwichs',
+        'Pizzas',
+        'Crepes',
+        'Meals',
+        'Drinks',
+      ];
+
+      List<ProductModel> allProducts = [];
+
+      for (String category in categoryNames) {
+        final querySnapshot = await FirebaseFirestore.instance
+            .collection('categories')
+            .doc(category)
+            .collection('products')
+            .get();
+
+        final products = querySnapshot.docs
+            .map((doc) {
+              final data = doc.data();
+              return ProductModel(
+                id: data['id'] ?? '',
+                name: data['name'] ?? '',
+                description: data['description'] ?? '',
+                price: (data['price'] as num?)?.toDouble() ?? 0.0,
+                quantity: (data['quantity'] as num?)?.toInt() ?? 0,
+                isAvailable: data['isAvailable'] ?? false,
+                isFeatured: data['isFeatured'] ?? false,
+                isNew: data['isNew'] ?? false,
+                isBestSeller: data['isBestSeller'] ?? false,
+                imageUrl: data['imageUrl'] ?? '',
+                category: data['category'] ?? '',
+                hasDiscount: data['hasDiscount'] ?? false,
+                startDiscount: (data['startDiscount'] as Timestamp?)?.toDate(),
+                endDiscount: (data['endDiscount'] as Timestamp?)?.toDate(),
+                discountPercentage:
+                    (data['discountPercentage'] as num?)?.toDouble() ?? 0.0,
+                discountedPrice:
+                    (data['discountedPrice'] as num?)?.toDouble() ?? 0.0,
+              );
+            })
+            .where(
+              (product) =>
+                  product.name.toLowerCase().contains(query.toLowerCase()),
+            )
+            .toList();
+
+        allProducts.addAll(products);
+      }
+
+      return allProducts;
     } catch (e) {
       print('Error searching products: $e');
       throw Exception('Failed to search products: $e');
     }
   }
 
-  Future getProductsByCategory(String category) async {
+  Future<List<ProductModel>> getProductsByCategory(String category) async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
+      final collection = FirebaseFirestore.instance
           .collection('categories')
           .doc(category)
           .collection('products');
-      final QuerySnapshot snapshot = await collection.get();
-      return snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+
+      final snapshot = await collection.get();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id; // إضافة الـ id لأن غالباً الموديل يستخدمه
+        return ProductModel.fromJson(data);
+      }).toList();
     } catch (e) {
       print('Error fetching products by category: $e');
       throw Exception('Failed to fetch products by category: $e');

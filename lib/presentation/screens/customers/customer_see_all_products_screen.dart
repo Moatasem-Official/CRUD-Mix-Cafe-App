@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
+import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
 
 class CustomerSeeAllProductsScreen extends StatelessWidget {
-  const CustomerSeeAllProductsScreen({super.key});
+  const CustomerSeeAllProductsScreen({super.key, required this.products});
+
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
@@ -13,69 +15,25 @@ class CustomerSeeAllProductsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
-            ),
-            ProductCard(
-              imageUrl: Assets.mixCafeCustomerFoodImage,
-              name: 'Mix Cafe',
-              description: 'Mix Cafe Description here ...',
-              price: 10.99,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    name: products[index].name,
+                    description: products[index].description,
+                    price: products[index].price,
+                    imageUrl: products[index].imageUrl,
+                  );
+                },
+              ),
             ),
           ],
         ),
-      ), // لون بيج فاتح
+      ),
     );
   }
 }

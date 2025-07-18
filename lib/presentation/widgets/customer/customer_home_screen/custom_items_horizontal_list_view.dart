@@ -9,21 +9,32 @@ class CustomItemsHorizontalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: products.length > 5 ? 5 : products.length,
-        itemBuilder: (context, index) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: products.take(5).map((product) {
           return Padding(
             padding: const EdgeInsets.only(right: 16),
             child: CustomProductContainer(
-              productImage: products[index].imageUrl,
-              productName: products[index].name,
-              productPrice: products[index].price.toString(),
+              productImage: product.imageUrl,
+              productName: product.name,
+              productPrice: product.price,
+              discountPercentage: product.discountPercentage,
+              isAvailable: product.isAvailable,
+              quantity: product.quantity,
+              onAddToCart: () {
+                // handle add to cart
+              },
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/customerShowProductDetails',
+                  arguments: product,
+                );
+              },
             ),
           );
-        },
+        }).toList(),
       ),
     );
   }

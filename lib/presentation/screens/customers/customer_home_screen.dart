@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
 import '../../widgets/customer/customer_home_screen/custom_app_bar.dart';
-import '../../widgets/customer/customer_home_screen/custom_items_horizontal_list_view.dart';
-import '../../widgets/customer/customer_home_screen/custom_items_title_row.dart';
 import '../../../data/services/auth/auth_service.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
@@ -15,6 +15,7 @@ class CustomerHomeScreen extends StatefulWidget {
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   final AuthService authService = AuthService();
+  String selectedCategory = 'All';
 
   @override
   void initState() {
@@ -27,124 +28,107 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(315),
-        child: CustomAppBar(),
+        child: CustomAppBar(
+          onSearchChanged: (value) {
+            value.isNotEmpty
+                ? context.read<HomeScreenCubit>().searchProducts(value)
+                : context.read<HomeScreenCubit>().getProducts();
+          },
+          selectedFilter: selectedCategory,
+          onFilterAllTapped: () {
+            setState(() {
+              selectedCategory = 'All';
+            });
+            context.read<HomeScreenCubit>().getProducts();
+          },
+          onFilterSandwichesTapped: () {
+            setState(() {
+              selectedCategory = 'Sandwiches';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Sandwichs');
+          },
+          onFilterPizzasTapped: () {
+            setState(() {
+              selectedCategory = 'Pizzas';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Pizzas');
+          },
+          onFilterCrepesTapped: () {
+            setState(() {
+              selectedCategory = 'Crepes';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Crepes');
+          },
+          onFilterMealsTapped: () {
+            setState(() {
+              selectedCategory = 'Meals';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Meals');
+          },
+          onFilterDesertsTapped: () {
+            setState(() {
+              selectedCategory = 'Deserts';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Deserts');
+          },
+          onFilterDrinksTapped: () {
+            setState(() {
+              selectedCategory = 'Drinks';
+            });
+            context.read<HomeScreenCubit>().filterProducts('Drinks');
+          },
+        ),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: CustomItemsTitleRow(title: 'Featured Items'),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: BlocBuilder<HomeScreenCubit, HomeScreenState>(
-                builder: (context, state) {
-                  if (state is HomeScreenLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is HomeScreenSuccess) {
-                    if (context
-                        .read<HomeScreenCubit>()
-                        .featuredProducts
-                        .isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
-                    }
-                    return CustomItemsHorizontalListView(
-                      products: context
-                          .read<HomeScreenCubit>()
-                          .featuredProducts,
-                    );
-                  } else if (state is HomeScreenError) {
-                    return Center(child: Text(state.error));
-                  }
-                  return const SizedBox.shrink();
+      body: BlocBuilder<HomeScreenCubit, HomeScreenState>(
+        builder: (context, state) {
+          if (state is HomeScreenLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HomeScreenError) {
+            return Center(child: Text(state.error));
+          } else if (state is HomeScreenSearch) {
+            if (state.products.isEmpty) {
+              return const Center(child: Text('No products available.'));
+            } else {
+              return ListView.builder(
+                itemCount: state.products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    name: state.products[index].name,
+                    description: state.products[index].description,
+                    price: state.products[index].price,
+                    imageUrl: state.products[index].imageUrl,
+                  );
                 },
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          SliverToBoxAdapter(child: CustomItemsTitleRow(title: 'Best Sellers')),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: BlocBuilder<HomeScreenCubit, HomeScreenState>(
-                builder: (context, state) {
-                  if (state is HomeScreenLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is HomeScreenSuccess) {
-                    if (context.read<HomeScreenCubit>().bestProducts.isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
-                    }
-                    return CustomItemsHorizontalListView(
-                      products: context.read<HomeScreenCubit>().bestProducts,
-                    );
-                  } else if (state is HomeScreenError) {
-                    return Center(child: Text(state.error));
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          SliverToBoxAdapter(child: CustomItemsTitleRow(title: 'New Items')),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: BlocBuilder<HomeScreenCubit, HomeScreenState>(
-                builder: (context, state) {
-                  if (state is HomeScreenLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is HomeScreenSuccess) {
-                    if (context.read<HomeScreenCubit>().newProducts.isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
-                    }
-                    return CustomItemsHorizontalListView(
-                      products: context.read<HomeScreenCubit>().newProducts,
-                    );
-                  } else if (state is HomeScreenError) {
-                    return Center(child: Text(state.error));
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          SliverToBoxAdapter(child: CustomItemsTitleRow(title: 'Other Items')),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: BlocBuilder<HomeScreenCubit, HomeScreenState>(
-                builder: (context, state) {
-                  if (state is HomeScreenLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is HomeScreenSuccess) {
-                    if (context.read<HomeScreenCubit>().otherProducts.isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
-                    }
-                    return CustomItemsHorizontalListView(
-                      products: context.read<HomeScreenCubit>().otherProducts,
-                    );
-                  } else if (state is HomeScreenError) {
-                    return Center(child: Text(state.error));
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-        ],
+              );
+            }
+          } else if (state is HomeScreenFilter) {
+            if (state.products.isEmpty) {
+              return const Center(child: Text('No products available.'));
+            } else {
+              return CustomScrollViewWidget(
+                featuredProducts: context
+                    .read<HomeScreenCubit>()
+                    .featuredProducts,
+                bestProducts: context.read<HomeScreenCubit>().bestProducts,
+                newProducts: context.read<HomeScreenCubit>().newProducts,
+                otherProducts: context.read<HomeScreenCubit>().otherProducts,
+              );
+            }
+          } else if (state is HomeScreenSuccess) {
+            return CustomScrollViewWidget(
+              featuredProducts: context
+                  .read<HomeScreenCubit>()
+                  .featuredProducts,
+              bestProducts: context.read<HomeScreenCubit>().bestProducts,
+              newProducts: context.read<HomeScreenCubit>().newProducts,
+              otherProducts: context.read<HomeScreenCubit>().otherProducts,
+            );
+          } else {
+            return const Center(child: Text('Unknown state'));
+          }
+        },
       ),
     );
   }

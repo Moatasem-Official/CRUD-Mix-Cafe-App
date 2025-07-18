@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomQuatityControlContainer extends StatelessWidget {
-  const CustomQuatityControlContainer({super.key});
+  const CustomQuatityControlContainer({super.key, required this.quantity});
+
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,8 @@ class CustomQuatityControlContainer extends StatelessWidget {
 
           const SizedBox(width: 16),
 
-          const Text(
-            '1',
+          Text(
+            quantity.toString(),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

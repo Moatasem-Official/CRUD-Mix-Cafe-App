@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'custom_quatity_control_container.dart';
 
 class CustomProductDetailsContainer extends StatelessWidget {
-  const CustomProductDetailsContainer({super.key});
+  const CustomProductDetailsContainer({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Shawarma Sandwich',
+              product.name,
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -37,7 +40,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
             ),
             SizedBox(height: 12),
             Text(
-              'A classic shawarma sandwich with tender, marinated meat, fresh vegetables, and creamy tahini sauce, all wrapped in a warm pita bread.',
+              product.description,
               style: TextStyle(
                 fontSize: 15,
                 color: Color(0xFF666666),
@@ -46,7 +49,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
             ),
             SizedBox(height: 24),
             Text(
-              'EGP 35',
+              'EGP ${product.price.toStringAsFixed(2)}',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -63,7 +66,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            CustomQuatityControlContainer(),
+            CustomQuatityControlContainer(quantity: product.quantity),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
