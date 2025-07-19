@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mix_cafe_app/data/model/user_model.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../model/product_model.dart';
 import '../cloudinary/cloudinary_services.dart';
@@ -408,5 +409,36 @@ class FirestoreServices {
       print('Error fetching products by category: $e');
       throw Exception('Failed to fetch products by category: $e');
     }
+  }
+
+  Future<UserModel> getUserInfo(String orderId) async {
+    try {
+      final DocumentReference document = FirebaseFirestore.instance
+          .collection('users')
+          .doc(orderId);
+      final DocumentSnapshot snapshot = await document.get();
+      if (snapshot.exists) {
+        return UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+      } else {
+        return UserModel(); // Item not found
+      }
+    } catch (e) {
+      print('Error fetching item by ID: $e');
+      throw Exception('Failed to fetch item by ID: $e');
+    }
+  }
+
+  Future<void> updateUserInfo({
+    required String userId,
+    required UserModel userModel,
+  }) async {
+    await FirebaseFirestore.instance.collection('users').doc(userId).update({
+      if (userModel.name != null) 'name': userModel.name,
+      if (userModel.email != null) 'email': userModel.email,
+      if (userModel.imageUrl != null) 'imageUrl': userModel.imageUrl,
+      if (userModel.address != null) 'address': userModel.address,
+      if (userModel.isNotificationsEnabled != null)
+        'isNotificationsEnabled': userModel.isNotificationsEnabled,
+    });
   }
 }

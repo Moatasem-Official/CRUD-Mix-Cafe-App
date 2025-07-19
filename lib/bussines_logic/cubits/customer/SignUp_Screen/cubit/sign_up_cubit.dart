@@ -12,7 +12,14 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   final AuthService _authService = AuthService();
 
-  Future<void> signUp(String email, String password, String name) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String name,
+    required bool isNotificationsEnabled,
+    required String address,
+    required String image,
+  }) async {
     emit(SignUpLoading());
     try {
       await _authService.createUserWithEmailAndPassword(
@@ -30,6 +37,9 @@ class SignUpCubit extends Cubit<SignUpState> {
               name: name.trim(),
               email: email.trim(),
               userRole: 'customer',
+              isNotificationsEnabled: isNotificationsEnabled,
+              address: address.trim(),
+              imageUrl: image.trim(),
             ).toJson(),
           );
 

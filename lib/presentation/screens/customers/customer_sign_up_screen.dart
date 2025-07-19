@@ -157,9 +157,12 @@ class _CustomerSignUpScreenState extends State<CustomerSignUpScreen> {
                         _confirmPasswordController.text) {
                       if (agreementChecked) {
                         context.read<SignUpCubit>().signUp(
-                          _emailController.text.trim(),
-                          _passwordController.text.trim(),
-                          _nameController.text.trim(),
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                          name: _nameController.text.trim(),
+                          isNotificationsEnabled: false,
+                          address: '',
+                          image: '',
                         );
                       } else {
                         const snackBar = SnackBar(

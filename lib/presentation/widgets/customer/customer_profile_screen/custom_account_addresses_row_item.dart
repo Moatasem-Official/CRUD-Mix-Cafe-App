@@ -45,7 +45,12 @@ class CustomAccountAddressesRowItem extends StatelessWidget {
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

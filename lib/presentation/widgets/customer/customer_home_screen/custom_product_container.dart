@@ -12,6 +12,9 @@ class CustomProductContainer extends StatelessWidget {
     this.isAvailable = true,
     this.onAddToCart,
     this.onTap,
+    this.offerStartDate,
+    this.offerEndDate,
+    required this.hasDiscount,
   });
 
   final String productImage;
@@ -20,8 +23,11 @@ class CustomProductContainer extends StatelessWidget {
   final double discountPercentage;
   final int quantity;
   final bool isAvailable;
+  final bool hasDiscount;
   final VoidCallback? onAddToCart;
   final Function()? onTap;
+  final DateTime? offerStartDate;
+  final DateTime? offerEndDate;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,7 @@ class CustomProductContainer extends StatelessWidget {
                     height: 120,
                   ),
                 ),
-                if (discountPercentage > 0)
+                if (hasDiscount && discountPercentage > 0)
                   Positioned(
                     top: 8,
                     left: 8,
@@ -124,17 +130,49 @@ class CustomProductContainer extends StatelessWidget {
                     color: Color(0xFF795548),
                   ),
                   const SizedBox(width: 4),
-                  Text(
-                    discountedPrice <= 0
-                        ? 'Free'
-                        : 'EGP ${discountedPrice.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFC58B3E),
+
+                  // السعر
+                  if (hasDiscount && discountPercentage > 0)
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            'EGP ${productPrice.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            discountedPrice <= 0
+                                ? 'Free'
+                                : 'EGP ${discountedPrice.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFC58B3E),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: Text(
+                        productPrice <= 0
+                            ? 'Free'
+                            : 'EGP ${productPrice.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFC58B3E),
+                        ),
+                      ),
                     ),
-                  ),
-                  const Spacer(),
+
+                  const SizedBox(width: 4),
                   const Icon(
                     IconlyLight.bag,
                     size: 16,
@@ -148,7 +186,25 @@ class CustomProductContainer extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+
+            // تاريخ العرض
+            if (hasDiscount &&
+                discountPercentage > 0 &&
+                offerStartDate != null &&
+                offerEndDate != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 4),
+                child: Text(
+                  'Offer: ${_formatDate(offerStartDate!)} - ${_formatDate(offerEndDate!)}',
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.orange,
+                  ),
+                ),
+              ),
+
+            const SizedBox(height: 4),
 
             // حالة التوفر
             Padding(
@@ -204,4 +260,8 @@ class CustomProductContainer extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatDate(DateTime date) {
+  return '${date.day}/${date.month}/${date.year}';
 }

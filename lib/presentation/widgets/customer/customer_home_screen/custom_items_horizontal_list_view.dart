@@ -19,9 +19,13 @@ class CustomItemsHorizontalListView extends StatelessWidget {
               productImage: product.imageUrl,
               productName: product.name,
               productPrice: product.price,
-              discountPercentage: product.discountPercentage,
+              discountPercentage:
+                  100 - ((product.discountedPrice / product.price) * 100),
               isAvailable: product.isAvailable,
               quantity: product.quantity,
+              offerStartDate: product.startDiscount,
+              offerEndDate: product.endDiscount,
+              hasDiscount: product.hasDiscount,
               onAddToCart: () {
                 // handle add to cart
               },

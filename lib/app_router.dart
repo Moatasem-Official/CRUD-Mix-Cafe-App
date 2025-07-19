@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/about_mix_cafe_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/contact_support_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_home_navigation.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_see_all_products_screen.dart';
@@ -54,6 +56,8 @@ class AppRouter {
       '/customerSeeAllProductsScreen';
   static const String customerOrdersScreen = '/customerOrdersScreen';
   static const String customerHomeNavigation = '/customerHomeNavigation';
+  static const String aboutMixCafeScreen = '/aboutMixCafeScreen';
+  static const String contactSupportScreen = '/contactSupportScreen';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -146,6 +150,10 @@ class AppRouter {
             child: const CustomerHomeNavigation(),
           ),
         );
+      case aboutMixCafeScreen:
+        return MaterialPageRoute(builder: (_) => const AboutMixCafeScreen());
+      case contactSupportScreen:
+        return MaterialPageRoute(builder: (_) => const ContactSupportScreen());
       default:
         return null;
     }

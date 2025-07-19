@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CustomAccountLanguageRowItem extends StatelessWidget {
-  const CustomAccountLanguageRowItem({super.key, required this.title});
+  const CustomAccountLanguageRowItem({
+    super.key,
+    required this.title,
+    required this.selectedLanguage,
+    required this.index,
+    required this.onArabicTap,
+    required this.onEnglishTap,
+  });
 
   final String title;
+  final String selectedLanguage;
+  final int index;
+  final VoidCallback onArabicTap;
+  final VoidCallback onEnglishTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +48,27 @@ class CustomAccountLanguageRowItem extends StatelessWidget {
         const Spacer(),
         Row(
           children: [
-            Text('English', style: TextStyle(color: Colors.grey, fontSize: 16)),
+            GestureDetector(
+              onTap: onEnglishTap,
+              child: Text(
+                'English',
+                style: TextStyle(
+                  color: selectedLanguage == 'en' ? Colors.black : Colors.grey,
+                  fontSize: 16,
+                ),
+              ),
+            ),
             const SizedBox(width: 16),
-            Text('العربية', style: TextStyle(color: Colors.grey, fontSize: 16)),
+            GestureDetector(
+              onTap: onArabicTap,
+              child: Text(
+                'العربية',
+                style: TextStyle(
+                  color: selectedLanguage == 'ar' ? Colors.black : Colors.grey,
+                  fontSize: 16,
+                ),
+              ),
+            ),
           ],
         ),
       ],
