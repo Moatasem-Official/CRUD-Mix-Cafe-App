@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
 import 'package:mix_cafe_app/data/helpers/image_helper.dart';
 import 'package:mix_cafe_app/data/model/user_model.dart';
 import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
@@ -86,7 +85,7 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
                     });
                   });
                 },
-                image: imageUrl, 
+                image: imageUrl,
                 name: name,
                 email: AuthService().currentUser!.email!,
               ),

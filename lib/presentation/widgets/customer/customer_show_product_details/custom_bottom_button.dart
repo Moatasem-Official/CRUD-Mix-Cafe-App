@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomButton extends StatelessWidget {
-  const CustomBottomButton({super.key});
+  const CustomBottomButton({
+    super.key,
+    required this.onPressed,
+    required this.isAvailable,
+  });
+
+  final Function()? onPressed;
+
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,7 @@ class CustomBottomButton extends StatelessWidget {
             elevation: 3,
             shadowColor: Colors.black26,
           ),
-          onPressed: () {},
+          onPressed: isAvailable ? onPressed : null,
           child: const Text(
             'Add to Cart',
             style: TextStyle(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
-import '../../../constants/app_assets.dart';
+import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_show_product_details/custom_back_botton.dart';
 import '../../widgets/customer/customer_show_product_details/custom_bottom_button.dart';
 import '../../widgets/customer/customer_show_product_details/custom_product_details_container.dart';
@@ -14,7 +15,17 @@ class CustomerShowProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomButton(),
+      bottomNavigationBar: CustomBottomButton(
+        isAvailable: productModel.isAvailable,
+        onPressed: () {
+          final FirestoreServices firestoreServices = FirestoreServices();
+          final AuthService authService = AuthService();
+          firestoreServices.addProductToCart(
+            productModel,
+            authService.currentUser!.uid,
+          );
+        },
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [

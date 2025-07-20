@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
+import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
+import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
 import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
 
 class CustomerSeeAllProductsScreen extends StatefulWidget {
@@ -62,6 +64,9 @@ class _CustomerSeeAllProductsScreenState
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: widget.products.length,
                       itemBuilder: (context, index) {
+                        final FirestoreServices firestoreServices =
+                            FirestoreServices();
+                        final AuthService authService = AuthService();
                         return InkWell(
                           borderRadius: BorderRadius.circular(10),
                           onTap: () => Navigator.pushNamed(
@@ -74,6 +79,24 @@ class _CustomerSeeAllProductsScreenState
                             description: widget.products[index].description,
                             price: widget.products[index].price,
                             imageUrl: widget.products[index].imageUrl,
+                            product: widget.products[index],
+                            onAddToCart: () =>
+                                firestoreServices.addProductToCart(
+                                  widget.products[index],
+                                  authService.currentUser!.uid,
+                                ),
+                            discountPercentage: double.parse(
+                              (100 -
+                                      ((state.products[index].discountedPrice /
+                                              state.products[index].price) *
+                                          100))
+                                  .toStringAsFixed(2),
+                            ),
+                            hasDiscount: state.products[index].hasDiscount,
+                            isAvailable: state.products[index].isAvailable,
+                            quantity: state.products[index].quantity,
+                            offerEndDate: state.products[index].endDiscount,
+                            offerStartDate: state.products[index].startDiscount,
                           ),
                         );
                       },
@@ -100,6 +123,9 @@ class _CustomerSeeAllProductsScreenState
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.searchResults.length,
                           itemBuilder: (context, index) {
+                            final FirestoreServices firestoreServices =
+                                FirestoreServices();
+                            final AuthService authService = AuthService();
                             return InkWell(
                               borderRadius: BorderRadius.circular(10),
                               onTap: () => Navigator.pushNamed(
@@ -113,6 +139,32 @@ class _CustomerSeeAllProductsScreenState
                                     state.searchResults[index].description,
                                 price: state.searchResults[index].price,
                                 imageUrl: state.searchResults[index].imageUrl,
+                                product: state.searchResults[index],
+                                onAddToCart: () =>
+                                    firestoreServices.addProductToCart(
+                                      state.searchResults[index],
+                                      authService.currentUser!.uid,
+                                    ),
+                                discountPercentage: double.parse(
+                                  (100 -
+                                          ((state
+                                                      .searchResults[index]
+                                                      .discountedPrice /
+                                                  state
+                                                      .searchResults[index]
+                                                      .price) *
+                                              100))
+                                      .toStringAsFixed(2),
+                                ),
+                                hasDiscount:
+                                    state.searchResults[index].hasDiscount,
+                                isAvailable:
+                                    state.searchResults[index].isAvailable,
+                                quantity: state.searchResults[index].quantity,
+                                offerStartDate:
+                                    state.searchResults[index].startDiscount,
+                                offerEndDate:
+                                    state.searchResults[index].endDiscount,
                               ),
                             );
                           },

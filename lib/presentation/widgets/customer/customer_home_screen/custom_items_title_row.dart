@@ -5,10 +5,12 @@ class CustomItemsTitleRow extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    required this.numberOfProducts,
   });
 
   final String title;
   final Function()? onTap;
+  final int numberOfProducts;
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +32,24 @@ class CustomItemsTitleRow extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
               onTap: onTap,
-              child: Row(
-                children: [
-                  const Text(
-                    'See All',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color.fromARGB(255, 193, 132, 0),
-                    ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Color.fromARGB(255, 193, 132, 0),
-                    size: 18,
-                  ),
-                ],
-              ),
+              child: numberOfProducts > 5
+                  ? Row(
+                      children: [
+                        const Text(
+                          'See All',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 193, 132, 0),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color.fromARGB(255, 193, 132, 0),
+                          size: 18,
+                        ),
+                      ],
+                    )
+                  : const Text(''),
             ),
           ),
         ],

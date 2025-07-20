@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
@@ -127,7 +128,12 @@ class AppRouter {
       case customerProfileScreen:
         return MaterialPageRoute(builder: (_) => const CustomerProfileScreen());
       case customerCartScreen:
-        return MaterialPageRoute(builder: (_) => const CustomerCartScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<CartScreenCubit>(
+            create: (context) => CartScreenCubit(),
+            child: const CustomerCartScreen(),
+          ),
+        );
       case customerShowProductDetails:
         final ProductModel product = settings.arguments as ProductModel;
         return MaterialPageRoute(
@@ -148,8 +154,15 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const CustomerOrdersScreen());
       case customerHomeNavigation:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<HomeScreenCubit>(
-            create: (_) => HomeScreenCubit()..getProducts(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider<HomeScreenCubit>(
+                create: (context) => HomeScreenCubit()..getProducts(),
+              ),
+              BlocProvider<CartScreenCubit>(
+                create: (context) => CartScreenCubit()..getCartProducts(),
+              ),
+            ],
             child: const CustomerHomeNavigation(),
           ),
         );

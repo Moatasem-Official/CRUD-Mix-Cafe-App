@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mix_cafe_app/data/model/user_model.dart';
@@ -408,6 +409,104 @@ class FirestoreServices {
     } catch (e) {
       print('Error fetching products by category: $e');
       throw Exception('Failed to fetch products by category: $e');
+    }
+  }
+
+  Future<void> addProductToCart(ProductModel product, String userId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('cart')
+          .doc(product.id)
+          .set({
+            'id': product.id,
+            'name': product.name,
+            'description': product.description,
+            'price': product.price,
+            'quantity': product.quantity,
+            'isAvailable': product.isAvailable,
+            'isFeatured': product.isFeatured,
+            'isNew': product.isNew,
+            'isBestSeller': product.isBestSeller,
+            'imageUrl': product.imageUrl,
+            'category': product.category,
+            'hasDiscount': product.hasDiscount,
+            'startDiscount': product.startDiscount,
+            'endDiscount': product.endDiscount,
+            'discountPercentage': product.hasDiscount
+                ? (100 - (product.discountedPrice / product.price) * 100)
+                : 0.0,
+            'discountedPrice': product.discountedPrice,
+          });
+    } catch (e) {
+      print('Error adding product to cart: $e');
+      throw Exception('Failed to add product to cart: $e');
+    }
+  }
+
+  Future<void> removeProductFromCart(String productId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .doc(productId)
+          .delete();
+    } catch (e) {
+      print('Error removing product from cart: $e');
+      throw Exception('Failed to remove product from cart: $e');
+    }
+  }
+
+  Future<void> updateProductQuantityInCart(
+    String productId,
+    int quantity,
+  ) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .doc(productId)
+          .update({'quantity': quantity});
+    } catch (e) {
+      print('Error updating product quantity in cart: $e');
+      throw Exception('Failed to update product quantity in cart: $e');
+    }
+  }
+
+  Future<void> clearCart() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .get()
+          .then((querySnapshot) async {
+            for (var doc in querySnapshot.docs) {
+              await doc.reference.delete();
+            }
+          });
+    } catch (e) {
+      print('Error clearing cart: $e');
+      throw Exception('Failed to clear cart: $e');
+    }
+  }
+
+  Future<List<ProductModel>> getCartProducts() async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .get();
+      return snapshot.docs
+          .map((doc) => ProductModel.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      print('Error fetching cart products: $e');
+      throw Exception('Failed to fetch cart products: $e');
     }
   }
 

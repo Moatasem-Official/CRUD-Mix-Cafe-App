@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/app_assets.dart';
 
 class CustomCartItemContainer extends StatelessWidget {
-  const CustomCartItemContainer({super.key});
+  const CustomCartItemContainer({
+    super.key,
+    required this.productName,
+    required this.productPrice,
+    required this.productImage,
+    required this.productQuantity,
+    required this.onDelete,
+    required this.onAdd,
+    required this.onMinus,
+  });
+
+  final String productName;
+  final double productPrice;
+  final int productQuantity;
+  final String productImage;
+  final Function() onDelete;
+  final Function() onAdd;
+  final Function() onMinus;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +40,8 @@ class CustomCartItemContainer extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              Assets.mixCafeCustomerFoodImage, // استخدم صورة حقيقية إن أردت
+            child: Image.network(
+              productImage,
               height: 50,
               width: 50,
               fit: BoxFit.cover,
@@ -35,9 +51,9 @@ class CustomCartItemContainer extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  'Kofta Burger',
+                  productName,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -46,7 +62,9 @@ class CustomCartItemContainer extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'EGP 30.00',
+                  productPrice == 0
+                      ? 'Free'
+                      : 'EGP ${productPrice.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 14,
                     color: Color(0xFF9C6B1C), // لون قريب من الصورة
@@ -66,14 +84,12 @@ class CustomCartItemContainer extends StatelessWidget {
                 ),
                 child: IconButton(
                   icon: Icon(Icons.remove, size: 18),
-                  onPressed: () {
-                    // decrease quantity
-                  },
+                  onPressed: onMinus,
                 ),
               ),
               const SizedBox(width: 8),
-              const Text(
-                '1',
+              Text(
+                productQuantity.toString(),
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(width: 8),
@@ -84,18 +100,14 @@ class CustomCartItemContainer extends StatelessWidget {
                 ),
                 child: IconButton(
                   icon: Icon(Icons.add, size: 18),
-                  onPressed: () {
-                    // Increase quantity
-                  },
+                  onPressed: onAdd,
                 ),
               ),
             ],
           ),
           const SizedBox(width: 10),
           IconButton(
-            onPressed: () {
-              // Remove item
-            },
+            onPressed: onDelete,
             icon: const Icon(Icons.delete_outline),
             color: Colors.grey[600],
           ),

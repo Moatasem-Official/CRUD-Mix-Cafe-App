@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mix_cafe_app/data/model/product_model.dart';
 
 class CustomProductContainer extends StatelessWidget {
   const CustomProductContainer({
@@ -16,6 +17,7 @@ class CustomProductContainer extends StatelessWidget {
     this.offerStartDate,
     this.offerEndDate,
     required this.hasDiscount,
+    required this.product,
   });
 
   final String productImage;
@@ -25,7 +27,8 @@ class CustomProductContainer extends StatelessWidget {
   final int quantity;
   final bool isAvailable;
   final bool hasDiscount;
-  final VoidCallback? onAddToCart;
+  final ProductModel product;
+  final Function(ProductModel product)? onAddToCart;
   final Function()? onTap;
   final DateTime? offerStartDate;
   final DateTime? offerEndDate;
@@ -97,7 +100,7 @@ class CustomProductContainer extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '-$discountPercentage% OFF',
+                            '$discountPercentage% OFF',
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -247,7 +250,7 @@ class CustomProductContainer extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: isAvailable ? onAddToCart : null,
+                  onPressed: () => isAvailable ? onAddToCart!(product) : null,
                   icon: const Icon(Icons.shopping_cart_outlined, size: 18),
                   label: const Text('Add'),
                   style: ElevatedButton.styleFrom(

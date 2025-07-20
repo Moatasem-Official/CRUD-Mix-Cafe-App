@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomCheckoutContainer extends StatelessWidget {
-  const CustomCheckoutContainer({super.key});
+  const CustomCheckoutContainer({
+    super.key,
+    required this.subTotal,
+    required this.deliveryFee,
+    required this.total,
+  });
+
+  final double subTotal;
+  final double deliveryFee;
+  final double total;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +26,13 @@ class CustomCheckoutContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildPriceRow('Subtotal', 'EGP 0.00'),
+          _buildPriceRow('Subtotal', 'EGP $subTotal'),
           const SizedBox(height: 12),
-          _buildPriceRow('Delivery Fee', 'EGP 0.00'),
+          _buildPriceRow('Delivery Fee', 'EGP $deliveryFee'),
           const SizedBox(height: 12),
           Divider(color: Colors.grey[300]),
           const SizedBox(height: 12),
-          _buildPriceRow('Total', 'EGP 0.00', isTotal: true),
+          _buildPriceRow('Total', 'EGP $total', isTotal: true),
           const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,

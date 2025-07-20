@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
+import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
 import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';
 import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
 import '../../widgets/customer/customer_home_screen/custom_app_bar.dart';
@@ -15,6 +16,7 @@ class CustomerHomeScreen extends StatefulWidget {
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   final AuthService authService = AuthService();
+  final FirestoreServices firestoreServices = FirestoreServices();
   String selectedCategory = 'All';
 
   @override
@@ -96,6 +98,8 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 return ListView.builder(
                   itemCount: state.products.length,
                   itemBuilder: (context, index) {
+                    final FirestoreServices firestoreServices =
+                        FirestoreServices();
                     return InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () => Navigator.pushNamed(
@@ -108,6 +112,25 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                         description: state.products[index].description,
                         price: state.products[index].price,
                         imageUrl: state.products[index].imageUrl,
+                        product: state.products[index],
+                        onAddToCart: () async {
+                          await firestoreServices.addProductToCart(
+                            state.products[index],
+                            authService.currentUser!.uid,
+                          );
+                        },
+                        discountPercentage: double.parse(
+                          (100 -
+                                  ((state.products[index].discountedPrice /
+                                          state.products[index].price) *
+                                      100))
+                              .toStringAsFixed(2),
+                        ),
+                        hasDiscount: state.products[index].hasDiscount,
+                        isAvailable: state.products[index].isAvailable,
+                        quantity: state.products[index].quantity,
+                        offerEndDate: state.products[index].endDiscount,
+                        offerStartDate: state.products[index].startDiscount,
                       ),
                     );
                   },
@@ -132,6 +155,25 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                         description: state.products[index].description,
                         price: state.products[index].price,
                         imageUrl: state.products[index].imageUrl,
+                        product: state.products[index],
+                        onAddToCart: () async {
+                          await firestoreServices.addProductToCart(
+                            state.products[index],
+                            authService.currentUser!.uid,
+                          );
+                        },
+                        discountPercentage: double.parse(
+                          (100 -
+                                  ((state.products[index].discountedPrice /
+                                          state.products[index].price) *
+                                      100))
+                              .toStringAsFixed(2),
+                        ),
+                        hasDiscount: state.products[index].hasDiscount,
+                        isAvailable: state.products[index].isAvailable,
+                        quantity: state.products[index].quantity,
+                        offerEndDate: state.products[index].endDiscount,
+                        offerStartDate: state.products[index].startDiscount,
                       ),
                     );
                   },
@@ -145,6 +187,13 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 bestProducts: context.read<HomeScreenCubit>().bestProducts,
                 newProducts: context.read<HomeScreenCubit>().newProducts,
                 otherProducts: context.read<HomeScreenCubit>().otherProducts,
+                onAddToCart: (product) async {
+                  print('Product added to cart: ${product.name}');
+                  await firestoreServices.addProductToCart(
+                    product,
+                    authService.currentUser!.uid,
+                  );
+                },
               );
             } else {
               return const Center(child: Text('Unknown state'));

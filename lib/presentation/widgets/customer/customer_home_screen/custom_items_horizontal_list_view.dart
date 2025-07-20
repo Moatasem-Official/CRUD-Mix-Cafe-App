@@ -3,9 +3,14 @@ import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'custom_product_container.dart';
 
 class CustomItemsHorizontalListView extends StatelessWidget {
-  const CustomItemsHorizontalListView({super.key, required this.products});
+  const CustomItemsHorizontalListView({
+    super.key,
+    required this.products,
+    required this.onAddToCart,
+  });
 
   final List<ProductModel> products;
+  final Function(ProductModel) onAddToCart;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +33,7 @@ class CustomItemsHorizontalListView extends StatelessWidget {
               offerStartDate: product.startDiscount,
               offerEndDate: product.endDiscount,
               hasDiscount: product.hasDiscount,
-              onAddToCart: () {
-                // handle add to cart
-              },
+              onAddToCart: (product) => onAddToCart(product),
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -38,6 +41,7 @@ class CustomItemsHorizontalListView extends StatelessWidget {
                   arguments: product,
                 );
               },
+              product: product,
             ),
           );
         }).toList(),
