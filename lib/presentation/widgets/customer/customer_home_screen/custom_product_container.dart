@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomProductContainer extends StatelessWidget {
   const CustomProductContainer({
@@ -39,7 +40,7 @@ class CustomProductContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        height: 300,
+        height: 315,
         width: 190,
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -57,13 +58,21 @@ class CustomProductContainer extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
-                  child: FadeInImage.assetNetwork(
-                    placeholder:
-                        'assets/animations/Animation - 1751644034977.gif',
-                    image: productImage,
+                  child: Image.network(
+                    productImage,
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 120,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        width: double.infinity,
+                        height: 120,
+                        child: Lottie.asset(
+                          'assets/animations/Animation - 1751639954708.json',
+                        ),
+                      );
+                    },
                   ),
                 ),
                 if (hasDiscount && discountPercentage > 0)
@@ -88,7 +97,7 @@ class CustomProductContainer extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '-$discountPercentage%',
+                            '-$discountPercentage% OFF',
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

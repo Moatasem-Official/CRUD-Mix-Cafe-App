@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class WhenLoadingLogInWidget extends StatelessWidget {
   const WhenLoadingLogInWidget({super.key});
@@ -13,8 +14,8 @@ class WhenLoadingLogInWidget extends StatelessWidget {
         child: Container(
           color: Colors.black.withOpacity(0.2),
           child: Center(
-            child: Image.asset(
-              'assets/animations/Animation - 1751644034977.gif',
+            child: Lottie.asset(
+              'assets/animations/Animation - 1751639954708.json',
               width: 200,
               height: 200,
             ),

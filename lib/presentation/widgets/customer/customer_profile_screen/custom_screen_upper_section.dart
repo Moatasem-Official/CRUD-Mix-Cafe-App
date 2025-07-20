@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_cafe_app/constants/app_assets.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomScreenUpperSection extends StatelessWidget {
   const CustomScreenUpperSection({
@@ -30,19 +31,38 @@ class CustomScreenUpperSection extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 Container(
+                  width: 160,
+                  height: 160,
                   decoration: BoxDecoration(shape: BoxShape.circle),
-                  child: CircleAvatar(
-                    radius: 80,
-                    backgroundColor: isDarkMode
-                        ? Colors.grey.shade700
-                        : Colors.grey.shade300,
-                    backgroundImage: image.isEmpty
-                        ? AssetImage(Assets.mixCafeCustomerImage)
-                        : NetworkImage(image) as ImageProvider,
-                    onBackgroundImageError: (exception, stackTrace) =>
-                        const Icon(Icons.person, size: 60),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: image.isNotEmpty
+                        ? Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Lottie.asset(
+                                'assets/animations/profile persons.json',
+                                width: 160,
+                                height: 160,
+                                fit: BoxFit.cover,
+                              ),
+                              Image.network(
+                                image,
+                                width: 160,
+                                height: 160,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          )
+                        : Image.asset(
+                            Assets.mixCafeCustomerImage,
+                            width: 160,
+                            height: 160,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
+
                 Positioned(
                   bottom: 5,
                   right: 5,

@@ -7,8 +7,6 @@ class Assets {
       "assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png";
   static const String mixCafeAdminImage =
       "assets/images/mix_cafe_admin_icon.png";
-  static const String mixCafeBeforeImageLoaded =
-      "assets/animations/Animation - 1751644034977.gif";
   static const String mixCafeCustomerFoodImage =
       "assets/images/pngtree-food-delivery-fast-food-unhealthy-obesity-concept-image_15654211.jpg";
 }

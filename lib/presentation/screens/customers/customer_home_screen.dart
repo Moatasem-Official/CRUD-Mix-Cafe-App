@@ -27,86 +27,117 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(315),
-        child: CustomAppBar(
-          onSearchChanged: (value) {
-            value.isNotEmpty
-                ? context.read<HomeScreenCubit>().searchProducts(value)
-                : context.read<HomeScreenCubit>().getProducts();
-          },
-          selectedFilter: selectedCategory,
-          onFilterAllTapped: () {
-            setState(() {
-              selectedCategory = 'All';
-            });
-            context.read<HomeScreenCubit>().getProducts();
-          },
-          onFilterSandwichesTapped: () {
-            setState(() {
-              selectedCategory = 'Sandwiches';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Sandwichs');
-          },
-          onFilterPizzasTapped: () {
-            setState(() {
-              selectedCategory = 'Pizzas';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Pizzas');
-          },
-          onFilterCrepesTapped: () {
-            setState(() {
-              selectedCategory = 'Crepes';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Crepes');
-          },
-          onFilterMealsTapped: () {
-            setState(() {
-              selectedCategory = 'Meals';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Meals');
-          },
-          onFilterDesertsTapped: () {
-            setState(() {
-              selectedCategory = 'Deserts';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Deserts');
-          },
-          onFilterDrinksTapped: () {
-            setState(() {
-              selectedCategory = 'Drinks';
-            });
-            context.read<HomeScreenCubit>().filterProducts('Drinks');
-          },
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(315),
+          child: CustomAppBar(
+            onSearchChanged: (value) {
+              value.isNotEmpty
+                  ? context.read<HomeScreenCubit>().searchProducts(value)
+                  : context.read<HomeScreenCubit>().getProducts();
+            },
+            selectedFilter: selectedCategory,
+            onFilterAllTapped: () {
+              setState(() {
+                selectedCategory = 'All';
+              });
+              context.read<HomeScreenCubit>().getProducts();
+            },
+            onFilterSandwichesTapped: () {
+              setState(() {
+                selectedCategory = 'Sandwiches';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Sandwichs');
+            },
+            onFilterPizzasTapped: () {
+              setState(() {
+                selectedCategory = 'Pizzas';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Pizzas');
+            },
+            onFilterCrepesTapped: () {
+              setState(() {
+                selectedCategory = 'Crepes';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Crepes');
+            },
+            onFilterMealsTapped: () {
+              setState(() {
+                selectedCategory = 'Meals';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Meals');
+            },
+            onFilterDesertsTapped: () {
+              setState(() {
+                selectedCategory = 'Deserts';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Deserts');
+            },
+            onFilterDrinksTapped: () {
+              setState(() {
+                selectedCategory = 'Drinks';
+              });
+              context.read<HomeScreenCubit>().filterProducts('Drinks');
+            },
+          ),
         ),
-      ),
-      body: BlocBuilder<HomeScreenCubit, HomeScreenState>(
-        builder: (context, state) {
-          if (state is HomeScreenLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is HomeScreenError) {
-            return Center(child: Text(state.error));
-          } else if (state is HomeScreenSearch) {
-            if (state.products.isEmpty) {
-              return const Center(child: Text('No products available.'));
-            } else {
-              return ListView.builder(
-                itemCount: state.products.length,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    name: state.products[index].name,
-                    description: state.products[index].description,
-                    price: state.products[index].price,
-                    imageUrl: state.products[index].imageUrl,
-                  );
-                },
-              );
-            }
-          } else if (state is HomeScreenFilter) {
-            if (state.products.isEmpty) {
-              return const Center(child: Text('No products available.'));
-            } else {
+        body: BlocBuilder<HomeScreenCubit, HomeScreenState>(
+          builder: (context, state) {
+            if (state is HomeScreenLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is HomeScreenError) {
+              return Center(child: Text(state.error));
+            } else if (state is HomeScreenSearch) {
+              if (state.products.isEmpty) {
+                return const Center(child: Text('No products available.'));
+              } else {
+                return ListView.builder(
+                  itemCount: state.products.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/customerShowProductDetails',
+                        arguments: state.products[index],
+                      ),
+                      child: ProductCard(
+                        name: state.products[index].name,
+                        description: state.products[index].description,
+                        price: state.products[index].price,
+                        imageUrl: state.products[index].imageUrl,
+                      ),
+                    );
+                  },
+                );
+              }
+            } else if (state is HomeScreenFilter) {
+              if (state.products.isEmpty) {
+                return const Center(child: Text('No products available.'));
+              } else {
+                return ListView.builder(
+                  itemCount: state.products.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/customerShowProductDetails',
+                        arguments: state.products[index],
+                      ),
+                      child: ProductCard(
+                        name: state.products[index].name,
+                        description: state.products[index].description,
+                        price: state.products[index].price,
+                        imageUrl: state.products[index].imageUrl,
+                      ),
+                    );
+                  },
+                );
+              }
+            } else if (state is HomeScreenSuccess) {
               return CustomScrollViewWidget(
                 featuredProducts: context
                     .read<HomeScreenCubit>()
@@ -115,20 +146,11 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 newProducts: context.read<HomeScreenCubit>().newProducts,
                 otherProducts: context.read<HomeScreenCubit>().otherProducts,
               );
+            } else {
+              return const Center(child: Text('Unknown state'));
             }
-          } else if (state is HomeScreenSuccess) {
-            return CustomScrollViewWidget(
-              featuredProducts: context
-                  .read<HomeScreenCubit>()
-                  .featuredProducts,
-              bestProducts: context.read<HomeScreenCubit>().bestProducts,
-              newProducts: context.read<HomeScreenCubit>().newProducts,
-              otherProducts: context.read<HomeScreenCubit>().otherProducts,
-            );
-          } else {
-            return const Center(child: Text('Unknown state'));
-          }
-        },
+          },
+        ),
       ),
     );
   }

@@ -19,8 +19,10 @@ class CustomItemsHorizontalListView extends StatelessWidget {
               productImage: product.imageUrl,
               productName: product.name,
               productPrice: product.price,
-              discountPercentage:
-                  100 - ((product.discountedPrice / product.price) * 100),
+              discountPercentage: double.parse(
+                (100 - ((product.discountedPrice / product.price) * 100))
+                    .toStringAsFixed(2),
+              ),
               isAvailable: product.isAvailable,
               quantity: product.quantity,
               offerStartDate: product.startDiscount,

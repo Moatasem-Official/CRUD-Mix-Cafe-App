@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import '../../../bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
 import '../../../data/helpers/custom_snack_bar.dart';
 import '../../widgets/admin/Login_Screen/admin_login_screen_content.dart';
@@ -115,8 +116,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
               child: Container(
                 color: Colors.black.withOpacity(0.2),
                 child: Center(
-                  child: Image.asset(
-                    'assets/animations/Animation - 1751644034977.gif',
+                  child: Lottie.asset(
+                    'assets/animations/Animation - 1751639954708.json',
                     width: 200,
                     height: 200,
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../constants/app_assets.dart';
 
 class CustomProductTemplate extends StatelessWidget {
@@ -40,21 +41,30 @@ class CustomProductTemplate extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(14),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: Assets.mixCafeBeforeImageLoaded,
-                      image: imagePath,
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      imageErrorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          Assets.mixCafeAdminImage,
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
+                    child: imagePath.isNotEmpty
+                        ? Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Lottie.asset(
+                                'assets/animations/Animation - 1751639954708.json',
+                                width: 160,
+                                height: 160,
+                                fit: BoxFit.cover,
+                              ),
+                              Image.network(
+                                imagePath,
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          )
+                        : Image.asset(
+                            Assets.mixCafeCustomerFoodImage,
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   const SizedBox(width: 16),
 
