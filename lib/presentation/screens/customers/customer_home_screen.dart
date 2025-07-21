@@ -22,9 +22,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeScreenCubit>().getProducts();
-    });
+    context.read<HomeScreenCubit>().getProducts();
   }
 
   @override
@@ -109,7 +107,6 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                       ),
                       child: ProductCard(
                         name: state.products[index].name,
-                        description: state.products[index].description,
                         price: state.products[index].price,
                         imageUrl: state.products[index].imageUrl,
                         product: state.products[index],
@@ -152,7 +149,6 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                       ),
                       child: ProductCard(
                         name: state.products[index].name,
-                        description: state.products[index].description,
                         price: state.products[index].price,
                         imageUrl: state.products[index].imageUrl,
                         product: state.products[index],

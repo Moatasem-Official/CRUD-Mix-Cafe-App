@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mix_cafe_app/data/model/user_model.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../model/product_model.dart';
 import '../cloudinary/cloudinary_services.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class FirestoreServices {
   Future<void> addProduct({
@@ -272,18 +275,54 @@ class FirestoreServices {
     }
   }
 
-  Future<void> addOrder(String userId, List<Map<String, dynamic>> items) async {
+  Future<void> addOrder(
+    String userId,
+    double totalPrice,
+    List<Map<String, dynamic>> items,
+  ) async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
+      final ordersRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
           .collection('orders');
-      await collection.add({
-        'userId': userId,
-        'items': items,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
+
+      final orderHash = generateOrderHash(items);
+
+      final existingOrder = await ordersRef
+          .where('orderHash', isEqualTo: orderHash)
+          .where('status', isEqualTo: 'pending')
+          .get();
+
+      if (existingOrder.docs.isEmpty) {
+        await ordersRef.add({
+          'userId': userId,
+          'items': items,
+          'totalPrice': totalPrice,
+          'timestamp': FieldValue.serverTimestamp(),
+          'status': 'pending',
+          'orderHash': orderHash,
+        });
+      } else {
+        throw Exception(
+          'You already have a pending order with the same items.',
+        );
+      }
+    } catch (error, stackTrace) {
+      debugPrint('Error adding order: $error');
+      debugPrintStack(stackTrace: stackTrace);
+      throw Exception('Failed to add order: $error');
+    }
+  }
+
+  Future<void> deleteOrder(String orderId) async {
+    try {
+      final DocumentReference document = FirebaseFirestore.instance
+          .collection('orders')
+          .doc(orderId);
+      await document.delete();
     } catch (e) {
-      print('Error adding order: $e');
-      throw Exception('Failed to add order: $e');
+      print('Error deleting order: $e');
+      throw Exception('Failed to delete order: $e');
     }
   }
 
@@ -302,16 +341,26 @@ class FirestoreServices {
   Future<List<Map<String, dynamic>>> getAllOrders() async {
     try {
       final CollectionReference collection = FirebaseFirestore.instance
-          .collection('users')
-          .doc('userOrders')
           .collection('orders');
       final QuerySnapshot snapshot = await collection.get();
       return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     } catch (e) {
-      print('Error fetching all orders: $e');
-      throw Exception('Failed to fetch all orders: $e');
+      print('Error fetching orders: $e');
+      throw Exception('Failed to fetch orders: $e');
+    }
+  }
+
+  Future<int> getOrdersCount() async {
+    try {
+      final CollectionReference collection = FirebaseFirestore.instance
+          .collection('orders');
+      final QuerySnapshot snapshot = await collection.get();
+      return snapshot.docs.length;
+    } catch (e) {
+      print('Error fetching orders count: $e');
+      throw Exception('Failed to fetch orders count: $e');
     }
   }
 
@@ -540,4 +589,14 @@ class FirestoreServices {
         'isNotificationsEnabled': userModel.isNotificationsEnabled,
     });
   }
+}
+
+String generateOrderHash(List<Map<String, dynamic>> items) {
+  // ترتيب العناصر لتجنب الاختلاف بسبب الترتيب
+  final sortedItems = List<Map<String, dynamic>>.from(items)
+    ..sort((a, b) => a.toString().compareTo(b.toString()));
+
+  final jsonString = jsonEncode(sortedItems);
+  final hash = sha256.convert(utf8.encode(jsonString));
+  return hash.toString();
 }

@@ -76,7 +76,6 @@ class _CustomerSeeAllProductsScreenState
                           ),
                           child: ProductCard(
                             name: widget.products[index].name,
-                            description: widget.products[index].description,
                             price: widget.products[index].price,
                             imageUrl: widget.products[index].imageUrl,
                             product: widget.products[index],
@@ -135,8 +134,6 @@ class _CustomerSeeAllProductsScreenState
                               ),
                               child: ProductCard(
                                 name: state.searchResults[index].name,
-                                description:
-                                    state.searchResults[index].description,
                                 price: state.searchResults[index].price,
                                 imageUrl: state.searchResults[index].imageUrl,
                                 product: state.searchResults[index],

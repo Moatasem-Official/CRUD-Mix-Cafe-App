@@ -9,54 +9,30 @@ class CustomerOrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 251),
-      appBar: const CustomerOrdersAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            OrderCard(
-              orderId: '1',
-              date: '2023-06-01',
-              status: 'Delivered',
-              totalPrice: 100.00,
-              products: ['Product 1', 'Product 2', 'Product 3'],
+      body: CustomScrollView(
+        slivers: [
+          // 1. Your new "fantastic" SliverAppBar
+          const CustomerOrdersSliverAppBar(),
+
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          // 2. The list of orders
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                // Here you build your OrderCard
+                return OrderCard(
+                  // Pass your order data here
+                  orderId: '1025${index + 1}',
+                  date: 'July 21, 2025',
+                  status: ['Pending', 'Delivered', 'Cancelled'][index % 3],
+                  totalPrice: 125.50 + (index * 10),
+                  products: const ['Espresso', 'Croissant', 'Latte'],
+                );
+              },
+              childCount: 15, // Example count
             ),
-            OrderCard(
-              orderId: '2',
-              date: '2023-06-02',
-              status: 'Pending',
-              totalPrice: 50.00,
-              products: ['Product 4', 'Product 5', 'Product 6'],
-            ),
-            OrderCard(
-              orderId: '3',
-              date: '2023-06-03',
-              status: 'Cancelled',
-              totalPrice: 75.00,
-              products: ['Product 7', 'Product 8', 'Product 9'],
-            ),
-            OrderCard(
-              orderId: '4',
-              date: '2023-06-04',
-              status: 'Delivered',
-              totalPrice: 150.00,
-              products: ['Product 10', 'Product 11', 'Product 12'],
-            ),
-            OrderCard(
-              orderId: '5',
-              date: '2023-06-05',
-              status: 'Pending',
-              totalPrice: 200.00,
-              products: ['Product 13', 'Product 14', 'Product 15'],
-            ),
-            OrderCard(
-              orderId: '6',
-              date: '2023-06-06',
-              status: 'Delivered',
-              totalPrice: 300.00,
-              products: ['Product 16', 'Product 17', 'Product 18'],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
