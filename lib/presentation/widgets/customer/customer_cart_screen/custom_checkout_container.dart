@@ -118,7 +118,7 @@ class CustomCheckoutContainer extends StatelessWidget {
                         child: ElevatedButton.icon(
                           icon: const Icon(IconlyBold.shield_done, size: 22),
                           label: Text(
-                            'Proceed to Checkout',
+                            'Proceed To Delivery Request',
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

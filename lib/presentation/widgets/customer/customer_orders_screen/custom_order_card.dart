@@ -4,6 +4,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
 import 'dart:math' as math;
 
+import 'package:mix_cafe_app/data/model/product_model.dart';
+
 // Helper class to hold status information (color, icon)
 class StatusInfo {
   final Color color;
@@ -17,7 +19,7 @@ class OrderCard extends StatelessWidget {
   final String date;
   final String status;
   final double totalPrice;
-  final List<String> products;
+  final List<dynamic> products;
 
   const OrderCard({
     super.key,
@@ -129,6 +131,7 @@ class OrderCard extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: products
+          .whereType<Map<String, dynamic>>()
           .map(
             (product) => Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -137,7 +140,7 @@ class OrderCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                product,
+                product['name'] ?? 'No Name',
                 style: GoogleFonts.poppins(
                   fontSize: 12,
                   color: const Color(0xFF6D4C41),
@@ -198,9 +201,7 @@ class OrderCard extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             ElevatedButton(
-              onPressed: () {
-                /* Reorder Logic */
-              },
+              onPressed: status == 'pending' ? null : () {} /* Reorder Logic */,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4E342E), // Rich brown
                 foregroundColor: Colors.white,

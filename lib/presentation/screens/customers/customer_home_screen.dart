@@ -98,37 +98,29 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                   itemBuilder: (context, index) {
                     final FirestoreServices firestoreServices =
                         FirestoreServices();
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        '/customerShowProductDetails',
-                        arguments: state.products[index],
+                    return ProductCard(
+                      name: state.products[index].name,
+                      price: state.products[index].price,
+                      imageUrl: state.products[index].imageUrl,
+                      product: state.products[index],
+                      onAddToCart: () async {
+                        await firestoreServices.addProductToCart(
+                          state.products[index],
+                          authService.currentUser!.uid,
+                        );
+                      },
+                      discountPercentage: double.parse(
+                        (100 -
+                                ((state.products[index].discountedPrice /
+                                        state.products[index].price) *
+                                    100))
+                            .toStringAsFixed(2),
                       ),
-                      child: ProductCard(
-                        name: state.products[index].name,
-                        price: state.products[index].price,
-                        imageUrl: state.products[index].imageUrl,
-                        product: state.products[index],
-                        onAddToCart: () async {
-                          await firestoreServices.addProductToCart(
-                            state.products[index],
-                            authService.currentUser!.uid,
-                          );
-                        },
-                        discountPercentage: double.parse(
-                          (100 -
-                                  ((state.products[index].discountedPrice /
-                                          state.products[index].price) *
-                                      100))
-                              .toStringAsFixed(2),
-                        ),
-                        hasDiscount: state.products[index].hasDiscount,
-                        isAvailable: state.products[index].isAvailable,
-                        quantity: state.products[index].quantity,
-                        offerEndDate: state.products[index].endDiscount,
-                        offerStartDate: state.products[index].startDiscount,
-                      ),
+                      hasDiscount: state.products[index].hasDiscount,
+                      isAvailable: state.products[index].isAvailable,
+                      quantity: state.products[index].quantity,
+                      offerEndDate: state.products[index].endDiscount,
+                      offerStartDate: state.products[index].startDiscount,
                     );
                   },
                 );
@@ -140,37 +132,29 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 return ListView.builder(
                   itemCount: state.products.length,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        '/customerShowProductDetails',
-                        arguments: state.products[index],
+                    return ProductCard(
+                      name: state.products[index].name,
+                      price: state.products[index].price,
+                      imageUrl: state.products[index].imageUrl,
+                      product: state.products[index],
+                      onAddToCart: () async {
+                        await firestoreServices.addProductToCart(
+                          state.products[index],
+                          authService.currentUser!.uid,
+                        );
+                      },
+                      discountPercentage: double.parse(
+                        (100 -
+                                ((state.products[index].discountedPrice /
+                                        state.products[index].price) *
+                                    100))
+                            .toStringAsFixed(2),
                       ),
-                      child: ProductCard(
-                        name: state.products[index].name,
-                        price: state.products[index].price,
-                        imageUrl: state.products[index].imageUrl,
-                        product: state.products[index],
-                        onAddToCart: () async {
-                          await firestoreServices.addProductToCart(
-                            state.products[index],
-                            authService.currentUser!.uid,
-                          );
-                        },
-                        discountPercentage: double.parse(
-                          (100 -
-                                  ((state.products[index].discountedPrice /
-                                          state.products[index].price) *
-                                      100))
-                              .toStringAsFixed(2),
-                        ),
-                        hasDiscount: state.products[index].hasDiscount,
-                        isAvailable: state.products[index].isAvailable,
-                        quantity: state.products[index].quantity,
-                        offerEndDate: state.products[index].endDiscount,
-                        offerStartDate: state.products[index].startDiscount,
-                      ),
+                      hasDiscount: state.products[index].hasDiscount,
+                      isAvailable: state.products[index].isAvailable,
+                      quantity: state.products[index].quantity,
+                      offerEndDate: state.products[index].endDiscount,
+                      offerStartDate: state.products[index].startDiscount,
                     );
                   },
                 );

@@ -101,6 +101,7 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                                         final quantity =
                                             productQuantities[product.id] ?? 1;
                                         return CustomCartItemContainer(
+                                          product: product,
                                           productName: product.name,
                                           productPrice: product.hasDiscount
                                               ? product.discountedPrice

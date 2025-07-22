@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mix_cafe_app/data/model/order_model.dart';
 import 'package:mix_cafe_app/data/model/user_model.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../model/product_model.dart';
@@ -338,14 +339,20 @@ class FirestoreServices {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getAllOrders() async {
+  Future<List<OrderModel>> getAllOrders() async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
+      final collection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('orders');
-      final QuerySnapshot snapshot = await collection.get();
-      return snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+
+      final snapshot = await collection.get();
+
+      return snapshot.docs.map((doc) {
+        // ignore: unnecessary_cast
+        final data = doc.data() as Map<String, dynamic>; // 👈 مهم جدًا
+        return OrderModel.fromMap(doc.id, data);
+      }).toList();
     } catch (e) {
       print('Error fetching orders: $e');
       throw Exception('Failed to fetch orders: $e');
@@ -364,16 +371,21 @@ class FirestoreServices {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getOrdersByStatus(String status) async {
+  Future<List<OrderModel>> getOrdersByStatus(String status) async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
+      final collection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('orders');
-      final QuerySnapshot snapshot = await collection
+
+      final snapshot = await collection
           .where('status', isEqualTo: status)
           .get();
-      return snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return OrderModel.fromMap(doc.id, data);
+      }).toList();
     } catch (e) {
       print('Error fetching orders by status: $e');
       throw Exception('Failed to fetch orders by status: $e');

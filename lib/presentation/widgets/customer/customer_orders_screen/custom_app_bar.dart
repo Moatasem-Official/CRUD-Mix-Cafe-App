@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 
 class FilterChipBar extends StatefulWidget {
-  const FilterChipBar({super.key});
+  const FilterChipBar({super.key, required this.onFilterChanged});
+
+  final Function(int) onFilterChanged;
 
   @override
   State<FilterChipBar> createState() => _FilterChipBarState();
@@ -32,7 +33,7 @@ class _FilterChipBarState extends State<FilterChipBar> {
                 onTap: () {
                   setState(() {
                     _activeIndex = index;
-                    // TODO: Add logic to filter orders based on _filters[index]
+                    widget.onFilterChanged(index);
                   });
                 },
                 child: AnimatedContainer(
@@ -113,7 +114,9 @@ class WaveClipper extends CustomClipper<Path> {
 }
 
 class CustomerOrdersSliverAppBar extends StatelessWidget {
-  const CustomerOrdersSliverAppBar({super.key});
+  const CustomerOrdersSliverAppBar({super.key, required this.onFilterChanged});
+
+  final Function(int) onFilterChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +133,7 @@ class CustomerOrdersSliverAppBar extends StatelessWidget {
         ),
       ),
       centerTitle: true,
+      automaticallyImplyLeading: false,
       flexibleSpace: ClipPath(
         clipper: WaveClipper(),
         child: Container(
@@ -151,9 +155,9 @@ class CustomerOrdersSliverAppBar extends StatelessWidget {
       iconTheme: const IconThemeData(color: Colors.white),
 
       // --- The filter bar at the bottom ---
-      bottom: const PreferredSize(
+      bottom: PreferredSize(
         preferredSize: Size.fromHeight(50),
-        child: FilterChipBar(),
+        child: FilterChipBar(onFilterChanged: onFilterChanged),
       ),
     );
   }

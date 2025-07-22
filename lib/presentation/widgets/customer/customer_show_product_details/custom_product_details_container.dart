@@ -13,7 +13,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     // ---- Logic Variables ----
     final hasDiscount = product.hasDiscount && product.discountedPrice > 0;
-    final isFree = product.price == 0;
+    final isFree = product.hasDiscount && product.discountedPrice == 0;
     final hasOfferDate =
         hasDiscount &&
         product.startDiscount != null &&
