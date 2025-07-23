@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'custom_orders_tab_bar_item.dart';
 
 class CustomOrdersManagmentAppBar extends StatefulWidget
@@ -12,89 +13,101 @@ class CustomOrdersManagmentAppBar extends StatefulWidget
       _CustomOrdersManagmentAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 160);
+  Size get preferredSize => const Size.fromHeight(140); // Adjusted height
 }
 
 class _CustomOrdersManagmentAppBarState
     extends State<CustomOrdersManagmentAppBar> {
-  String selectedTab = 'All';
+  int _selectedIndex = 0;
+  final List<String> tabs = ['All', 'Pending', 'Delivered', 'Cancelled'];
 
-  final List<String> tabs = [
-    'All',
-    'Pending',
-    'In Progress',
-    'Delivered',
-    'Cancelled',
-  ];
+  // This maps index to an alignment value for the slider
+  Alignment _getAlignment(int index) {
+    double value = -1.0 + (index * (2.0 / (tabs.length - 1)));
+    return Alignment(value, 0.0);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      padding: const EdgeInsets.only(top: 40, bottom: 16, left: 16, right: 16),
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppBar(
-            automaticallyImplyLeading: true,
-            surfaceTintColor: Colors.white,
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            title: const Text(
-              'Orders Managment',
-              style: TextStyle(
-                color: Color(0xFF6F4E37),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+          // Title
+          Text(
+            'Orders Management',
+            style: GoogleFonts.poppins(
+              color: const Color(0xFF4E342E),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
-            elevation: 0,
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 20),
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9F9F9),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: TextField(
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Search Orders by Customer Name or Order ID',
-                  prefixIcon: Icon(Icons.search, color: Color(0xFF6F4E37)),
-                ),
-              ),
+
+          // Animated Segmented Control
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF9F5EF),
+              borderRadius: BorderRadius.circular(12),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              child: Row(
-                children: tabs.map((tabText) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: CustomOrdersTabBarItem(
-                      itemText: tabText,
-                      isSelected: selectedTab == tabText,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // --- The Sliding Indicator ---
+                AnimatedAlign(
+                  alignment: _getAlignment(_selectedIndex),
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.fastOutSlowIn,
+                  child: FractionallySizedBox(
+                    widthFactor: 1 / tabs.length,
+                    child: Container(
+                      margin: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFA56538),
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFA56538).withOpacity(0.4),
+                            blurRadius: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                // --- The Tab Items (Text) ---
+                Row(
+                  children: List.generate(tabs.length, (index) {
+                    return CustomOrdersTabBarItem(
+                      itemText: tabs[index],
+                      isSelected: _selectedIndex == index,
                       onTap: () {
                         setState(() {
-                          selectedTab = tabText;
+                          _selectedIndex = index;
                         });
-                        widget.onTabSelected(tabText);
+                        widget.onTabSelected(tabs[index]);
                       },
-                    ),
-                  );
-                }).toList(),
-              ),
+                    );
+                  }),
+                ),
+              ],
             ),
           ),
         ],

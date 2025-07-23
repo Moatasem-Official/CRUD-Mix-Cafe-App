@@ -17,7 +17,10 @@ final class CategoriesLoaded extends CategoriesState {
   List<Object> get props => [categories];
 }
 
-final class CategoriesError extends CategoriesState {}
+final class CategoriesError extends CategoriesState {
+  final String errorMessage;
+  const CategoriesError(this.errorMessage);
+}
 
 final class CategoriesEmpty extends CategoriesState {}
 

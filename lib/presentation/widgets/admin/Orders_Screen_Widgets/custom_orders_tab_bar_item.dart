@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomOrdersTabBarItem extends StatelessWidget {
   const CustomOrdersTabBarItem({
@@ -14,28 +15,17 @@ class CustomOrdersTabBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 120,
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSelected
-              ? const Color.fromARGB(255, 165, 101, 56)
-              : const Color(0xFFF9F9F9),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
-          child: Text(
-            itemText,
-            style: TextStyle(
-              color: isSelected ? Colors.white : const Color(0xFF6F4E37),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 300),
+          style: GoogleFonts.poppins(
+            color: isSelected ? Colors.white : const Color(0xFF6F4E37),
+            fontSize: 15,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
           ),
+          child: Text(itemText, textAlign: TextAlign.center),
         ),
       ),
     );

@@ -392,6 +392,84 @@ class FirestoreServices {
     }
   }
 
+  Future<List<OrderModel>> getAllCustomerOrders() async {
+    try {
+      final usersSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('userRole', isEqualTo: 'customer')
+          .get();
+
+      List<OrderModel> allOrders = [];
+
+      for (var userDoc in usersSnapshot.docs) {
+        final userData = userDoc.data();
+        final customerName = userData['name'] ?? '---';
+        final customerImage = userData['imageUrl'] ?? '';
+        final customerAddress = userData['address'] ?? '';
+        final customerPhone = userData['phone'] ?? '';
+
+        final ordersSnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userDoc.id)
+            .collection('orders')
+            .get();
+
+        final userOrders = ordersSnapshot.docs.map((orderDoc) {
+          final data = orderDoc.data();
+
+          final order = OrderModel.fromMap(orderDoc.id, data);
+
+          // تحديث الحقول يدويًا لو OrderModel لا يحتوي عليهم من الـ map
+          return order.copyWith(
+            customerName: customerName,
+            customerImage: customerImage,
+            customerAddress: customerAddress,
+            customerPhone: customerPhone,
+          );
+        }).toList();
+
+        allOrders.addAll(userOrders);
+      }
+
+      return allOrders;
+    } catch (e) {
+      print('Error fetching customer orders: $e');
+      throw Exception('Failed to fetch customer orders: $e');
+    }
+  }
+
+  Future<List<OrderModel>> getCustomersOrdersByStatus(String status) async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collectionGroup('orders')
+          .where('status', isEqualTo: status)
+          .get();
+
+      List<OrderModel> orders = [];
+
+      for (var doc in snapshot.docs) {
+        final data = doc.data();
+        final userRef = doc.reference.parent.parent; // نجيب الـ user
+        final userSnapshot = await userRef?.get();
+
+        final customerName = userSnapshot?.data()?['name'] ?? '---';
+        final customerImage = userSnapshot?.data()?['imageUrl'] ?? '';
+
+        final order = OrderModel.fromMap(
+          doc.id,
+          data,
+        ).copyWith(customerName: customerName, customerImage: customerImage);
+
+        orders.add(order);
+      }
+
+      return orders;
+    } catch (e) {
+      print('Error fetching orders by status: $e');
+      throw Exception('فشل في جلب الطلبات حسب الحالة: $e');
+    }
+  }
+
   Future<List<ProductModel>> searchProductsFromAllCategories(
     String query,
   ) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 import '../../../../constants/app_assets.dart';
 
 class CustomProductTemplate extends StatelessWidget {
@@ -12,6 +13,7 @@ class CustomProductTemplate extends StatelessWidget {
     required this.isHasDiscount,
     required this.discountPrice,
     required this.onDelete,
+    required this.onEdit,
   });
 
   final String productName;
@@ -21,169 +23,130 @@ class CustomProductTemplate extends StatelessWidget {
   final bool isHasDiscount;
   final double discountPrice;
   final Function() onDelete;
+  final Function() onEdit;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-      child: Stack(
-        children: [
-          Card(
-            color: const Color(0xFFFDF9F3),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            shadowColor: Colors.brown.withOpacity(0.15),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
-                    child: imagePath.isNotEmpty
-                        ? Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Lottie.asset(
-                                'assets/animations/Animation - 1751639954708.json',
-                                width: 160,
-                                height: 160,
-                                fit: BoxFit.cover,
-                              ),
-                              Image.network(
-                                imagePath,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          )
-                        : Image.asset(
-                            Assets.mixCafeCustomerFoodImage,
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                  const SizedBox(width: 16),
+    // --- ✨ 1. حساب نسبة الخصم تلقائيًا ✨ ---
+    double discountPercentage = 0;
+    if (isHasDiscount && productPrice > 0) {
+      discountPercentage =
+          ((productPrice - discountPrice) / productPrice) * 100;
+    }
 
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          productName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF6E4C2B), // لون كابتشينو غامق أنيق
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          productDescription,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black87,
-                            height: 1.4,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF8B4513).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.local_offer,
-                                size: 18,
-                                color: Color(0xFF8B4513),
-                              ),
-                              const SizedBox(width: 4),
-                              isHasDiscount
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${productPrice.toStringAsFixed(2)} EGP',
-                                          style: const TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.grey,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
-                                        ),
-                                        Text(
-                                          '${discountPrice.toStringAsFixed(2)} EGP',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xFF8B4513),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Text(
-                                      '${productPrice.toStringAsFixed(2)} EGP',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF8B4513),
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ),
-                      ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Image with Discount Ribbon
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  imagePath.isEmpty
+                      ? 'https://via.placeholder.com/100'
+                      : imagePath,
+                  width: 100,
+                  height: 120,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                    Assets.mixCafeCustomerFoodImage,
+                    width: 100,
+                    height: 120,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              // Show ribbon only if there is a valid discount
+              if (isHasDiscount && discountPercentage > 0)
+                Positioned(
+                  top: -4,
+                  left: -4,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFC62828),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                    ),
+                    // --- ✨ 2. عرض النسبة المئوية هنا ✨ ---
+                    child: Text(
+                      '${discountPercentage.toInt()}% OFF',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-
-                  Column(
+                ),
+            ],
+          ),
+          const SizedBox(width: 16),
+          // Details
+          Expanded(
+            child: SizedBox(
+              height: 120,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF3E2723),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    productDescription,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  _buildPriceInfo(),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Tooltip(
-                        message: 'Edit Product',
-                        child: Material(
-                          shape: const CircleBorder(),
-                          color: Colors.orange.withOpacity(0.1),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.edit_outlined,
-                              color: Color(0xFF8B4513),
-                            ),
-                            color: Colors.deepOrange,
-                            onPressed: () {},
-                          ),
+                      TextButton.icon(
+                        onPressed: onEdit,
+                        icon: const Icon(IconlyLight.edit, size: 18),
+                        label: Text('Edit', style: GoogleFonts.poppins()),
+                        style: TextButton.styleFrom(
+                          foregroundColor: const Color(0xFF4E342E),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Tooltip(
-                        message: 'Delete Product',
-                        child: Material(
-                          shape: const CircleBorder(),
-                          color: Colors.redAccent.withOpacity(0.08),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.delete_outline,
-                              color: Color(0xFF8B4513),
-                            ),
-                            color: Colors.redAccent,
-                            onPressed: onDelete,
-                          ),
+                      const SizedBox(width: 8),
+                      TextButton.icon(
+                        onPressed: onDelete,
+                        icon: const Icon(IconlyLight.delete, size: 18),
+                        label: Text('Delete', style: GoogleFonts.poppins()),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.red.shade700,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                         ),
                       ),
                     ],
@@ -192,50 +155,38 @@ class CustomProductTemplate extends StatelessWidget {
               ),
             ),
           ),
-          isHasDiscount
-              ? Positioned(
-                  bottom: 4,
-                  left: 3,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFE0B2), // لون مشرق وخفيف للأوفر
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.brown.withOpacity(0.2),
-                          blurRadius: 4,
-                          offset: const Offset(2, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.local_offer_rounded,
-                          size: 14,
-                          color: Color(0xFF8B4513),
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          discountPrice == 0 ? 'مجاني' : 'عرض خاص',
-                          style: TextStyle(
-                            fontSize: 12.5,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF8B4513),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox(),
         ],
       ),
+    );
+  }
+
+  Widget _buildPriceInfo() {
+    final finalPrice = isHasDiscount ? discountPrice : productPrice;
+
+    return Row(
+      children: [
+        if (isHasDiscount) ...[
+          Text(
+            'EGP ${productPrice.toStringAsFixed(2)}',
+            style: GoogleFonts.poppins(
+              decoration: TextDecoration.lineThrough,
+              color: Colors.red.shade400,
+              fontSize: 13,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
+        Text(
+          finalPrice <= 0 ? 'Free' : 'EGP ${finalPrice.toStringAsFixed(2)}',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: finalPrice <= 0
+                ? Colors.green.shade700
+                : const Color(0xFF4E342E),
+          ),
+        ),
+      ],
     );
   }
 }

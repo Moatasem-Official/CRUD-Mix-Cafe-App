@@ -97,6 +97,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                     imagePath: products[index].imageUrl,
                     isHasDiscount: products[index].hasDiscount,
                     discountPrice: products[index].discountedPrice,
+                    onEdit: () {},
                     onDelete: () {
                       showDialog(
                         context: context,

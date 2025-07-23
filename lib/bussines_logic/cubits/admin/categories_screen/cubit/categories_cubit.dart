@@ -21,7 +21,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
         if (!isClosed) emit(CategoriesLoaded(products));
       }
     } catch (e) {
-      emit(CategoriesError());
+      emit(CategoriesError(e.toString()));
     }
   }
 
@@ -30,7 +30,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       await _firestoreServices.deleteItem(id, categoryId);
       await getProducts(categoryId);
     } catch (e) {
-      emit(CategoriesError());
+      emit(CategoriesError(e.toString()));
     }
   }
 }

@@ -21,17 +21,25 @@ class SignUpCubit extends Cubit<SignUpState> {
     required String image,
   }) async {
     emit(SignUpLoading());
+
     try {
-      await _authService.createUserWithEmailAndPassword(
-        email.trim(),
-        password.trim(),
-      );
+      // إنشاء المستخدم الجديد باستخدام AuthService
+      final UserCredential userCredential = await _authService
+          .createUserWithEmailAndPassword(email.trim(), password.trim());
 
-      final uid = FirebaseAuth.instance.currentUser!.uid;
+      final User? user = userCredential.user;
 
+      if (user == null) {
+        emit(
+          SignUpError('حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة مرة أخرى.'),
+        );
+        return;
+      }
+
+      // حفظ بيانات المستخدم في Firestore
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(uid)
+          .doc(user.uid)
           .set(
             UserModel(
               name: name.trim(),
@@ -43,17 +51,18 @@ class SignUpCubit extends Cubit<SignUpState> {
             ).toJson(),
           );
 
+      // إرسال رابط التحقق عبر البريد
       try {
-        await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+        await user.sendEmailVerification();
         emit(
           SignUpSuccess(
             'تم إنشاء الحساب بنجاح. يرجى التحقق من بريدك الإلكتروني.',
           ),
         );
-      } catch (e) {
+      } catch (_) {
         emit(
           SignUpError(
-            'تم إنشاء الحساب بنجاح، ولكن لم يتم إرسال رابط التحقق. يرجى التحقق من بريدك الإلكتروني.',
+            'تم إنشاء الحساب، ولكن فشل إرسال رابط التحقق. يرجى المحاولة لاحقاً.',
           ),
         );
       }
@@ -67,38 +76,24 @@ class SignUpCubit extends Cubit<SignUpState> {
       } else if (e.code == 'too-many-requests') {
         emit(
           SignUpError(
-            'تم إرسال رابط التحقق مسبقاً. يرجى الانتظار قبل المحاولة مرة أخرى.',
+            'تم إرسال العديد من الطلبات. يرجى الانتظار قبل المحاولة مجددًا.',
           ),
         );
       } else if (e.code == 'operation-not-allowed') {
-        emit(
-          SignUpError(
-            'العملية غير مسموح بها. يرجى التحقق من إعدادات Firebase.',
-          ),
-        );
+        emit(SignUpError('العملية غير مسموح بها. تحقق من إعدادات Firebase.'));
       } else if (e.code == 'network-request-failed') {
         emit(
-          SignUpNoInternet(
-            'لا يوجد اتصال بالإنترنت. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.',
-          ),
+          SignUpNoInternet('لا يوجد اتصال بالإنترنت. يرجى المحاولة لاحقاً.'),
         );
       } else if (e.code == 'user-disabled') {
-        emit(SignUpUserDisabled('تم تعطيل الحساب. يرجى الاتصال بالدعم الفني.'));
-      } else if (e.code == 'unknown') {
-        emit(SignUpError('حدث خطأ غير معروف. يرجى المحاولة مرة أخرى لاحقاً.'));
-      } else {
         emit(
-          SignUpError(
-            'حدث خطأ أثناء إرسال رابط التحقق. يرجى المحاولة مرة أخرى لاحقاً.',
-          ),
+          SignUpUserDisabled('تم تعطيل الحساب. يرجى التواصل مع الدعم الفني.'),
         );
+      } else {
+        emit(SignUpError('حدث خطأ غير معروف من Firebase. حاول لاحقاً.'));
       }
     } catch (e) {
-      emit(
-        SignUpError(
-          'حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة مرة أخرى لاحقاً.',
-        ),
-      );
+      emit(SignUpError('حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة لاحقاً.'));
     }
   }
 }

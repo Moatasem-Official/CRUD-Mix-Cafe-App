@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
+import 'package:mix_cafe_app/data/model/order_model.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/about_mix_cafe_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/contact_support_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_home_navigation.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/customer_see_all_products_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/order_details_screen.dart';
 import 'bussines_logic/cubits/admin/login_screen/cubit/log_in_cubit_cubit.dart';
 import 'bussines_logic/cubits/customer/Login_Screen/cubit/login_cubit.dart';
 import 'bussines_logic/cubits/customer/SignUp_Screen/cubit/sign_up_cubit.dart';
@@ -100,10 +101,21 @@ class AppRouter {
       case adminSettingsScreen:
         return MaterialPageRoute(builder: (_) => const AdminSettingsScreen());
       case adminHomeScreen:
-        return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
-      case adminOrderDetailsScreen:
         return MaterialPageRoute(
-          builder: (_) => const AdminOrderDetailsScreen(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider<OrdersManagementCubit>(
+                create: (context) => OrdersManagementCubit()..fetchOrders(),
+              ),
+            ],
+            child: const AdminHomeScreen(),
+          ),
+        );
+      case adminOrderDetailsScreen:
+        final arg = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) =>
+              AdminOrderDetailsScreen(order: arg['order'], orderId: arg['id']),
         );
       case customerLogin:
         return MaterialPageRoute(
@@ -181,8 +193,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AboutMixCafeScreen());
       case contactSupportScreen:
         return MaterialPageRoute(builder: (_) => const ContactSupportScreen());
-      case orderDetailsScreen:
-        return MaterialPageRoute(builder: (_) => const OrderDetailsScreen());
       default:
         return null;
     }

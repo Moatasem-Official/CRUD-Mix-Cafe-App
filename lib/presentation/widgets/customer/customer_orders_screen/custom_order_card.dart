@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'dart:math' as math;
 
-import 'package:mix_cafe_app/data/model/product_model.dart';
-
-// Helper class to hold status information (color, icon)
 class StatusInfo {
   final Color color;
   final IconData icon;
@@ -89,7 +85,9 @@ class OrderCard extends StatelessWidget {
                         const SizedBox(height: 16),
 
                         // --- Products ---
-                        _buildProductChips(),
+                        _buildOrderDetailsTile(
+                          products.cast<Map<String, dynamic>>(),
+                        ),
                         const SizedBox(height: 20),
 
                         // --- Custom Dashed Separator ---
@@ -126,25 +124,124 @@ class OrderCard extends StatelessWidget {
   }
 
   /// Builds the product chips list.
-  Widget _buildProductChips() {
+  Widget _buildOrderDetailsTile(List<Map<String, dynamic>> products) {
+    // يمكنك تغيير هذا اللون ليتناسب مع تصميمك
+    const Color primaryColor = Color(0xFFC58B3E);
+    const Color textColor = Color(0xFF4E342E);
+
+    // لمنع ظهور الخطوط الافتراضية حول الـ ExpansionTile
+    const borderShape = BorderSide.none;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.07),
+            blurRadius: 15,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      // ClipRRect لضمان أن الخلفية الملونة عند الفتح لا تتجاوز الحواف الدائرية
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: ExpansionTile(
+          // --- تصميم العنوان الرئيسي للـ Tile ---
+          title: Text(
+            'Order Details',
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              color: textColor,
+            ),
+          ),
+          subtitle: Text(
+            '${products.length} items',
+            style: GoogleFonts.poppins(color: Colors.grey.shade600),
+          ),
+          leading: const Icon(IconlyBold.document),
+
+          // --- التحكم في ألوان وأشكال الـ Tile ---
+          shape: const Border(top: borderShape, bottom: borderShape),
+          collapsedShape: const Border(top: borderShape, bottom: borderShape),
+          backgroundColor: primaryColor.withOpacity(0.05),
+          collapsedBackgroundColor: Colors.white,
+          iconColor: primaryColor,
+          collapsedIconColor: textColor,
+
+          // --- المنتجات التي ستظهر عند فتح الـ Tile ---
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              // نستخدم نفس منطق الـ Wrap الذي قمنا ببنائه سابقًا
+              child: _buildProductChipsInside(products),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// هذا الويدجت هو نفس منطق الـ Wrap السابق، ولكن تم وضعه هنا ليكون تابعاً للـ Tile
+  Widget _buildProductChipsInside(List<Map<String, dynamic>> products) {
     return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+      spacing: 10,
+      runSpacing: 10,
       children: products
           .whereType<Map<String, dynamic>>()
           .map(
             (product) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF4E342E).withOpacity(0.05),
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFFECEFF1),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: const Color(0xFFCFD8DC)),
               ),
-              child: Text(
-                product['name'] ?? 'No Name',
-                style: GoogleFonts.poppins(
-                  fontSize: 12,
-                  color: const Color(0xFF6D4C41),
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      product['name'] ?? 'No Name',
+                      style: GoogleFonts.poppins(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF37474F),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFC58B3E).withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'x${product['quantity'] ?? 0}',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'EGP ${(product['price'] ?? 0.0).toStringAsFixed(2)}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF455A64),
+                    ),
+                  ),
+                ],
               ),
             ),
           )
@@ -180,44 +277,22 @@ class OrderCard extends StatelessWidget {
           ],
         ),
         // Action Buttons
-        Row(
-          children: [
-            OutlinedButton(
-              onPressed: () {
-                /* View Details Logic */
-              },
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                foregroundColor: const Color(0xFF5D4037),
-                side: BorderSide(color: Colors.grey.shade300),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                'Details',
-                style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-              ),
+        ElevatedButton(
+          onPressed: status == 'pending' ? null : () {} /* Reorder Logic */,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF4E342E), // Rich brown
+            foregroundColor: Colors.white,
+            elevation: 2,
+            shadowColor: const Color(0xFF4E342E).withOpacity(0.5),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            const SizedBox(width: 8),
-            ElevatedButton(
-              onPressed: status == 'pending' ? null : () {} /* Reorder Logic */,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4E342E), // Rich brown
-                foregroundColor: Colors.white,
-                elevation: 2,
-                shadowColor: const Color(0xFF4E342E).withOpacity(0.5),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                'Reorder',
-                style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-              ),
-            ),
-          ],
+          ),
+          child: Text(
+            'Reorder',
+            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+          ),
         ),
       ],
     );

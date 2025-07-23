@@ -1,91 +1,141 @@
-import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'category_products_screen.dart';
+
+// Data model for our categories for cleaner code
+class CategoryInfo {
+  final int id;
+  final String name;
+  final IconData icon;
+
+  CategoryInfo({required this.id, required this.name, required this.icon});
+}
 
 class CategoriesManagmentScreen extends StatefulWidget {
   const CategoriesManagmentScreen({super.key});
 
   @override
   State<CategoriesManagmentScreen> createState() =>
-      _CategoriesManagmentScreenState();
+      _CategoriesManagementScreenState();
 }
 
-class _CategoriesManagmentScreenState extends State<CategoriesManagmentScreen> {
+class _CategoriesManagementScreenState extends State<CategoriesManagmentScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  // --- ✨ 1. تم اختيار أيقونات جديدة واحترافية ✨ ---
+  final List<CategoryInfo> _categories = [
+    CategoryInfo(id: 0, name: 'Sandwiches', icon: Icons.lunch_dining_outlined),
+    CategoryInfo(id: 1, name: 'Pizza', icon: Icons.local_pizza_outlined),
+    CategoryInfo(id: 2, name: 'Crepes', icon: Icons.breakfast_dining_outlined),
+    CategoryInfo(id: 3, name: 'Meals', icon: Icons.dinner_dining_outlined),
+    CategoryInfo(id: 4, name: 'Drinks', icon: Icons.local_cafe_outlined),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _categories.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final themeColor = const Color(0xFF8B4513);
+    const themeColor = Color(0xFFA56538);
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F6F1), // خلفية كريمية ناعمة
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'Categories Management',
-          style: TextStyle(
-            color: Color(0xFF8B4513),
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
+      backgroundColor: const Color(0xFFF7F9FC),
+      // --- ✨ 2. تصميم AppBar متكامل جديد ✨ ---
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(130),
+        child: Container(
+          // --- ✨ قم بزيادة المسافة العلوية هنا ✨ ---
+          padding: const EdgeInsets.only(top: 55, left: 16, right: 16),
+          decoration: BoxDecoration(
+            //... باقي الكود كما هو
+            color: Colors.white,
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(24),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Categories Management',
+                style: GoogleFonts.poppins(
+                  color: const Color(0xFF333333),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              // --- ✨ 3. شريط تبويب بنمط Material 3 ✨ ---
+              TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                padding: EdgeInsets.zero,
+                dividerHeight: 0, // <-- 1. أضف هذا السطر لإزالة الخط
+                tabAlignment: TabAlignment
+                    .start, // <-- 2. أضف هذا السطر لبدء التبويبات من الحافة
+                labelColor: themeColor,
+                unselectedLabelColor: Colors.grey.shade600,
+                labelStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                unselectedLabelStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: BoxDecoration(
+                  color: themeColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: WidgetStateProperty.all(
+                  themeColor.withOpacity(0.1),
+                ),
+                tabs: _categories.map((category) {
+                  return Tab(
+                    height: 45,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(category.icon, size: 20),
+                        const SizedBox(width: 8),
+                        Text(category.name),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
           ),
         ),
       ),
-      body: DefaultTabController(
-        length: 5,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
-              child: ButtonsTabBar(
-                backgroundColor: themeColor,
-                unselectedBackgroundColor: Colors.grey.shade200,
-                unselectedLabelStyle: const TextStyle(color: Colors.black87),
-                labelStyle: const TextStyle(color: Colors.white),
-                radius: 100,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                tabs: const [
-                  Tab(icon: Icon(Icons.fastfood), text: "سندويتشات"),
-                  Tab(icon: Icon(Icons.local_pizza), text: "بيتزا"),
-                  Tab(
-                    icon: Icon(Icons.breakfast_dining, size: 28),
-                    text: "كريب",
-                  ),
-                  Tab(icon: Icon(Icons.dinner_dining), text: "وجبات"),
-                  Tab(icon: Icon(Icons.local_drink), text: "مشروبات"),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  BlocProvider(
-                    create: (context) => CategoriesCubit()..getProducts(0),
-                    child: CategoryProductsScreen(categoryId: 0),
-                  ),
-                  BlocProvider(
-                    create: (context) => CategoriesCubit()..getProducts(1),
-                    child: CategoryProductsScreen(categoryId: 1),
-                  ),
-                  BlocProvider(
-                    create: (context) => CategoriesCubit()..getProducts(2),
-                    child: CategoryProductsScreen(categoryId: 2),
-                  ),
-                  BlocProvider(
-                    create: (context) => CategoriesCubit()..getProducts(3),
-                    child: CategoryProductsScreen(categoryId: 3),
-                  ),
-                  BlocProvider(
-                    create: (context) => CategoriesCubit()..getProducts(4),
-                    child: CategoryProductsScreen(categoryId: 4),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      body: TabBarView(
+        controller: _tabController,
+        children: _categories.map((category) {
+          return BlocProvider(
+            create: (context) => CategoriesCubit()..getProducts(category.id),
+            child: CategoryProductsScreen(categoryId: category.id),
+          );
+        }).toList(),
       ),
     );
   }

@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import '../../widgets/admin/Orders_Screen_Widgets/custom_order_container.dart';
 import '../../widgets/admin/Orders_Screen_Widgets/custom_orders_screen_appbar.dart';
 
@@ -10,94 +13,31 @@ class OrdersManagmentScreen extends StatefulWidget {
 }
 
 class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
-  List orders = [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "date": "2023-05-01",
-      "time": "9:00 AM",
-      "status": "Pending",
-    },
-    {
-      "id": 2,
-      "name": "Jane Smith",
-      "date": "2023-05-02",
-      "time": "10:00 AM",
-      "status": "Delivered",
-    },
-    {
-      "id": 3,
-      "name": "Bob Johnson",
-      "date": "2023-05-03",
-      "time": "12:00 PM",
-      "status": "In Progress",
-    },
-    {
-      "id": 4,
-      "name": "Alice Brown",
-      "date": "2023-05-04",
-      "time": "2:00 PM",
-      "status": "Pending",
-    },
-    {
-      "id": 5,
-      "name": "Charlie Davis",
-      "date": "2023-05-05",
-      "time": "3:00 PM",
-      "status": "Delivered",
-    },
-    {
-      "id": 6,
-      "name": "Eve Wilson",
-      "date": "2023-05-06",
-      "time": "6:00 PM",
-      "status": "In Progress",
-    },
-    {
-      "id": 7,
-      "name": "Frank Thompson",
-      "date": "2023-05-07",
-      "time": "9:00 AM",
-      "status": "Pending",
-    },
-    {
-      "id": 8,
-      "name": "Grace Martinez",
-      "date": "2023-05-08",
-      "time": "2:00 PM",
-      "status": "Delivered",
-    },
-    {
-      "id": 9,
-      "name": "Hank Jackson",
-      "date": "2023-05-09",
-      "time": "8:00 AM",
-      "status": "In Progress",
-    },
-    {
-      "id": 10,
-      "name": "Ivy Anderson",
-      "date": "2023-05-10",
-      "time": "4:00 PM",
-      "status": "Pending",
-    },
-  ];
+  @override
+  initState() {
+    context.read<OrdersManagementCubit>().fetchOrders();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: Colors.white,
       appBar: CustomOrdersManagmentAppBar(
         onTabSelected: (tabText) {
           tabText == 'All'
-              ? print('All')
+              ? context.read<OrdersManagementCubit>().fetchOrders()
               : tabText == 'Pending'
-              ? print('Pending')
-              : tabText == 'In Progress'
-              ? print('In Progress')
+              ? context.read<OrdersManagementCubit>().filterOrdersByStatus(
+                  'pending',
+                )
               : tabText == 'Delivered'
-              ? print('Delivered')
-              : print('Cancelled');
+              ? context.read<OrdersManagementCubit>().filterOrdersByStatus(
+                  'delivered',
+                )
+              : context.read<OrdersManagementCubit>().filterOrdersByStatus(
+                  'cancelled',
+                );
         },
       ),
       body: SingleChildScrollView(
@@ -106,22 +46,75 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: orders.length,
-              itemBuilder: (context, index) {
-                return CustomOrderContainerTemplete(
-                  orderId: orders[index]['id'].toString(),
-                  customerName: orders[index]['name'],
-                  date: orders[index]['date'],
-                  status: orders[index]['status'],
-                  time: orders[index]['time'],
-                  onPressed: () => Navigator.of(
-                    context,
-                  ).pushNamed('/adminOrderDetailsScreen'),
-                );
+            BlocBuilder<OrdersManagementCubit, OrdersManagementState>(
+              builder: (context, state) {
+                if (state is OrdersManagementLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is OrdersManagementLoaded) {
+                  if (state.orders.isEmpty) {
+                    return const Center(child: Text('لا توجد طلبات حالياً.'));
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.orders.length,
+                    itemBuilder: (context, index) {
+                      final order = state.orders[index];
+                      final id = (index + 1).toString();
+                      return AuroraOrderCard(
+                        orderId: id,
+                        customerName: order.customerName ?? 'غير معروف',
+                        image: order.customerImage!,
+                        date: formatDate(order.timestamp),
+                        time: formatTime(order.timestamp),
+                        status: order.status ?? '---',
+                        onPressed: () => Navigator.of(context).pushNamed(
+                          '/adminOrderDetailsScreen',
+                          arguments: {
+                            'order': order,
+                            'id': id,
+                          }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is OrdersManagementError) {
+                  return const Center(
+                    child: Text('حدث خطأ أثناء تحميل الطلبات.'),
+                  );
+                } else if (state is OrdersManagementFilter) {
+                  if (state.orders.isEmpty) {
+                    return const Center(child: Text('لا توجد طلبات حالياً.'));
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.orders.length,
+                    itemBuilder: (context, index) {
+                      final order = state.orders[index];
+                      final id = (index + 1).toString();
+                      return AuroraOrderCard(
+                        orderId: id,
+                        customerName: order.customerName ?? 'غير معروف',
+                        image: order.customerImage!,
+                        date: formatDate(order.timestamp),
+                        time: formatTime(order.timestamp),
+                        status: order.status ?? '---',
+                        onPressed: () => Navigator.of(context).pushNamed(
+                          '/adminOrderDetailsScreen',
+                          arguments: {
+                            'order': order,
+                            'id': id,
+                          }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox(); // fallback في حالة غير متوقعة
+                }
               },
             ),
           ],
@@ -129,4 +122,14 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
       ),
     );
   }
+}
+
+String formatDate(DateTime? timestamp) {
+  if (timestamp == null) return '---';
+  return '${timestamp.day}/${timestamp.month}/${timestamp.year}';
+}
+
+String formatTime(DateTime? timestamp) {
+  if (timestamp == null) return '---';
+  return '${timestamp.hour}:${timestamp.minute.toString().padLeft(2, '0')}';
 }
