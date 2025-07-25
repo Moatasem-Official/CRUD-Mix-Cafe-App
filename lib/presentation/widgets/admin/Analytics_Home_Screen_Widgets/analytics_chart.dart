@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../data/model/weekly_and_yearly_sales_data_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'custom_chart_content.dart';
 import 'custom_chart_header_content.dart';
 
@@ -14,14 +15,12 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
   bool showWeekly = true;
   int selectedYear = 2024;
 
-  // Example sales data for each year (add more years as needed)
-  final weeklyAndYearlySalesDataModel = WeeklyAndYearlySalesDataModel();
-
   @override
   Widget build(BuildContext context) {
-    final List<int> availableYears =
-        weeklyAndYearlySalesDataModel.yearlySales.keys.toList()..sort();
-
+    final List<int> availableYears = List.generate(
+      10,
+      (index) => DateTime.now().year - index,
+    );
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
       child: Container(
@@ -46,17 +45,35 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
               child: Text(
                 showWeekly
                     ? 'Track your restaurant\'s weekly sales performance'
-                    : 'Track your restaurant\'s monthly sales for the year',
+                    : 'Track monthly sales in $selectedYear',
                 style: TextStyle(color: Colors.brown.shade300, fontSize: 14),
               ),
             ),
             const SizedBox(height: 30),
-            CustomChartContent(
-              showWeekly: showWeekly,
-              weeklySales: weeklyAndYearlySalesDataModel.weeklySales,
-              yearlySalesData: weeklyAndYearlySalesDataModel.yearlySales,
-              selectedYear: selectedYear,
+            BlocBuilder<
+              ChartDistributionsAnalysisCubit,
+              ChartDistributionsAnalysisState
+            >(
+              builder: (context, state) {
+                if (state is ChartDistributionsAnalysisLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state
+                    is ChartDistributionsAnalysisDistributionSuccess) {
+                  return CustomChartContent(
+                    showWeekly: showWeekly,
+                    selectedYear: selectedYear,
+                    weeklySales: state.weeklySpots,
+                    yearlySalesData: state.yearlySpots,
+                  );
+                } else if (state is ChartDistributionsAnalysisError) {
+                  return Center(child: Text(state.message));
+                } else {
+                  // fallback safety
+                  return const SizedBox(); // don't show "Unknown state" to users
+                }
+              },
             ),
+
             const SizedBox(height: 18),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -67,6 +84,7 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
                     Icons.circle,
                     size: 12,
                     color: Color.fromARGB(255, 165, 101, 56),
+                    semanticLabel: 'Sales Line',
                   ),
                   const SizedBox(width: 6),
                   Text(

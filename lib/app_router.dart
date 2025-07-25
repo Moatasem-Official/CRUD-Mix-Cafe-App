@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
@@ -115,6 +116,14 @@ class AppRouter {
               BlocProvider<HomeAnalyticsCubit>(
                 create: (context) => HomeAnalyticsCubit(),
                 child: AnalyticsHomeScreen(),
+              ),
+              BlocProvider<HomeScreenCubit>(
+                create: (context) => HomeScreenCubit()..getProducts(),
+              ),
+              BlocProvider<ChartDistributionsAnalysisCubit>(
+                create: (context) =>
+                    ChartDistributionsAnalysisCubit()
+                      ..getAnalyticsDistribution(),
               ),
             ],
             child: const AdminHomeScreen(),

@@ -61,6 +61,15 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     }
   }
 
+  Future<void> deleteProduct(String id, int categoryId) async {
+    emit(HomeScreenLoading());
+    try {
+      await _firestore.deleteItem(id, categoryId);
+    } catch (e) {
+      emit(HomeScreenError(e.toString()));
+    }
+  }
+
   @override
   Future<void> close() async {
     await _productsSubscription?.cancel();

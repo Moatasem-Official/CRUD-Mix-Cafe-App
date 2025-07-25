@@ -245,7 +245,11 @@ class FirestoreServices {
                 ? 'Crepes'
                 : categoryId == 3
                 ? 'Meals'
-                : 'Drinks',
+                : categoryId == 4
+                ? 'Drinks'
+                : categoryId == 5
+                ? 'Desserts'
+                : '',
           )
           .collection('products')
           .doc(id);
@@ -365,7 +369,7 @@ class FirestoreServices {
 
       final snapshot = await FirebaseFirestore.instance
           .collectionGroup('orders')
-          .where('status', isEqualTo: 'pending')
+          .where('status', isEqualTo: 'delivered')
           .get();
 
       for (final doc in snapshot.docs) {
@@ -379,6 +383,66 @@ class FirestoreServices {
     } catch (e) {
       print('Error calculating revenue: $e');
       throw Exception('Failed to calculate revenue');
+    }
+  }
+
+  Future<List<double>> getRevenueDistribution(String period) async {
+    try {
+      final now = DateTime.now();
+      DateTime startDate;
+
+      int bucketCount;
+      int Function(DateTime date) bucketSelector;
+
+      if (period == 'weekly') {
+        // الأسبوع الحالي (7 أيام)
+        startDate = now.subtract(Duration(days: now.weekday % 7));
+        bucketCount = 7;
+        bucketSelector = (date) => date.weekday % 7; // Sunday = 0
+      } else if (period == 'monthly') {
+        // الشهر الحالي (4 أو 5 أسابيع)
+        startDate = DateTime(now.year, now.month, 1);
+        bucketCount = 5;
+        bucketSelector = (date) => ((date.day - 1) ~/ 7); // week index 0-4
+      } else if (period == 'yearly') {
+        // السنة الحالية (12 شهر)
+        startDate = DateTime(now.year, 1, 1);
+        bucketCount = 12;
+        bucketSelector = (date) => date.month - 1; // 0 = Jan
+      } else {
+        throw Exception('Invalid period: $period');
+      }
+
+      final snapshot = await FirebaseFirestore.instance
+          .collectionGroup('orders')
+          .where('status', isEqualTo: 'delivered')
+          .where(
+            'timestamp',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(startDate),
+          )
+          .get();
+
+      List<double> buckets = List.filled(bucketCount, 0.0);
+
+      for (final doc in snapshot.docs) {
+        final data = doc.data();
+        final price = data['totalPrice'];
+        final timestamp = data['timestamp'];
+
+        if (price != null && price is num && timestamp is Timestamp) {
+          final date = timestamp.toDate();
+          int index = bucketSelector(date);
+
+          if (index >= 0 && index < bucketCount) {
+            buckets[index] += price.toDouble();
+          }
+        }
+      }
+
+      return buckets;
+    } catch (e) {
+      print('Error in revenue distribution: $e');
+      throw Exception('Failed to calculate revenue distribution');
     }
   }
 
