@@ -359,15 +359,39 @@ class FirestoreServices {
     }
   }
 
+  Future<double> calculateTotalRevenue() async {
+    try {
+      double total = 0.0;
+
+      final snapshot = await FirebaseFirestore.instance
+          .collectionGroup('orders')
+          .where('status', isEqualTo: 'pending')
+          .get();
+
+      for (final doc in snapshot.docs) {
+        final price = doc['totalPrice'];
+        if (price != null && price is num) {
+          total += price.toDouble();
+        }
+      }
+
+      return total;
+    } catch (e) {
+      print('Error calculating revenue: $e');
+      throw Exception('Failed to calculate revenue');
+    }
+  }
+
   Future<int> getOrdersCount() async {
     try {
-      final CollectionReference collection = FirebaseFirestore.instance
-          .collection('orders');
-      final QuerySnapshot snapshot = await collection.get();
-      return snapshot.docs.length;
+      final snapshot = await FirebaseFirestore.instance
+          .collectionGroup('orders') // شامل كل subcollections
+          .get();
+
+      return snapshot.size;
     } catch (e) {
-      print('Error fetching orders count: $e');
-      throw Exception('Failed to fetch orders count: $e');
+      print('Error counting orders: $e');
+      throw Exception('Failed to count orders');
     }
   }
 
@@ -678,6 +702,20 @@ class FirestoreServices {
       if (userModel.isNotificationsEnabled != null)
         'isNotificationsEnabled': userModel.isNotificationsEnabled,
     });
+  }
+
+  Future<int> getAllCustomersCount() async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('userRole', isEqualTo: 'customer') // عد العملاء فقط
+          .get();
+
+      return snapshot.size; // عدد الوثائق (العملاء)
+    } catch (e) {
+      print('Error counting customers: $e');
+      throw Exception('Failed to count customers: $e');
+    }
   }
 }
 

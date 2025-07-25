@@ -45,13 +45,19 @@ class CustomAnalysisContainer extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            // الرقم
-            Text(
-              analysisNumber,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF4E342E),
+            // الرقم – مع FittedBox علشان ميكسرش
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  analysisNumber,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF4E342E),
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 6),

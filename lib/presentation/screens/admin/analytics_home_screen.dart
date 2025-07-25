@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
 import '../../../constants/app_assets.dart';
@@ -6,9 +8,14 @@ import '../../widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_title_of_popular_items.dart';
 
-class AnalyticsHomeScreen extends StatelessWidget {
-  AnalyticsHomeScreen({super.key});
+class AnalyticsHomeScreen extends StatefulWidget {
+  const AnalyticsHomeScreen({super.key});
 
+  @override
+  State<AnalyticsHomeScreen> createState() => _AnalyticsHomeScreenState();
+}
+
+class _AnalyticsHomeScreenState extends State<AnalyticsHomeScreen> {
   List<Map<String, dynamic>> data = [
     {
       'imagePath': Assets.mixCafeAdminImage,
@@ -38,6 +45,12 @@ class AnalyticsHomeScreen extends StatelessWidget {
       'price': 1.99,
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeAnalyticsCubit>().getAnalytics();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +87,23 @@ class AnalyticsHomeScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            CustomAnalysisContainersRow(),
+            BlocBuilder<HomeAnalyticsCubit, HomeAnalyticsState>(
+              builder: (context, state) {
+                if (state is HomeAnalyticsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is HomeAnalyticsSuccess) {
+                  return CustomAnalysisContainersRow(
+                    ordersNumber: state.analyticsData[0].toString(),
+                    usersNumber: state.analyticsData[2].toString(),
+                    salesNumber: state.analyticsData[1].toString(),
+                  );
+                } else if (state is HomeAnalyticsError) {
+                  return Text(state.message);
+                } else {
+                  return const Text('Unknown state');
+                }
+              },
+            ),
             CustomAnalysisChart(),
             CustomTitleOfPopularItems(),
             CustomMostPopularItemsGrid(items: data),

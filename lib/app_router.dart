@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
-import 'package:mix_cafe_app/data/model/order_model.dart';
 import 'package:mix_cafe_app/data/model/product_model.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/about_mix_cafe_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/contact_support_screen.dart';
@@ -97,7 +97,12 @@ class AppRouter {
       case notifications:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case analyticsHome:
-        return MaterialPageRoute(builder: (_) => AnalyticsHomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<HomeAnalyticsCubit>(
+            create: (context) => HomeAnalyticsCubit(),
+            child: AnalyticsHomeScreen(),
+          ),
+        );
       case adminSettingsScreen:
         return MaterialPageRoute(builder: (_) => const AdminSettingsScreen());
       case adminHomeScreen:
@@ -106,6 +111,10 @@ class AppRouter {
             providers: [
               BlocProvider<OrdersManagementCubit>(
                 create: (context) => OrdersManagementCubit()..fetchOrders(),
+              ),
+              BlocProvider<HomeAnalyticsCubit>(
+                create: (context) => HomeAnalyticsCubit(),
+                child: AnalyticsHomeScreen(),
               ),
             ],
             child: const AdminHomeScreen(),
