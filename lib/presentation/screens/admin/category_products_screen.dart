@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'add_product_information_form.dart';
-import '../../widgets/admin/Products_Screen_Widgets/custom_product_templete.dart';
+import '../../widgets/admin/Products_Screen_Widgets/product_templete/custom_product_templete.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
   const CategoryProductsScreen({super.key, required this.categoryId});

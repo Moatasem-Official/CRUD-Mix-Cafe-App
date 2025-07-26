@@ -26,17 +26,29 @@ class CustomChartContent extends StatelessWidget {
 
     // 2. بنعمل رسالة مخصصة في حالة عدم وجود بيانات
     final Widget noDataWidget = Center(
-      child: Text(
-        showWeekly
-            ? 'No data available for this week'
-            : 'No data available for $selectedYear',
-        style: TextStyle(color: Colors.brown.shade400, fontSize: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.insights_outlined, color: Colors.brown.shade300, size: 40),
+          const SizedBox(height: 8),
+          Text(
+            showWeekly
+                ? 'No sales data for this week yet.'
+                : 'No data available for $selectedYear',
+            style: TextStyle(
+              color: Colors.brown.shade400,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
 
+    final hasActualData = spots.any((spot) => spot.y > 0);
     return SizedBox(
       height: 260,
-      child: spots.isNotEmpty
+      child: hasActualData
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: LineChart(
@@ -100,13 +112,13 @@ class CustomChartContent extends StatelessWidget {
                         getTitlesWidget: (value, meta) {
                           if (showWeekly) {
                             const days = [
+                              'Sat',
                               'Sun',
                               'Mon',
                               'Tue',
                               'Wed',
                               'Thu',
                               'Fri',
-                              'Sat',
                             ];
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),

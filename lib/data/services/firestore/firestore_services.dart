@@ -344,41 +344,49 @@ class FirestoreServices {
     }
   }
 
-  Future<void> updateOrderStatus(String orderId, String status) async {
+  Future<void> updateOrderStatus({
+    required String userId,
+    required String orderId,
+    required String status,
+  }) async {
     try {
       final docRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
           .collection('orders')
           .doc(orderId);
 
       await docRef.update({
         'status': status,
-        'updatedAt': FieldValue.serverTimestamp(), // (اختياري) لتتبع التحديثات
+        'updatedAt':
+            FieldValue.serverTimestamp(), // ✅ أفضل من string لتتبع الوقت الحقيقي
       });
+
+      print('✅ Order status updated.');
     } catch (e, stack) {
       print('🔥 Failed to update order [$orderId]: $e');
-      print(stack); // يساعد في التتبع أثناء التطوير
+      print(stack);
       throw Exception('Something went wrong while updating order status.');
     }
   }
 
-  Future<void> updateOrderPreparationTime(
-    String orderId,
-    DateTime preparationTime,
-  ) async {
+  Future<void> updateOrderPreparationTime({
+    required String userId,
+    required String orderId,
+    required Duration preparationTime,
+  }) async {
     try {
-      final docRef = FirebaseFirestore.instance
+      final orderRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
           .collection('orders')
           .doc(orderId);
 
-      await docRef.update({
-        'preparationTime': preparationTime, // (اختياري) لتتبع التحديثات
-      });
-    } catch (e, stack) {
-      print('🔥 Failed to update order [$orderId]: $e');
-      print(stack); // يساعد في التتبع أثناء التطوير
-      throw Exception(
-        'Something went wrong while updating order preparation time.',
-      );
+      await orderRef.update({'preparationTime': preparationTime.toString()});
+
+      print('✅ Order updated successfully.');
+    } catch (e) {
+      print('❌ Failed to update order [$orderId]: $e');
     }
   }
 
@@ -434,10 +442,35 @@ class FirestoreServices {
       int Function(DateTime date) bucketSelector;
 
       if (period == 'weekly') {
-        // الأسبوع الحالي (7 أيام)
-        startDate = now.subtract(Duration(days: now.weekday % 7));
+        // ✅ حساب بداية الأسبوع من يوم السبت
+        int daysSinceSaturday = now.weekday == DateTime.saturday
+            ? 0
+            : now.weekday;
+        startDate = now.subtract(Duration(days: daysSinceSaturday));
+
         bucketCount = 7;
-        bucketSelector = (date) => date.weekday % 7; // Sunday = 0
+
+        // ✅ bucketSelector من السبت (0) إلى الجمعة (6)
+        bucketSelector = (date) {
+          switch (date.weekday) {
+            case DateTime.saturday:
+              return 0;
+            case DateTime.sunday:
+              return 1;
+            case DateTime.monday:
+              return 2;
+            case DateTime.tuesday:
+              return 3;
+            case DateTime.wednesday:
+              return 4;
+            case DateTime.thursday:
+              return 5;
+            case DateTime.friday:
+              return 6;
+            default:
+              return 0;
+          }
+        };
       } else if (period == 'monthly') {
         // الشهر الحالي (4 أو 5 أسابيع)
         startDate = DateTime(now.year, now.month, 1);
@@ -456,7 +489,7 @@ class FirestoreServices {
           .collectionGroup('orders')
           .where('status', isEqualTo: 'delivered')
           .where(
-            'timestamp',
+            'updatedAt',
             isGreaterThanOrEqualTo: Timestamp.fromDate(startDate),
           )
           .get();
@@ -466,7 +499,7 @@ class FirestoreServices {
       for (final doc in snapshot.docs) {
         final data = doc.data();
         final price = data['totalPrice'];
-        final timestamp = data['timestamp'];
+        final timestamp = data['updatedAt'];
 
         if (price != null && price is num && timestamp is Timestamp) {
           final date = timestamp.toDate();
@@ -479,9 +512,10 @@ class FirestoreServices {
       }
 
       return buckets;
-    } catch (e) {
-      print('Error in revenue distribution: $e');
-      throw Exception('Failed to calculate revenue distribution');
+    } catch (e, stackTrace) {
+      print('❌ Error in revenue distribution: $e');
+      print('📌 Stack Trace: $stackTrace');
+      rethrow; // علشان تشوف الخطأ الأصلي في debug
     }
   }
 

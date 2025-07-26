@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import 'package:mix_cafe_app/data/model/order_model.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/Build_Action_Panel/action_panel_main_widget.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_info_panel.dart';
@@ -62,15 +60,11 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                   children: [
                     CustomRowInfo(
                       label: 'Order Date',
-                      value: HelperFunctions.formatDate(
-                        widget.order.timestamp,
-                      ),
+                      value: HelperFunctions.formatDate(widget.order.timestamp),
                     ),
                     CustomRowInfo(
                       label: 'Order Time',
-                      value: HelperFunctions.formatTime(
-                        widget.order.timestamp,
-                      ),
+                      value: HelperFunctions.formatTime(widget.order.timestamp),
                     ),
                   ],
                 ),
@@ -107,25 +101,72 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                   onStatusChanged: (newStatus) => setState(() {
                     _currentStatus = newStatus!;
                   }),
-                  onConfirm: () {},
-                  onDelete: () =>
-                      HelperFunctions.showDeleteConfirmationDialog(
-                        context,
+                  onConfirm: () {
+                    if (_estimatedDuration != null &&
+                        _currentStatus.isNotEmpty) {
+                      context
+                          .read<OrderDetailsScreenCubit>()
+                          .updateOrderPreparationTime(
+                            widget.order.orderId!,
+                            widget.order.userId!,
+                            _estimatedDuration!,
+                          );
+                      context.read<OrderDetailsScreenCubit>().updateOrderStatus(
+                        widget.order.orderId!,
                         widget.order.userId!,
-                        () {
-                          final userId = widget.order.userId;
-                          final orderId = widget.order.orderId;
-      
-                          if (userId != null && orderId != null) {
-                            context
-                                .read<OrderDetailsScreenCubit>()
-                                .deleteOrder(orderId, userId);
-                          } else {
-                            print('userId or orderId is null');
-                          }
-                          Navigator.pop(context);
-                        },
-                      ),
+                        _currentStatus == 'Pending'
+                            ? 'pending'
+                            : _currentStatus == 'Delivered'
+                            ? 'delivered'
+                            : 'cancelled',
+                      );
+                    } else if (_estimatedDuration != null &&
+                        _currentStatus.isEmpty) {
+                      context
+                          .read<OrderDetailsScreenCubit>()
+                          .updateOrderPreparationTime(
+                            widget.order.orderId!,
+                            widget.order.userId!,
+                            _estimatedDuration!,
+                          );
+                    } else if (_estimatedDuration == null &&
+                        _currentStatus.isNotEmpty) {
+                      context.read<OrderDetailsScreenCubit>().updateOrderStatus(
+                        widget.order.orderId!,
+                        widget.order.userId!,
+                        _currentStatus == 'Pending'
+                            ? 'pending'
+                            : _currentStatus == 'Delivered'
+                            ? 'delivered'
+                            : 'cancelled',
+                      );
+                    } else if (_estimatedDuration == null &&
+                        _currentStatus.isEmpty) {
+                      print('No changes were made.');
+                    } else {
+                      print(
+                        'Unexpected combination of estimated delivery time and order status.',
+                      );
+                    }
+                  },
+                  onDelete: () => HelperFunctions.showDeleteConfirmationDialog(
+                    context,
+                    widget.order.userId!,
+                    () {
+                      final userId = widget.order.userId;
+                      final orderId = widget.order.orderId;
+
+                      if (userId != null && orderId != null) {
+                        context.read<OrderDetailsScreenCubit>().deleteOrder(
+                          orderId,
+                          userId,
+                        );
+                      } else {
+                        print('userId or orderId is null');
+                      }
+                      Navigator.pop(context);
+                    },
+                  ),
                   onTap: () => HelperFunctions.selectTime(context, (p0) {
                     setState(() {
                       _estimatedDuration = Duration(

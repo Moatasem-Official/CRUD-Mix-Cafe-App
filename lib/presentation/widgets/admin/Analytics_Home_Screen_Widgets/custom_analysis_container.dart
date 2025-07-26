@@ -110,7 +110,7 @@ class CustomAnalysisContainer extends StatelessWidget {
         return number.toStringAsFixed(0);
       }
     } catch (e) {
-      return numberString; // Return original string if parsing fails
+      return numberString;
     }
   }
 }

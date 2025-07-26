@@ -18,36 +18,6 @@ class AnalyticsHomeScreen extends StatefulWidget {
 }
 
 class _AnalyticsHomeScreenState extends State<AnalyticsHomeScreen> {
-  List<Map<String, dynamic>> data = [
-    {
-      'imagePath': Assets.mixCafeAdminImage,
-      'name': 'Cappuccino',
-      'description':
-          'Cappuccino is a coffee drink made from espresso and steamed milk, typically topped with a steamed milk foam.',
-      'price': 2.99,
-    },
-    {
-      'imagePath': Assets.mixCafeCustomerImage,
-      'name': 'Latte',
-      'description':
-          'Latte is a coffee drink made from espresso steamed milk foam.',
-      'price': 3.99,
-    },
-    {
-      'imagePath': Assets.mixCafeImageLogo,
-      'name': 'Espresso',
-      'description':
-          'Espresso is a coffee drink made from espresso and steamed milk, typically topped with foam.',
-      'price': 2.49,
-    },
-    {
-      'imagePath': Assets.mixCafeAdminImage,
-      'name': 'Cafe',
-      'description': 'Cafe spressofoam is a coffee drink made from espresso.',
-      'price': 1.99,
-    },
-  ];
-
   @override
   void initState() {
     super.initState();

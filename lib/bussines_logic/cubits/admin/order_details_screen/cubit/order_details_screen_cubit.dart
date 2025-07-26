@@ -17,4 +17,34 @@ class OrderDetailsScreenCubit extends Cubit<OrderDetailsScreenState> {
       emit(OrderDetailsScreenError(e.toString()));
     }
   }
+
+  void updateOrderPreparationTime(
+    String orderId,
+    String userId,
+    Duration preparationTime,
+  ) async {
+    emit(OrderDetailsScreenLoading());
+    try {
+      await firestoreServices.updateOrderPreparationTime(
+        orderId: orderId,
+        userId: userId,
+        preparationTime: preparationTime,
+      );
+    } catch (e) {
+      emit(OrderDetailsScreenError(e.toString()));
+    }
+  }
+
+  void updateOrderStatus(String orderId, String userId, String status) async {
+    emit(OrderDetailsScreenLoading());
+    try {
+      await firestoreServices.updateOrderStatus(
+        orderId: orderId,
+        userId: userId,
+        status: status,
+      );
+    } catch (e) {
+      emit(OrderDetailsScreenError(e.toString()));
+    }
+  }
 }
