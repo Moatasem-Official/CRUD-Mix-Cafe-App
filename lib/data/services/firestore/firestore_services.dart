@@ -299,13 +299,18 @@ class FirestoreServices {
           .get();
 
       if (existingOrder.docs.isEmpty) {
-        await ordersRef.add({
+        final newDocRef = ordersRef.doc(); // أنشئ ID يدويًا
+
+        await newDocRef.set({
+          'orderId': newDocRef.id, // ✅ خزنه هنا
           'userId': userId,
           'items': items,
           'totalPrice': totalPrice,
           'timestamp': FieldValue.serverTimestamp(),
           'status': 'pending',
           'orderHash': orderHash,
+          'updatedAt': '',
+          'preparationTime': '',
         });
       } else {
         throw Exception(
@@ -319,27 +324,61 @@ class FirestoreServices {
     }
   }
 
-  Future<void> deleteOrder(String orderId) async {
+  Future<void> deleteOrder({
+    required String userId,
+    required String orderId,
+  }) async {
+    print('⛳ deleteOrder called: $userId - $orderId'); // <== هنا
     try {
-      final DocumentReference document = FirebaseFirestore.instance
+      final docRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
           .collection('orders')
           .doc(orderId);
-      await document.delete();
+
+      await docRef.delete();
+      print('✅ Order deleted');
     } catch (e) {
-      print('Error deleting order: $e');
+      print('❌ Error deleting order: $e');
       throw Exception('Failed to delete order: $e');
     }
   }
 
   Future<void> updateOrderStatus(String orderId, String status) async {
     try {
-      final DocumentReference document = FirebaseFirestore.instance
+      final docRef = FirebaseFirestore.instance
           .collection('orders')
           .doc(orderId);
-      await document.update({'status': status});
-    } catch (e) {
-      print('Error updating order status: $e');
-      throw Exception('Failed to update order status: $e');
+
+      await docRef.update({
+        'status': status,
+        'updatedAt': FieldValue.serverTimestamp(), // (اختياري) لتتبع التحديثات
+      });
+    } catch (e, stack) {
+      print('🔥 Failed to update order [$orderId]: $e');
+      print(stack); // يساعد في التتبع أثناء التطوير
+      throw Exception('Something went wrong while updating order status.');
+    }
+  }
+
+  Future<void> updateOrderPreparationTime(
+    String orderId,
+    DateTime preparationTime,
+  ) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('orders')
+          .doc(orderId);
+
+      await docRef.update({
+        'preparationTime': preparationTime, // (اختياري) لتتبع التحديثات
+      });
+    } catch (e, stack) {
+      print('🔥 Failed to update order [$orderId]: $e');
+      print(stack); // يساعد في التتبع أثناء التطوير
+      throw Exception(
+        'Something went wrong while updating order preparation time.',
+      );
     }
   }
 

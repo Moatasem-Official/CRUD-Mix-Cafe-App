@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
@@ -125,6 +126,9 @@ class AppRouter {
                     ChartDistributionsAnalysisCubit()
                       ..getAnalyticsDistribution(),
               ),
+              BlocProvider<OrderDetailsScreenCubit>(
+                create: (context) => OrderDetailsScreenCubit(),
+              ),
             ],
             child: const AdminHomeScreen(),
           ),
@@ -132,8 +136,13 @@ class AppRouter {
       case adminOrderDetailsScreen:
         final arg = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) =>
-              AdminOrderDetailsScreen(order: arg['order'], orderId: arg['id']),
+          builder: (_) => BlocProvider<OrderDetailsScreenCubit>(
+            create: (context) => OrderDetailsScreenCubit(),
+            child: AdminOrderDetailsScreen(
+              order: arg['order'],
+              orderId: arg['id'],
+            ),
+          ),
         );
       case customerLogin:
         return MaterialPageRoute(

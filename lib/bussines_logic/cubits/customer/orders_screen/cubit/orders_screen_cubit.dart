@@ -18,10 +18,10 @@ class OrdersScreenCubit extends Cubit<OrdersScreenState> {
     }
   }
 
-  Future<void> deleteOrder(String orderId) async {
+  Future<void> deleteOrder(String orderId, String userId) async {
     emit(OrdersScreenLoading());
     try {
-      await _firestoreServices.deleteOrder(orderId);
+      await _firestoreServices.deleteOrder(orderId: orderId, userId: userId);
       emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
     } catch (e) {
       emit(OrdersScreenError(e.toString()));

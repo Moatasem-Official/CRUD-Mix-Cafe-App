@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel {
-  final String? orderId;
+  final String? userId;
   final String? customerName;
   final String? customerImage; // ✅ مضاف حديثًا
   final String? customerPhone;
   final String? customerAddress;
   final String? customerCity;
   final String? customerState;
+  final String? orderId;
   final String? status;
   final double? totalPrice;
   final String? preparationTime;
@@ -15,13 +16,14 @@ class OrderModel {
   final DateTime? timestamp;
 
   OrderModel({
-    this.orderId,
+    this.userId,
     this.customerName,
     this.customerImage,
     this.customerPhone,
     this.customerAddress,
     this.customerCity,
     this.customerState,
+    this.orderId,
     this.status,
     this.totalPrice,
     this.preparationTime,
@@ -41,7 +43,10 @@ class OrderModel {
         .toList();
 
     return OrderModel(
-      orderId: id,
+      userId: data['userId'] ?? '', // ← لو موجود في الداتا، استخدمه
+      orderId:
+          data['orderId'] ??
+          id, // لو مش موجود، fallback للـ doc.id // ← ده الـ doc.id من Firestore
       items: itemsList,
       totalPrice: (data['totalPrice'] ?? 0).toDouble(),
       status: data['status']?.toString() ?? 'pending',
@@ -57,6 +62,7 @@ class OrderModel {
     String? customerAddress,
   }) {
     return OrderModel(
+      userId: userId,
       orderId: orderId,
       customerName: customerName ?? this.customerName,
       customerImage: customerImage ?? this.customerImage,

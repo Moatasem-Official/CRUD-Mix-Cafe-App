@@ -43,81 +43,94 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            BlocBuilder<OrdersManagementCubit, OrdersManagementState>(
-              builder: (context, state) {
-                if (state is OrdersManagementLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is OrdersManagementLoaded) {
-                  if (state.orders.isEmpty) {
-                    return const Center(child: Text('لا توجد طلبات حالياً.'));
-                  }
+        child: RefreshIndicator(
+          color: const Color(0xFFA0522D),
+          backgroundColor: Colors.white,
+          strokeWidth: 2.0,
+          displacement: 20.0,
+          triggerMode: RefreshIndicatorTriggerMode.anywhere,
+          notificationPredicate: (_) => true,
+          onRefresh: () async =>
+              context.read<OrdersManagementCubit>().fetchOrders(),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              BlocBuilder<OrdersManagementCubit, OrdersManagementState>(
+                builder: (context, state) {
+                  if (state is OrdersManagementLoading) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height - 200,
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (state is OrdersManagementLoaded) {
+                    if (state.orders.isEmpty) {
+                      return const Center(child: Text('لا توجد طلبات حالياً.'));
+                    }
 
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.orders.length,
-                    itemBuilder: (context, index) {
-                      final order = state.orders[index];
-                      final id = (index + 1).toString();
-                      return AuroraOrderCard(
-                        orderId: id,
-                        customerName: order.customerName ?? 'غير معروف',
-                        image: order.customerImage!,
-                        date: formatDate(order.timestamp),
-                        time: formatTime(order.timestamp),
-                        status: order.status ?? '---',
-                        onPressed: () => Navigator.of(context).pushNamed(
-                          '/adminOrderDetailsScreen',
-                          arguments: {
-                            'order': order,
-                            'id': id,
-                          }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
-                        ),
-                      );
-                    },
-                  );
-                } else if (state is OrdersManagementError) {
-                  return const Center(
-                    child: Text('حدث خطأ أثناء تحميل الطلبات.'),
-                  );
-                } else if (state is OrdersManagementFilter) {
-                  if (state.orders.isEmpty) {
-                    return const Center(child: Text('لا توجد طلبات حالياً.'));
-                  }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.orders.length,
+                      itemBuilder: (context, index) {
+                        final order = state.orders[index];
+                        final id = (index + 1).toString();
+                        return AuroraOrderCard(
+                          orderId: id,
+                          customerName: order.customerName ?? 'غير معروف',
+                          image: order.customerImage!,
+                          date: formatDate(order.timestamp),
+                          time: formatTime(order.timestamp),
+                          status: order.status ?? '---',
+                          onPressed: () => Navigator.of(context).pushNamed(
+                            '/adminOrderDetailsScreen',
+                            arguments: {
+                              'order': order,
+                              'id': id,
+                            }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
+                          ),
+                        );
+                      },
+                    );
+                  } else if (state is OrdersManagementError) {
+                    return const Center(
+                      child: Text('حدث خطأ أثناء تحميل الطلبات.'),
+                    );
+                  } else if (state is OrdersManagementFilter) {
+                    if (state.orders.isEmpty) {
+                      return const Center(child: Text('لا توجد طلبات حالياً.'));
+                    }
 
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.orders.length,
-                    itemBuilder: (context, index) {
-                      final order = state.orders[index];
-                      final id = (index + 1).toString();
-                      return AuroraOrderCard(
-                        orderId: id,
-                        customerName: order.customerName ?? 'غير معروف',
-                        image: order.customerImage!,
-                        date: formatDate(order.timestamp),
-                        time: formatTime(order.timestamp),
-                        status: order.status ?? '---',
-                        onPressed: () => Navigator.of(context).pushNamed(
-                          '/adminOrderDetailsScreen',
-                          arguments: {
-                            'order': order,
-                            'id': id,
-                          }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return const SizedBox(); // fallback في حالة غير متوقعة
-                }
-              },
-            ),
-          ],
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.orders.length,
+                      itemBuilder: (context, index) {
+                        final order = state.orders[index];
+                        final id = (index + 1).toString();
+                        return AuroraOrderCard(
+                          orderId: id,
+                          customerName: order.customerName ?? 'غير معروف',
+                          image: order.customerImage!,
+                          date: formatDate(order.timestamp),
+                          time: formatTime(order.timestamp),
+                          status: order.status ?? '---',
+                          onPressed: () => Navigator.of(context).pushNamed(
+                            '/adminOrderDetailsScreen',
+                            arguments: {
+                              'order': order,
+                              'id': id,
+                            }, // يمكن تمرير الطلب كامل إذا احتجت التفاصيل
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const SizedBox(); // fallback في حالة غير متوقعة
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

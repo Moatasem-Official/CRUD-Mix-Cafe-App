@@ -98,7 +98,7 @@ class CustomProductTemplate extends StatelessWidget {
           ),
           const SizedBox(width: 16),
           // Details
-          Expanded(
+          Flexible(
             child: SizedBox(
               height: 120,
               child: Column(
