@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/custom_edit_product_widget.dart';
 import '../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'add_product_information_form.dart';
 import '../../widgets/admin/Products_Screen_Widgets/product_templete/custom_product_templete.dart';
@@ -97,7 +98,18 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                     imagePath: products[index].imageUrl,
                     isHasDiscount: products[index].hasDiscount,
                     discountPrice: products[index].discountedPrice,
-                    onEdit: () {},
+                    onEdit: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Material(
+                            child: CustomEditProductWidget(
+                              productModel: products[index],
+                            ),
+                          );
+                        },
+                      );
+                    },
                     onDelete: () {
                       showDialog(
                         context: context,
