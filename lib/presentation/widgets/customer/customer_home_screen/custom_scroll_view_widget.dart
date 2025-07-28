@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_items_horizontal_list_view.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_items_title_row.dart';
+import '../../../../data/model/product_model.dart';
+import 'custom_items_horizontal_list_view.dart';
+import 'custom_items_title_row.dart';
 
 class CustomScrollViewWidget extends StatelessWidget {
   const CustomScrollViewWidget({

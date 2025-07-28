@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
+import '../../../../constants/app_assets.dart';
 import 'package:lottie/lottie.dart';
 
 class CustomScreenUpperSection extends StatelessWidget {

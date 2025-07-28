@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../data/model/product_model.dart';
 
 class CustomProductContainer extends StatelessWidget {
   const CustomProductContainer({

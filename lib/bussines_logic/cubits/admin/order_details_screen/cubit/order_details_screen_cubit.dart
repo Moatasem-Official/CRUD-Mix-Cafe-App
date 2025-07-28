@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'order_details_screen_state.dart';
 

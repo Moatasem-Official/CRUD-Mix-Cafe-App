@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/model/order_model.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../../../data/model/order_model.dart';
+import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'orders_management_state.dart';
 

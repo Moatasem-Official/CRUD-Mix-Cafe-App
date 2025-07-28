@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_date_time_picker.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_text_field.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/helper_functions.dart';
+import 'custom_date_time_picker.dart';
+import 'custom_text_field.dart';
+import 'helper_functions.dart';
 
 class CustomDiscountDetails extends StatelessWidget {
   const CustomDiscountDetails({

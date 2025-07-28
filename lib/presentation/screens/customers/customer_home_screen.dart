@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
+import '../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
+import '../../../data/services/firestore/firestore_services.dart';
+import '../../widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';
+import '../../widgets/customer/customer_see_all_products/custom_product_card.dart';
 import '../../widgets/customer/customer_home_screen/custom_app_bar.dart';
 import '../../../data/services/auth/auth_service.dart';
 

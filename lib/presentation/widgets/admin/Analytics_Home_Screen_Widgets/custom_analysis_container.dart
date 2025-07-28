@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
+import '../../../../bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 
 class CustomAnalysisContainer extends StatelessWidget {
   const CustomAnalysisContainer({

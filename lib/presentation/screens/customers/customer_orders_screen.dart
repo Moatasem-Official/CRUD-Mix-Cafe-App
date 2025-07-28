@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_orders_screen/custom_app_bar.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_orders_screen/custom_order_card.dart';
+import '../../../bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../widgets/customer/customer_orders_screen/custom_app_bar.dart';
+import '../../widgets/customer/customer_orders_screen/custom_order_card.dart';
 
 class CustomerOrdersScreen extends StatefulWidget {
   const CustomerOrdersScreen({super.key});

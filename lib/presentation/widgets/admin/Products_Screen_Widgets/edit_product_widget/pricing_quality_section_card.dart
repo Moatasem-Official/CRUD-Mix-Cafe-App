@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_category_drop_down.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_section_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_text_field.dart';
+import 'custom_category_drop_down.dart';
+import 'custom_section_card.dart';
+import 'custom_text_field.dart';
 
 class PricingQualitySectionCard extends StatelessWidget {
   const PricingQualitySectionCard({

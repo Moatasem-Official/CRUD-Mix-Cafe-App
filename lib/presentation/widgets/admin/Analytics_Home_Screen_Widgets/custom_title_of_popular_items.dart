@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../data/model/product_model.dart';
 
 class CustomTitleOfPopularItems extends StatelessWidget {
   const CustomTitleOfPopularItems({super.key, required this.items});

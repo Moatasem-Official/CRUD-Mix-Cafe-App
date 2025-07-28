@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mix_cafe_app/constants/app_assets.dart';
+import '../../../../../constants/app_assets.dart';
 
 class CustomCollapsedContent extends StatelessWidget {
   const CustomCollapsedContent({

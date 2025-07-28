@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/helpers/search_helper.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../../data/helpers/search_helper.dart';
+import '../../../../../data/model/product_model.dart';
 
 part 'see_all_products_state.dart';
 

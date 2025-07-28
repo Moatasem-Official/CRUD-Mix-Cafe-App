@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/data/model/order_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_info_panel.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_order_items.dart';
+import '../../../../data/model/order_model.dart';
+import 'custom_info_panel.dart';
+import 'custom_order_items.dart';
 
 class CustomProductPanel extends StatelessWidget {
   const CustomProductPanel({super.key, required this.order});

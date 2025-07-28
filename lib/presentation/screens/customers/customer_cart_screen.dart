@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
-import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
-import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
+import '../../../data/helpers/custom_snack_bar.dart';
+import '../../../data/helpers/when_loading_widget.dart';
+import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_cart_screen/custom_cart_item_container.dart';
 import '../../widgets/customer/customer_cart_screen/custom_checkout_container.dart';
 

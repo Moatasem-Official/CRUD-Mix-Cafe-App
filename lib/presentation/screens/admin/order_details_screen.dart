@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/order_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/Build_Action_Panel/action_panel_main_widget.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_info_panel.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_product_panel.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_row_info.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_sliver_app_bar.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/helper_functions.dart';
+import '../../../bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
+import '../../../data/model/order_model.dart';
+import '../../widgets/admin/Order_details_screen/Build_Action_Panel/action_panel_main_widget.dart';
+import '../../widgets/admin/Order_details_screen/custom_info_panel.dart';
+import '../../widgets/admin/Order_details_screen/custom_product_panel.dart';
+import '../../widgets/admin/Order_details_screen/custom_row_info.dart';
+import '../../widgets/admin/Order_details_screen/custom_sliver_app_bar.dart';
+import '../../widgets/admin/Order_details_screen/helper_functions.dart';
 
 class AdminOrderDetailsScreen extends StatefulWidget {
   const AdminOrderDetailsScreen({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../data/model/product_model.dart';
 
 class CustomCartItemContainer extends StatelessWidget {
   const CustomCartItemContainer({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/helper_functions.dart';
+import '../helper_functions.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({super.key, this.estimatedDuration, this.onTap});

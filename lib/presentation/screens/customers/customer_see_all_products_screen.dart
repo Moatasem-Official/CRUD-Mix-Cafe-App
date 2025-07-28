@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_see_all_products/custom_product_card.dart';
+import '../../../bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
+import '../../../data/model/product_model.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/firestore/firestore_services.dart';
+import '../../widgets/customer/customer_see_all_products/custom_product_card.dart';
 
 class CustomerSeeAllProductsScreen extends StatefulWidget {
   const CustomerSeeAllProductsScreen({super.key, required this.products});

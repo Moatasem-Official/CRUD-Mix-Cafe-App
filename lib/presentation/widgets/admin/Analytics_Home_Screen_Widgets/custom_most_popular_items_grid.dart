@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
+import '../../../../data/model/product_model.dart';
 import 'most_popular_items_card/custom_most_popular_items_card.dart';
 import 'dart:math';
 

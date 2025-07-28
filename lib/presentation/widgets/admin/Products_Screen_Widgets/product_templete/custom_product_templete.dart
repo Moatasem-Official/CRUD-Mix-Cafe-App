@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/product_templete/custom_offer_percentage.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/product_templete/custom_product_column_info.dart';
+import 'custom_offer_percentage.dart';
+import 'custom_product_column_info.dart';
 import '../../../../../constants/app_assets.dart';
 
 class CustomProductTemplate extends StatelessWidget {

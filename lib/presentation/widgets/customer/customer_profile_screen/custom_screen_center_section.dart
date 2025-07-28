@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_addresses_row_item.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_language_row_item.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_notifications_row_item.dart';
+import 'custom_account_addresses_row_item.dart';
+import 'custom_account_language_row_item.dart';
+import 'custom_account_notifications_row_item.dart';
 
 class CustomScreenCenterSection extends StatelessWidget {
   const CustomScreenCenterSection({

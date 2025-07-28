@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../../../data/model/product_model.dart';
+import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'cart_screen_state.dart';
 

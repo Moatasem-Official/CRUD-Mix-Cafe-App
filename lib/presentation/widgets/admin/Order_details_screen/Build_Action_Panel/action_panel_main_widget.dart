@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/Build_Action_Panel/custom_buttons_row.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/Build_Action_Panel/custom_drop_down.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/Build_Action_Panel/custom_list_tile.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Order_details_screen/custom_info_panel.dart';
+import 'custom_buttons_row.dart';
+import 'custom_drop_down.dart';
+import 'custom_list_tile.dart';
+import '../custom_info_panel.dart';
 
 class ActionPanelMainWidget extends StatelessWidget {
   const ActionPanelMainWidget({

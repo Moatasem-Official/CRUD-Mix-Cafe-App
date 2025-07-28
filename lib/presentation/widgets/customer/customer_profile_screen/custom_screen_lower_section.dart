@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_support_row_item.dart';
+import 'custom_account_support_row_item.dart';
 
 class CustomScreenLowerSection extends StatelessWidget {
   const CustomScreenLowerSection({super.key});

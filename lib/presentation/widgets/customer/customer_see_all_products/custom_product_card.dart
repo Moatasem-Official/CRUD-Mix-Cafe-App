@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../data/model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;

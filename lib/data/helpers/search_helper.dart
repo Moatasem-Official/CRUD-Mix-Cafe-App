@@ -1,4 +1,4 @@
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../model/product_model.dart';
 
 class SearchHelper {
   static List<ProductModel> setSearchQuery(

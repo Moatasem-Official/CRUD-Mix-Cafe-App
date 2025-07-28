@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_discount_details.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_section_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_switch_tile.dart';
+import 'custom_discount_details.dart';
+import 'custom_section_card.dart';
+import 'custom_switch_tile.dart';
 
 class ProductSettingsSectionCard extends StatelessWidget {
   const ProductSettingsSectionCard({

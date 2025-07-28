@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/helpers/image_helper.dart';
-import 'package:mix_cafe_app/data/model/user_model.dart';
-import 'package:mix_cafe_app/data/services/auth/auth_service.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_screen_center_section.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_screen_lower_section.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_screen_upper_section.dart';
+import '../../../data/helpers/image_helper.dart';
+import '../../../data/model/user_model.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/cloudinary/cloudinary_services.dart';
+import '../../../data/services/firestore/firestore_services.dart';
+import '../../widgets/customer/customer_profile_screen/custom_screen_center_section.dart';
+import '../../widgets/customer/customer_profile_screen/custom_screen_lower_section.dart';
+import '../../widgets/customer/customer_profile_screen/custom_screen_upper_section.dart';
 import '../../widgets/customer/customer_profile_screen/custom_account_support_row_item.dart';
 
 class CustomerProfileScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
+import '../../../../../data/model/product_model.dart';
 
 class CustomImageUploader extends StatelessWidget {
   const CustomImageUploader({super.key, required this.productModel});

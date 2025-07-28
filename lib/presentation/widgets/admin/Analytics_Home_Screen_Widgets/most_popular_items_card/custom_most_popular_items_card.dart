@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/most_popular_items_card/custom_footer.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Analytics_Home_Screen_Widgets/most_popular_items_card/custom_text_content.dart';
+import 'custom_footer.dart';
+import 'custom_text_content.dart';
 
 class MostPopularItemsCard extends StatelessWidget {
   const MostPopularItemsCard({

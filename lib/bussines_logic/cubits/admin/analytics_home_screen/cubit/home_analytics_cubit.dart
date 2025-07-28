@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'home_analytics_state.dart';
 

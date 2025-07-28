@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:mix_cafe_app/data/model/product_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_action_buttons.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_image_uploader.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/helper_functions.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/main-section_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/pricing_quality_section_card.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/edit_product_widget/product_settings_section_card.dart';
+import '../../../../../data/model/product_model.dart';
+import 'custom_action_buttons.dart';
+import 'custom_image_uploader.dart';
+import 'helper_functions.dart';
+import 'main-section_card.dart';
+import 'pricing_quality_section_card.dart';
+import 'product_settings_section_card.dart';
 
 class CustomEditProductWidget extends StatefulWidget {
-  const CustomEditProductWidget({super.key, this.productModel});
+  const CustomEditProductWidget({
+    super.key,
+    this.productModel,
+    required this.onSave,
+  });
 
   final ProductModel? productModel;
+  final Function() onSave;
 
   @override
   State<CustomEditProductWidget> createState() =>
@@ -98,7 +103,7 @@ class _CustomEditProductWidgetState extends State<CustomEditProductWidget> {
             onEndDateTap: () => _pickDateTime(false),
           ),
           const SizedBox(height: 32),
-          CustomActionButtons(onSave: () {}),
+          CustomActionButtons(onSave: widget.onSave),
         ],
       ).animate().fadeIn(duration: 500.ms),
     );

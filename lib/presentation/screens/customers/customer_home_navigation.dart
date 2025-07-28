@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_bar/bottom_bar.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_cart_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_home_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_orders_screen.dart';
-import 'package:mix_cafe_app/presentation/screens/customers/customer_profile_screen.dart';
+import 'customer_cart_screen.dart';
+import 'customer_home_screen.dart';
+import 'customer_orders_screen.dart';
+import 'customer_profile_screen.dart';
 
 class CustomerHomeNavigation extends StatefulWidget {
   const CustomerHomeNavigation({super.key});

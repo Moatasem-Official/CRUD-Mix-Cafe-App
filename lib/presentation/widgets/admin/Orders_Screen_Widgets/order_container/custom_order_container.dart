@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_container/custom_collapsed_content.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_container/custom_expanded_content.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/order_container/helper_functions.dart';
+import 'custom_collapsed_content.dart';
+import 'custom_expanded_content.dart';
+import 'helper_functions.dart';
 
 class AuroraOrderCard extends StatefulWidget {
   const AuroraOrderCard({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/product_templete/custom_price_info.dart';
+import 'custom_price_info.dart';
 
 class CustomProductColumnInfo extends StatelessWidget {
   const CustomProductColumnInfo({

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
+import '../../../bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import '../../widgets/admin/Orders_Screen_Widgets/order_container/custom_order_container.dart';
 import '../../widgets/admin/Orders_Screen_Widgets/custom_orders_screen_appbar.dart';
 
