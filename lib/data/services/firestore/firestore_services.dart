@@ -443,14 +443,18 @@ class FirestoreServices {
 
       if (period == 'weekly') {
         // ✅ حساب بداية الأسبوع من يوم السبت
-        int daysSinceSaturday = now.weekday == DateTime.saturday
-            ? 0
-            : now.weekday;
-        startDate = now.subtract(Duration(days: daysSinceSaturday));
+        int daysSinceSaturday = now.weekday % 7; // Saturday = 6
+        DateTime rawStartDate = now.subtract(Duration(days: daysSinceSaturday));
+
+        // ✅ تصفير الساعة والدقيقة والثانية
+        startDate = DateTime(
+          rawStartDate.year,
+          rawStartDate.month,
+          rawStartDate.day,
+        );
 
         bucketCount = 7;
 
-        // ✅ bucketSelector من السبت (0) إلى الجمعة (6)
         bucketSelector = (date) {
           switch (date.weekday) {
             case DateTime.saturday:
@@ -484,7 +488,8 @@ class FirestoreServices {
       } else {
         throw Exception('Invalid period: $period');
       }
-
+      print('📅 startDate = $startDate');
+      print('🕒 now = $now');
       final snapshot = await FirebaseFirestore.instance
           .collectionGroup('orders')
           .where('status', isEqualTo: 'delivered')
@@ -493,6 +498,10 @@ class FirestoreServices {
             isGreaterThanOrEqualTo: Timestamp.fromDate(startDate),
           )
           .get();
+      print('📦 Fetched orders count: ${snapshot.docs.length}');
+      for (var doc in snapshot.docs) {
+        print('🧾 Order ID: ${doc.id}, updatedAt: ${doc['updatedAt']}');
+      }
 
       List<double> buckets = List.filled(bucketCount, 0.0);
 
