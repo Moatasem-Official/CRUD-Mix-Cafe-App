@@ -65,10 +65,17 @@ class HelperFunctions {
         text: (product.price > 0 && product.discountedPrice > 0)
             ? (100 - ((product.discountedPrice / product.price) * 100))
                   .toStringAsFixed(1)
-            : '0.0',
+            : (product.price > 0 &&
+                  product.discountedPrice == 0 &&
+                  product.hasDiscount)
+            ? '100.0'
+            : '',
       ),
       isAvailable: product.isAvailable,
       hasDiscount: product.hasDiscount,
+      isBestSeller: product.isBestSeller,
+      isFeatured: product.isFeatured,
+      isNew: product.isNew,
       selectedCategory: product.category,
       startDate: product.startDiscount!,
       endDate: product.endDiscount!,
@@ -84,6 +91,9 @@ class ProductInitData {
   final TextEditingController discountController;
   final bool isAvailable;
   final bool hasDiscount;
+  final bool isBestSeller;
+  final bool isFeatured;
+  final bool isNew;
   final String selectedCategory;
   final DateTime startDate;
   final DateTime endDate;
@@ -96,6 +106,9 @@ class ProductInitData {
     required this.discountController,
     required this.isAvailable,
     required this.hasDiscount,
+    required this.isBestSeller,
+    required this.isFeatured,
+    required this.isNew,
     required this.selectedCategory,
     required this.startDate,
     required this.endDate,

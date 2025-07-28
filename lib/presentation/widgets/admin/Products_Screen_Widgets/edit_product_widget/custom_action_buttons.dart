@@ -9,45 +9,17 @@ class CustomActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: OutlinedButton.icon(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(IconlyLight.close_square),
-            label: const Text('Cancel'),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              foregroundColor: Colors.grey.shade700,
-              side: BorderSide(color: Colors.grey.shade300),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          flex: 2,
-          child: ElevatedButton.icon(
-            onPressed: onSave,
-            icon: const Icon(IconlyBold.tick_square, color: Colors.white),
-            label: const Text(
-              'Save Changes',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              backgroundColor: const Color(0xFFC58B3E),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 4,
-              shadowColor: const Color(0xFFC58B3E).withOpacity(0.4),
-            ),
-          ),
-        ),
-      ],
+    return ElevatedButton.icon(
+      onPressed: onSave,
+      icon: const Icon(IconlyBold.tick_square, color: Colors.white),
+      label: const Text('Save Changes', style: TextStyle(color: Colors.white)),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        backgroundColor: const Color(0xFFC58B3E),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 4,
+        shadowColor: const Color(0xFFC58B3E).withOpacity(0.4),
+      ),
     ).animate().slideY(
       begin: 1,
       delay: 400.ms,

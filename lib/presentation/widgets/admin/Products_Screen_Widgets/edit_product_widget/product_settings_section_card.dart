@@ -10,6 +10,9 @@ class ProductSettingsSectionCard extends StatelessWidget {
     super.key,
     required this.isAvailable,
     required this.hasDiscount,
+    required this.isFeatured,
+    required this.isNew,
+    required this.isBestSeller,
     required this.discountController,
     this.startDate,
     this.endDate,
@@ -17,15 +20,24 @@ class ProductSettingsSectionCard extends StatelessWidget {
     required this.onIsAvailableChanged,
     required this.onStartDateTap,
     required this.onEndDateTap,
+    required this.onIsFeaturedChanged,
+    required this.onIsNewChanged,
+    required this.onIsBestSellerChanged,
   });
 
   final bool isAvailable;
   final bool hasDiscount;
+  final bool isFeatured;
+  final bool isNew;
+  final bool isBestSeller;
   final TextEditingController discountController;
   final DateTime? startDate;
   final DateTime? endDate;
   final Function(bool) onHasDiscountChanged;
   final Function(bool) onIsAvailableChanged;
+  final Function(bool) onIsFeaturedChanged;
+  final Function(bool) onIsNewChanged;
+  final Function(bool) onIsBestSellerChanged;
   final Function() onStartDateTap;
   final Function() onEndDateTap;
 
@@ -41,6 +53,27 @@ class ProductSettingsSectionCard extends StatelessWidget {
             subtitle: 'Product Will Appear To Customers When Available',
             value: isAvailable,
             onChanged: (val) => onIsAvailableChanged(val),
+          ),
+          const Divider(height: 24),
+          CustomSwitchTile(
+            title: 'Product is Featured ?',
+            subtitle: 'Product Will Appear To Customers When Featured',
+            value: isFeatured,
+            onChanged: (val) => onIsFeaturedChanged(val),
+          ),
+          const Divider(height: 24),
+          CustomSwitchTile(
+            title: 'Product is New ?',
+            subtitle: 'Product Will Appear To Customers When New',
+            value: isNew,
+            onChanged: (val) => onIsNewChanged(val),
+          ),
+          const Divider(height: 24),
+          CustomSwitchTile(
+            title: 'Product is Best Seller ?',
+            subtitle: 'Product Will Appear To Customers When Best Seller',
+            value: isBestSeller,
+            onChanged: (val) => onIsBestSellerChanged(val),
           ),
           const Divider(height: 24),
           CustomSwitchTile(

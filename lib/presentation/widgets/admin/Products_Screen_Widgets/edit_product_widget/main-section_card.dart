@@ -25,6 +25,7 @@ class MainSectionCard extends StatelessWidget {
             controller: _nameController,
             label: 'Product Name',
             icon: IconlyLight.document,
+            isNumber: false,
           ),
           const SizedBox(height: 16),
           CustomTextField(
@@ -32,6 +33,7 @@ class MainSectionCard extends StatelessWidget {
             label: 'Product Description',
             icon: IconlyLight.info_square,
             maxLines: 3,
+            isNumber: false,
           ),
         ],
       ),

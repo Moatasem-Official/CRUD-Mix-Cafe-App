@@ -99,16 +99,17 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                     isHasDiscount: products[index].hasDiscount,
                     discountPrice: products[index].discountedPrice,
                     onEdit: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return Material(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<CategoriesCubit>(),
                             child: CustomEditProductWidget(
                               productModel: products[index],
-                              onSave: () {},
+                              categoryId: widget.categoryId,
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       );
                     },
                     onDelete: () {

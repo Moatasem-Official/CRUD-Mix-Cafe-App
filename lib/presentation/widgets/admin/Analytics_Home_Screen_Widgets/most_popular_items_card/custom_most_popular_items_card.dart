@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'custom_footer.dart';
 import 'custom_text_content.dart';
 
 class MostPopularItemsCard extends StatelessWidget {
@@ -75,14 +74,6 @@ class MostPopularItemsCard extends StatelessWidget {
             accentColor: accentColor,
             primaryTextColor: primaryTextColor,
             secondaryTextColor: secondaryTextColor,
-          ),
-
-          Divider(color: Colors.brown.shade100, height: 1, thickness: 1),
-
-          CustomFooter(
-            accentColor: accentColor,
-            onEdit: onEdit!,
-            onDelete: onDelete!,
           ),
         ],
       ),

@@ -27,7 +27,7 @@ class CustomProductColumnInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: SizedBox(
-        height: 120,
+        height: 135,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

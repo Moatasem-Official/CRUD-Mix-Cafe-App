@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'custom_date_time_picker.dart';
 import 'custom_text_field.dart';
-import 'helper_functions.dart';
 
 class CustomDiscountDetails extends StatelessWidget {
   const CustomDiscountDetails({
@@ -31,6 +30,7 @@ class CustomDiscountDetails extends StatelessWidget {
             label: 'Discount Percentage (%)',
             icon: IconlyLight.discount,
             keyboardType: TextInputType.number,
+            isNumber: true,
           ),
           const SizedBox(height: 16),
           // --- حقول التاريخ والوقت الجديدة ---

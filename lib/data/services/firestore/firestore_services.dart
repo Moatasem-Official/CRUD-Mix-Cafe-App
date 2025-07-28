@@ -190,45 +190,74 @@ class FirestoreServices {
     });
   }
 
+  // لاحظ كيف أصبحت البارامترات أبسط بكثير
   Future<void> updateProduct(
-    String id,
-    String name,
-    String description,
-    double price,
-    int quantity,
-    bool isAvailable,
-    String imageUrl,
-    String category,
-    DateTime startDiscount,
-    DateTime endDiscount,
-    double discountPercentage,
-    double discountedPrice,
+    int oldCategoryId,
+    ProductModel product, // نستقبل كائن المنتج المحدث بالكامل
   ) async {
     try {
-      final DocumentReference document = FirebaseFirestore.instance
-          .collection('products')
-          .doc(id);
-      await document.update({
-        'name': name,
-        'description': description,
-        'price': price,
-        'quantity': quantity,
-        'isAvailable': isAvailable,
-        'imageUrl': imageUrl,
-        'category': category,
-        'hasDiscount': discountPercentage > 0,
-        'startDiscount': startDiscount != null
-            ? Timestamp.fromDate(startDiscount)
-            : null,
-        'endDiscount': endDiscount != null
-            ? Timestamp.fromDate(endDiscount)
-            : null,
-        'discountPercentage': discountPercentage,
-        'discountedPrice': discountedPrice,
-      });
+      // 🧭 تحويل ID التصنيف القديم إلى اسم للوصول للمسار الصحيح
+      String oldCategoryName = _getCategoryNameFromId(oldCategoryId);
+
+      final firestore = FirebaseFirestore.instance;
+      final newCategoryName = product.category; // اسم التصنيف الجديد من الكائن
+
+      // 🔁 هل تم تغيير التصنيف؟
+      if (oldCategoryName != newCategoryName) {
+        // إذا تم تغيير التصنيف، نقوم بحذف المنتج من القديم وإضافته للجديد
+
+        // 🗑️ احذف من التصنيف القديم
+        await firestore
+            .collection('categories')
+            .doc(oldCategoryName)
+            .collection('products')
+            .doc(product.id)
+            .delete();
+
+        // ➕ أضف للتصنيف الجديد باستخدام toMap
+        await firestore
+            .collection('categories')
+            .doc(newCategoryName)
+            .collection('products')
+            .doc(product.id)
+            .set(product.toMap()); // ✨ نستخدم toMap هنا
+      } else {
+        // ✅ تحديث عادي في نفس التصنيف
+        final document = firestore
+            .collection('categories')
+            .doc(oldCategoryName)
+            .collection('products')
+            .doc(product.id);
+
+        // ✨ نستخدم toMap هنا أيضًا للتحديث
+        await document.update(product.toMap());
+      }
+
+      print('✅ Product updated successfully in $newCategoryName');
     } catch (e) {
-      print('Error updating product: $e');
-      throw Exception('Failed to update item: $e');
+      print('❌ Error updating product: $e');
+      // من الأفضل إلقاء الخطأ مرة أخرى ليتمكن الـ Cubit من التعامل معه
+      throw Exception('Failed to update product: $e');
+    }
+  }
+
+  // دالة مساعدة خاصة لتنظيف الكود
+  String _getCategoryNameFromId(int categoryId) {
+    switch (categoryId) {
+      case 0:
+        return 'Sandwichs';
+      case 1:
+        return 'Pizzas';
+      case 2:
+        return 'Crepes';
+      case 3:
+        return 'Meals';
+      case 4:
+        return 'Drinks';
+      case 5:
+        return 'Desserts'; // تأكد من أن هذا الاسم يطابق Firestore
+      default:
+        throw Exception('❌ Invalid old categoryId: $categoryId');
     }
   }
 

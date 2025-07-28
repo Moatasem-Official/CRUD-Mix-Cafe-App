@@ -10,7 +10,7 @@ class ProductModel {
   final bool isFeatured;
   final bool isNew;
   final bool isBestSeller;
-  final String imageUrl;
+  String imageUrl;
   final String category;
   final bool hasDiscount;
   final DateTime? startDiscount;
@@ -64,4 +64,29 @@ class ProductModel {
         ? (json['timestamp'] as Timestamp).toDate()
         : null,
   );
+
+  // داخل كلاس ProductModel
+  // ... (الحقول والـ constructor)
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'quantity': quantity,
+      'isAvailable': isAvailable,
+      'imageUrl': imageUrl,
+      'category': category,
+      'hasDiscount': hasDiscount,
+      'startDiscount': startDiscount, // فايرستور سيقوم بتحويله لـ Timestamp
+      'endDiscount': endDiscount, // فايرستور سيقوم بتحويله لـ Timestamp
+      'discountedPrice': discountedPrice,
+      'discountPercentage': discountPercentage, // تأكد من إضافة هذا الحقل
+      'timestamp': FieldValue.serverTimestamp(), // للتحديث التلقائي للوقت
+      'isBestSeller': isBestSeller,
+      'isFeatured': isFeatured,
+      'isNew': isNew,
+    };
+  }
 }

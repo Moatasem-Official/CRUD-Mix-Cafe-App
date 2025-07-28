@@ -1,12 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
+import 'package:mix_cafe_app/data/helpers/image_helper.dart';
+import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
 import '../../../../../data/model/product_model.dart';
 
-class CustomImageUploader extends StatelessWidget {
+class CustomImageUploader extends StatefulWidget {
   const CustomImageUploader({super.key, required this.productModel});
 
   final ProductModel productModel;
+
+  @override
+  State<CustomImageUploader> createState() => _CustomImageUploaderState();
+}
+
+class _CustomImageUploaderState extends State<CustomImageUploader> {
+  late String imageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    imageUrl = widget.productModel.imageUrl;
+  }
+
+  void _pickAndUploadImage() async {
+    final image = await ImageHelper.pickFromGallery();
+    if (image != null) {
+      final cloudinary = CloudinaryServices();
+      final uploadedUrl = await cloudinary.uploadImageToCloudinary(image);
+      if (uploadedUrl != null) {
+        setState(() {
+          imageUrl = uploadedUrl;
+          widget.productModel.imageUrl = uploadedUrl; // Keep model in sync
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +63,7 @@ class CustomImageUploader extends StatelessWidget {
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    productModel.imageUrl,
+                    imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
                         const Icon(Icons.error),
@@ -56,9 +85,7 @@ class CustomImageUploader extends StatelessWidget {
                     ],
                   ),
                   child: IconButton(
-                    onPressed: () {
-                      // TODO: Implement image picking logic
-                    },
+                    onPressed: _pickAndUploadImage,
                     icon: const Icon(
                       IconlyBold.camera,
                       color: Colors.white,

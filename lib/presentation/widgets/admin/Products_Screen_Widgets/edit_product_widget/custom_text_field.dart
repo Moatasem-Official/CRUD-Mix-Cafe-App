@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
     required this.icon,
     this.maxLines = 1,
     this.keyboardType = TextInputType.text,
+    required this.isNumber,
   });
 
   final TextEditingController controller;
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final int maxLines;
   final TextInputType keyboardType;
+  final bool isNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,15 @@ class CustomTextField extends StatelessWidget {
           borderSide: const BorderSide(color: Color(0xFFC58B3E), width: 2),
         ),
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return 'هذا الحقل مطلوب';
+        }
+        if (double.tryParse(value) == null && isNumber) {
+          return 'الرجاء إدخال قيمة صحيحة';
+        }
+        return null; // يعني أن القيمة صحيحة
+      },
     );
   }
 }

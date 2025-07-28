@@ -56,7 +56,7 @@ class CustomTextContent extends StatelessWidget {
               Text(
                 "$price EGP",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: price.toString().length > 3 ? 16 : 18,
                   fontWeight: FontWeight.w700,
                   color: accentColor,
                 ),
