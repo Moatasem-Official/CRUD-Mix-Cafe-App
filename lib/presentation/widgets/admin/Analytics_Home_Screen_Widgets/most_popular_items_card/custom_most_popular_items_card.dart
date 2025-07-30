@@ -9,8 +9,6 @@ class MostPopularItemsCard extends StatelessWidget {
     required this.price,
     required this.imagePath,
     this.rating = 4.5,
-    this.onEdit,
-    this.onDelete,
   });
 
   final String name;
@@ -18,8 +16,6 @@ class MostPopularItemsCard extends StatelessWidget {
   final double price;
   final String imagePath;
   final double rating;
-  final VoidCallback? onEdit;
-  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {

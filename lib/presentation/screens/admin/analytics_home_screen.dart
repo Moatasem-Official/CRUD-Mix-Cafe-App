@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconly/iconly.dart';
 import '../../../bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import '../../../bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import '../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_analysis_containers_row.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_notifications_num.dart';
-import '../../../constants/app_assets.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/analytics_chart.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_most_popular_items_grid.dart';
 import '../../widgets/admin/Analytics_Home_Screen_Widgets/custom_title_of_popular_items.dart';
@@ -53,6 +53,24 @@ class _AnalyticsHomeScreenState extends State<AnalyticsHomeScreen> {
             ),
             onPressed: () => Navigator.of(context).pushNamed('/notifications'),
             icon: CustomNotificationsNumStack(),
+          ),
+          IconButton(
+            tooltip: 'Offers',
+            style: ButtonStyle(
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+            ),
+            onPressed: () => Navigator.of(context).pushNamed('/offersScreen'),
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 237, 237, 237),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                IconlyLight.discount,
+                color: Color.fromARGB(255, 165, 101, 56),
+              ),
+            ),
           ),
         ],
       ),

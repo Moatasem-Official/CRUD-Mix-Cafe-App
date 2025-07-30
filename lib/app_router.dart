@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/add_offer_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/offers_screen.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
@@ -51,6 +53,8 @@ class AppRouter {
   static const String adminHomeScreen = '/adminHomeScreen';
   static const String adminSettingsScreen = '/adminSettingsScreen';
   static const String adminOrderDetailsScreen = '/adminOrderDetailsScreen';
+  static const String adminAddOfferScreen = '/adminAddOfferScreen';
+  static const String offersScreen = '/offersScreen';
   static const String customerLogin = '/customerLogin';
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
@@ -144,6 +148,10 @@ class AppRouter {
             ),
           ),
         );
+      case adminAddOfferScreen:
+        return MaterialPageRoute(builder: (_) => AdminAddOfferScreen());
+      case offersScreen:
+        return MaterialPageRoute(builder: (_) => OffersScreen());
       case customerLogin:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(
