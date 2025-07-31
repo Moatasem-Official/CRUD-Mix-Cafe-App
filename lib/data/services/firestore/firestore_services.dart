@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mix_cafe_app/data/model/offer_model.dart';
 import '../../model/order_model.dart';
 import '../../model/user_model.dart';
 import 'package:rxdart/rxdart.dart';
@@ -634,6 +635,62 @@ class FirestoreServices {
     } catch (e) {
       print('Error fetching customer orders: $e');
       throw Exception('Failed to fetch customer orders: $e');
+    }
+  }
+
+  Future<void> addOffer({required Offer offer}) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      final offerData = {
+        'imageUrl': offer.imageUrl,
+        'title': offer.title,
+        'description': offer.description,
+        'startDate': Timestamp.fromDate(offer.startDate),
+        'endDate': Timestamp.fromDate(offer.endDate),
+        'timestamp': FieldValue.serverTimestamp(), // ترتيب حسب وقت الإضافة
+      };
+
+      await firestore.collection('offers').add(offerData);
+      print('✅ Offer added successfully!');
+    } catch (e) {
+      print('❌ Error adding offer: $e');
+      throw Exception('Failed to add offer: $e');
+    }
+  }
+
+  Future<void> deleteOffer(String offerId) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      await firestore.collection('offers').doc(offerId).delete();
+      print('✅ Offer deleted successfully!');
+    } catch (e) {
+      print('❌ Error deleting offer: $e');
+      throw Exception('Failed to delete offer: $e');
+    }
+  }
+
+  Future<void> updateOffer(Offer offer) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      await firestore.collection('offers').doc(offer.id).update(offer.toMap());
+      print('✅ Offer updated successfully!');
+    } catch (e) {
+      print('❌ Error updating offer: $e');
+      throw Exception('Failed to update offer: $e');
+    }
+  }
+
+  Future<List<Offer>> getAllOffers() async {
+    final firestore = FirebaseFirestore.instance;
+    try {
+      final snapshot = await firestore.collection('offers').get();
+      final offers = snapshot.docs
+          .map((doc) => Offer.fromMap(doc.data(), doc.id))
+          .toList();
+      return offers;
+    } catch (e) {
+      print('❌ Error fetching offers: $e');
+      throw Exception('Failed to fetch offers: $e');
     }
   }
 

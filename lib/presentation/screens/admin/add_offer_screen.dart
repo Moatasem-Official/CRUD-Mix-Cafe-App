@@ -39,7 +39,7 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 1000),
     );
     _fadeAnimation = CurvedAnimation(
       parent: _animationController,
