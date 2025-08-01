@@ -350,7 +350,7 @@ class FirestoreServices {
     } catch (error, stackTrace) {
       debugPrint('Error adding order: $error');
       debugPrintStack(stackTrace: stackTrace);
-      throw Exception('Failed to add order: $error');
+      rethrow; // ❗️ده بيرمي نفس الخطأ اللي حصل بدون تعديل
     }
   }
 
@@ -675,10 +675,21 @@ class FirestoreServices {
     }
   }
 
-  Future<void> updateOffer(Offer offer) async {
+  Future<void> updateOffer(
+    String offerId, // 🟡 تمرير الـ ID هنا
+    String imageUrl,
+    String title,
+    String description,
+    DateTime endDate,
+  ) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     try {
-      await firestore.collection('offers').doc(offer.id).update(offer.toMap());
+      await firestore.collection('offers').doc(offerId).update({
+        'imageUrl': imageUrl,
+        'title': title,
+        'description': description,
+        'endDate': Timestamp.fromDate(endDate),
+      });
       print('✅ Offer updated successfully!');
     } catch (e) {
       print('❌ Error updating offer: $e');

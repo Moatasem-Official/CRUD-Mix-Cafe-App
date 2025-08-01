@@ -7,7 +7,7 @@ class ImageHelper {
   static Future<File?> pickFromGallery() async {
     final picked = await _picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 100, // جودة الصورة من 0 إلى 100
+      imageQuality: 100,
       maxWidth: 1024,
       maxHeight: 1024,
     );
@@ -17,7 +17,7 @@ class ImageHelper {
   static Future<File?> pickFromCamera() async {
     final picked = await _picker.pickImage(
       source: ImageSource.camera,
-      imageQuality: 100, // جودة الصورة من 0 إلى 100
+      imageQuality: 100,
       maxWidth: 1024,
       maxHeight: 1024,
     );

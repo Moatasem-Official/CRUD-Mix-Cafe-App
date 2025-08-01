@@ -29,10 +29,22 @@ class OffersScreenCubit extends Cubit<OffersScreenState> {
     }
   }
 
-  Future<void> updateOffer(Offer offer) async {
+  Future<void> updateOffer(
+    String offerId,
+    String imageUrl,
+    String title,
+    String description,
+    DateTime endDate,
+  ) async {
     emit(OffersScreenLoading());
     try {
-      await _firestoreServices.updateOffer(offer);
+      await _firestoreServices.updateOffer(
+        offerId,
+        imageUrl,
+        title,
+        description,
+        endDate,
+      );
     } catch (e) {
       emit(OffersScreenError(e.toString()));
     }

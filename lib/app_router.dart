@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
+import 'package:mix_cafe_app/data/model/offer_model.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/add_offer_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/admin/edit_offer_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/offers_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/offer_details_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/offers_screen.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
@@ -56,6 +61,7 @@ class AppRouter {
   static const String adminOrderDetailsScreen = '/adminOrderDetailsScreen';
   static const String adminAddOfferScreen = '/adminAddOfferScreen';
   static const String offersScreen = '/offersScreen';
+  static const String editOfferForm = '/editOfferForm';
   static const String customerLogin = '/customerLogin';
   static const String customerSignUp = '/customerSignUp';
   static const String forgetPassword = '/forgetPassword';
@@ -71,6 +77,9 @@ class AppRouter {
   static const String aboutMixCafeScreen = '/aboutMixCafeScreen';
   static const String contactSupportScreen = '/contactSupportScreen';
   static const String orderDetailsScreen = '/orderDetailsScreen';
+  static const String customerOffersScreen = '/customerOffersScreen';
+  static const String customerOfferDetailsScreen =
+      '/customerOfferDetailsScreen';
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -163,6 +172,14 @@ class AppRouter {
             child: OffersScreen(),
           ),
         );
+      case editOfferForm:
+        final arg = settings.arguments as Offer;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<OffersScreenCubit>(
+            create: (context) => OffersScreenCubit(),
+            child: EditOfferForm(offer: arg),
+          ),
+        );
       case customerLogin:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(
@@ -218,6 +235,16 @@ class AppRouter {
             child: const CustomerOrdersScreen(),
           ),
         );
+      case customerOffersScreen:
+        return MaterialPageRoute(builder: (_) => const CustomerOffersScreen());
+      case customerOfferDetailsScreen:
+        final arg = settings.arguments as Offer;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<OrderDetailsScreenCubit>(
+            create: (context) => OrderDetailsScreenCubit(),
+            child: CustomerOfferDetailsScreen(offer: arg),
+          ),
+        );
       case customerHomeNavigation:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
@@ -230,6 +257,9 @@ class AppRouter {
               ),
               BlocProvider<OrdersScreenCubit>(
                 create: (context) => OrdersScreenCubit()..getOrders(),
+              ),
+              BlocProvider<CustomerOffersScreenCubit>(
+                create: (context) => CustomerOffersScreenCubit()..getOffers(),
               ),
             ],
             child: const CustomerHomeNavigation(),

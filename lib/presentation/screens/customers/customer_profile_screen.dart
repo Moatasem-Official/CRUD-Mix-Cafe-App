@@ -91,7 +91,7 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
               ),
               const SizedBox(height: 40),
               Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 16, right: 8),
                 child: CustomScreenCenterSection(
                   address: address == '' ? 'No address Exists' : address,
                   index: 0,

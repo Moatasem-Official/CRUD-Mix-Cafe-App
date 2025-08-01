@@ -39,18 +39,34 @@ class HelperFunctions {
 
   static String timeDifferenceString(OfferStatus status, Offer offer) {
     final now = DateTime.now();
+    Duration difference;
+
     if (status == OfferStatus.Scheduled) {
-      final difference = offer.startDate.difference(now);
-      if (difference.inDays > 0) return 'يبدأ خلال ${difference.inDays} يوم';
-      if (difference.inHours > 0) return 'يبدأ خلال ${difference.inHours} ساعة';
-      return 'يبدأ قريباً';
+      difference = offer.startDate.difference(now);
+      if (difference.isNegative) return 'يبدأ قريباً';
     } else if (status == OfferStatus.Active) {
-      final difference = offer.endDate.difference(now);
-      if (difference.inDays > 0) return 'ينتهي خلال ${difference.inDays} يوم';
-      if (difference.inHours > 0)
-        return 'ينتهي خلال ${difference.inHours} ساعة';
-      return 'ينتهي قريباً';
+      difference = offer.endDate.difference(now);
+      if (difference.isNegative) return 'ينتهي قريباً';
+    } else {
+      return 'انتهى العرض';
     }
-    return 'انتهى العرض';
+
+    final days = difference.inDays;
+    final hours = difference.inHours % 24;
+    final minutes = difference.inMinutes % 60;
+
+    String result = '';
+
+    if (days > 0) result += '$days يوم ';
+    if (hours > 0) result += '$hours ساعة ';
+    if (minutes > 0) result += '$minutes دقيقة';
+
+    if (result.isEmpty) result = 'أقل من دقيقة';
+
+    if (status == OfferStatus.Scheduled) {
+      return 'يبدأ خلال $result';
+    } else {
+      return 'ينتهي خلال $result';
+    }
   }
 }

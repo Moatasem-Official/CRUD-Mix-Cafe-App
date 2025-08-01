@@ -43,7 +43,7 @@ class _OffersScreenState extends State<OffersScreen> {
           }
           if (state is OffersScreenSuccess) {
             if (state.offers.isEmpty) {
-              return Center(child: Text('لا يوجد عروض'));
+              return Center(child: Text('لا يوجد عروض في الوقت الحالي'));
             }
             return ListView.builder(
               itemCount: state.offers.length,
@@ -51,7 +51,10 @@ class _OffersScreenState extends State<OffersScreen> {
                 return AdminOfferCard(
                   offer: state.offers[index],
                   onEdit: () {
-                    print('Editing offer');
+                    Navigator.of(context).pushNamed(
+                      '/editOfferForm',
+                      arguments: state.offers[index],
+                    );
                   },
                   onDelete: () async {
                     await context.read<OffersScreenCubit>().deleteOffer(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_bar/bottom_bar.dart';
+import 'package:mix_cafe_app/presentation/screens/customers/offers_screen.dart';
 import 'customer_cart_screen.dart';
 import 'customer_home_screen.dart';
 import 'customer_orders_screen.dart';
@@ -33,6 +34,7 @@ class _CustomerHomeNavigationState extends State<CustomerHomeNavigation> {
           CustomerHomeScreen(),
           CustomerCartScreen(),
           CustomerOrdersScreen(),
+          CustomerOffersScreen(),
           CustomerProfileScreen(),
         ],
         onPageChanged: (index) {
@@ -60,6 +62,11 @@ class _CustomerHomeNavigationState extends State<CustomerHomeNavigation> {
           BottomBarItem(
             icon: const Icon(Icons.receipt_long_outlined),
             title: const Text('Orders'),
+            activeColor: mainColor,
+          ),
+          BottomBarItem(
+            icon: const Icon(Icons.card_giftcard_outlined),
+            title: const Text('Offers'),
             activeColor: mainColor,
           ),
           BottomBarItem(

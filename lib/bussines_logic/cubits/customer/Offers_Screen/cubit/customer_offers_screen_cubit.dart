@@ -1,0 +1,22 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:mix_cafe_app/data/model/offer_model.dart';
+import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+
+part 'customer_offers_screen_state.dart';
+
+class CustomerOffersScreenCubit extends Cubit<CustomerOffersScreenState> {
+  CustomerOffersScreenCubit() : super(CustomerOffersScreenInitial());
+
+  final FirestoreServices _firestoreServices = FirestoreServices();
+
+  void getOffers() async {
+    emit(CustomerOffersScreenLoading());
+    try {
+      final offers = await _firestoreServices.getAllOffers();
+      emit(CustomerOffersScreenSuccess(offers));
+    } catch (e) {
+      emit(CustomerOffersScreenError(e.toString()));
+    }
+  }
+}
