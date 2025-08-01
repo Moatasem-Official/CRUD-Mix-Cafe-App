@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
 import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/offer_card.dart';
 
-class OffersScreen extends StatelessWidget {
-  OffersScreen({super.key});
-  // Example of how to use the card in a list
+class OffersScreen extends StatefulWidget {
+  const OffersScreen({super.key});
 
-  // Dummy data for demonstration
-  final Offer sampleOffer = Offer(
-    id: '123',
-    title: 'عرض الصيف الخيالي',
-    description:
-        'خصومات تصل إلى 70% على جميع الملابس الصيفية. لا تفوت الفرصة الآن واحصل على أفضل الإطلالات!',
-    imageUrl:
-        'https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Use a real image URL
-    startDate: DateTime.now().subtract(const Duration(days: 2)), // Active
-    endDate: DateTime.now().add(const Duration(days: 5)),
-  );
+  @override
+  State<OffersScreen> createState() => _OffersScreenState();
+}
+
+class _OffersScreenState extends State<OffersScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<OffersScreenCubit>(context).getOffers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +36,36 @@ class OffersScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 165, 101, 56),
         surfaceTintColor: Color.fromARGB(255, 165, 101, 56),
       ),
-      body: ListView.builder(
-        itemCount: 5, // Replace with your offers list length
-        itemBuilder: (context, index) {
-          return AdminOfferCard(
-            offer:
-                sampleOffer, // Replace with your actual offer object from the list
-            onEdit: () {
-              print('Editing offer ${sampleOffer.id}');
-            },
-            onDelete: () {
-              print('Deleting offer ${sampleOffer.id}');
-            },
-          );
+      body: BlocBuilder<OffersScreenCubit, OffersScreenState>(
+        builder: (context, state) {
+          if (state is OffersScreenLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is OffersScreenSuccess) {
+            if (state.offers.isEmpty) {
+              return Center(child: Text('لا يوجد عروض'));
+            }
+            return ListView.builder(
+              itemCount: state.offers.length,
+              itemBuilder: (context, index) {
+                return AdminOfferCard(
+                  offer: state.offers[index],
+                  onEdit: () {
+                    print('Editing offer');
+                  },
+                  onDelete: () async {
+                    await context.read<OffersScreenCubit>().deleteOffer(
+                      state.offers[index].id,
+                    );
+                  },
+                );
+              },
+            );
+          }
+          if (state is OffersScreenError) {
+            return Center(child: Text(state.message));
+          }
+          return Container();
         },
       ),
     );

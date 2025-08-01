@@ -34,6 +34,7 @@ class Offer {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'title': title,
       'description': description,
       'imageUrl': imageUrl,

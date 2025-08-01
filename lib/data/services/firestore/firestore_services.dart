@@ -640,17 +640,23 @@ class FirestoreServices {
 
   Future<void> addOffer({required Offer offer}) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     try {
+      final docRef = firestore.collection('offers').doc(); // توليد ID يدوي
+      final offerId = docRef.id;
+
       final offerData = {
+        'id': offerId, // عشان تحفظ الـ ID نفسه داخل الداتا
         'imageUrl': offer.imageUrl,
         'title': offer.title,
         'description': offer.description,
         'startDate': Timestamp.fromDate(offer.startDate),
         'endDate': Timestamp.fromDate(offer.endDate),
-        'timestamp': FieldValue.serverTimestamp(), // ترتيب حسب وقت الإضافة
+        'timestamp': FieldValue.serverTimestamp(),
       };
 
-      await firestore.collection('offers').add(offerData);
+      await docRef.set(offerData); // ✅ استخدم set بس هنا
+
       print('✅ Offer added successfully!');
     } catch (e) {
       print('❌ Error adding offer: $e');

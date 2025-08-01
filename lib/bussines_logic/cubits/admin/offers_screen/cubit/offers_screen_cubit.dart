@@ -23,6 +23,7 @@ class OffersScreenCubit extends Cubit<OffersScreenState> {
     emit(OffersScreenLoading());
     try {
       await _firestoreServices.deleteOffer(offerId);
+      await getOffers();
     } catch (e) {
       emit(OffersScreenError(e.toString()));
     }

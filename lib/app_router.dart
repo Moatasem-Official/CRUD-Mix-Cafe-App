@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/add_offer_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/offers_screen.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
@@ -149,9 +150,19 @@ class AppRouter {
           ),
         );
       case adminAddOfferScreen:
-        return MaterialPageRoute(builder: (_) => AdminAddOfferScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<OffersScreenCubit>(
+            create: (context) => OffersScreenCubit(),
+            child: AdminAddOfferScreen(),
+          ),
+        );
       case offersScreen:
-        return MaterialPageRoute(builder: (_) => OffersScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<OffersScreenCubit>(
+            create: (context) => OffersScreenCubit(),
+            child: OffersScreen(),
+          ),
+        );
       case customerLogin:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(

@@ -41,7 +41,7 @@ class AdminOfferCard extends StatelessWidget {
           CustomOfferCardContent(offer: offer),
 
           // --- Action Buttons ---
-          CustomDeleteEditOfferCard(onDelete: () {}, onEdit: () {}),
+          CustomDeleteEditOfferCard(onDelete: onDelete, onEdit: onEdit),
         ],
       ),
     );
