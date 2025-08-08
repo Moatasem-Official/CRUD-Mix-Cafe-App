@@ -51,6 +51,9 @@ To run this project locally:
 
 Contributions are welcome! Please open an issue or submit a pull request for suggestions or improvements.
 
----
+## License
 
-*This README will be updated as the project progresses.*
+⚠️ This project is not open for reuse.  
+Do **not copy or distribute** the source code without permission.
+
+© 2025 Moatasem Nagy
