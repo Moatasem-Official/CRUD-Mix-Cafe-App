@@ -8,6 +8,7 @@ import 'package:mix_cafe_app/presentation/screens/admin/edit_offer_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/admin/offers_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/offer_details_screen.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/offers_screen.dart';
+import 'package:mix_cafe_app/presentation/screens/on_boarding_screen.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/chart_distributions_analysis_cubit.dart';
 import 'bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
@@ -48,6 +49,7 @@ import 'presentation/screens/splash_screen.dart';
 
 class AppRouter {
   static const String splash = '/';
+  static const String onBoardingScreen = '/onboardingScreen';
   static const String selectUserRole = '/selectUserRole';
   static const String adminLogin = '/adminLogin';
   static const String categoriesManagment = '/categories_managment';
@@ -81,10 +83,12 @@ class AppRouter {
   static const String customerOfferDetailsScreen =
       '/customerOfferDetailsScreen';
 
-  Route? onGenerateRoute(RouteSettings settings) {
+  static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case onBoardingScreen:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case selectUserRole:
         return MaterialPageRoute(builder: (_) => const SelectUserRoleScreen());
       case adminLogin:
@@ -98,9 +102,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CategoriesManagmentScreen());
       case categoryProducts:
         return MaterialPageRoute(
-          builder: (_) => CategoryProductsScreen(
-            categoryId: settings.arguments as int, // Pass the category ID
-          ),
+          builder: (_) =>
+              CategoryProductsScreen(categoryId: settings.arguments as int),
         );
       case productInformationForm:
         return MaterialPageRoute(

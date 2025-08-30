@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Fall 1: Kein Benutzer ist angemeldet
     if (currentUser == null) {
-      Navigator.pushReplacementNamed(context, '/selectUserRole');
+      Navigator.pushReplacementNamed(context, '/onboardingScreen');
       return;
     }
 
@@ -59,19 +59,19 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         } else {
           // Die Rolle ist ungültig oder null
-          Navigator.pushReplacementNamed(context, '/selectUserRole');
+          Navigator.pushReplacementNamed(context, '/onboardingScreen');
         }
       } else {
         // Das Benutzerdokument existiert nicht in Firestore
         // Dies verhindert einen Absturz, wenn 'userRole' nicht gefunden wird
-        Navigator.pushReplacementNamed(context, '/selectUserRole');
+        Navigator.pushReplacementNamed(context, '/onboardingScreen');
       }
     } catch (e) {
       // Fehler bei Firestore-Aufrufen (z.B. Netzwerkprobleme) abfangen
       if (!mounted) return;
       debugPrint("Fehler beim Laden der Benutzerdaten: $e");
       // Leiten Sie den Benutzer zu einer sicheren Fallback-Seite
-      Navigator.pushReplacementNamed(context, '/selectUserRole');
+      Navigator.pushReplacementNamed(context, '/onboardingScreen');
     }
   }
 

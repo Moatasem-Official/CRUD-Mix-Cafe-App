@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRouter().onGenerateRoute,
+      onGenerateRoute: AppRouter.onGenerateRoute,
       theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
     );
   }
