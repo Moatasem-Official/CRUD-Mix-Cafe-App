@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// --- Global Colors ---
 const Color kCoffeeLight = Color(0xFFEADBC8);
 const Color kCoffeeDark = Color(0xFF4B3621);
 const Color kAccentBrown = Color(0xFF6F4E37);
 const Color kAccentOrange = Color(0xFFC38154);
 
-// --- Main Onboarding Screen Widget ---
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -19,46 +17,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
-  // The list of onboarding page data
   final List<Map<String, String>> onboardingPages = [
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'assets/icons/coffee-cup-svgrepo-com.svg',
       'title': 'Welcome to Mix Cafe',
       'body':
           'Discover a world of flavor where a restaurant, a cafe, and a juice bar meet in one place.',
     },
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'assets/icons/food-fast-hamburger-burger-svgrepo-com.svg',
       'title': 'A Memorable Dining Experience',
       'body':
           'Browse our diverse menus, from breakfast to dinner, and order your favorite dishes with ease.',
     },
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'assets/icons/coffee-beans-svgrepo-com.svg',
       'title': 'Your Coffee Awaits',
       'body':
           'Enjoy moments of tranquility with your favorite cup of coffee, from rich espresso to luxurious latte.',
     },
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'assets/icons/juice-svgrepo-com.svg',
       'title': 'Fresh & Natural Juices',
       'body':
           'Revitalize with our wide selection of fresh, natural juices. Perfect for any time of the day.',
     },
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'asset/icons/shopping-cart-svgrepo-com.svg',
       'title': 'Seamless Control for You',
       'body':
           'Track your orders, review your purchase history, and save your favorites for quick reordering.',
     },
     {
-      'image':
-          'assets/images/Gemini_Generated_Image_l6pj6kl6pj6kl6pj-removebg-preview.png',
+      'image': 'assets/icons/analytics-chart-diagram-svgrepo-com.svg',
       'title': 'Smart Business Management',
       'body':
           'For our business partners: our admin dashboard provides instant insights and comprehensive reports to manage your business efficiently.',
@@ -87,7 +78,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: kCoffeeLight,
       body: Stack(
         children: [
-          // Main content: PageView
           PageView.builder(
             controller: _pageController,
             itemCount: onboardingPages.length,
@@ -100,7 +90,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-          // "Skip" button at the top-right
           Positioned(
             top: 40,
             right: 20,
@@ -116,7 +105,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
           ),
-          // Bottom navigation and buttons
           Positioned(
             bottom: 50,
             left: 20,
@@ -126,10 +114,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 _buildDotsIndicator(),
                 const SizedBox(height: 30),
                 if (_currentPage < onboardingPages.length - 1)
-                  // "Next" button for most pages
                   _buildNextButton(context)
                 else
-                  // "Get Started" button for the final page
                   _buildGetStartedButton(context),
               ],
             ),
@@ -139,15 +125,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  // Helper widget to build each onboarding page
   Widget _buildOnboardingPage(String imagePath, String title, String body) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Image at the top
-        SizedBox(height: 250, child: Image.asset(imagePath)),
+        SizedBox(
+          height: 250,
+          width: 250,
+          child: SvgPicture.asset(
+            imagePath,
+            fit: BoxFit.contain,
+            colorFilter: const ColorFilter.mode(kAccentBrown, BlendMode.srcIn),
+          ),
+        ),
         const SizedBox(height: 40),
-        // Text container at the bottom
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -187,7 +178,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  // Helper widget to build the dot indicators
   Widget _buildDotsIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -209,7 +199,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  // Helper widget for the "Next" button
   Widget _buildNextButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
@@ -233,7 +222,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  // Helper widget for the "Get Started" button
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _goToHome(context),
@@ -252,7 +240,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  // Function to navigate to the home page
   void _goToHome(BuildContext context) {
     Navigator.of(context).pushReplacementNamed('/selectUserRole');
   }
