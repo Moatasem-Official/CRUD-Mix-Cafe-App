@@ -4,9 +4,15 @@ import 'package:iconly/iconly.dart';
 import '../helper_functions.dart';
 
 class CustomListTile extends StatelessWidget {
-  const CustomListTile({super.key, this.estimatedDuration, this.onTap});
+  const CustomListTile({
+    super.key,
+    this.estimatedDuration,
+    this.onTap,
+    required this.orderPreparationTime,
+  });
 
   final Duration? estimatedDuration;
+  final String orderPreparationTime;
   final Function()? onTap;
 
   @override
@@ -28,7 +34,7 @@ class CustomListTile extends StatelessWidget {
             // Use the new formatter function here
             estimatedDuration != null
                 ? HelperFunctions.formatDuration(estimatedDuration!)
-                : 'Set Time',
+                : orderPreparationTime,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w600,
               color: const Color(0xFF4E342E),

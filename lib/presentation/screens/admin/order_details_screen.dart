@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
+import 'package:mix_cafe_app/data/helpers/search_helper.dart';
 import '../../../bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
 import '../../../data/model/order_model.dart';
 import '../../widgets/admin/Order_details_screen/Build_Action_Panel/action_panel_main_widget.dart';
@@ -95,6 +96,11 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                 CustomProductPanel(order: widget.order),
                 const SizedBox(height: 16),
                 ActionPanelMainWidget(
+                  orderPreparedTime: widget.order.preparationTime!.isNotEmpty
+                      ? SearchHelper.formatPreparedTime(
+                          widget.order.preparationTime!,
+                        )
+                      : HelperFunctions.formatDuration(_estimatedDuration!),
                   currentStatus: _currentStatus,
                   statusOptions: _statusOptions,
                   estimatedDuration: _estimatedDuration,

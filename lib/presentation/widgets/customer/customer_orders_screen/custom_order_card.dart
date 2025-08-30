@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
+import 'package:mix_cafe_app/data/helpers/search_helper.dart';
 
 class StatusInfo {
   final Color color;
@@ -12,6 +13,7 @@ class StatusInfo {
 
 class OrderCard extends StatelessWidget {
   final String orderId;
+  final String preparingTime;
   final String date;
   final String status;
   final double totalPrice;
@@ -20,6 +22,7 @@ class OrderCard extends StatelessWidget {
   const OrderCard({
     super.key,
     required this.orderId,
+    required this.preparingTime,
     required this.date,
     required this.status,
     required this.totalPrice,
@@ -113,13 +116,34 @@ class OrderCard extends StatelessWidget {
   /// Builds the top part of the card with Order ID and Date.
   /// Builds the top part of the card with Order ID ONLY.
   Widget _buildHeader() {
-    return Text(
-      'Order #$orderId',
-      style: GoogleFonts.poppins(
-        fontWeight: FontWeight.w600,
-        fontSize: 18,
-        color: const Color(0xFF4E342E), // Rich brown
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Order #$orderId',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            color: const Color(0xFF4E342E), // Rich brown
+          ),
+        ),
+        const SizedBox(height: 5),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFF9F0),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            'Preparing Time : $preparingTime',
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+              color: const Color(0xFF4E342E),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

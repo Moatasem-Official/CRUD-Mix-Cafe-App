@@ -42,7 +42,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
             165,
             101,
             56,
-          ), // بني غامق للأيقونة المفعلة
+          ),
           inactiveIconColor: Color(0xFFBCAAA4),
           onItemSelected: (index) {
             setState(() {

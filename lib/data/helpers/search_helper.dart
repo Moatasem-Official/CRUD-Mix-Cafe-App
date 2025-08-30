@@ -13,4 +13,10 @@ class SearchHelper {
       return product.name.toLowerCase().contains(query.toLowerCase());
     }).toList();
   }
+
+  static String formatPreparedTime(String time) {
+    final hour = time.split(':')[0];
+    final minute = time.split(':')[1];
+    return '$hour h  $minute min';
+  }
 }

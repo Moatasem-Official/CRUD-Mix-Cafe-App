@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/data/helpers/search_helper.dart';
 import '../../../bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import '../../../data/services/auth/auth_service.dart';
 import '../../widgets/customer/customer_orders_screen/custom_app_bar.dart';
@@ -66,7 +67,7 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
               } else if (state is OrdersScreenSuccess) {
                 if (state.orders.isEmpty) {
                   return SliverToBoxAdapter(
-                    child: Center(child: Text('No orders found.')),
+                    child: Center(child: Text('No Orders Found.')),
                   );
                 } else {
                   return SliverList(
@@ -78,6 +79,11 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
 
                       return OrderCard(
                         orderId: '${index + 1}',
+                        preparingTime: order.preparationTime!.isNotEmpty
+                            ? SearchHelper.formatPreparedTime(
+                                order.preparationTime!,
+                              )
+                            : 'Not Prepared Yet',
                         date: order.timestamp.toString().split(' ')[0],
                         status: order.status!,
                         totalPrice: order.totalPrice!,
@@ -92,7 +98,7 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
                   return SliverToBoxAdapter(
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height - 200,
-                      child: Center(child: Text('No orders found.')),
+                      child: Center(child: Text('No Orders Found.')),
                     ),
                   );
                 } else {
@@ -102,6 +108,11 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
 
                       return OrderCard(
                         orderId: '${index + 1}',
+                        preparingTime: order.preparationTime!.isNotEmpty
+                            ? SearchHelper.formatPreparedTime(
+                                order.preparationTime!,
+                              )
+                            : 'Not Prepared Yet',
                         date: order.timestamp?.toString().split(' ')[0] ?? '',
                         status: order.status ?? '',
                         totalPrice: order.totalPrice ?? 0,

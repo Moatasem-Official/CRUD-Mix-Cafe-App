@@ -44,6 +44,7 @@ class OrderModel {
 
     return OrderModel(
       userId: data['userId'] ?? '', // ← لو موجود في الداتا، استخدمه
+      preparationTime: data['preparationTime']?.toString() ?? '',
       orderId:
           data['orderId'] ??
           id, // لو مش موجود، fallback للـ doc.id // ← ده الـ doc.id من Firestore

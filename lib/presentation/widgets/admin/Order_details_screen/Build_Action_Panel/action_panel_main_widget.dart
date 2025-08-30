@@ -15,11 +15,13 @@ class ActionPanelMainWidget extends StatelessWidget {
     required this.onConfirm,
     required this.onTap,
     this.onStatusChanged,
+    required this.orderPreparedTime,
   });
 
   final Duration? estimatedDuration;
   final List<String> statusOptions;
   final String? currentStatus;
+  final String orderPreparedTime;
   final Function() onDelete;
   final Function() onConfirm;
   final Function() onTap;
@@ -31,7 +33,11 @@ class ActionPanelMainWidget extends StatelessWidget {
       icon: IconlyBold.setting,
       title: 'Order Management',
       children: [
-        CustomListTile(onTap: onTap, estimatedDuration: estimatedDuration),
+        CustomListTile(
+          onTap: onTap,
+          estimatedDuration: estimatedDuration,
+          orderPreparationTime: orderPreparedTime,
+        ),
         const SizedBox(height: 16),
 
         CustomDropDown(
