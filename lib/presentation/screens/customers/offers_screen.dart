@@ -23,12 +23,14 @@ class _CustomerOffersScreenState extends State<CustomerOffersScreen> {
     final Color mainColor = const Color.fromARGB(255, 165, 101, 56);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'العروض المتاحة',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: Text(
+          'Available Offers',
+          style: TextStyle(color: mainColor, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: mainColor,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -42,7 +44,7 @@ class _CustomerOffersScreenState extends State<CustomerOffersScreen> {
             if (offers.isEmpty) {
               return const Center(
                 child: Text(
-                  'لا توجد عروض حالياً',
+                  'No offers available At The Moment.',
                   style: TextStyle(fontSize: 16),
                 ),
               );
