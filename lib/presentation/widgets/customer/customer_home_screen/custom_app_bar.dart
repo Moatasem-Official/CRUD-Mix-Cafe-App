@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/app_assets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
+import 'package:mix_cafe_app/data/model/offer_model.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_offer_status_badge.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
 import 'custom_filter_row_item.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -30,77 +35,122 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 220,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFFDE7D6), Color(0xFFF3CBA8)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+        BlocBuilder<CustomerOffersScreenCubit, CustomerOffersScreenState>(
+          builder: (context, state) {
+            if (state is CustomerOffersScreenLoading) {
+              return SizedBox(
+                width: double.infinity,
+                height: 200,
+                child: const Center(
+                  child: CircularProgressIndicator(color: Colors.brown),
                 ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                child: Image.asset(
-                  Assets.mixCafeCustomerFoodImage,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
-              ),
-            ),
-
-            Container(
-              width: double.infinity,
-              height: 220,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
-            ),
-
-            // النصوص
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Welcome to Mix Cafe!',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              );
+            } else if (state is CustomerOffersScreenSuccess) {
+              final List<Offer> offers = state.offers;
+              if (offers.isNotEmpty) {
+                return CarouselSlider.builder(
+                  options: CarouselOptions(
+                    height: 200,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.95,
+                    initialPage: 0,
+                    enableInfiniteScroll: state.offers.length > 1,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration: const Duration(
+                      milliseconds: 800,
                     ),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Freshly prepared, just for you.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  itemCount: offers.length,
+                  itemBuilder: (context, index, realIndex) {
+                    final OfferStatus status = HelperFunctions.status(
+                      offers[index],
+                    );
+                    return Stack(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(offers[index].imageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          right: 20,
+                          child: OfferStatusBadge(offer: offers[index]),
+                        ),
+                        Positioned(
+                          bottom: 20,
+                          left: 20,
+                          child: Text(
+                            offers[index].title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: 20,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: status.name != 'Expired'
+                                  ? const Color(0xFFC58B3E)
+                                  : const Color(0xFFC58B3E).withAlpha(100),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: MaterialButton(
+                              minWidth: 100,
+                              height: 40,
+                              onPressed: status.name != 'Expired'
+                                  ? () => Navigator.pushNamed(
+                                      context,
+                                      '/customerOfferDetailsScreen',
+                                      arguments: offers[index],
+                                    )
+                                  : null,
+                              child: const Text(
+                                'Order Now',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                return ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
-                ],
-              ),
-            ),
-          ],
+                  child: Image.asset(
+                    'assets/images/pngtree-food-delivery-fast-food-unhealthy-obesity-concept-image_15654211.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                );
+              }
+            } else if (state is CustomerOffersScreenError) {
+              return Center(child: Text(state.message));
+            } else {
+              return Container();
+            }
+          },
         ),
 
         Padding(

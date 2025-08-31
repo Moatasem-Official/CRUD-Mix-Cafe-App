@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
 import '../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';

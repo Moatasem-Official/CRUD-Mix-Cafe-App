@@ -9,11 +9,13 @@ class CustomerOffersScreenCubit extends Cubit<CustomerOffersScreenState> {
   CustomerOffersScreenCubit() : super(CustomerOffersScreenInitial());
 
   final FirestoreServices _firestoreServices = FirestoreServices();
+  final List<Offer> offersList = [];
 
   void getOffers() async {
     emit(CustomerOffersScreenLoading());
     try {
       final offers = await _firestoreServices.getAllOffers();
+      offersList.addAll(offers);
       emit(CustomerOffersScreenSuccess(offers));
     } catch (e) {
       emit(CustomerOffersScreenError(e.toString()));

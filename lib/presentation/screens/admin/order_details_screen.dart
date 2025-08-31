@@ -100,7 +100,9 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                       ? SearchHelper.formatPreparedTime(
                           widget.order.preparationTime!,
                         )
-                      : HelperFunctions.formatDuration(_estimatedDuration!),
+                      : _estimatedDuration != null
+                      ? HelperFunctions.formatDuration(_estimatedDuration!)
+                      : 'Set Time',
                   currentStatus: _currentStatus,
                   statusOptions: _statusOptions,
                   estimatedDuration: _estimatedDuration,
