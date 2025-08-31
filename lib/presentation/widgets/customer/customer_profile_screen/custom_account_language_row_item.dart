@@ -50,22 +50,44 @@ class CustomAccountLanguageRowItem extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: onEnglishTap,
-              child: Text(
-                'English',
-                style: TextStyle(
-                  color: selectedLanguage == 'en' ? Colors.black : Colors.grey,
-                  fontSize: 16,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: selectedLanguage == 'en'
+                      ? const Color(0xFFC58B3E)
+                      : Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Text(
+                  'English',
+                  style: TextStyle(
+                    color: selectedLanguage == 'en'
+                        ? Colors.white
+                        : Colors.grey,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
             const SizedBox(width: 16),
             GestureDetector(
               onTap: onArabicTap,
-              child: Text(
-                'العربية',
-                style: TextStyle(
-                  color: selectedLanguage == 'ar' ? Colors.black : Colors.grey,
-                  fontSize: 16,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: selectedLanguage == 'ar'
+                      ? const Color(0xFFC58B3E)
+                      : Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Text(
+                  'العربية',
+                  style: TextStyle(
+                    color: selectedLanguage == 'ar'
+                        ? Colors.white
+                        : Colors.grey,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
