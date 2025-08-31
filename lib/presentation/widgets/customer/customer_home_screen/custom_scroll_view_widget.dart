@@ -37,10 +37,12 @@ class CustomScrollViewWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: CustomItemsHorizontalListView(
-              products: featuredProducts,
-              onAddToCart: (product) => onAddToCart(product),
-            ),
+            child: featuredProducts.isEmpty
+                ? const Center(child: Text('No Featured Items'))
+                : CustomItemsHorizontalListView(
+                    products: featuredProducts,
+                    onAddToCart: (product) => onAddToCart(product),
+                  ),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 20)),
@@ -58,10 +60,12 @@ class CustomScrollViewWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: CustomItemsHorizontalListView(
-              products: bestProducts,
-              onAddToCart: onAddToCart,
-            ),
+            child: bestProducts.isEmpty
+                ? const Center(child: Text('No Best Sellers'))
+                : CustomItemsHorizontalListView(
+                    products: bestProducts,
+                    onAddToCart: onAddToCart,
+                  ),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 20)),
@@ -79,10 +83,12 @@ class CustomScrollViewWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: CustomItemsHorizontalListView(
-              products: newProducts,
-              onAddToCart: onAddToCart,
-            ),
+            child: newProducts.isEmpty
+                ? const Center(child: Text('No New Items'))
+                : CustomItemsHorizontalListView(
+                    products: newProducts,
+                    onAddToCart: onAddToCart,
+                  ),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 20)),
@@ -100,10 +106,12 @@ class CustomScrollViewWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: CustomItemsHorizontalListView(
-              products: otherProducts,
-              onAddToCart: onAddToCart,
-            ),
+            child: otherProducts.isEmpty
+                ? const Center(child: Text('No Other Items'))
+                : CustomItemsHorizontalListView(
+                    products: otherProducts,
+                    onAddToCart: onAddToCart,
+                  ),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 20)),
