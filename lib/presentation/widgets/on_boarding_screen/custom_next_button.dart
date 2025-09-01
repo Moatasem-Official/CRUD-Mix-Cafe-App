@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_constants.dart';
+import '../../../constants/app_constants.dart';
 
 class CustomNextButton extends StatelessWidget {
   const CustomNextButton({super.key, required this.pageController});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/offer_card.dart';
+import '../../../bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
+import '../../widgets/admin/Offers_Screen/offer_card/offer_card.dart';
 
 class OffersScreen extends StatefulWidget {
   const OffersScreen({super.key});

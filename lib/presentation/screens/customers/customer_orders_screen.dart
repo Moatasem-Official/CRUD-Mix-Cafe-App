@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/data/helpers/search_helper.dart';
+import '../../../data/helpers/search_helper.dart';
 import '../../../bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import '../../../data/services/auth/auth_service.dart';
 import '../../widgets/customer/customer_orders_screen/custom_app_bar.dart';

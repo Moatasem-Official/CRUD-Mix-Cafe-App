@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_offer_status_badge.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
+import '../../../../bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
+import '../../../../data/model/offer_model.dart';
+import '../customer_offers_screen/custom_offer_status_badge.dart';
+import '../../admin/Offers_Screen/offer_card/helper_functions.dart';
 import 'custom_filter_row_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

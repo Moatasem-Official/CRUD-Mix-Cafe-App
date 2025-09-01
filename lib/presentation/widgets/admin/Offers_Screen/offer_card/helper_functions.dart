@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
+import '../../../../../data/model/offer_model.dart';
 
 class HelperFunctions {
   static OfferStatus status(Offer offer) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
+import '../../../../../data/model/offer_model.dart';
+import 'helper_functions.dart';
 
 class CustomOfferStatus extends StatelessWidget {
   const CustomOfferStatus({super.key, required this.offer});

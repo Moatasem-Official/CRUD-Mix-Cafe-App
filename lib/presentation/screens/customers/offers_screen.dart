@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_offer_card.dart';
+import '../../../bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
+import '../../../data/model/offer_model.dart';
+import '../../widgets/customer/customer_offers_screen/custom_offer_card.dart';
 
 class CustomerOffersScreen extends StatefulWidget {
   const CustomerOffersScreen({super.key});

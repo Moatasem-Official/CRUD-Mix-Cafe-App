@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/data/helpers/image_helper.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
+import '../../../../../data/helpers/image_helper.dart';
+import '../../../../../data/services/cloudinary/cloudinary_services.dart';
 import '../../../../../data/model/product_model.dart';
 
 class CustomImageUploader extends StatefulWidget {

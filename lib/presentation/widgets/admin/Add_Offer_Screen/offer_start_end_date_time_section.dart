@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/custom_build_date_time_picker.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/custom_build_section.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/helper_functions.dart';
+import 'custom_build_date_time_picker.dart';
+import 'custom_build_section.dart';
+import 'helper_functions.dart';
 
 class OfferStartEndDateTimeSection extends StatelessWidget {
   const OfferStartEndDateTimeSection({

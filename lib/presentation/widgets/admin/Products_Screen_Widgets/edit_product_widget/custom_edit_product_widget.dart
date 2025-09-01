@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
+import '../../../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import '../../../../../data/model/product_model.dart';
 import 'custom_action_buttons.dart';
 import 'custom_image_uploader.dart';

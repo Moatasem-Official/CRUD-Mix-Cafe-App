@@ -1,8 +1,8 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
-import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
+import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
+import '../../../data/helpers/custom_snack_bar.dart';
 import '../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_home_screen/custom_scroll_view_widget.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_constants.dart';
-import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_dots_indicator.dart';
-import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_get_started_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_next_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_on_boarding_page.dart';
+import '../../constants/app_constants.dart';
+import '../widgets/on_boarding_screen/custom_dots_indicator.dart';
+import '../widgets/on_boarding_screen/custom_get_started_button.dart';
+import '../widgets/on_boarding_screen/custom_next_button.dart';
+import '../widgets/on_boarding_screen/custom_on_boarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
+import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import '../../../data/model/product_model.dart';
 import '../../widgets/customer/customer_show_product_details/custom_back_botton.dart';
 import '../../widgets/customer/customer_show_product_details/custom_bottom_button.dart';

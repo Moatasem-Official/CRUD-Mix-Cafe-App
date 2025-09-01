@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Edit_Offer_Screen/helper_functions.dart';
+import '../../../../bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
+import '../../../../data/model/offer_model.dart';
+import '../../../../data/services/cloudinary/cloudinary_services.dart';
+import 'helper_functions.dart';
 
 class CustomSaveButton extends StatelessWidget {
   const CustomSaveButton({

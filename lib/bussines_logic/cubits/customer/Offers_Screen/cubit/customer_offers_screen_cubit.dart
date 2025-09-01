@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/data/services/firestore/firestore_services.dart';
+import '../../../../../data/model/offer_model.dart';
+import '../../../../../data/services/firestore/firestore_services.dart';
 
 part 'customer_offers_screen_state.dart';
 

@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mix_cafe_app/bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/custom_add_offer_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/custom_build_image_picker.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/custom_build_section.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/helper_functions.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/main_offer_details_section.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Add_Offer_Screen/offer_start_end_date_time_section.dart';
+import '../../../bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
+import '../../../data/model/offer_model.dart';
+import '../../../data/services/cloudinary/cloudinary_services.dart';
+import '../../widgets/admin/Add_Offer_Screen/custom_add_offer_button.dart';
+import '../../widgets/admin/Add_Offer_Screen/custom_build_image_picker.dart';
+import '../../widgets/admin/Add_Offer_Screen/custom_build_section.dart';
+import '../../widgets/admin/Add_Offer_Screen/helper_functions.dart';
+import '../../widgets/admin/Add_Offer_Screen/main_offer_details_section.dart';
+import '../../widgets/admin/Add_Offer_Screen/offer_start_end_date_time_section.dart';
 
 class AdminAddOfferScreen extends StatefulWidget {
   const AdminAddOfferScreen({super.key});

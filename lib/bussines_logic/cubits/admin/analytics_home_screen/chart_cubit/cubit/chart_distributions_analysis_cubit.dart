@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fl_chart/fl_chart.dart';
+
 import '../../../../../../data/model/weekly_and_yearly_sales_data_model.dart';
 import '../../../../../../data/services/firestore/firestore_services.dart';
 

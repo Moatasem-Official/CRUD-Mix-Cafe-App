@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
+import '../../../../data/model/offer_model.dart';
 
 class CustomImagePreview extends StatelessWidget {
   const CustomImagePreview({super.key, this.image, required this.offer});

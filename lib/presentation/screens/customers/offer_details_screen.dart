@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_offer_status_badge.dart';
+import '../../../data/model/offer_model.dart';
+import '../../widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
+import '../../widgets/customer/customer_offers_screen/custom_offer_status_badge.dart';
 
 class CustomerOfferDetailsScreen extends StatelessWidget {
   final Offer offer;

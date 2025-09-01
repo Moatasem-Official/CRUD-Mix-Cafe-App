@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mix_cafe_app/constants/app_constants.dart';
+import '../../../constants/app_constants.dart';
 
 class CustomOnBoardingPage extends StatelessWidget {
   const CustomOnBoardingPage({

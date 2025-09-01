@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/offer_card/helper_functions.dart';
-import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_offer_status_badge.dart';
+import '../../../../data/model/offer_model.dart';
+import '../../admin/Offers_Screen/offer_card/helper_functions.dart';
+import 'custom_offer_status_badge.dart';
 
 class OfferCard extends StatefulWidget {
   const OfferCard({super.key, required this.offer});

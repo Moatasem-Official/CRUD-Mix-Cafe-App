@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
+import '../../model/offer_model.dart';
 import '../../model/order_model.dart';
 import '../../model/user_model.dart';
 import 'package:rxdart/rxdart.dart';

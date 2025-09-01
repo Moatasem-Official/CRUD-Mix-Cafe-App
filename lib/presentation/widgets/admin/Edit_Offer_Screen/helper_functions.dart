@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/services/cloudinary/cloudinary_services.dart';
+import '../../../../data/services/cloudinary/cloudinary_services.dart';
 
 class HelperFunctions {
   static void pickDateTime(

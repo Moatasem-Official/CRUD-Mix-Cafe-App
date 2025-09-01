@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/data/helpers/image_helper.dart';
-import 'package:mix_cafe_app/data/model/offer_model.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Edit_Offer_Screen/custom_end_date_list_tile.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Edit_Offer_Screen/custom_image_preview.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Edit_Offer_Screen/custom_save_button.dart';
-import 'package:mix_cafe_app/presentation/widgets/admin/Edit_Offer_Screen/custom_text_form_field.dart';
+import '../../../data/helpers/image_helper.dart';
+import '../../../data/model/offer_model.dart';
+import '../../widgets/admin/Edit_Offer_Screen/custom_end_date_list_tile.dart';
+import '../../widgets/admin/Edit_Offer_Screen/custom_image_preview.dart';
+import '../../widgets/admin/Edit_Offer_Screen/custom_save_button.dart';
+import '../../widgets/admin/Edit_Offer_Screen/custom_text_form_field.dart';
 
 class EditOfferForm extends StatefulWidget {
   const EditOfferForm({super.key, required this.offer});

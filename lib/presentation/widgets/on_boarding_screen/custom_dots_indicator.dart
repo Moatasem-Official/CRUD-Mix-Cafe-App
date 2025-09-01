@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_constants.dart';
+import '../../../constants/app_constants.dart';
 
 class CustomDotsIndicator extends StatelessWidget {
   const CustomDotsIndicator({super.key, required this.currentPage});

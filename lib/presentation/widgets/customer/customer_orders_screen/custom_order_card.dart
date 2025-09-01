@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mix_cafe_app/data/helpers/search_helper.dart';
+import '../../../../data/helpers/search_helper.dart';
 
 class StatusInfo {
   final Color color;
