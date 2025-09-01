@@ -39,9 +39,16 @@ final class AddProductToCartError extends CartScreenState {
 
 final class AddProductToCartLoading extends CartScreenState {}
 
+final class RemoveProductFromCartLoading extends CartScreenState {}
+
 final class RemoveProductFromCart extends CartScreenState {
   final String message;
   const RemoveProductFromCart(this.message);
+}
+
+final class RemoveProductFromCartError extends CartScreenState {
+  final String message;
+  const RemoveProductFromCartError(this.message);
 }
 
 final class ClearCart extends CartScreenState {

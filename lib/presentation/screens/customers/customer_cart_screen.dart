@@ -72,6 +72,9 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.error)));
               } else if (state is RemoveProductFromCart) {
+                setState(() {
+                  isLoading = false;
+                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   CustomSnackBar(
                     title: 'Success',
@@ -79,6 +82,21 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                     contentType: ContentType.success,
                   ),
                 );
+              } else if (state is RemoveProductFromCartError) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Error',
+                    message: state.message,
+                    contentType: ContentType.failure,
+                  ),
+                );
+              } else if (state is RemoveProductFromCartLoading) {
+                setState(() {
+                  isLoading = true;
+                });
               } else if (state is OrdersReachedToMaxTimes) {
                 setState(() {
                   isLoading = false;

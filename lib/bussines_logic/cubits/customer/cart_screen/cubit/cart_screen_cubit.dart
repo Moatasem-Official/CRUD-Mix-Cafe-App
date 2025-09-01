@@ -39,7 +39,7 @@ class CartScreenCubit extends Cubit<CartScreenState> {
   }
 
   Future<void> removeProductFromCart(String productId) async {
-    emit(CartScreenLoading());
+    emit(RemoveProductFromCartLoading());
     try {
       await _firestoreServices.removeProductFromCart(productId);
       emit(RemoveProductFromCart('Product Removed From Cart Successfully'));
@@ -47,7 +47,7 @@ class CartScreenCubit extends Cubit<CartScreenState> {
           .getCartProducts(); // ✅ تحديث النسخة
       emit(CartScreenSuccess(cartProducts));
     } catch (e) {
-      emit(CartScreenError(e.toString()));
+      emit(RemoveProductFromCartError(e.toString()));
     }
   }
 
