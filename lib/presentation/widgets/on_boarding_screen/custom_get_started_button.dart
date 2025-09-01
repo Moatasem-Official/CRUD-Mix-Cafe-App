@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_strings.dart';
+import 'package:mix_cafe_app/constants/app_constants.dart';
 
 class CustomGetStartedButton extends StatelessWidget {
   const CustomGetStartedButton({super.key, required this.onGetStarted});
@@ -11,12 +11,12 @@ class CustomGetStartedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => onGetStarted(),
       style: ElevatedButton.styleFrom(
-        foregroundColor: AppStrings.kCoffeeLight,
-        backgroundColor: AppStrings.kCoffeeDark,
+        foregroundColor: AppConstants.kCoffeeLight,
+        backgroundColor: AppConstants.kCoffeeDark,
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         elevation: 5,
-        shadowColor: AppStrings.kCoffeeDark.withOpacity(0.5),
+        shadowColor: AppConstants.kCoffeeDark.withOpacity(0.5),
       ),
       child: const Text(
         'Get Started',

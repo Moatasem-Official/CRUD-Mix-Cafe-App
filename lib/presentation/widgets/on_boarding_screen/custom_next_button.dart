@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_strings.dart';
+import 'package:mix_cafe_app/constants/app_constants.dart';
 
 class CustomNextButton extends StatelessWidget {
   const CustomNextButton({super.key, required this.pageController});
@@ -16,12 +16,12 @@ class CustomNextButton extends StatelessWidget {
         );
       },
       style: ElevatedButton.styleFrom(
-        foregroundColor: AppStrings.kCoffeeLight,
-        backgroundColor: AppStrings.kAccentOrange,
+        foregroundColor: AppConstants.kCoffeeLight,
+        backgroundColor: AppConstants.kAccentOrange,
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         elevation: 5,
-        shadowColor: AppStrings.kAccentOrange.withOpacity(0.5),
+        shadowColor: AppConstants.kAccentOrange.withOpacity(0.5),
       ),
       child: const Text(
         'Next',

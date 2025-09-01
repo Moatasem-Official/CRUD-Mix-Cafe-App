@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class AppStrings {
+class AppConstants {
   static final List<Map<String, String>> onboardingPages = [
     {
       'image': 'assets/icons/coffee-cup-svgrepo-com.svg',
@@ -44,4 +44,6 @@ class AppStrings {
   static const Color kCoffeeDark = Color(0xFF4B3621);
   static const Color kAccentBrown = Color(0xFF6F4E37);
   static const Color kAccentOrange = Color(0xFFC38154);
+
+  static const double kDeliveryFee = 0.1;
 }

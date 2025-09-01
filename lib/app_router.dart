@@ -209,12 +209,7 @@ class AppRouter {
       case customerProfileScreen:
         return MaterialPageRoute(builder: (_) => const CustomerProfileScreen());
       case customerCartScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider<CartScreenCubit>(
-            create: (context) => CartScreenCubit(),
-            child: const CustomerCartScreen(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => const CustomerCartScreen());
       case customerShowProductDetails:
         final ProductModel product = settings.arguments as ProductModel;
         return MaterialPageRoute(
@@ -254,9 +249,6 @@ class AppRouter {
             providers: [
               BlocProvider<HomeScreenCubit>(
                 create: (context) => HomeScreenCubit()..getProducts(),
-              ),
-              BlocProvider<CartScreenCubit>(
-                create: (context) => CartScreenCubit()..getCartProducts(),
               ),
               BlocProvider<OrdersScreenCubit>(
                 create: (context) => OrdersScreenCubit()..getOrders(),

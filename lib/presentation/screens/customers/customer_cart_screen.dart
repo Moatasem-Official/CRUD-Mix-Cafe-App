@@ -1,12 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import '../../../data/helpers/custom_snack_bar.dart';
 import '../../../data/helpers/when_loading_widget.dart';
-import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_cart_screen/custom_cart_item_container.dart';
 import '../../widgets/customer/customer_cart_screen/custom_checkout_container.dart';
 
@@ -73,6 +71,62 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.error)));
+              } else if (state is RemoveProductFromCart) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Success',
+                    message: state.message,
+                    contentType: ContentType.success,
+                  ),
+                );
+              } else if (state is OrdersReachedToMaxTimes) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Limit Exceeded',
+                    message: state.message,
+                    contentType: ContentType.failure,
+                  ),
+                );
+              } else if (state is RequestOrderSuccess) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Success',
+                    message: state.message,
+                    contentType: ContentType.success,
+                  ),
+                );
+              } else if (state is RequestOrderError) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Error',
+                    message: state.message,
+                    contentType: ContentType.failure,
+                  ),
+                );
+              } else if (state is RequestOrderLoading) {
+                setState(() {
+                  isLoading = true;
+                });
+              } else if (state is DuplicateOrder) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    title: 'Error',
+                    message: state.message,
+                    contentType: ContentType.failure,
+                  ),
+                );
               }
             },
             builder: (context, state) {
@@ -134,9 +188,9 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                                                   ..hideCurrentSnackBar()
                                                   ..showSnackBar(
                                                     CustomSnackBar(
-                                                      title: 'Out of Stock',
+                                                      title: 'Out Of Stock',
                                                       message:
-                                                          'This product is out of stock',
+                                                          'Product Quantity Is Reached To Its Limit',
                                                       contentType:
                                                           ContentType.failure,
                                                     ),
@@ -176,95 +230,17 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                               prices[2].toStringAsFixed(2),
                             ),
                             total: double.parse(prices[0].toStringAsFixed(2)),
-                            onCheckout: () async {
-                              setState(() {
-                                isLoading = true;
-                              });
-
-                              final firestore = FirebaseFirestore.instance;
+                            onCheckout: () {
                               final userId =
                                   FirebaseAuth.instance.currentUser!.uid;
-                              final todayStart = Timestamp.fromDate(
-                                DateTime(
-                                  DateTime.now().year,
-                                  DateTime.now().month,
-                                  DateTime.now().day,
-                                ),
-                              );
-
-                              final todayEnd = Timestamp.fromDate(
-                                DateTime(
-                                  DateTime.now().year,
-                                  DateTime.now().month,
-                                  DateTime.now().day,
-                                  23,
-                                  59,
-                                  59,
-                                ),
-                              );
-
-                              // تحقق من عدد الطلبات في نفس اليوم
-                              final ordersQuery = await firestore
-                                  .collection('users')
-                                  .doc(userId)
-                                  .collection('orders')
-                                  .where(
-                                    'timestamp',
-                                    isGreaterThanOrEqualTo: todayStart,
-                                  )
-                                  .where(
-                                    'timestamp',
-                                    isLessThanOrEqualTo: todayEnd,
-                                  )
-                                  .get();
-
-                              if (ordersQuery.docs.length >= 5) {
-                                setState(() {
-                                  isLoading = false;
-                                });
-                                // عرض رسالة مثلاً
-                                ScaffoldMessenger.of(context)
-                                  ..hideCurrentSnackBar()
-                                  ..showSnackBar(
-                                    CustomSnackBar(
-                                      message:
-                                          'You have reached the maximum number of orders for today. Please try again tomorrow.',
-                                      title: 'Day Orders Limit Reached',
-                                      contentType: ContentType.failure,
-                                    ),
+                              context
+                                  .read<CartScreenCubit>()
+                                  .onCustomerRequestOrder(
+                                    userId,
+                                    prices,
+                                    productQuantities,
+                                    state.products,
                                   );
-                                return;
-                              }
-
-                              // لو الطلب مسموح
-                              final FirestoreServices firestoreServices =
-                                  FirestoreServices();
-                              await firestoreServices.addOrder(
-                                userId,
-                                double.parse(prices[0].toStringAsFixed(2)),
-                                state.products
-                                    .map(
-                                      (product) => {
-                                        'productId': product.id,
-                                        'orderItems': [
-                                          {
-                                            'quantity':
-                                                productQuantities[product.id],
-                                            'price': product.hasDiscount
-                                                ? product.discountedPrice
-                                                : product.price,
-                                            'name': product.name,
-                                            'imageUrl': product.imageUrl,
-                                          },
-                                        ],
-                                      },
-                                    )
-                                    .toList(),
-                              );
-
-                              setState(() {
-                                isLoading = false;
-                              });
                             },
                           )
                         : Container(),

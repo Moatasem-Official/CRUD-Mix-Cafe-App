@@ -345,7 +345,7 @@ class FirestoreServices {
       } else {
         throw Exception(
           'You already have a pending order with the same items.',
-        );
+        ); // 'You already have a pending order with the same items.';
       }
     } catch (error, stackTrace) {
       debugPrint('Error adding order: $error');
@@ -964,6 +964,37 @@ class FirestoreServices {
     } catch (e) {
       print('Error counting customers: $e');
       throw Exception('Failed to count customers: $e');
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>>
+  getCustomerOrdersPerDaySnapshot() async {
+    final todayStart = Timestamp.fromDate(
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+    );
+
+    final todayEnd = Timestamp.fromDate(
+      DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        23,
+        59,
+        59,
+      ),
+    );
+    try {
+      final ordersQuery = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('orders')
+          .where('timestamp', isGreaterThanOrEqualTo: todayStart)
+          .where('timestamp', isLessThanOrEqualTo: todayEnd)
+          .get();
+      return ordersQuery;
+    } catch (e) {
+      print('Error fetching orders: $e');
+      throw Exception('Failed to fetch orders: $e');
     }
   }
 }

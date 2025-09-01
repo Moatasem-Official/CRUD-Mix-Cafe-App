@@ -26,3 +26,47 @@ final class CartScreenSuccess extends CartScreenState {
   @override
   List<Object> get props => [products];
 }
+
+final class AddProductToCart extends CartScreenState {
+  final String message;
+  const AddProductToCart(this.message);
+}
+
+final class AddProductToCartError extends CartScreenState {
+  final String message;
+  const AddProductToCartError(this.message);
+}
+
+final class AddProductToCartLoading extends CartScreenState {}
+
+final class RemoveProductFromCart extends CartScreenState {
+  final String message;
+  const RemoveProductFromCart(this.message);
+}
+
+final class ClearCart extends CartScreenState {
+  final String message;
+  const ClearCart(this.message);
+}
+
+final class OrdersReachedToMaxTimes extends CartScreenState {
+  final String message;
+  const OrdersReachedToMaxTimes(this.message);
+}
+
+final class RequestOrderSuccess extends CartScreenState {
+  final String message;
+  const RequestOrderSuccess(this.message);
+}
+
+final class RequestOrderError extends CartScreenState {
+  final String message;
+  const RequestOrderError(this.message);
+}
+
+final class DuplicateOrder extends CartScreenState {
+  final String message;
+  const DuplicateOrder(this.message);
+}
+
+final class RequestOrderLoading extends CartScreenState {}

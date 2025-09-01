@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import '../../../data/model/product_model.dart';
-import '../../../data/services/auth/auth_service.dart';
-import '../../../data/services/firestore/firestore_services.dart';
 import '../../widgets/customer/customer_show_product_details/custom_back_botton.dart';
 import '../../widgets/customer/customer_show_product_details/custom_bottom_button.dart';
 import '../../widgets/customer/customer_show_product_details/custom_product_details_container.dart';
@@ -18,12 +18,7 @@ class CustomerShowProductScreen extends StatelessWidget {
       bottomNavigationBar: CustomBottomButton(
         isAvailable: productModel.isAvailable,
         onPressed: () {
-          final FirestoreServices firestoreServices = FirestoreServices();
-          final AuthService authService = AuthService();
-          firestoreServices.addProductToCart(
-            productModel,
-            authService.currentUser!.uid,
-          );
+          context.read<CartScreenCubit>().addProductToCart(productModel);
         },
       ),
       backgroundColor: Colors.white,

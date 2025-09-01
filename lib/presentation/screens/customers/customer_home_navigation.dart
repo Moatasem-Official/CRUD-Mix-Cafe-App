@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_bar/bottom_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'package:mix_cafe_app/presentation/screens/customers/offers_screen.dart';
 import 'customer_cart_screen.dart';
 import 'customer_home_screen.dart';
@@ -55,7 +57,19 @@ class _CustomerHomeNavigationState extends State<CustomerHomeNavigation> {
             activeColor: mainColor,
           ),
           BottomBarItem(
-            icon: const Icon(Icons.shopping_cart_outlined),
+            icon: Badge(
+              label: BlocBuilder<CartScreenCubit, CartScreenState>(
+                builder: (context, state) {
+                  final cubit = context.read<CartScreenCubit>();
+
+                  if (state is CartScreenSuccess) {
+                    return Text(state.products.length.toString());
+                  }
+                  return Text(cubit.cartProducts.length.toString());
+                },
+              ),
+              child: const Icon(Icons.shopping_cart_outlined),
+            ),
             title: const Text('Cart'),
             activeColor: mainColor,
           ),

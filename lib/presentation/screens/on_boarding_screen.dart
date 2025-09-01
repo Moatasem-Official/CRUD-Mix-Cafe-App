@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_cafe_app/constants/app_strings.dart';
+import 'package:mix_cafe_app/constants/app_constants.dart';
 import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_dots_indicator.dart';
 import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_get_started_button.dart';
 import 'package:mix_cafe_app/presentation/widgets/on_boarding_screen/custom_next_button.dart';
@@ -35,14 +35,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppStrings.kCoffeeLight,
+      backgroundColor: AppConstants.kCoffeeLight,
       body: Stack(
         children: [
           PageView.builder(
             controller: _pageController,
-            itemCount: AppStrings.onboardingPages.length,
+            itemCount: AppConstants.onboardingPages.length,
             itemBuilder: (context, index) {
-              final page = AppStrings.onboardingPages[index];
+              final page = AppConstants.onboardingPages[index];
               return CustomOnBoardingPage(
                 imagePath: page['image']!,
                 title: page['title']!,
@@ -58,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: const Text(
                 'Skip',
                 style: TextStyle(
-                  color: AppStrings.kCoffeeDark,
+                  color: AppConstants.kCoffeeDark,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -73,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 CustomDotsIndicator(currentPage: _currentPage),
                 const SizedBox(height: 30),
-                if (_currentPage < AppStrings.onboardingPages.length - 1)
+                if (_currentPage < AppConstants.onboardingPages.length - 1)
                   CustomNextButton(pageController: _pageController)
                 else
                   CustomGetStartedButton(

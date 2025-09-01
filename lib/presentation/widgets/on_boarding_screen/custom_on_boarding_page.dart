@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mix_cafe_app/constants/app_strings.dart';
+import 'package:mix_cafe_app/constants/app_constants.dart';
 
 class CustomOnBoardingPage extends StatelessWidget {
   const CustomOnBoardingPage({
@@ -26,7 +26,7 @@ class CustomOnBoardingPage extends StatelessWidget {
             imagePath,
             fit: BoxFit.contain,
             colorFilter: const ColorFilter.mode(
-              AppStrings.kAccentBrown,
+              AppConstants.kAccentBrown,
               BlendMode.srcIn,
             ),
           ),
@@ -55,7 +55,7 @@ class CustomOnBoardingPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: AppStrings.kCoffeeDark,
+                  color: AppConstants.kCoffeeDark,
                 ),
               ),
               const SizedBox(height: 15),
@@ -64,7 +64,7 @@ class CustomOnBoardingPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: AppStrings.kCoffeeDark,
+                  color: AppConstants.kCoffeeDark,
                 ),
               ),
             ],
