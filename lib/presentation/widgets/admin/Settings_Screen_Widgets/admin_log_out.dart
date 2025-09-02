@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../data/services/auth/auth_service.dart';
 
 class AdminLogOut extends StatelessWidget {
-  const AdminLogOut({super.key, required AuthService authService})
-    : _authService = authService;
-
-  final AuthService _authService;
+  const AdminLogOut({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +18,14 @@ class AdminLogOut extends StatelessWidget {
       content: const Text('هل تريد تسجيل الخروج ؟'),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, false),
           child: const Text('لا'),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF8B4513),
           ),
-          onPressed: () async {
-            await _authService.signOut();
-            Navigator.of(context).pushReplacementNamed('/adminLogin');
-          },
+          onPressed: () => Navigator.pop(context, true),
           child: const Text('نعم', style: TextStyle(color: Colors.white)),
         ),
       ],

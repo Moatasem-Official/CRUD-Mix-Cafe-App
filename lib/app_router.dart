@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/admin/settings_screen/cubit/settings_cubit.dart';
 import 'package:mix_cafe_app/bussines_logic/cubits/customer/profile_screen/cubit/profile_cubit.dart';
 import 'bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
@@ -146,6 +147,7 @@ class AppRouter {
               BlocProvider<OrderDetailsScreenCubit>(
                 create: (context) => OrderDetailsScreenCubit(),
               ),
+              BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
             ],
             child: const AdminHomeScreen(),
           ),
