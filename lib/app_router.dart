@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/profile_screen/cubit/profile_cubit.dart';
 import 'bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
 import 'data/model/offer_model.dart';
@@ -13,7 +14,6 @@ import 'bussines_logic/cubits/admin/analytics_home_screen/chart_cubit/cubit/char
 import 'bussines_logic/cubits/admin/analytics_home_screen/cubit/home_analytics_cubit.dart';
 import 'bussines_logic/cubits/admin/order_details_screen/cubit/order_details_screen_cubit.dart';
 import 'bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
-import 'bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/see_all_products_screen/cubit/see_all_products_cubit.dart';
@@ -256,6 +256,7 @@ class AppRouter {
               BlocProvider<CustomerOffersScreenCubit>(
                 create: (context) => CustomerOffersScreenCubit()..getOffers(),
               ),
+              BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
             ],
             child: const CustomerHomeNavigation(),
           ),
