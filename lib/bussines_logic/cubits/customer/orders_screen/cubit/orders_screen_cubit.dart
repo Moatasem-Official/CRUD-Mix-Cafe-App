@@ -41,6 +41,18 @@ class OrdersScreenCubit extends Cubit<OrdersScreenState> {
   Future<void> reOrder(String orderId, String userId) async {
     emit(ReorderLoading());
     try {
+      final orderRequestsTimes = await _firestoreServices
+          .getCustomerOrdersPerDaySnapshot();
+
+      if (orderRequestsTimes.docs.length >= 5) {
+        emit(
+          ReoderedOrdersReachedToMaxTimes(
+            'You Have Reached The Maximum Number Of Orders Per This Day.',
+          ),
+        );
+        emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+        return;
+      }
       await _firestoreServices.reOrder(orderId: orderId, userId: userId);
       emit(ReorderSuccess('Order Reordered Successfully'));
       emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));

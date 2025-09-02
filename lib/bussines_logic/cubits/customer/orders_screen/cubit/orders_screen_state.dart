@@ -23,6 +23,11 @@ final class ReorderError extends OrdersScreenState {
   const ReorderError(this.message);
 }
 
+final class ReoderedOrdersReachedToMaxTimes extends OrdersScreenState {
+  final String message;
+  const ReoderedOrdersReachedToMaxTimes(this.message);
+}
+
 final class OrdersScreenSuccess extends OrdersScreenState {
   final List<OrderModel> orders;
   const OrdersScreenSuccess(this.orders);
