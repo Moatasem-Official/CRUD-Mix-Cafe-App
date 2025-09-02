@@ -47,7 +47,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
@@ -132,7 +132,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  '© 2025 Mix Cafe. All rights reserved.',
+                  '© 2025 Mix Cafe. All Rights Reserved.',
                   style: TextStyle(color: Colors.grey, fontSize: 18),
                 ),
               ),

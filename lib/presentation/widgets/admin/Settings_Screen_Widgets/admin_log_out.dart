@@ -33,7 +33,7 @@ class AdminLogOut extends StatelessWidget {
             await _authService.signOut();
             Navigator.of(context).pushReplacementNamed('/adminLogin');
           },
-          child: const Text('نعم'),
+          child: const Text('نعم', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

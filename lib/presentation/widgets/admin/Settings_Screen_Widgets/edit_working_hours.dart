@@ -106,7 +106,7 @@ class EditWorkingHours extends StatelessWidget {
               SnackBar(content: Text('تم التحديث من $start إلى $end')),
             );
           },
-          child: const Text('تحديث'),
+          child: const Text('تحديث', style: TextStyle(color: Colors.white)),
         ),
       ],
     );
