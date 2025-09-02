@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconly/iconly.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import '../../../../data/helpers/search_helper.dart';
 
 class StatusInfo {
@@ -12,7 +14,9 @@ class StatusInfo {
 }
 
 class OrderCard extends StatelessWidget {
+  final String orderCount;
   final String orderId;
+  final String userId;
   final String preparingTime;
   final String date;
   final String status;
@@ -21,7 +25,9 @@ class OrderCard extends StatelessWidget {
 
   const OrderCard({
     super.key,
+    required this.orderCount,
     required this.orderId,
+    required this.userId,
     required this.preparingTime,
     required this.date,
     required this.status,
@@ -120,7 +126,7 @@ class OrderCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Order #$orderId',
+          'Order #$orderCount',
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             fontSize: 18,
@@ -302,7 +308,8 @@ class OrderCard extends StatelessWidget {
         ),
         // Action Buttons
         ElevatedButton(
-          onPressed: status == 'pending' ? null : () {} /* Reorder Logic */,
+          onPressed: status == 'pending' ? null : () => _reorder(context),
+          /* Reorder Logic */
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF4E342E), // Rich brown
             foregroundColor: Colors.white,
@@ -320,6 +327,11 @@ class OrderCard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _reorder(BuildContext context) {
+    final cubit = BlocProvider.of<OrdersScreenCubit>(context);
+    cubit.reOrder(orderId, userId);
   }
 
   /// Builds the status ribbon in the top-right corner.

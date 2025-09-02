@@ -186,7 +186,6 @@ class CustomAppBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              // Add your category items here
               CustomFilterRowItem(
                 filterName: 'All',
                 filterIcon: Icons.fastfood,
@@ -202,7 +201,7 @@ class CustomAppBar extends StatelessWidget {
                 onTap: onFilterSandwichesTapped,
               ),
               CustomFilterRowItem(
-                filterName: 'Pizza',
+                filterName: 'Pizzas',
                 filterIcon: Icons.local_pizza,
                 filterId: 2,
                 isSelected: selectedFilter == 'Pizzas',
@@ -223,18 +222,18 @@ class CustomAppBar extends StatelessWidget {
                 onTap: onFilterMealsTapped,
               ),
               CustomFilterRowItem(
-                filterName: 'Drinks',
-                filterIcon: Icons.local_drink,
-                filterId: 5,
-                isSelected: selectedFilter == 'Drinks',
-                onTap: () {},
-              ),
-              CustomFilterRowItem(
                 filterName: 'Desserts',
                 filterIcon: Icons.cake,
-                filterId: 6,
+                filterId: 5,
                 isSelected: selectedFilter == 'Desserts',
                 onTap: onFilterDesertsTapped,
+              ),
+              CustomFilterRowItem(
+                filterName: 'Drinks',
+                filterIcon: Icons.local_drink,
+                filterId: 6,
+                isSelected: selectedFilter == 'Drinks',
+                onTap: () {},
               ),
             ],
           ),

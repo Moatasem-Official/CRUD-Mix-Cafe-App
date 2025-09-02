@@ -11,6 +11,18 @@ final class OrdersScreenInitial extends OrdersScreenState {}
 
 final class OrdersScreenLoading extends OrdersScreenState {}
 
+final class ReorderLoading extends OrdersScreenState {}
+
+final class ReorderSuccess extends OrdersScreenState {
+  final String message;
+  const ReorderSuccess(this.message);
+}
+
+final class ReorderError extends OrdersScreenState {
+  final String message;
+  const ReorderError(this.message);
+}
+
 final class OrdersScreenSuccess extends OrdersScreenState {
   final List<OrderModel> orders;
   const OrdersScreenSuccess(this.orders);

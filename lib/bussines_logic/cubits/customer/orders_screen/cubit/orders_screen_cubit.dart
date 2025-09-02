@@ -37,4 +37,16 @@ class OrdersScreenCubit extends Cubit<OrdersScreenState> {
       emit(OrdersScreenError(e.toString()));
     }
   }
+
+  Future<void> reOrder(String orderId, String userId) async {
+    emit(ReorderLoading());
+    try {
+      await _firestoreServices.reOrder(orderId: orderId, userId: userId);
+      emit(ReorderSuccess('Order Reordered Successfully'));
+      emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+    } catch (e) {
+      emit(ReorderError('Failed To Reorder Order'));
+      emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+    }
+  }
 }

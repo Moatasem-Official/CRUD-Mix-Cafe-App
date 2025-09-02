@@ -320,7 +320,7 @@ class FirestoreServices {
     }
   }
 
-  Future<void> addOrder(
+  Future<String> addOrder(
     String userId,
     double totalPrice,
     List<Map<String, dynamic>> items,
@@ -339,10 +339,10 @@ class FirestoreServices {
           .get();
 
       if (existingOrder.docs.isEmpty) {
-        final newDocRef = ordersRef.doc(); // أنشئ ID يدويًا
+        final newDocRef = ordersRef.doc();
 
         await newDocRef.set({
-          'orderId': newDocRef.id, // ✅ خزنه هنا
+          'orderId': newDocRef.id,
           'userId': userId,
           'items': items,
           'totalPrice': totalPrice,
@@ -352,15 +352,16 @@ class FirestoreServices {
           'updatedAt': '',
           'preparationTime': '',
         });
+
+        return newDocRef.id;
       } else {
         throw Exception(
           'You already have a pending order with the same items.',
-        ); // 'You already have a pending order with the same items.';
+        );
       }
-    } catch (error, stackTrace) {
+    } catch (error) {
       debugPrint('Error adding order: $error');
-      debugPrintStack(stackTrace: stackTrace);
-      rethrow; // ❗️ده بيرمي نفس الخطأ اللي حصل بدون تعديل
+      rethrow;
     }
   }
 
@@ -427,6 +428,45 @@ class FirestoreServices {
       print('✅ Order updated successfully.');
     } catch (e) {
       print('❌ Failed to update order [$orderId]: $e');
+    }
+  }
+
+  Future<void> reOrder({
+    required String userId,
+    required String orderId,
+  }) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('orders')
+          .doc(orderId);
+
+      final snapshot = await docRef.get();
+
+      if (!snapshot.exists) {
+        throw Exception("Order with ID $orderId not found");
+      }
+
+      final oldData = snapshot.data()!;
+
+      // ✨ إنشاء doc جديد
+      final newDocRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('orders')
+          .doc();
+
+      await newDocRef.set({
+        ...oldData,
+        'orderId': newDocRef.id,
+        'status': 'pending',
+        'timestamp': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('❌ Error reordering order: $e');
+      throw Exception('Failed to re-order order: $e');
     }
   }
 
