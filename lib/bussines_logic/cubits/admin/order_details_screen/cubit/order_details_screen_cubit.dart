@@ -10,11 +10,13 @@ class OrderDetailsScreenCubit extends Cubit<OrderDetailsScreenState> {
   FirestoreServices firestoreServices = FirestoreServices();
 
   void deleteOrder(String orderId, String userId) async {
-    emit(OrderDetailsScreenLoading());
+    emit(DeleteOrderLoading());
     try {
       await firestoreServices.deleteOrder(userId: userId, orderId: orderId);
+      emit(DeleteOrderSuccess('Order Deleted Successfully'));
+      await firestoreServices.getAllOrders();
     } catch (e) {
-      emit(OrderDetailsScreenError(e.toString()));
+      emit(DeleteOrderError('Failed To Delete Order'));
     }
   }
 
@@ -23,28 +25,40 @@ class OrderDetailsScreenCubit extends Cubit<OrderDetailsScreenState> {
     String userId,
     Duration preparationTime,
   ) async {
-    emit(OrderDetailsScreenLoading());
+    emit(UpdateOrderPreparationTimeLoading());
     try {
       await firestoreServices.updateOrderPreparationTime(
         orderId: orderId,
         userId: userId,
         preparationTime: preparationTime,
       );
+      emit(
+        UpdateOrderPreparationTimeSuccess(
+          'Order Preparation Time Updated Successfully',
+        ),
+      );
+      await firestoreServices.getAllOrders();
     } catch (e) {
-      emit(OrderDetailsScreenError(e.toString()));
+      emit(
+        UpdateOrderPreparationTimeError(
+          'Failed To Update Order Preparation Time',
+        ),
+      );
     }
   }
 
   void updateOrderStatus(String orderId, String userId, String status) async {
-    emit(OrderDetailsScreenLoading());
+    emit(UpdateOrderStatusLoading());
     try {
       await firestoreServices.updateOrderStatus(
         orderId: orderId,
         userId: userId,
         status: status,
       );
+      emit(UpdateOrderStatusSuccess('Order Status Updated Successfully'));
+      await firestoreServices.getAllOrders();
     } catch (e) {
-      emit(OrderDetailsScreenError(e.toString()));
+      emit(UpdateOrderStatusError('Failed To Update Order Status'));
     }
   }
 }

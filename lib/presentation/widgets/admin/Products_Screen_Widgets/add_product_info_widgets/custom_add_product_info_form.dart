@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/add_product_info_widgets/custom_switchs.dart';
 import '../../../../../controllers/product_form_controller.dart';
 import 'discount_widget.dart';
 import 'without_discount_widget.dart';
@@ -60,104 +61,15 @@ class _CustomAddProductInformationFormState
 
             const SizedBox(height: 20),
 
-            Row(
-              children: [
-                Switch(
-                  value: widget.controller.isNew,
-                  onChanged: widget.onIsNewSwitchChanged,
-                  activeColor: const Color(0xFF8B5E3C),
-                  inactiveThumbColor: const Color(0xFFD7B899),
-                  inactiveTrackColor: const Color(0xFFF3E3D3),
-                  trackOutlineColor: WidgetStateProperty.all(
-                    const Color(0xFFDCC6B1),
-                  ),
-                  splashRadius: 20,
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  "Is New ?",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF8B4513),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: [
-                Switch(
-                  value: widget.controller.isFeatured,
-                  onChanged: widget.onIsFeaturedSwitchChanged,
-                  activeColor: const Color(0xFF8B5E3C),
-                  inactiveThumbColor: const Color(0xFFD7B899),
-                  inactiveTrackColor: const Color(0xFFF3E3D3),
-                  trackOutlineColor: WidgetStateProperty.all(
-                    const Color(0xFFDCC6B1),
-                  ),
-                  splashRadius: 20,
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  "Is Featured ?",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF8B4513),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: [
-                Switch(
-                  value: widget.controller.isBest,
-                  onChanged: widget.onIsBestSwitchChanged,
-                  activeColor: const Color(0xFF8B5E3C),
-                  inactiveThumbColor: const Color(0xFFD7B899),
-                  inactiveTrackColor: const Color(0xFFF3E3D3),
-                  trackOutlineColor: WidgetStateProperty.all(
-                    const Color(0xFFDCC6B1),
-                  ),
-                  splashRadius: 20,
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  "Is Best ?",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF8B4513),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: [
-                Switch(
-                  value: widget.controller.isHasDiscount,
-                  onChanged: widget.onHasDiscountSwitchChanged,
-                  activeColor: const Color(0xFF8B5E3C),
-                  inactiveThumbColor: const Color(0xFFD7B899),
-                  inactiveTrackColor: const Color(0xFFF3E3D3),
-                  trackOutlineColor: WidgetStateProperty.all(
-                    const Color(0xFFDCC6B1),
-                  ),
-                  splashRadius: 20,
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  "Has Discount ?",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF8B4513),
-                  ),
-                ),
-              ],
+            ProductPropertiesCard(
+              isNew: widget.controller.isNew,
+              isFeatured: widget.controller.isFeatured,
+              isBest: widget.controller.isBest,
+              hasDiscount: widget.controller.isHasDiscount,
+              onIsNewChanged: widget.onIsNewSwitchChanged,
+              onIsFeaturedChanged: widget.onIsFeaturedSwitchChanged,
+              onIsBestChanged: widget.onIsBestSwitchChanged,
+              onHasDiscountChanged: widget.onHasDiscountSwitchChanged,
             ),
             // تفاصيل العرض
             if (widget.controller.isHasDiscount) ...[
