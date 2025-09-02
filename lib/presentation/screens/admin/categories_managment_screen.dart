@@ -31,7 +31,8 @@ class _CategoriesManagementScreenState extends State<CategoriesManagmentScreen>
     CategoryInfo(id: 1, name: 'Pizza', icon: Icons.local_pizza_outlined),
     CategoryInfo(id: 2, name: 'Crepes', icon: Icons.breakfast_dining_outlined),
     CategoryInfo(id: 3, name: 'Meals', icon: Icons.dinner_dining_outlined),
-    CategoryInfo(id: 4, name: 'Drinks', icon: Icons.local_cafe_outlined),
+    CategoryInfo(id: 4, name: 'Desserts', icon: Icons.cake_outlined),
+    CategoryInfo(id: 5, name: 'Drinks', icon: Icons.local_cafe_outlined),
   ];
 
   @override

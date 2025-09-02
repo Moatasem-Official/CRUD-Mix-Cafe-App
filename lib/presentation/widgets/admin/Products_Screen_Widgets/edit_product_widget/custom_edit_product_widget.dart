@@ -1,6 +1,9 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
+import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
 import '../../../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import '../../../../../data/model/product_model.dart';
 import 'custom_action_buttons.dart';
@@ -43,6 +46,8 @@ class _CustomEditProductWidgetState extends State<CustomEditProductWidget> {
   DateTime? _startDate;
   DateTime? _endDate;
 
+  bool isLoading = false;
+
   final List<String> _categories = [
     'Pizzas',
     'Sandwichs',
@@ -79,131 +84,173 @@ class _CustomEditProductWidgetState extends State<CustomEditProductWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        automaticallyImplyLeading: true,
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          overflow: TextOverflow.ellipsis,
-          'Edit Product',
-          style: TextStyle(
-            color: Color(0xFF6F4E37),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+    return Stack(
+      children: [
+        BlocListener<CategoriesCubit, CategoriesState>(
+          listener: (context, state) {
+            if (state is EditProductLoading) {
+              setState(() {
+                isLoading = true;
+              });
+            } else if (state is EditProductSuccess) {
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                CustomSnackBar(
+                  message: state.message,
+                  title: 'Success',
+                  contentType: ContentType.success,
+                ),
+              );
+              Navigator.pop(context);
+            } else if (state is EditProductError) {
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                CustomSnackBar(
+                  message: state.errorMessage,
+                  title: 'Error',
+                  contentType: ContentType.failure,
+                ),
+              );
+            }
+          },
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              surfaceTintColor: Colors.white,
+              automaticallyImplyLeading: true,
+              backgroundColor: Colors.white,
+              centerTitle: true,
+              title: Text(
+                overflow: TextOverflow.ellipsis,
+                'Edit Product',
+                style: TextStyle(
+                  color: Color(0xFF6F4E37),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              elevation: 0,
+            ),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomImageUploader(productModel: widget.productModel!),
+                    const SizedBox(height: 24),
+                    MainSectionCard(
+                      nameController: _nameController,
+                      descriptionController: _descriptionController,
+                    ),
+                    const SizedBox(height: 20),
+                    PricingQualitySectionCard(
+                      priceController: _priceController,
+                      quantityController: _quantityController,
+                      categories: _categories,
+                      selectedCategory: _selectedCategory,
+                      onCategoryChanged: (value) =>
+                          setState(() => _selectedCategory = value),
+                    ),
+                    const SizedBox(height: 20),
+                    ProductSettingsSectionCard(
+                      isAvailable: _isAvailable,
+                      hasDiscount: _hasDiscount,
+                      isBestSeller: _isBestSeller,
+                      isNew: _isNew,
+                      isFeatured: _isFeatured,
+                      discountController: _discountController,
+                      startDate: _startDate,
+                      endDate: _endDate,
+                      onIsAvailableChanged: (val) =>
+                          setState(() => _isAvailable = val),
+                      onHasDiscountChanged: (val) =>
+                          setState(() => _hasDiscount = val),
+                      onIsBestSellerChanged: (val) =>
+                          setState(() => _isBestSeller = val),
+                      onIsNewChanged: (val) => setState(() => _isNew = val),
+                      onIsFeaturedChanged: (val) =>
+                          setState(() => _isFeatured = val),
+                      onStartDateTap: () => _pickDateTime(true),
+                      onEndDateTap: () => _pickDateTime(false),
+                    ),
+                    const SizedBox(height: 32),
+                    CustomActionButtons(
+                      onSave: () async {
+                        // ... (كود التحقق من الصحة كما هو)
+                        final bool isValid =
+                            _formKey.currentState?.validate() ?? false;
+                        if (!isValid) {
+                          return;
+                        }
+
+                        print(
+                          '--- Validation PASSED! Proceeding to update... ---',
+                        );
+
+                        // --- 👇 أضف هذا الجزء للتشخيص ---
+                        print('--- CHECKING WIDGET VALUES ---');
+                        print(
+                          'Value of widget.categoryId is: ${widget.categoryId}',
+                        );
+                        print(
+                          'Value of widget.productModel is: ${widget.productModel}',
+                        );
+
+                        if (widget.categoryId == null) {
+                          print(
+                            '❌ FATAL ERROR: categoryId is NULL. Stopping execution.',
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'CRITICAL ERROR: Category ID is missing!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+
+                        if (widget.productModel == null) {
+                          print(
+                            '❌ FATAL ERROR: productModel is NULL. Stopping execution.',
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'CRITICAL ERROR: Product data is missing!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+                        // --- نهاية جزء التشخيص ---
+
+                        print(
+                          '--- All values seem OK. Building updated model... ---',
+                        );
+                        final updatedProduct = _buildUpdatedProductModel();
+
+                        print('--- Calling Cubit to update product... ---');
+                        await context.read<CategoriesCubit>().updateProduct(
+                          widget.categoryId!,
+                          updatedProduct,
+                        );
+                      },
+                    ),
+                  ],
+                ).animate().fadeIn(duration: 500.ms),
+              ),
+            ),
           ),
         ),
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CustomImageUploader(productModel: widget.productModel!),
-              const SizedBox(height: 24),
-              MainSectionCard(
-                nameController: _nameController,
-                descriptionController: _descriptionController,
-              ),
-              const SizedBox(height: 20),
-              PricingQualitySectionCard(
-                priceController: _priceController,
-                quantityController: _quantityController,
-                categories: _categories,
-                selectedCategory: _selectedCategory,
-                onCategoryChanged: (value) =>
-                    setState(() => _selectedCategory = value),
-              ),
-              const SizedBox(height: 20),
-              ProductSettingsSectionCard(
-                isAvailable: _isAvailable,
-                hasDiscount: _hasDiscount,
-                isBestSeller: _isBestSeller,
-                isNew: _isNew,
-                isFeatured: _isFeatured,
-                discountController: _discountController,
-                startDate: _startDate,
-                endDate: _endDate,
-                onIsAvailableChanged: (val) =>
-                    setState(() => _isAvailable = val),
-                onHasDiscountChanged: (val) =>
-                    setState(() => _hasDiscount = val),
-                onIsBestSellerChanged: (val) =>
-                    setState(() => _isBestSeller = val),
-                onIsNewChanged: (val) => setState(() => _isNew = val),
-                onIsFeaturedChanged: (val) => setState(() => _isFeatured = val),
-                onStartDateTap: () => _pickDateTime(true),
-                onEndDateTap: () => _pickDateTime(false),
-              ),
-              const SizedBox(height: 32),
-              CustomActionButtons(
-                onSave: () async {
-                  // ... (كود التحقق من الصحة كما هو)
-                  final bool isValid =
-                      _formKey.currentState?.validate() ?? false;
-                  if (!isValid) {
-                    return;
-                  }
-
-                  print('--- Validation PASSED! Proceeding to update... ---');
-
-                  // --- 👇 أضف هذا الجزء للتشخيص ---
-                  print('--- CHECKING WIDGET VALUES ---');
-                  print('Value of widget.categoryId is: ${widget.categoryId}');
-                  print(
-                    'Value of widget.productModel is: ${widget.productModel}',
-                  );
-
-                  if (widget.categoryId == null) {
-                    print(
-                      '❌ FATAL ERROR: categoryId is NULL. Stopping execution.',
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'CRITICAL ERROR: Category ID is missing!',
-                        ),
-                      ),
-                    );
-                    return;
-                  }
-
-                  if (widget.productModel == null) {
-                    print(
-                      '❌ FATAL ERROR: productModel is NULL. Stopping execution.',
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'CRITICAL ERROR: Product data is missing!',
-                        ),
-                      ),
-                    );
-                    return;
-                  }
-                  // --- نهاية جزء التشخيص ---
-
-                  print(
-                    '--- All values seem OK. Building updated model... ---',
-                  );
-                  final updatedProduct = _buildUpdatedProductModel();
-
-                  print('--- Calling Cubit to update product... ---');
-                  await context.read<CategoriesCubit>().updateProduct(
-                    widget.categoryId!,
-                    updatedProduct,
-                  );
-                },
-              ),
-            ],
-          ).animate().fadeIn(duration: 500.ms),
-        ),
-      ),
+        isLoading ? const WhenLoadingLogInWidget() : Container(),
+      ],
     );
   }
 

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../../data/model/product_model.dart';
@@ -27,12 +25,53 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     }
   }
 
+  Future<void> addProduct({
+    required int categoryId,
+    required String name,
+    required String description,
+    required double price,
+    required int quantity,
+    required String image,
+    String? startDiscountDate,
+    String? endDiscountDate,
+    String? startDiscountTime,
+    String? endDiscountTime,
+    double? discountPercentage,
+    required bool hasDiscount,
+    required bool isAvailable,
+    required bool isFeatured,
+    required bool isNew,
+    required bool isBestSeller,
+  }) async {
+    emit(AddProductLoading());
+    try {
+      await _firestoreServices.addProduct(
+        categoryId: categoryId,
+        name: name,
+        description: description,
+        price: price,
+        quantity: quantity,
+        image: image,
+        hasDiscount: hasDiscount,
+        isAvailable: isAvailable,
+        isFeatured: isFeatured,
+        isNew: isNew,
+        isBestSeller: isBestSeller,
+      );
+      emit(AddProductSuccess('Product Added Successfully'));
+    } catch (e) {
+      emit(AddProductError('Failed To Add Product'));
+    }
+  }
+
   Future<void> deleteProduct(String id, int categoryId) async {
+    emit(DeleteProductLoading());
     try {
       await _firestoreServices.deleteItem(id, categoryId);
+      emit(DeleteProductSuccess('Product Deleted Successfully'));
       await getProducts(categoryId);
     } catch (e) {
-      emit(CategoriesError(e.toString()));
+      emit(DeleteProductError('Failed To Delete Product'));
     }
   }
 
@@ -42,11 +81,11 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     int oldCategoryId,
     ProductModel product, // الكائن المحدث بالكامل
   ) async {
-    emit(CategoriesLoading());
+    emit(EditProductLoading());
     try {
       // ✨ تمرير الكائن مباشرةً كما هو إلى طبقة الخدمات
       await _firestoreServices.updateProduct(oldCategoryId, product);
-
+      emit(EditProductSuccess('Product Updated Successfully'));
       // تحديث قائمة المنتجات في الواجهة
       await getProducts(
         product.category == getCategoryName(oldCategoryId)
@@ -54,7 +93,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
             : getNewCategoryId(product.category),
       );
     } catch (e) {
-      emit(CategoriesError(e.toString()));
+      emit(EditProductError('Failed To Update Product'));
     }
   }
 
@@ -69,9 +108,9 @@ class CategoriesCubit extends Cubit<CategoriesState> {
         return 2;
       case 'Meals':
         return 3;
-      case 'Drinks':
-        return 4;
       case 'Desserts':
+        return 4;
+      case 'Drinks':
         return 5;
       default:
         return -1; // Or handle as an error
@@ -90,9 +129,9 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       case 3:
         return 'Meals';
       case 4:
-        return 'Drinks';
-      case 5:
         return 'Desserts';
+      case 5:
+        return 'Drinks';
       default:
         return ''; // Or handle as an error
     }

@@ -32,7 +32,14 @@ class FirestoreServices {
     required bool isBestSeller,
   }) async {
     try {
-      final categories = ['Sandwichs', 'Pizzas', 'Crepes', 'Meals', 'Drinks'];
+      final categories = [
+        'Sandwichs',
+        'Pizzas',
+        'Crepes',
+        'Meals',
+        'Desserts',
+        'Drinks',
+      ];
       final categoryName = categories[categoryId];
 
       final docRef = FirebaseFirestore.instance
@@ -107,6 +114,8 @@ class FirestoreServices {
                 ? 'Crepes'
                 : categoryId == 3
                 ? 'Meals'
+                : categoryId == 4
+                ? 'Desserts'
                 : 'Drinks',
           )
           .collection('products');
@@ -145,6 +154,7 @@ class FirestoreServices {
       'Pizzas',
       'Crepes',
       'Meals',
+      'Desserts',
       'Drinks',
     ];
 
@@ -254,9 +264,9 @@ class FirestoreServices {
       case 3:
         return 'Meals';
       case 4:
-        return 'Drinks';
+        return 'Desserts';
       case 5:
-        return 'Desserts'; // تأكد من أن هذا الاسم يطابق Firestore
+        return 'Drinks'; // تأكد من أن هذا الاسم يطابق Firestore
       default:
         throw Exception('❌ Invalid old categoryId: $categoryId');
     }
@@ -276,9 +286,9 @@ class FirestoreServices {
                 : categoryId == 3
                 ? 'Meals'
                 : categoryId == 4
-                ? 'Drinks'
-                : categoryId == 5
                 ? 'Desserts'
+                : categoryId == 5
+                ? 'Drinks'
                 : '',
           )
           .collection('products')
@@ -752,6 +762,7 @@ class FirestoreServices {
         'Pizzas',
         'Crepes',
         'Meals',
+        'Desserts',
         'Drinks',
       ];
 
