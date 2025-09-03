@@ -26,7 +26,8 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
                 Center(
                   child: Image.asset(
                     Assets.mixCafeImageLogo,
-                    width: size.width * 0.6,
+                    width: 300,
+                    height: 300,
                   ),
                 ),
 
