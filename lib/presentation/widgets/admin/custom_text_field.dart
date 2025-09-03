@@ -46,7 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 : widget.hintText == 'Name'
                 ? Icons.person
                 : Icons.lock,
-            color: const Color(0xFF6F4E37),
+            color: Color.fromARGB(255, 165, 101, 56),
           ),
           suffixIcon:
               widget.hintText == 'Password' ||
@@ -56,11 +56,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   icon: isVisiblePassword
                       ? const Icon(
                           Icons.visibility_off,
-                          color: Color(0xFF6F4E37),
+                          color: Color.fromARGB(255, 165, 101, 56),
                         )
                       : const Icon(
                           Icons.remove_red_eye,
-                          color: Color(0xFF6F4E37),
+                          color: Color.fromARGB(255, 165, 101, 56),
                         ),
                 )
               : null,

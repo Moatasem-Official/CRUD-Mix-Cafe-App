@@ -40,7 +40,7 @@ class CustomerLoginScreenContent extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF8B4513),
+                color: Color.fromARGB(255, 165, 101, 56),
               ),
             ),
             const SizedBox(height: 16),
@@ -86,7 +86,7 @@ class CustomerLoginScreenContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF8B4513),
+                            color: Color.fromARGB(255, 165, 101, 56),
                           ),
                         ),
                       ),
@@ -136,7 +136,7 @@ class CustomerLoginScreenContent extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.brown,
+                  color: Color.fromARGB(255, 165, 101, 56),
                 ),
               ),
             ),

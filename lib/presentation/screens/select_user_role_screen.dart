@@ -39,7 +39,7 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF6F4E37),
+                    color: Color.fromARGB(255, 165, 101, 56),
                   ),
                 ),
                 const SizedBox(height: 12),

@@ -46,7 +46,7 @@ class CusomerSignUpScreenContent extends StatelessWidget {
               fontSize: 24,
               letterSpacing: 5,
               fontWeight: FontWeight.w500,
-              color: const Color(0xFF6F4E37),
+              color: Color.fromARGB(255, 165, 101, 56),
             ),
           ),
           const SizedBox(height: 20),
