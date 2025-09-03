@@ -32,7 +32,7 @@ class CustomRichText extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: 'I agree to the ',
+                    text: 'I Agree To The ',
                     style: TextStyle(color: Colors.grey[600], fontSize: 16),
                   ),
                   TextSpan(

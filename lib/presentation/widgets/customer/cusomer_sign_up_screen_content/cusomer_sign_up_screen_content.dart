@@ -94,17 +94,24 @@ class CusomerSignUpScreenContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Already have an account ? ',
+                'Already Have An Account ? ',
                 style: TextStyle(color: Colors.grey[600], fontSize: 16),
               ),
               TextButton(
+                style: TextButton.styleFrom(
+                  minimumSize: Size.zero,
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
+                  overlayColor: Colors.transparent,
+                ),
                 onPressed: () => Navigator.pop(context),
                 child: Text(
                   'LOGIN',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 165, 101, 56),
-                    fontSize: 14,
-                    letterSpacing: 2,
+                    color: Color(0xFF8B4513),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    letterSpacing: 1,
                   ),
                 ),
               ),

@@ -58,7 +58,6 @@ class CustomerLoginScreenContent extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 12),
                   CustomTextField(
                     hintText: 'Password',
                     controller: passwordController,
