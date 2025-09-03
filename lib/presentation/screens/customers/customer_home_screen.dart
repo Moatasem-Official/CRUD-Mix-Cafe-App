@@ -123,7 +123,11 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               body: BlocBuilder<HomeScreenCubit, HomeScreenState>(
                 builder: (context, state) {
                   if (state is HomeScreenLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 165, 101, 56),
+                      ),
+                    );
                   } else if (state is HomeScreenError) {
                     return Center(child: Text(state.error));
                   } else if (state is HomeScreenSearch) {

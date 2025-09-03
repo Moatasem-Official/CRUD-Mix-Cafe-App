@@ -113,7 +113,11 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
                       return SliverToBoxAdapter(
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height - 200,
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Color.fromARGB(255, 165, 101, 56),
+                            ),
+                          ),
                         ),
                       );
                     } else if (state is OrdersScreenSuccess) {

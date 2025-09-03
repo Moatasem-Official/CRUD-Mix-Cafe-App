@@ -44,7 +44,11 @@ class CustomerOfferDetailsScreen extends StatelessWidget {
               ),
               loadingBuilder: (_, child, progress) => progress == null
                   ? child
-                  : const Center(child: CircularProgressIndicator()),
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 165, 101, 56),
+                      ),
+                    ),
             ),
           ),
 

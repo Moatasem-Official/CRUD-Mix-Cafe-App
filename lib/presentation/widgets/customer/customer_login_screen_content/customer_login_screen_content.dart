@@ -19,25 +19,23 @@ class CustomerLoginScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: size.height - kToolbarHeight),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 24),
             Center(
               child: Image.asset(
                 Assets.mixCafeImageLogo,
-                width: 220,
-                height: 220,
+                width: 300,
+                height: 300,
               ),
             ),
             const SizedBox(height: 24),
             const Text(
-              'Welcome back !',
+              'Welcome Back !',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
@@ -72,22 +70,31 @@ class CustomerLoginScreenContent extends StatelessWidget {
                     },
                   ),
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.centerLeft,
                     child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size.zero,
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                        overlayColor: Colors.transparent,
+                      ),
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/forgetPassword'),
-                      child: const Text(
-                        'Forgot Password ?',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF8B4513),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: const Text(
+                          'Forgot Password ?',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF8B4513),
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  CustomButton(buttonText: 'Login', onPressed: onPressed),
+                  CustomButton(buttonText: 'LOGIN', onPressed: onPressed),
                 ],
               ),
             ),
@@ -101,6 +108,12 @@ class CustomerLoginScreenContent extends StatelessWidget {
                     style: TextStyle(color: Colors.brown, fontSize: 15),
                   ),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size.zero,
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                      overlayColor: Colors.transparent,
+                    ),
                     onPressed: () =>
                         Navigator.of(context).pushNamed('/customerSignUp'),
                     child: const Text(

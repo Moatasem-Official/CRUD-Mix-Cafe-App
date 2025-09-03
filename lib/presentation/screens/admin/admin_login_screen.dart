@@ -26,11 +26,6 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
     return Stack(
       children: [
         Scaffold(
-          appBar: AppBar(
-            surfaceTintColor: Colors.white,
-            automaticallyImplyLeading: true,
-            backgroundColor: Colors.white,
-          ),
           backgroundColor: Colors.white,
           body: BlocConsumer<LogInCubitCubit, LogInCubitState>(
             listener: (context, state) {

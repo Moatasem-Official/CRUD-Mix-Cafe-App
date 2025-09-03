@@ -56,7 +56,11 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
             >(
               builder: (context, state) {
                 if (state is ChartDistributionsAnalysisLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 165, 101, 56),
+                    ),
+                  );
                 } else if (state
                     is ChartDistributionsAnalysisDistributionSuccess) {
                   return CustomChartContent(

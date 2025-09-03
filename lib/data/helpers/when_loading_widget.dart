@@ -36,7 +36,11 @@ class WhenLoadingCategoriesWidget extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
           color: Colors.black.withOpacity(0.2),
-          child: Center(child: CircularProgressIndicator()),
+          child: Center(
+            child: CircularProgressIndicator(
+              color: Color.fromARGB(255, 165, 101, 56),
+            ),
+          ),
         ),
       ),
     );

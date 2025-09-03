@@ -52,7 +52,11 @@ class _CustomerSeeAllProductsScreenState
               return SizedBox(
                 height:
                     MediaQuery.of(context).size.height - kToolbarHeight - 60,
-                child: const Center(child: CircularProgressIndicator()),
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 165, 101, 56),
+                  ),
+                ),
               );
             } else if (state is SeeAllProductsLoaded) {
               return Column(

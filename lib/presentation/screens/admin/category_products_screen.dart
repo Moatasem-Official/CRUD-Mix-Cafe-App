@@ -66,7 +66,11 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
         child: BlocBuilder<CategoriesCubit, CategoriesState>(
           builder: (context, state) {
             if (state is CategoriesLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromARGB(255, 165, 101, 56),
+                ),
+              );
             } else if (state is CategoriesEmpty) {
               return ListView(
                 physics: const AlwaysScrollableScrollPhysics(),

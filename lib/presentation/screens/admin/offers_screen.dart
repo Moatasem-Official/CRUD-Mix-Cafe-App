@@ -39,7 +39,11 @@ class _OffersScreenState extends State<OffersScreen> {
       body: BlocBuilder<OffersScreenCubit, OffersScreenState>(
         builder: (context, state) {
           if (state is OffersScreenLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 165, 101, 56),
+              ),
+            );
           }
           if (state is OffersScreenSuccess) {
             if (state.offers.isEmpty) {

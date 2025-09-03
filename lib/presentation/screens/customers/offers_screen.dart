@@ -37,7 +37,11 @@ class _CustomerOffersScreenState extends State<CustomerOffersScreen> {
       body: BlocBuilder<CustomerOffersScreenCubit, CustomerOffersScreenState>(
         builder: (context, state) {
           if (state is CustomerOffersScreenLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 165, 101, 56),
+              ),
+            );
           } else if (state is CustomerOffersScreenSuccess) {
             final List<Offer> offers = state.offers;
 

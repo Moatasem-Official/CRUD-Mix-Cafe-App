@@ -19,7 +19,11 @@ class CustomOfferImage extends StatelessWidget {
           : Container(
               height: 180,
               color: Colors.grey[200],
-              child: const Center(child: CircularProgressIndicator()),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromARGB(255, 165, 101, 56),
+                ),
+              ),
             ),
       errorBuilder: (context, error, stackTrace) => Container(
         height: 180,

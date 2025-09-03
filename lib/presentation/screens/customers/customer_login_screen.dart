@@ -23,18 +23,10 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: const Color(0xFFFFFCF9),
-          appBar: AppBar(
-            backgroundColor: const Color(0xFFFFFCF9),
-            elevation: 0,
-            surfaceTintColor: Colors.transparent,
-            automaticallyImplyLeading: true,
-          ),
+          backgroundColor: Colors.white,
           body: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginLoading) {

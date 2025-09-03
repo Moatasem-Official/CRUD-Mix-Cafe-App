@@ -60,7 +60,11 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                   if (state is OrdersManagementLoading) {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height - 200,
-                      child: const Center(child: CircularProgressIndicator()),
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: Color.fromARGB(255, 165, 101, 56),
+                        ),
+                      ),
                     );
                   } else if (state is OrdersManagementLoaded) {
                     if (state.orders.isEmpty) {

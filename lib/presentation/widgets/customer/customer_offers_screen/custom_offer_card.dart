@@ -103,7 +103,11 @@ class _OfferCardState extends State<OfferCard> {
                         const Center(child: Icon(Icons.image_not_supported)),
                     loadingBuilder: (_, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color.fromARGB(255, 165, 101, 56),
+                        ),
+                      );
                     },
                   ),
                 ),

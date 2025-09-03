@@ -42,7 +42,9 @@ class CustomAppBar extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 child: const Center(
-                  child: CircularProgressIndicator(color: Colors.brown),
+                  child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 165, 101, 56),
+                  ),
                 ),
               );
             } else if (state is CustomerOffersScreenSuccess) {

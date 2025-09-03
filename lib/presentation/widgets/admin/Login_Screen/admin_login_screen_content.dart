@@ -24,7 +24,8 @@ class AdminLoginScreenContent extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Image.asset(
@@ -68,19 +69,26 @@ class AdminLoginScreenContent extends StatelessWidget {
               children: [
                 const Text(
                   'I am not admin ?',
-                  style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+                  style: TextStyle(color: Colors.brown, fontSize: 15),
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: const Color.fromARGB(255, 232, 206, 187),
-                    textStyle: const TextStyle(fontSize: 16),
+                    minimumSize: Size.zero,
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
+                    overlayColor: Colors.transparent,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/customerLogin');
                   },
                   child: const Text(
-                    'Login as Customer',
-                    style: TextStyle(fontSize: 16, color: Color(0xFF6F4E37)),
+                    'I Am Customer',
+                    style: TextStyle(
+                      color: Color(0xFF8B4513),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               ],

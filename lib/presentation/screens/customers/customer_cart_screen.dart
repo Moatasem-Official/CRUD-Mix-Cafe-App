@@ -162,7 +162,11 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: state is CartScreenLoading
-                            ? const Center(child: CircularProgressIndicator())
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: Color.fromARGB(255, 165, 101, 56),
+                                ),
+                              )
                             : state is CartScreenSuccess
                             ? state.products.isEmpty
                                   ? const Center(child: Text('Cart is Empty !'))
