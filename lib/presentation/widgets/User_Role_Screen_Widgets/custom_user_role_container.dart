@@ -14,29 +14,16 @@ class CustomUserRoleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Material(
+        child: SizedBox(
           width: double.infinity,
           height: 110,
-          decoration: BoxDecoration(
-            color: const Color(0xFFFDF4EF), // خلفية هادئة
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.brown.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(16),
+          child: GestureDetector(
             onTap: onTap,
             child: Row(
               children: [
-                // الصورة
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: ClipRRect(
@@ -50,7 +37,6 @@ class CustomUserRoleContainer extends StatelessWidget {
                   ),
                 ),
 
-                // النص والزر
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

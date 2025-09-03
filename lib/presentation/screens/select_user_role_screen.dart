@@ -15,7 +15,7 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8F3), // خلفية كريمي ناعمة
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -23,7 +23,6 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // شعار الكافيه
                 Center(
                   child: Image.asset(
                     Assets.mixCafeImageLogo,
@@ -33,7 +32,6 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
 
                 const SizedBox(height: 30),
 
-                // عنوان الصفحة
                 const Text(
                   'Welcome To Mix Cafe',
                   textAlign: TextAlign.center,
@@ -52,7 +50,6 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
 
                 const SizedBox(height: 40),
 
-                // زر الأدمن
                 CustomUserRoleContainer(
                   buttonText: 'ADMIN',
                   onTap: () => Navigator.pushNamed(context, '/adminLogin'),
@@ -66,14 +63,6 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
                   buttonText: 'CUSTOMER',
                   onTap: () => Navigator.pushNamed(context, '/customerLogin'),
                   imagePath: Assets.mixCafeCustomerImage,
-                ),
-
-                const SizedBox(height: 40),
-
-                // توقيع خفيف تحت
-                const Text(
-                  'Made with ☕ by Mix Cafe',
-                  style: TextStyle(fontSize: 14, color: Colors.brown),
                 ),
               ],
             ),
