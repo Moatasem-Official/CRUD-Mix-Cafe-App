@@ -18,18 +18,12 @@ class CustomOnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           height: 250,
           width: 250,
-          child: SvgPicture.asset(
-            imagePath,
-            fit: BoxFit.contain,
-            colorFilter: const ColorFilter.mode(
-              AppConstants.kAccentBrown,
-              BlendMode.srcIn,
-            ),
-          ),
+          child: SvgPicture.asset(imagePath, fit: BoxFit.contain),
         ),
         const SizedBox(height: 40),
         Container(
@@ -40,7 +34,7 @@ class CustomOnBoardingPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Color.fromARGB(255, 165, 101, 56).withOpacity(0.1),
                 spreadRadius: 2,
                 blurRadius: 10,
                 offset: const Offset(0, 5),
@@ -55,7 +49,7 @@ class CustomOnBoardingPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: AppConstants.kCoffeeDark,
+                  color: Color.fromARGB(255, 165, 101, 56),
                 ),
               ),
               const SizedBox(height: 15),

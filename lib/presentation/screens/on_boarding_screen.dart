@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConstants.kCoffeeLight,
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           PageView.builder(
@@ -54,11 +54,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             top: 40,
             right: 20,
             child: TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size.zero,
+                elevation: 0,
+                shadowColor: Colors.transparent,
+                overlayColor: Colors.transparent,
+              ),
               onPressed: () => _goToHome(context),
               child: const Text(
                 'Skip',
                 style: TextStyle(
-                  color: AppConstants.kCoffeeDark,
+                  color: Color.fromARGB(255, 165, 101, 56),
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

@@ -4,7 +4,7 @@ class AppConstants {
   static final List<Map<String, String>> onboardingPages = [
     {
       'image': 'assets/icons/coffee-cup-svgrepo-com.svg',
-      'title': 'Welcome to Mix Cafe',
+      'title': 'Welcome To Mix Cafe',
       'body':
           'Discover a world of flavor where a restaurant, a cafe, and a juice bar meet in one place.',
     },
@@ -27,8 +27,8 @@ class AppConstants {
           'Revitalize with our wide selection of fresh, natural juices. Perfect for any time of the day.',
     },
     {
-      'image': 'asset/icons/shopping-cart-svgrepo-com.svg',
-      'title': 'Seamless Control for You',
+      'image': 'assets/icons/shopping-cart-svgrepo-com.svg',
+      'title': 'Seamless Control For You',
       'body':
           'Track your orders, review your purchase history, and save your favorites for quick reordering.',
     },

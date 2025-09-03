@@ -19,7 +19,7 @@ class CustomDotsIndicator extends StatelessWidget {
           width: currentPage == index ? 24.0 : 8.0,
           decoration: BoxDecoration(
             color: currentPage == index
-                ? AppConstants.kCoffeeDark
+                ? Color.fromARGB(255, 165, 101, 56)
                 : AppConstants.kAccentBrown.withOpacity(0.5),
             borderRadius: BorderRadius.circular(4),
           ),

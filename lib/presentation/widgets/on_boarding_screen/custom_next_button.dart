@@ -17,15 +17,17 @@ class CustomNextButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: AppConstants.kCoffeeLight,
-        backgroundColor: AppConstants.kAccentOrange,
+        backgroundColor: Color.fromARGB(255, 165, 101, 56),
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        elevation: 5,
-        shadowColor: AppConstants.kAccentOrange.withOpacity(0.5),
       ),
       child: const Text(
         'Next',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
       ),
     );
   }
