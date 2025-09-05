@@ -4,11 +4,11 @@ class CustomAccountThemeAppRowItem extends StatelessWidget {
   const CustomAccountThemeAppRowItem({
     super.key,
     required this.title,
-    required this.subtitle,
+    required this.index,
   });
 
   final String title;
-  final String subtitle;
+  final int index;
 
   @override
   @override
@@ -26,7 +26,11 @@ class CustomAccountThemeAppRowItem extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Icon(
-                Icons.brightness_6,
+                index == 0
+                    ? Icons.dark_mode_rounded
+                    : index == 1
+                    ? Icons.light_mode_rounded
+                    : Icons.brightness_6_rounded,
                 color: const Color.fromARGB(255, 216, 165, 52),
               ),
             ),
@@ -44,7 +48,11 @@ class CustomAccountThemeAppRowItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  subtitle,
+                  index == 0
+                      ? 'Light'
+                      : index == 1
+                      ? 'Dark'
+                      : 'No Theme',
                   maxLines: 1,
                   style: TextStyle(
                     color: Colors.grey,

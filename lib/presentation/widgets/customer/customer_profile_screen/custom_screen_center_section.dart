@@ -4,7 +4,7 @@ import 'custom_account_addresses_row_item.dart';
 import 'custom_account_language_row_item.dart';
 import 'custom_account_notifications_row_item.dart';
 
-class CustomScreenCenterSection extends StatelessWidget {
+class CustomScreenCenterSection extends StatefulWidget {
   const CustomScreenCenterSection({
     super.key,
     required this.address,
@@ -28,6 +28,13 @@ class CustomScreenCenterSection extends StatelessWidget {
   final VoidCallback onNotificationTap;
   final Function() onPress;
 
+  @override
+  State<CustomScreenCenterSection> createState() =>
+      _CustomScreenCenterSectionState();
+}
+
+class _CustomScreenCenterSectionState extends State<CustomScreenCenterSection> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -55,7 +62,7 @@ class CustomScreenCenterSection extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    addressController.text = address;
+                    widget.addressController.text = widget.address;
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
@@ -69,7 +76,7 @@ class CustomScreenCenterSection extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               TextField(
-                                controller: addressController,
+                                controller: widget.addressController,
                                 decoration: InputDecoration(
                                   hintText: 'Enter address',
                                   border: OutlineInputBorder(
@@ -81,7 +88,7 @@ class CustomScreenCenterSection extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                  onPressed: onPress,
+                                  onPressed: widget.onPress,
                                   child: const Text('Save'),
                                 ),
                               ),
@@ -98,7 +105,7 @@ class CustomScreenCenterSection extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16, top: 16, right: 8),
                     child: CustomAccountAddressesRowItem(
                       title: 'Saved Addresses',
-                      subtitle: address,
+                      subtitle: widget.address,
                     ),
                   ),
                 ),
@@ -113,10 +120,10 @@ class CustomScreenCenterSection extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16, right: 16),
                   child: CustomAccountLanguageRowItem(
                     title: 'Language',
-                    selectedLanguage: selectedLanguage,
-                    index: index,
-                    onArabicTap: onArabicTap,
-                    onEnglishTap: onEnglishTap,
+                    selectedLanguage: widget.selectedLanguage,
+                    index: widget.index,
+                    onArabicTap: widget.onArabicTap,
+                    onEnglishTap: widget.onEnglishTap,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -125,11 +132,74 @@ class CustomScreenCenterSection extends StatelessWidget {
                   height: .5,
                 ),
                 const SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: CustomAccountThemeAppRowItem(
-                    title: 'Theme',
-                    subtitle: 'Light',
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        ),
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              title: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.light_mode,
+                                    color: Color.fromARGB(255, 216, 165, 52),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  const Text(
+                                    'Light',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.pop(context, 0);
+                                setState(() {
+                                  currentIndex = 0;
+                                });
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.dark_mode,
+                                    color: Color.fromARGB(255, 216, 165, 52),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  const Text(
+                                    'Dark',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.pop(context, 1);
+                                setState(() {
+                                  currentIndex = 1;
+                                });
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: CustomAccountThemeAppRowItem(
+                      title: 'Theme',
+                      index: currentIndex,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -146,9 +216,9 @@ class CustomScreenCenterSection extends StatelessWidget {
                   ),
                   child: CustomAccountNotificationsRowItem(
                     title: 'Notifications',
-                    notificationsEnabled: isNotificationOn,
+                    notificationsEnabled: widget.isNotificationOn,
                     onChanged: (value) {
-                      onNotificationTap();
+                      widget.onNotificationTap();
                     },
                   ),
                 ),
