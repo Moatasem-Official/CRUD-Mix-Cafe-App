@@ -20,6 +20,7 @@ class _OffersScreenState extends State<OffersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 165, 101, 56),
         onPressed: () =>
@@ -27,14 +28,26 @@ class _OffersScreenState extends State<OffersScreen> {
         child: Icon(Icons.add, color: Colors.white),
       ),
       appBar: AppBar(
-        title: const Text(
-          "إدارة العروض",
-          style: TextStyle(color: Colors.white),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Color.fromARGB(255, 165, 101, 56),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        title: const Text(
+          "Offers Management",
+          style: TextStyle(
+            color: Color.fromARGB(255, 165, 101, 56),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 165, 101, 56),
-        surfaceTintColor: Color.fromARGB(255, 165, 101, 56),
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
       ),
       body: BlocBuilder<OffersScreenCubit, OffersScreenState>(
         builder: (context, state) {

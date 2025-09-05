@@ -51,9 +51,9 @@ class _CustomOrdersManagmentAppBarState
           // Title
           Text(
             'Orders Management',
-            style: GoogleFonts.poppins(
-              color: const Color(0xFF4E342E),
-              fontSize: 22,
+            style: TextStyle(
+              color: Color.fromARGB(255, 165, 101, 56),
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),

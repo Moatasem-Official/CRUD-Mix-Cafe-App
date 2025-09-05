@@ -77,9 +77,9 @@ class _CategoriesManagementScreenState extends State<CategoriesManagmentScreen>
             children: [
               Text(
                 'Categories Management',
-                style: GoogleFonts.poppins(
-                  color: const Color(0xFF333333),
-                  fontSize: 22,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 165, 101, 56),
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
