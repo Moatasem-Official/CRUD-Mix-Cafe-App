@@ -307,23 +307,55 @@ class OrderCard extends StatelessWidget {
           ],
         ),
         // Action Buttons
-        ElevatedButton(
-          onPressed: status == 'pending' ? null : () => _reorder(context),
-          /* Reorder Logic */
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF4E342E), // Rich brown
-            foregroundColor: Colors.white,
-            elevation: 2,
-            shadowColor: const Color(0xFF4E342E).withOpacity(0.5),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: status == 'pending' ? null : () => _reorder(context),
+              /* Reorder Logic */
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFC38154), // Rich brown
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.replay_rounded, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Reorder',
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
-          ),
-          child: Text(
-            'Reorder',
-            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-          ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: status == 'pending' ? () => _cancel(context) : null,
+              /* Reorder Logic */
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF4E342E), // Rich brown
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.cancel_rounded, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Cancel',
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -332,6 +364,11 @@ class OrderCard extends StatelessWidget {
   void _reorder(BuildContext context) {
     final cubit = BlocProvider.of<OrdersScreenCubit>(context);
     cubit.reOrder(orderId, userId);
+  }
+
+  void _cancel(BuildContext context) {
+    final cubit = BlocProvider.of<OrdersScreenCubit>(context);
+    cubit.cancelOrder(orderId, userId);
   }
 
   /// Builds the status ribbon in the top-right corner.

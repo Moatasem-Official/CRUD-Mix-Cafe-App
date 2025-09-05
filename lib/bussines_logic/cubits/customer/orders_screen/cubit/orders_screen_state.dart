@@ -13,6 +13,8 @@ final class OrdersScreenLoading extends OrdersScreenState {}
 
 final class ReorderLoading extends OrdersScreenState {}
 
+final class CancelOrderLoading extends OrdersScreenState {}
+
 final class ReorderSuccess extends OrdersScreenState {
   final String message;
   const ReorderSuccess(this.message);
@@ -26,6 +28,16 @@ final class ReorderError extends OrdersScreenState {
 final class ReoderedOrdersReachedToMaxTimes extends OrdersScreenState {
   final String message;
   const ReoderedOrdersReachedToMaxTimes(this.message);
+}
+
+final class CancelOrderSuccess extends OrdersScreenState {
+  final String message;
+  const CancelOrderSuccess(this.message);
+}
+
+final class CancelOrderError extends OrdersScreenState {
+  final String message;
+  const CancelOrderError(this.message);
 }
 
 final class OrdersScreenSuccess extends OrdersScreenState {

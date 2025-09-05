@@ -8,8 +8,10 @@ part 'orders_screen_state.dart';
 class OrdersScreenCubit extends Cubit<OrdersScreenState> {
   OrdersScreenCubit() : super(OrdersScreenLoading());
   final FirestoreServices _firestoreServices = FirestoreServices();
+  String _currentFilter = 'all';
   Future<void> getOrders() async {
     emit(OrdersScreenLoading());
+    _currentFilter = 'all';
     try {
       final orders = await _firestoreServices.getAllOrders();
       emit(OrdersScreenSuccess(orders));
@@ -18,20 +20,35 @@ class OrdersScreenCubit extends Cubit<OrdersScreenState> {
     }
   }
 
-  Future<void> deleteOrder(String orderId, String userId) async {
-    emit(OrdersScreenLoading());
+  Future<void> cancelOrder(String orderId, String userId) async {
+    emit(CancelOrderLoading());
     try {
-      await _firestoreServices.deleteOrder(orderId: orderId, userId: userId);
-      emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+      await _firestoreServices.customerCancelOrder(
+        orderId: orderId,
+        userId: userId,
+      );
+      emit(CancelOrderSuccess('Order Cancelled Successfully'));
+      if (_currentFilter == 'all') {
+        emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+      } else {
+        emit(
+          OrdersScreenFilterOrders(
+            await _firestoreServices.getOrdersByStatus(_currentFilter),
+          ),
+        );
+      }
     } catch (e) {
-      emit(OrdersScreenError(e.toString()));
+      emit(CancelOrderError('Failed To Cancel Order'));
     }
   }
 
   Future<void> filterOrdersByStatus(String? userId, String status) async {
     emit(OrdersScreenLoading());
+    _currentFilter = status;
     try {
-      final orders = await _firestoreServices.getOrdersByStatus(status);
+      final orders = status == 'all'
+          ? await _firestoreServices.getAllOrders()
+          : await _firestoreServices.getOrdersByStatus(status);
       emit(OrdersScreenFilterOrders(orders));
     } catch (e) {
       emit(OrdersScreenError(e.toString()));
@@ -50,12 +67,28 @@ class OrdersScreenCubit extends Cubit<OrdersScreenState> {
             'You Have Reached The Maximum Number Of Orders Per This Day.',
           ),
         );
-        emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+        if (_currentFilter == 'all') {
+          emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+        } else {
+          emit(
+            OrdersScreenFilterOrders(
+              await _firestoreServices.getOrdersByStatus(_currentFilter),
+            ),
+          );
+        }
         return;
       }
       await _firestoreServices.reOrder(orderId: orderId, userId: userId);
       emit(ReorderSuccess('Order Reordered Successfully'));
-      emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+      if (_currentFilter == 'all') {
+        emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));
+      } else {
+        emit(
+          OrdersScreenFilterOrders(
+            await _firestoreServices.getOrdersByStatus(_currentFilter),
+          ),
+        );
+      }
     } catch (e) {
       emit(ReorderError('Failed To Reorder Order'));
       emit(OrdersScreenSuccess(await _firestoreServices.getAllOrders()));

@@ -68,6 +68,32 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
                   contentType: ContentType.failure,
                 ),
               );
+            } else if (state is CancelOrderLoading) {
+              setState(() {
+                isLoading = true;
+              });
+            } else if (state is CancelOrderSuccess) {
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                CustomSnackBar(
+                  message: state.message,
+                  title: 'Success',
+                  contentType: ContentType.success,
+                ),
+              );
+            } else if (state is CancelOrderError) {
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                CustomSnackBar(
+                  message: state.message,
+                  title: 'Error',
+                  contentType: ContentType.failure,
+                ),
+              );
             }
           },
           child: Scaffold(

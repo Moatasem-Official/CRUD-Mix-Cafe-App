@@ -470,6 +470,40 @@ class FirestoreServices {
     }
   }
 
+  Future<void> customerCancelOrder({
+    required String userId,
+    required String orderId,
+  }) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('orders')
+          .doc(orderId);
+
+      final snapshot = await docRef.get();
+
+      if (snapshot.exists) {
+        final data = snapshot.data();
+
+        // الشرط: الاوردر لازم يكون pending
+        if (data?['status'] == 'pending') {
+          await docRef.update({'status': 'cancelled'});
+          print('✅ Order cancelled successfully');
+        } else {
+          print('⚠️ Order is not pending, cannot cancel.');
+          throw Exception('Order is not pending, cannot cancel.');
+        }
+      } else {
+        print('⚠️ Order not found.');
+        throw Exception('Order not found.');
+      }
+    } catch (e) {
+      print('❌ Error canceling order: $e');
+      throw Exception('Failed to cancel order: $e');
+    }
+  }
+
   Future<List<OrderModel>> getAllOrders() async {
     try {
       final collection = FirebaseFirestore.instance
