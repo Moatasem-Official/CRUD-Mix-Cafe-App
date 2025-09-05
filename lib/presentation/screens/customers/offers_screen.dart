@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_offers_screen/custom_empty_offers.dart';
 import '../../../bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
 import '../../../data/model/offer_model.dart';
 import '../../widgets/customer/customer_offers_screen/custom_offer_card.dart';
@@ -47,10 +48,7 @@ class _CustomerOffersScreenState extends State<CustomerOffersScreen> {
 
             if (offers.isEmpty) {
               return const Center(
-                child: Text(
-                  'No offers available At The Moment.',
-                  style: TextStyle(fontSize: 16),
-                ),
+                child: SizedBox(width: 300, child: EmptyOffersWidget()),
               );
             }
 

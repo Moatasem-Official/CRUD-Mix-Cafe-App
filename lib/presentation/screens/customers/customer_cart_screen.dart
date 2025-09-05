@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_cart_screen/custom_empty_cart.dart';
 import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import '../../../data/helpers/custom_snack_bar.dart';
 import '../../../data/helpers/when_loading_widget.dart';
@@ -40,31 +41,20 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
       children: [
         Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color.fromARGB(
-              255,
-              255,
-              253,
-              251,
-            ), // لون بيج فاتح
+            backgroundColor: Colors.white, // لون بيج فاتح
             automaticallyImplyLeading: false,
             elevation: 0,
             title: const Text(
               'Your Cart',
               style: TextStyle(
-                color: Colors.black,
-                fontSize: 24,
+                color: Color.fromARGB(255, 165, 101, 56),
                 fontWeight: FontWeight.bold,
               ),
             ),
             centerTitle: true,
-            surfaceTintColor: const Color.fromARGB(255, 255, 253, 251),
+            surfaceTintColor: Colors.transparent,
           ),
-          backgroundColor: const Color.fromARGB(
-            255,
-            255,
-            253,
-            251,
-          ), // لون بيج فاتح
+          backgroundColor: Colors.white, // لون بيج فاتح
           body: BlocConsumer<CartScreenCubit, CartScreenState>(
             listener: (context, state) {
               if (state is CartScreenError) {
@@ -169,7 +159,7 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                               )
                             : state is CartScreenSuccess
                             ? state.products.isEmpty
-                                  ? const Center(child: Text('Cart is Empty !'))
+                                  ? const Center(child: CustomEmptyCart())
                                   : ListView.builder(
                                       itemCount: state.products.length,
                                       itemBuilder: (context, index) {

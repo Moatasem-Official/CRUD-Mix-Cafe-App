@@ -108,7 +108,10 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
               automaticallyImplyLeading: false,
               title: Text(
                 'Profile',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  color: const Color.fromARGB(255, 165, 101, 56),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               centerTitle: true,
               surfaceTintColor: Colors.white,

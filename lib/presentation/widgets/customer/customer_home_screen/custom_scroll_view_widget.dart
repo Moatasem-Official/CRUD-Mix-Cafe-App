@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_no_products_widget.dart';
 import '../../../../data/model/product_model.dart';
 import 'custom_items_horizontal_list_view.dart';
 import 'custom_items_title_row.dart';
@@ -38,7 +39,7 @@ class CustomScrollViewWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: featuredProducts.isEmpty
-                ? const Center(child: Text('No Featured Items'))
+                ? const Center(child: CustomNoProductsWidget())
                 : CustomItemsHorizontalListView(
                     products: featuredProducts,
                     onAddToCart: (product) => onAddToCart(product),
@@ -61,7 +62,7 @@ class CustomScrollViewWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: bestProducts.isEmpty
-                ? const Center(child: Text('No Best Sellers'))
+                ? const Center(child: CustomNoProductsWidget())
                 : CustomItemsHorizontalListView(
                     products: bestProducts,
                     onAddToCart: onAddToCart,
@@ -84,7 +85,7 @@ class CustomScrollViewWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: newProducts.isEmpty
-                ? const Center(child: Text('No New Items'))
+                ? const Center(child: CustomNoProductsWidget())
                 : CustomItemsHorizontalListView(
                     products: newProducts,
                     onAddToCart: onAddToCart,
@@ -107,7 +108,7 @@ class CustomScrollViewWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: otherProducts.isEmpty
-                ? const Center(child: Text('No Other Items'))
+                ? const Center(child: CustomNoProductsWidget())
                 : CustomItemsHorizontalListView(
                     products: otherProducts,
                     onAddToCart: onAddToCart,

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_cart_screen/custom_checkout_container.dart';
 
 class FilterChipBar extends StatefulWidget {
   const FilterChipBar({super.key, required this.onFilterChanged});
@@ -18,57 +19,63 @@ class _FilterChipBarState extends State<FilterChipBar> {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: Container(
-        height: 50,
-        color: const Color(0xFF4E342E), // Rich dark brown
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(_filters.length, (index) {
-              final bool isActive = _activeIndex == index;
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _activeIndex = index;
-                    widget.onFilterChanged(index);
-                  });
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isActive ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: isActive
-                        ? [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.15),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ]
-                        : [],
-                  ),
-                  child: Text(
-                    _filters[index],
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: isActive
-                          ? const Color(0xFF4E342E)
-                          : Colors.white.withOpacity(0.8),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: FittedBox(
+          child: Container(
+            height: 50,
+            color: const Color.fromARGB(255, 165, 101, 56), // Rich dark brown
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(_filters.length, (index) {
+                  final bool isActive = _activeIndex == index;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _activeIndex = index;
+                        widget.onFilterChanged(index);
+                      });
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isActive ? Colors.white : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: isActive
+                            ? [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.15),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: Text(
+                        _filters[index],
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: isActive
+                              ? const Color.fromARGB(255, 165, 101, 56)
+                              : Colors.white.withOpacity(0.8),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }),
+                  );
+                }),
+              ),
+            ),
           ),
         ),
       ),
@@ -135,12 +142,12 @@ class CustomerOrdersSliverAppBar extends StatelessWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       flexibleSpace: ClipPath(
-        clipper: WaveClipper(),
+        clipper: TicketClipper(),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF4E342E), // Rich dark brown
+                Color.fromARGB(255, 165, 101, 56), // Rich dark brown
                 Color(0xFF8B4513), // Rich brown
               ],
               begin: Alignment.topLeft,
@@ -151,12 +158,11 @@ class CustomerOrdersSliverAppBar extends StatelessWidget {
       ),
       surfaceTintColor: const Color(0xFF4E342E), // The color when expanded
       shadowColor: Colors.black.withOpacity(0.3),
-      backgroundColor: const Color(0xFF4E342E), // The color when collapsed
       iconTheme: const IconThemeData(color: Colors.white),
 
       // --- The filter bar at the bottom ---
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(50),
+        preferredSize: Size.fromHeight(70),
         child: FilterChipBar(onFilterChanged: onFilterChanged),
       ),
     );

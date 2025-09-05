@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_home_screen/custom_no_products_widget.dart';
 import '../../../bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import '../../../data/helpers/custom_snack_bar.dart';
 import '../../../bussines_logic/cubits/customer/home_screen/cubit/home_screen_cubit.dart';
@@ -67,6 +68,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
           GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
+              backgroundColor: Colors.white,
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(315),
                 child: CustomAppBar(
@@ -132,9 +134,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     return Center(child: Text(state.error));
                   } else if (state is HomeScreenSearch) {
                     if (state.products.isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
+                      return const Center(child: CustomNoProductsWidget());
                     } else {
                       return ListView.builder(
                         itemCount: state.products.length,
@@ -167,9 +167,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     }
                   } else if (state is HomeScreenFilter) {
                     if (state.products.isEmpty) {
-                      return const Center(
-                        child: Text('No products available.'),
-                      );
+                      return const Center(child: CustomNoProductsWidget());
                     } else {
                       return ListView.builder(
                         itemCount: state.products.length,

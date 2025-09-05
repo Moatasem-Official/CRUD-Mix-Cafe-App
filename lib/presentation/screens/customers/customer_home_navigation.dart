@@ -58,6 +58,7 @@ class _CustomerHomeNavigationState extends State<CustomerHomeNavigation> {
           ),
           BottomBarItem(
             icon: Badge(
+              backgroundColor: const Color.fromARGB(255, 165, 101, 56),
               label: BlocBuilder<CartScreenCubit, CartScreenState>(
                 builder: (context, state) {
                   final cubit = context.read<CartScreenCubit>();

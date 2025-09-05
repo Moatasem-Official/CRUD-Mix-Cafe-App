@@ -24,7 +24,7 @@ class CustomItemsTitleRow extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: const Color.fromARGB(255, 193, 132, 0),
+              color: const Color.fromARGB(255, 165, 101, 56),
             ),
           ),
           const Spacer(),

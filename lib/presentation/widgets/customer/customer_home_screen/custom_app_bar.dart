@@ -164,7 +164,7 @@ class CustomAppBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black12,
+                  color: const Color.fromARGB(255, 165, 101, 56).withAlpha(100),
                   blurRadius: 6,
                   offset: Offset(0, 2),
                 ),
@@ -176,7 +176,7 @@ class CustomAppBar extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 border: InputBorder.none,
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                hintText: 'Search for food, drinks, or more...',
+                hintText: 'Search For Food, Drinks, Or More...',
                 hintStyle: TextStyle(color: Colors.grey.shade600),
               ),
               onChanged: onSearchChanged,

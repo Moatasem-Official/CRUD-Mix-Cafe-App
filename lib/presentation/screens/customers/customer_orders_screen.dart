@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
 import 'package:mix_cafe_app/data/helpers/when_loading_widget.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_orders_screen/custom_empty_orders.dart';
 import '../../../data/helpers/search_helper.dart';
 import '../../../bussines_logic/cubits/customer/orders_screen/cubit/orders_screen_cubit.dart';
 import '../../../data/services/auth/auth_service.dart';
@@ -100,7 +101,6 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
             backgroundColor: const Color.fromARGB(255, 255, 253, 251),
             body: CustomScrollView(
               slivers: [
-                // 1. Your new "fantastic" SliverAppBar
                 CustomerOrdersSliverAppBar(
                   onFilterChanged: (index) {
                     final AuthService authService = AuthService();
@@ -149,7 +149,15 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
                     } else if (state is OrdersScreenSuccess) {
                       if (state.orders.isEmpty) {
                         return SliverToBoxAdapter(
-                          child: Center(child: Text('No Orders Found.')),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height - 200,
+                            child: Center(
+                              child: SizedBox(
+                                width: 300,
+                                child: CustomEmptyOrders(),
+                              ),
+                            ),
+                          ),
                         );
                       } else {
                         return SliverList(
@@ -185,7 +193,12 @@ class _CustomerOrdersScreenState extends State<CustomerOrdersScreen> {
                         return SliverToBoxAdapter(
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height - 200,
-                            child: Center(child: Text('No Orders Found.')),
+                            child: Center(
+                              child: SizedBox(
+                                width: 300,
+                                child: CustomEmptyOrders(),
+                              ),
+                            ),
                           ),
                         );
                       } else {
