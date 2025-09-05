@@ -15,7 +15,7 @@ class AppConstants {
           'Browse our diverse menus, from breakfast to dinner, and order your favorite dishes with ease.',
     },
     {
-      'image': 'assets/icons/coffee-beans-svgrepo-com.svg',
+      'image': 'assets/icons/coffee-beans-coffee-svgrepo-com.svg',
       'title': 'Your Coffee Awaits',
       'body':
           'Enjoy moments of tranquility with your favorite cup of coffee, from rich espresso to luxurious latte.',
@@ -33,7 +33,7 @@ class AppConstants {
           'Track your orders, review your purchase history, and save your favorites for quick reordering.',
     },
     {
-      'image': 'assets/icons/analytics-chart-diagram-svgrepo-com.svg',
+      'image': 'assets/icons/analytics-svgrepo-com.svg',
       'title': 'Smart Business Management',
       'body':
           'For our business partners: our admin dashboard provides instant insights and comprehensive reports to manage your business efficiently.',

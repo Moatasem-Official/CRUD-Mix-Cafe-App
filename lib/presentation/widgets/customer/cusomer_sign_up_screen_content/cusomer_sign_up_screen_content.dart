@@ -32,6 +32,7 @@ class CusomerSignUpScreenContent extends StatelessWidget {
       scrollDirection: Axis.vertical,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Image.asset(
