@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/presentation/widgets/customer/customer_profile_screen/custom_account_theme_app_row_item.dart';
 import 'custom_account_addresses_row_item.dart';
 import 'custom_account_language_row_item.dart';
 import 'custom_account_notifications_row_item.dart';
@@ -65,8 +66,7 @@ class CustomScreenCenterSection extends StatelessWidget {
                         content: SizedBox(
                           width: double.maxFinite,
                           child: Column(
-                            mainAxisSize:
-                                MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               TextField(
                                 controller: addressController,
@@ -117,6 +117,19 @@ class CustomScreenCenterSection extends StatelessWidget {
                     index: index,
                     onArabicTap: onArabicTap,
                     onEnglishTap: onEnglishTap,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Divider(
+                  color: Color.fromARGB(255, 227, 227, 227),
+                  height: .5,
+                ),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: CustomAccountThemeAppRowItem(
+                    title: 'Theme',
+                    subtitle: 'Light',
                   ),
                 ),
                 const SizedBox(height: 16),
