@@ -110,7 +110,7 @@ class _CustomAddProductInformationFormState
                 icon: const Icon(Icons.add_circle_outline),
                 label: const Text("Add Product"),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF8B4513),
+                  backgroundColor: Color.fromARGB(255, 165, 101, 56),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 14,

@@ -29,7 +29,7 @@ class WithoutDiscountWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF8B4513),
+            color: Color.fromARGB(255, 165, 101, 56),
           ),
         ),
         const SizedBox(height: 20),

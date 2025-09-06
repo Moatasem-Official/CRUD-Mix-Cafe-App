@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Offers_Screen/custom_admin_empty_offers.dart';
 import '../../../bussines_logic/cubits/admin/offers_screen/cubit/offers_screen_cubit.dart';
 import '../../widgets/admin/Offers_Screen/offer_card/offer_card.dart';
 
@@ -60,7 +61,7 @@ class _OffersScreenState extends State<OffersScreen> {
           }
           if (state is OffersScreenSuccess) {
             if (state.offers.isEmpty) {
-              return Center(child: Text('لا يوجد عروض في الوقت الحالي'));
+              return Center(child: CustomAdminEmptyOffers());
             }
             return ListView.builder(
               itemCount: state.offers.length,

@@ -20,12 +20,12 @@ class OfferStartEndDateTimeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomBuildSection(
-      title: 'جدولة العرض',
+      title: 'Offer Schedule',
       icon: Icons.calendar_month,
       child: Column(
         children: [
           CustomBuildDateTimePicker(
-            label: 'تاريخ ووقت البداية',
+            label: 'Start Date & Time',
             dateTime: startDate,
             onTap: () => HelperFunctions.pickDateTime(
               isStartDate: true,
@@ -35,7 +35,7 @@ class OfferStartEndDateTimeSection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomBuildDateTimePicker(
-            label: 'تاريخ ووقت النهاية',
+            label: 'End Date & Time',
             dateTime: endDate,
             onTap: () => HelperFunctions.pickDateTime(
               isStartDate: false,

@@ -8,10 +8,17 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Color(0xFF6F4E37),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
@@ -31,9 +38,7 @@ class NotificationsScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 10, left: 8, right: 8),
-              padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
-                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: AdminAddNotificationTile(),
@@ -45,8 +50,8 @@ class NotificationsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               itemBuilder: (context, index) {
                 return NotificationCard(
-                  title: 'طلب جديد!',
-                  body: 'وصل طلب من العميل أحمد برقم #238',
+                  title: 'New Order !',
+                  body: 'You Have A new Order From Customer ${index + 1}',
                   timestamp: DateTime.now().subtract(
                     const Duration(minutes: 4),
                   ),

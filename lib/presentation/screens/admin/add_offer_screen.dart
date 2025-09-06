@@ -37,10 +37,6 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
-  // Theme color
-  final Color _primaryColor = const Color.fromARGB(255, 165, 101, 56);
-  final Color _secondaryColor = const Color.fromARGB(255, 195, 131, 86);
-
   @override
   void initState() {
     super.initState();
@@ -67,22 +63,28 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'إضافة عرض جديد',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [_primaryColor, _secondaryColor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          'Add New Offer',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(255, 165, 101, 56),
+            letterSpacing: 1.1,
           ),
         ),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Color.fromARGB(255, 165, 101, 56),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: FadeTransition(
@@ -111,7 +113,7 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
                 ),
                 const SizedBox(height: 20),
                 CustomBuildSection(
-                  title: 'صورة العرض',
+                  title: 'Offer Image',
                   icon: Icons.image,
                   child: CustomBuildImagePicker(
                     offerImage: _offerImage,
@@ -142,7 +144,9 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
 
                         if (imageUrl == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('فشل رفع الصورة')),
+                            const SnackBar(
+                              content: Text('Failed To Upload Image'),
+                            ),
                           );
                           return;
                         }
@@ -161,13 +165,15 @@ class _AdminAddOfferScreenState extends State<AdminAddOfferScreen>
                         );
 
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("تم الإضافة")),
+                          const SnackBar(
+                            content: Text("Offer Added Successfully"),
+                          ),
                         );
                         Navigator.pop(context);
                       } catch (e) {
                         ScaffoldMessenger.of(
                           context,
-                        ).showSnackBar(SnackBar(content: Text('حدث خطأ: $e')));
+                        ).showSnackBar(SnackBar(content: Text('Error: $e')));
                       }
                     },
                   ),

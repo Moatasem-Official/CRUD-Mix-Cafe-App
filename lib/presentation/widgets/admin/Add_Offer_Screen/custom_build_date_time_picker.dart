@@ -18,7 +18,7 @@ class CustomBuildDateTimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     String formattedDateTime = dateTime != null
         ? DateFormat('yyyy-MM-dd – hh:mm a', 'ar').format(dateTime!)
-        : 'لم يتم التحديد';
+        : 'Select Date & Time';
 
     return InkWell(
       onTap: onTap,

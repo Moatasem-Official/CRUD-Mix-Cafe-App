@@ -46,6 +46,7 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
                 showWeekly
                     ? 'Track your restaurant\'s weekly sales performance'
                     : 'Track monthly sales in $selectedYear',
+                textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.brown.shade300, fontSize: 14),
               ),
             ),

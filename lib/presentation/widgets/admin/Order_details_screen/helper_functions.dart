@@ -10,13 +10,17 @@ class HelperFunctions {
   ) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // User must tap a button to dismiss
+      barrierDismissible: true, // User must tap a button to dismiss
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          icon: const Icon(IconlyBold.delete, color: Colors.red, size: 32),
+          icon: const Icon(
+            IconlyBold.delete,
+            color: Color.fromARGB(255, 165, 101, 56),
+            size: 32,
+          ),
           title: Text(
             'Delete Order ?',
             style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
@@ -39,7 +43,7 @@ class HelperFunctions {
               child: Text(
                 'Delete',
                 style: GoogleFonts.poppins(
-                  color: Colors.red,
+                  color: Color.fromARGB(255, 165, 101, 56),
                   fontWeight: FontWeight.w600,
                 ),
               ),

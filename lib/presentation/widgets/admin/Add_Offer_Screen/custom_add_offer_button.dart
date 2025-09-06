@@ -17,7 +17,7 @@ class CustomAddOfferButton extends StatelessWidget {
         elevation: 5,
       ),
       child: const Text(
-        'إضافة العرض الآن',
+        'Add Offer',
         style: TextStyle(
           fontSize: 18,
           color: Colors.white,

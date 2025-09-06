@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Products_Screen_Widgets/custom_admin_empty_products.dart';
 import '../../widgets/admin/Products_Screen_Widgets/edit_product_widget/custom_edit_product_widget.dart';
 import '../../../bussines_logic/cubits/admin/categories_screen/cubit/categories_cubit.dart';
 import 'add_product_information_form.dart';
@@ -35,7 +36,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
           elevation: 4,
           icon: const Icon(Icons.add, size: 22, color: Colors.white),
           label: const Text(
-            "إضافة منتج",
+            "Add Product",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -72,19 +73,13 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                 ),
               );
             } else if (state is CategoriesEmpty) {
-              return ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: const [
-                  SizedBox(height: 200),
-                  Center(child: Text('لا يوجد منتجات')),
-                ],
-              );
+              return Center(child: CustomAdminEmptyProducts());
             } else if (state is CategoriesError) {
               return ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: const [
                   SizedBox(height: 200),
-                  Center(child: Text('حدث خطأ أثناء تحميل المنتجات')),
+                  Center(child: Text('Something Went Wrong')),
                 ],
               );
             } else if (state is CategoriesLoaded) {
@@ -121,15 +116,17 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                         context: context,
                         builder: (_) {
                           return AlertDialog(
-                            title: const Text('تأكيد'),
-                            content: const Text('هل تريد حذف هذا المنتج؟'),
+                            title: const Text('Delete Product'),
+                            content: const Text(
+                              'Do You Want To Delete This Item ?',
+                            ),
                             actions: [
                               TextButton(
-                                child: const Text('لا'),
+                                child: const Text('No'),
                                 onPressed: () => Navigator.pop(context),
                               ),
                               TextButton(
-                                child: const Text('نعم'),
+                                child: const Text('Yes'),
                                 onPressed: () async {
                                   Navigator.pop(context);
 
@@ -150,7 +147,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
                 },
               );
             } else {
-              return const Center(child: Text('لم يتم تحميل البيانات بعد'));
+              return const Center(child: Text('Something Went Wrong'));
             }
           },
         ),

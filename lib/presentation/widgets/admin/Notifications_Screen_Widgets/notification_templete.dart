@@ -23,7 +23,9 @@ class NotificationCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isRead ? const Color(0xFFFDFDFD) : const Color(0xFFFFF9F2),
+        color: isRead
+            ? const Color(0xFFFDFDFD)
+            : const Color.fromARGB(255, 255, 252, 248),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -108,9 +110,9 @@ class NotificationCard extends StatelessWidget {
     final now = DateTime.now();
     final diff = now.difference(date);
 
-    if (diff.inSeconds < 60) return 'الآن';
-    if (diff.inMinutes < 60) return 'منذ ${diff.inMinutes} دقيقة';
-    if (diff.inHours < 24) return 'منذ ${diff.inHours} ساعة';
+    if (diff.inSeconds < 60) return 'Now';
+    if (diff.inMinutes < 60) return '${diff.inMinutes} Minutes Ago';
+    if (diff.inHours < 24) return '${diff.inHours} Hours Ago';
     return DateFormat('yyyy-MM-dd – HH:mm').format(date);
   }
 }

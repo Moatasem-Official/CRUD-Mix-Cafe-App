@@ -42,10 +42,10 @@ class CustomTextField extends StatelessWidget {
       ),
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
-          return 'هذا الحقل مطلوب';
+          return 'This Field Is Required';
         }
         if (double.tryParse(value) == null && isNumber) {
-          return 'الرجاء إدخال قيمة صحيحة';
+          return 'Please Enter A Valid Number';
         }
         return null; // يعني أن القيمة صحيحة
       },

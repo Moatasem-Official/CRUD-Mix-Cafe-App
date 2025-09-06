@@ -32,7 +32,7 @@ class ProductPropertiesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Color(0xFFF3E3D3),
+      color: Color.fromARGB(255, 255, 250, 245),
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Padding(

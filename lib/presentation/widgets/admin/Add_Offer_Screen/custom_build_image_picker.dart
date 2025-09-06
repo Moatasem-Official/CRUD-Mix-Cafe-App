@@ -44,7 +44,10 @@ class CustomBuildImagePicker extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   SizedBox(height: 8),
-                  Text('اضغط هنا لاختيار صورة'),
+                  Text(
+                    'Press To Add Offer Image',
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ],
               ),
       ),

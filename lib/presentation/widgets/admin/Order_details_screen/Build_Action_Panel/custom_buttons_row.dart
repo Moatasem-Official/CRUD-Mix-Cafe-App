@@ -18,18 +18,25 @@ class CustomButtonsRow extends StatelessWidget {
       children: [
         Expanded(
           child: OutlinedButton.icon(
-            icon: Icon(IconlyBold.delete, color: Colors.red.shade700, size: 20),
+            icon: Icon(
+              IconlyBold.delete,
+              color: Color.fromARGB(255, 165, 101, 56),
+              size: 20,
+            ),
             label: Text(
               'Delete', // Shorter label
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                color: Colors.red.shade700,
+                color: Color.fromARGB(255, 165, 101, 56),
               ),
             ),
             // ✨ This now shows a confirmation dialog ✨
             onPressed: onDelete,
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: Colors.red.shade300, width: 1.5),
+              side: BorderSide(
+                color: Color.fromARGB(255, 165, 101, 56),
+                width: 1.5,
+              ),
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),

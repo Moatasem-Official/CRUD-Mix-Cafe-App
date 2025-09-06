@@ -70,7 +70,7 @@ class CustomAnalysisContainer extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF4E342E),
+                            color: Color.fromARGB(255, 110, 68, 37),
                           ),
                         ),
                       ),

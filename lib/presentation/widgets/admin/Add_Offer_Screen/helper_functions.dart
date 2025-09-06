@@ -61,24 +61,22 @@ class HelperFunctions {
     if (!isValid || startDate == null || endDate == null) {
       ScaffoldMessenger.of(rootContext).showSnackBar(
         const SnackBar(
-          content: Text("الرجاء تعبئة جميع الحقول وتحديد التواريخ"),
+          content: Text("Please Fill In All The Required Fields."),
         ),
       );
       return false;
     }
 
     if (offerImage == null) {
-      ScaffoldMessenger.of(
-        rootContext,
-      ).showSnackBar(const SnackBar(content: Text("الرجاء اختيار صورة للعرض")));
+      ScaffoldMessenger.of(rootContext).showSnackBar(
+        const SnackBar(content: Text("Please Select Offer Image.")),
+      );
       return false;
     }
 
     if (endDate.isBefore(startDate)) {
       ScaffoldMessenger.of(rootContext).showSnackBar(
-        const SnackBar(
-          content: Text("تاريخ النهاية يجب أن يكون بعد تاريخ البداية"),
-        ),
+        const SnackBar(content: Text("End Date Must Be After Start Date.")),
       );
       return false;
     }

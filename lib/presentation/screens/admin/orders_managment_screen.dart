@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mix_cafe_app/presentation/widgets/admin/Orders_Screen_Widgets/custom_admin_empty_orders.dart';
 
 import '../../../bussines_logic/cubits/admin/orders_management_screen/cubit/orders_management_cubit.dart';
 import '../../widgets/admin/Orders_Screen_Widgets/custom_orders_screen_appbar.dart';
@@ -68,7 +69,10 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                     );
                   } else if (state is OrdersManagementLoaded) {
                     if (state.orders.isEmpty) {
-                      return const Center(child: Text('لا توجد طلبات حالياً.'));
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height - 200,
+                        child: const Center(child: CustomAdminEmptyOrders()),
+                      );
                     }
 
                     return ListView.builder(
@@ -80,7 +84,7 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                         final id = (index + 1).toString();
                         return AuroraOrderCard(
                           orderId: id,
-                          customerName: order.customerName ?? 'غير معروف',
+                          customerName: order.customerName ?? 'Unknown',
                           image: order.customerImage!,
                           date: formatDate(order.timestamp),
                           time: formatTime(order.timestamp),
@@ -96,12 +100,10 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                       },
                     );
                   } else if (state is OrdersManagementError) {
-                    return const Center(
-                      child: Text('حدث خطأ أثناء تحميل الطلبات.'),
-                    );
+                    return const Center(child: Text('Something Went Wrong'));
                   } else if (state is OrdersManagementFilter) {
                     if (state.orders.isEmpty) {
-                      return const Center(child: Text('لا توجد طلبات حالياً.'));
+                      return const Center(child: CustomAdminEmptyOrders());
                     }
 
                     return ListView.builder(
@@ -113,7 +115,7 @@ class _OrdersManagmentScreenState extends State<OrdersManagmentScreen> {
                         final id = (index + 1).toString();
                         return AuroraOrderCard(
                           orderId: id,
-                          customerName: order.customerName ?? 'غير معروف',
+                          customerName: order.customerName ?? 'Unknown',
                           image: order.customerImage!,
                           date: formatDate(order.timestamp),
                           time: formatTime(order.timestamp),

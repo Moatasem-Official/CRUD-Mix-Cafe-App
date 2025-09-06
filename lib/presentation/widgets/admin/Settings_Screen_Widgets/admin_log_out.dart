@@ -8,25 +8,28 @@ class AdminLogOut extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       title: const Text(
-        'تسجيل الخروج',
+        'LOG OUT',
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: Color.fromARGB(255, 165, 101, 56),
         ),
       ),
-      content: const Text('هل تريد تسجيل الخروج ؟'),
+      content: const Text('Do You Want To Log Out ?'),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('لا'),
+          child: const Text(
+            'No',
+            style: TextStyle(color: Color.fromARGB(255, 165, 101, 56)),
+          ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF8B4513),
+            backgroundColor: Color.fromARGB(255, 165, 101, 56),
           ),
           onPressed: () => Navigator.pop(context, true),
-          child: const Text('نعم', style: TextStyle(color: Colors.white)),
+          child: const Text('Yes', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

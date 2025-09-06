@@ -1,4 +1,6 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:mix_cafe_app/data/helpers/custom_snack_bar.dart';
 
 class AdminAddNotificationTile extends StatefulWidget {
   const AdminAddNotificationTile({super.key});
@@ -171,8 +173,10 @@ class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
                             }
 
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Notification sent locally'),
+                              CustomSnackBar(
+                                message: 'Notification Sent Successfully',
+                                title: 'Success',
+                                contentType: ContentType.success,
                               ),
                             );
 

@@ -15,14 +15,14 @@ class MainOfferDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomBuildSection(
-      title: 'تفاصيل العرض الأساسية',
+      title: 'Main Offer Details',
       icon: Icons.edit_note,
       child: Column(
         children: [
           TextFormField(
             controller: titleController,
             decoration: HelperFunctions.buildInputDecoration(
-              'عنوان العرض',
+              'Offer Title',
               Icons.title,
             ),
           ),
@@ -30,7 +30,7 @@ class MainOfferDetailsSection extends StatelessWidget {
           TextFormField(
             controller: descriptionController,
             decoration: HelperFunctions.buildInputDecoration(
-              'وصف العرض',
+              'Offer Description',
               Icons.description,
             ),
             maxLines: 4,

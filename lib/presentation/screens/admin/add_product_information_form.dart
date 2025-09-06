@@ -68,35 +68,27 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
             }
           },
           child: Scaffold(
+            backgroundColor: Colors.white,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70),
               child: AppBar(
-                backgroundColor: const Color(0xFF8B4513), // كابتشينو ناعم
-                elevation: 2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(20),
-                  ),
-                ),
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.white, // كابتشينو ناعم
                 centerTitle: true,
                 title: const Text(
                   'Product Information',
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    letterSpacing: 1.1,
+                    color: Color.fromARGB(255, 165, 101, 56),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                leading: Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
-                    ),
-                    onPressed: () => Navigator.of(context).pop(),
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color.fromARGB(255, 165, 101, 56),
                   ),
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
             ),
@@ -105,7 +97,6 @@ class _ProductInformationFormState extends State<ProductInformationForm> {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
                   CustomAddProductInformationForm(
                     controller: _formController,
                     onHasDiscountSwitchChanged: (value) {
