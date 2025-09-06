@@ -80,7 +80,7 @@ class CustomerLoginScreenContent extends StatelessWidget {
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/forgetPassword'),
                       child: Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsetsDirectional.all(4.0),
                         child: const Text(
                           'Forgot Password ?',
                           style: TextStyle(

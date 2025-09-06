@@ -62,7 +62,7 @@ class _AnalyticsHomeScreenState extends State<AnalyticsHomeScreen> {
             ),
             onPressed: () => Navigator.of(context).pushNamed('/offersScreen'),
             icon: Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsetsDirectional.all(8),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 237, 237, 237),
                 shape: BoxShape.circle,

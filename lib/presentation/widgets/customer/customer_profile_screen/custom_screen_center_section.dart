@@ -102,7 +102,11 @@ class _CustomScreenCenterSectionState extends State<CustomScreenCenterSection> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 16, right: 8),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 16,
+                      top: 16,
+                      end: 8,
+                    ),
                     child: CustomAccountAddressesRowItem(
                       title: 'Saved Addresses',
                       subtitle: widget.address,
@@ -117,7 +121,7 @@ class _CustomScreenCenterSectionState extends State<CustomScreenCenterSection> {
                 ),
                 const SizedBox(height: 16),
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                   child: CustomAccountLanguageRowItem(
                     title: 'Language',
                     selectedLanguage: widget.selectedLanguage,
@@ -195,7 +199,10 @@ class _CustomScreenCenterSectionState extends State<CustomScreenCenterSection> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 16,
+                      end: 16,
+                    ),
                     child: CustomAccountThemeAppRowItem(
                       title: 'Theme',
                       index: currentIndex,
@@ -209,9 +216,9 @@ class _CustomScreenCenterSectionState extends State<CustomScreenCenterSection> {
                 ),
                 const SizedBox(height: 16),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16,
-                    right: 16,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 16,
+                    end: 16,
                     bottom: 16,
                   ),
                   child: CustomAccountNotificationsRowItem(

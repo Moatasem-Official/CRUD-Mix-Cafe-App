@@ -26,7 +26,7 @@ class CustomExpandedContent extends StatelessWidget {
         curve: Curves.easeIn,
         opacity: isExpanded ? 1.0 : 0.0,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 15),
+          padding: const EdgeInsetsDirectional.only(top: 15),
           child: Column(
             children: [
               const Divider(color: Colors.white24),

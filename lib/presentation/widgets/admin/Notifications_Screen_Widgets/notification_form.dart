@@ -40,7 +40,7 @@ class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
           ),
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: const EdgeInsetsDirectional.symmetric(
                 horizontal: 18.0,
                 vertical: 12,
               ),
@@ -152,7 +152,9 @@ class _AdminAddNotificationTileState extends State<AdminAddNotificationTile> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF6F4E37),
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            vertical: 14,
+                          ),
                           textStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

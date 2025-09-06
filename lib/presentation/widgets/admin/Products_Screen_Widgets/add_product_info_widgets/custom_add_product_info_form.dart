@@ -46,7 +46,7 @@ class _CustomAddProductInformationFormState
     return Form(
       key: widget.controller.formKey,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsetsDirectional.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -111,7 +111,7 @@ class _CustomAddProductInformationFormState
                 label: const Text("Add Product"),
                 style: FilledButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 165, 101, 56),
-                  padding: const EdgeInsets.symmetric(
+                  padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: 24,
                     vertical: 14,
                   ),

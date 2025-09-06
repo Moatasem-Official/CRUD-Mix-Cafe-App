@@ -37,7 +37,7 @@ class CustomButtonsRow extends StatelessWidget {
                 color: Color.fromARGB(255, 165, 101, 56),
                 width: 1.5,
               ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -58,7 +58,7 @@ class CustomButtonsRow extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF4E342E),
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

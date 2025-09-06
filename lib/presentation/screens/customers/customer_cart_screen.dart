@@ -150,7 +150,9 @@ class _CustomerCartScreenState extends State<CustomerCartScreen> {
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 16,
+                        ),
                         child: state is CartScreenLoading
                             ? const Center(
                                 child: CircularProgressIndicator(

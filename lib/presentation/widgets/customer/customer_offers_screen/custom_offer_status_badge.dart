@@ -14,7 +14,10 @@ class OfferStatusBadge extends StatelessWidget {
     final IconData icon = HelperFunctions.statusIcon(status);
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 10,
+        vertical: 4,
+      ),
       decoration: BoxDecoration(
         color: iconColor.withOpacity(0.1), // لون خلفية فاتح
         borderRadius: BorderRadius.circular(20),

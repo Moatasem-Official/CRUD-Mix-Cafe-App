@@ -30,7 +30,12 @@ class _CustomOrdersManagmentAppBarState
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 40, bottom: 16, left: 16, right: 16),
+      padding: const EdgeInsetsDirectional.only(
+        top: 40,
+        bottom: 16,
+        start: 16,
+        end: 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.only(
@@ -77,7 +82,7 @@ class _CustomOrdersManagmentAppBarState
                   child: FractionallySizedBox(
                     widthFactor: 1 / tabs.length,
                     child: Container(
-                      margin: const EdgeInsets.all(4),
+                      margin: const EdgeInsetsDirectional.all(4),
                       decoration: BoxDecoration(
                         color: const Color(0xFFA56538),
                         borderRadius: BorderRadius.circular(8),

@@ -41,7 +41,7 @@ class CustomUplaodImageContainer extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   height: 200,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsetsDirectional.all(8),
                   child: Center(
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,

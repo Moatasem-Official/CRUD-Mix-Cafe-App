@@ -37,7 +37,11 @@ class NotificationsScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 10, left: 8, right: 8),
+              margin: const EdgeInsetsDirectional.only(
+                top: 10,
+                start: 8,
+                end: 8,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -47,7 +51,7 @@ class NotificationsScreen extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsetsDirectional.all(8),
               itemBuilder: (context, index) {
                 return NotificationCard(
                   title: 'New Order !',

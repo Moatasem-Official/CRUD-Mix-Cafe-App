@@ -66,9 +66,12 @@ class _AuroraOrderCardState extends State<AuroraOrderCard>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         curve: Curves.fastOutSlowIn,
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        margin: const EdgeInsetsDirectional.symmetric(
+          vertical: 10,
+          horizontal: 16,
+        ),
         height: _isExpanded ? 200 : 100,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsetsDirectional.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: const LinearGradient(

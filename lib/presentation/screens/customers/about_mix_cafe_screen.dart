@@ -22,7 +22,7 @@ class AboutMixCafeScreen extends StatelessWidget {
         ), // لون كوفي أنيق
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsetsDirectional.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

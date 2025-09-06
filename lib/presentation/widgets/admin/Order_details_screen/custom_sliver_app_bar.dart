@@ -22,7 +22,7 @@ class CustomSliverAppBar extends StatelessWidget {
       iconTheme: const IconThemeData(color: Colors.white),
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: false,
-        titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
+        titlePadding: const EdgeInsetsDirectional.only(start: 16, bottom: 16),
         title: Text(
           'Order #$orderId',
           style: GoogleFonts.poppins(
@@ -31,7 +31,7 @@ class CustomSliverAppBar extends StatelessWidget {
           ),
         ),
         background: Container(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsetsDirectional.all(16.0),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFF5D4037), Color(0xFF3E2723)],
@@ -44,7 +44,7 @@ class CustomSliverAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
+                padding: const EdgeInsetsDirectional.symmetric(
                   horizontal: 10,
                   vertical: 5,
                 ),

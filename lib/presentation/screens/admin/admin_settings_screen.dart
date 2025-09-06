@@ -178,7 +178,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsetsDirectional.all(16.0),
                       child: Text(
                         '© 2025 Mix Cafe. All Rights Reserved.',
                         style: TextStyle(color: Colors.grey, fontSize: 18),

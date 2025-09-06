@@ -22,7 +22,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsetsDirectional.all(16.0),
       child: TextFormField(
         controller: widget.controller,
         validator: widget.validator,
@@ -66,7 +66,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null,
           hintText: widget.hintText,
           hintStyle: TextStyle(color: Colors.grey[600]),
-          contentPadding: const EdgeInsets.all(12),
+          contentPadding: const EdgeInsetsDirectional.all(12),
         ),
       ),
     );

@@ -75,7 +75,7 @@ class CustomAppBar extends StatelessWidget {
                     return Stack(
                       children: [
                         Container(
-                          margin: const EdgeInsets.all(8.0),
+                          margin: const EdgeInsetsDirectional.all(8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
@@ -156,7 +156,10 @@ class CustomAppBar extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: 16,
+            vertical: 10,
+          ),
           child: Container(
             height: 50,
             decoration: BoxDecoration(
@@ -173,7 +176,9 @@ class CustomAppBar extends StatelessWidget {
             child: TextField(
               style: const TextStyle(fontSize: 16),
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                contentPadding: const EdgeInsetsDirectional.symmetric(
+                  vertical: 12,
+                ),
                 border: InputBorder.none,
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 hintText: 'Search For Food, Drinks, Or More...',
@@ -185,7 +190,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
           child: Row(
             children: [
               CustomFilterRowItem(

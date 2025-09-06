@@ -145,7 +145,10 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
                     ),
                     const SizedBox(height: 40),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 8),
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 16,
+                        end: 8,
+                      ),
                       child: CustomScreenCenterSection(
                         address: address == '' ? 'No address Exists' : address,
                         index: 0,
@@ -190,12 +193,18 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 16,
+                        end: 16,
+                      ),
                       child: CustomScreenLowerSection(),
                     ),
                     const SizedBox(height: 20),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 16,
+                        end: 16,
+                      ),
                       child: Container(
                         width: double.infinity,
                         height: 80,
@@ -231,7 +240,10 @@ class _CustomerProfileScreenState extends State<CustomerProfileScreen> {
                             }
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            padding: const EdgeInsetsDirectional.only(
+                              start: 16,
+                              end: 16,
+                            ),
                             child: CustomAccountSupportRowItem(
                               title: 'Logout',
                               backgroundColor: const Color.fromARGB(

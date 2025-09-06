@@ -8,7 +8,7 @@ class CustomAnalysisContainersRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+      padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 15, 20),
       child: Row(
         spacing: 10,
         mainAxisAlignment: MainAxisAlignment.center,

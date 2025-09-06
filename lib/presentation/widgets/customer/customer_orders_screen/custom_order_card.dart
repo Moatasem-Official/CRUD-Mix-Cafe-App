@@ -63,14 +63,17 @@ class OrderCard extends StatelessWidget {
     final statusInfo = getStatusInfo(status);
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      margin: const EdgeInsetsDirectional.symmetric(
+        horizontal: 16,
+        vertical: 10,
+      ),
       child:
           Stack(
                 clipBehavior: Clip.none,
                 children: [
                   // Main Card Body
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsetsDirectional.all(20),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFFFDF9),
                       borderRadius: BorderRadius.circular(20),
@@ -135,7 +138,10 @@ class OrderCard extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: 8,
+            vertical: 4,
+          ),
           decoration: BoxDecoration(
             color: const Color(0xFFFFF9F0),
             borderRadius: BorderRadius.circular(12),
@@ -163,7 +169,10 @@ class OrderCard extends StatelessWidget {
     const borderShape = BorderSide.none;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsetsDirectional.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -204,7 +213,7 @@ class OrderCard extends StatelessWidget {
           // --- المنتجات التي ستظهر عند فتح الـ Tile ---
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsetsDirectional.all(16.0),
               // نستخدم نفس منطق الـ Wrap الذي قمنا ببنائه سابقًا
               child: _buildProductChipsInside(products),
             ),
@@ -223,7 +232,10 @@ class OrderCard extends StatelessWidget {
           .whereType<Map<String, dynamic>>()
           .map(
             (product) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ),
               decoration: BoxDecoration(
                 color: const Color(0xFFECEFF1),
                 borderRadius: BorderRadius.circular(10),
@@ -245,7 +257,7 @@ class OrderCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(
+                    padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: 6,
                       vertical: 2,
                     ),
@@ -316,7 +328,7 @@ class OrderCard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFC38154), // Rich brown
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -339,7 +351,7 @@ class OrderCard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4E342E), // Rich brown
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -379,7 +391,10 @@ class OrderCard extends StatelessWidget {
       right: 10,
       child: Container(
         // ✨ تم تقليل الحشو الداخلي (Padding)
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 10,
+          vertical: 14,
+        ),
         decoration: BoxDecoration(
           color: statusInfo.color,
           borderRadius: const BorderRadius.only(
@@ -420,7 +435,10 @@ class OrderCard extends StatelessWidget {
   /// Builds a stylish chip to display the order date.
   Widget _buildDateChip() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 12,
+        vertical: 6,
+      ),
       decoration: BoxDecoration(
         color: Colors.blueGrey.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),

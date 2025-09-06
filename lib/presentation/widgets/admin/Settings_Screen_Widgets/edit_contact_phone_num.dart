@@ -17,7 +17,7 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: const Text(
-        'تعديل رقم تواصل المطعم العام',
+        'Edit Public Restaurant Phone Number',
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'رقم التواصل',
+            'Phone Number',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
@@ -41,7 +41,7 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
             controller: phoneController,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
-              hintText: 'أدخل رقم التواصل',
+              hintText: 'Phone Number',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -59,7 +59,7 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('إلغاء', style: TextStyle(color: Colors.grey)),
+          child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -67,7 +67,10 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 20,
+              vertical: 12,
+            ),
           ),
           onPressed: () async {
             final newPhone = phoneController.text.trim();
@@ -96,7 +99,7 @@ class EditAdminContactPhoneNumber extends StatelessWidget {
               );
             }
           },
-          child: const Text('تحديث', style: TextStyle(color: Colors.white)),
+          child: const Text('Save', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

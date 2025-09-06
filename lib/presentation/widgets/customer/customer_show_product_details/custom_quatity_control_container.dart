@@ -8,7 +8,10 @@ class CustomQuatityControlContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
       decoration: BoxDecoration(
         color: const Color(0xFFFFF9F0),
         borderRadius: BorderRadius.circular(12),

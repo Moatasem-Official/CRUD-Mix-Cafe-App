@@ -27,8 +27,11 @@ class CustomOnBoardingPage extends StatelessWidget {
         ),
         const SizedBox(height: 40),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+          margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: 25,
+            vertical: 30,
+          ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.85),
             borderRadius: BorderRadius.circular(25),

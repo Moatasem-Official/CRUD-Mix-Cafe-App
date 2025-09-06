@@ -20,16 +20,16 @@ class _FilterChipBarState extends State<FilterChipBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsetsDirectional.all(8.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: FittedBox(
           child: Container(
             height: 50,
             color: const Color.fromARGB(255, 165, 101, 56), // Rich dark brown
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsetsDirectional.symmetric(vertical: 8.0),
             child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(_filters.length, (index) {
@@ -44,7 +44,7 @@ class _FilterChipBarState extends State<FilterChipBar> {
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
-                      padding: const EdgeInsets.symmetric(
+                      padding: const EdgeInsetsDirectional.symmetric(
                         horizontal: 20,
                         vertical: 6,
                       ),

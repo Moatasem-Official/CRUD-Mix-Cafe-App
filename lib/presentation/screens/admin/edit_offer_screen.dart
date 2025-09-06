@@ -45,7 +45,7 @@ class _EditOfferFormState extends State<EditOfferForm> {
         backgroundColor: mainColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsetsDirectional.all(20),
         child: Form(
           key: _formKey,
           child: ListView(

@@ -58,7 +58,11 @@ class _CategoriesManagementScreenState extends State<CategoriesManagmentScreen>
         preferredSize: const Size.fromHeight(130),
         child: Container(
           // --- ✨ قم بزيادة المسافة العلوية هنا ✨ ---
-          padding: const EdgeInsets.only(top: 55, left: 16, right: 16),
+          padding: const EdgeInsetsDirectional.only(
+            top: 55,
+            start: 16,
+            end: 16,
+          ),
           decoration: BoxDecoration(
             //... باقي الكود كما هو
             color: Colors.white,
@@ -88,7 +92,7 @@ class _CategoriesManagementScreenState extends State<CategoriesManagmentScreen>
               TabBar(
                 controller: _tabController,
                 isScrollable: true,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsetsDirectional.zero,
                 dividerHeight: 0, // <-- 1. أضف هذا السطر لإزالة الخط
                 tabAlignment: TabAlignment
                     .start, // <-- 2. أضف هذا السطر لبدء التبويبات من الحافة

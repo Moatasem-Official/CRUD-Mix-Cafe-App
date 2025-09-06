@@ -13,7 +13,10 @@ class ActivateOrdersWithSwitchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 12,
+        vertical: 10,
+      ),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 137, 86, 50),
         borderRadius: BorderRadius.circular(8),

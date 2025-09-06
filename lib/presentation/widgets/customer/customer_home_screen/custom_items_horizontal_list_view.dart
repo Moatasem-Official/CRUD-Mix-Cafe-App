@@ -19,7 +19,7 @@ class CustomItemsHorizontalListView extends StatelessWidget {
       child: Row(
         children: products.take(5).map((product) {
           return Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: const EdgeInsetsDirectional.only(end: 16),
             child: CustomProductContainer(
               productImage: product.imageUrl,
               productName: product.name,

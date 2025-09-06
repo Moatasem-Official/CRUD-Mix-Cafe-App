@@ -33,10 +33,10 @@ class ProductPropertiesCard extends StatelessWidget {
     return Card(
       elevation: 0,
       color: Color.fromARGB(255, 255, 250, 245),
-      margin: EdgeInsets.zero,
+      margin: EdgeInsetsDirectional.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: 8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

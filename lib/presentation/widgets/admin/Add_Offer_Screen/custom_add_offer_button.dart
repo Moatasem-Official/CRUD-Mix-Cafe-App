@@ -11,7 +11,7 @@ class CustomAddOfferButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onAddOffer,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: 16),
         backgroundColor: primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 5,

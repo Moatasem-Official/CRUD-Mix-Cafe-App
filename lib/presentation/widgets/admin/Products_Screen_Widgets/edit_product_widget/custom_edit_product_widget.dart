@@ -136,7 +136,7 @@ class _CustomEditProductWidgetState extends State<CustomEditProductWidget> {
               elevation: 0,
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsetsDirectional.all(16.0),
               child: Form(
                 key: _formKey,
                 child: Column(

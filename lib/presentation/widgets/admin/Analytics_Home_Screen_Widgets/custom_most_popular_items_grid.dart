@@ -20,9 +20,9 @@ class CustomMostPopularItemsGrid extends StatelessWidget {
           (index) => SizedBox(
             width: MediaQuery.of(context).size.width / 2,
             child: Padding(
-              padding: EdgeInsets.only(
-                left: index == 0 || index == 2 ? 15 : 8,
-                right: index == 0 || index == 2 ? 0 : 15,
+              padding: EdgeInsetsDirectional.only(
+                start: index == 0 || index == 2 ? 15 : 8,
+                end: index == 0 || index == 2 ? 0 : 15,
               ),
               child: GestureDetector(
                 onTap: () => Navigator.pushNamed(

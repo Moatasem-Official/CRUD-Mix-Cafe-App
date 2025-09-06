@@ -53,7 +53,7 @@ class _CustomerOffersScreenState extends State<CustomerOffersScreen> {
             }
 
             return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
               itemCount: offers.length,
               itemBuilder: (context, index) {
                 return OfferCard(offer: offers[index]);

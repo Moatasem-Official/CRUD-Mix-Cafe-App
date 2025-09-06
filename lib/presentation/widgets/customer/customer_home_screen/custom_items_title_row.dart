@@ -15,7 +15,7 @@ class CustomItemsTitleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, bottom: 8),
+      padding: const EdgeInsetsDirectional.only(start: 16, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,7 +29,7 @@ class CustomItemsTitleRow extends StatelessWidget {
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: const EdgeInsetsDirectional.only(end: 16),
             child: GestureDetector(
               onTap: onTap,
               child: numberOfProducts > 5

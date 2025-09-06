@@ -1,9 +1,11 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mix_cafe_app/bussines_logic/cubits/locale/locale_cubit.dart';
 import 'bussines_logic/cubits/customer/Offers_Screen/cubit/customer_offers_screen_cubit.dart';
 import 'bussines_logic/cubits/customer/cart_screen/cubit/cart_screen_cubit.dart';
 import 'app_router.dart';
@@ -12,8 +14,22 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/lang',
+      fallbackLocale: const Locale('en'),
+      child: BlocProvider(
+        create: (_) => LocaleCubit(),
+        child: DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => MyApp(),
+        ),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -47,10 +63,17 @@ class _MyAppState extends State<MyApp> {
           create: (context) => CustomerOffersScreenCubit(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
+      child: BlocBuilder<LocaleCubit, Locale>(
+        builder: (context, locale) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
+          );
+        },
       ),
     );
   }

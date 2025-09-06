@@ -19,7 +19,10 @@ class _SelectUserRoleScreenState extends State<SelectUserRoleScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24,
+              vertical: 32,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

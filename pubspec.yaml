@@ -17,6 +17,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   device_preview: ^1.2.0
   dotted_border: ^3.0.1
+  easy_localization: ^3.0.8
   equatable: ^2.0.7
   firebase_auth: ^5.6.1
   firebase_core: ^3.15.0
@@ -64,6 +65,7 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/icons/
+    - assets/lang/
 
 flutter_assets:
   assets_path: assets/images/

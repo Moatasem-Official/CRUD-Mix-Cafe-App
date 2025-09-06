@@ -140,7 +140,7 @@ class _AdminOrderDetailsScreenState extends State<AdminOrderDetailsScreen> {
                   currentStatus: _currentStatus,
                 ),
                 SliverPadding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsetsDirectional.all(16.0),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
                       CustomInfoPanel(

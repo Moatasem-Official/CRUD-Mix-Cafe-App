@@ -50,7 +50,7 @@ class CustomChartContent extends StatelessWidget {
       height: 260,
       child: hasActualData
           ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 16.0),
               child: LineChart(
                 LineChartData(
                   lineTouchData: LineTouchData(
@@ -89,7 +89,7 @@ class CustomChartContent extends StatelessWidget {
                         showTitles: true,
                         interval: showWeekly ? 500 : 5000,
                         getTitlesWidget: (value, meta) => Padding(
-                          padding: const EdgeInsets.only(right: 4.0),
+                          padding: const EdgeInsetsDirectional.only(end: 4.0),
                           child: Transform.translate(
                             offset: const Offset(-10, 0),
                             child: Text(
@@ -121,7 +121,9 @@ class CustomChartContent extends StatelessWidget {
                               'Fri',
                             ];
                             return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsetsDirectional.only(
+                                top: 8.0,
+                              ),
                               child: Text(
                                 days[value.toInt() % days.length],
                                 style: TextStyle(
@@ -147,7 +149,9 @@ class CustomChartContent extends StatelessWidget {
                               'Dec',
                             ];
                             return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsetsDirectional.only(
+                                top: 8.0,
+                              ),
                               child: Text(
                                 months[value.toInt() % months.length],
                                 style: TextStyle(

@@ -43,7 +43,7 @@ class CustomProductDetailsContainer extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 12, 24, 30),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 30),
             child:
                 Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,9 @@ class CustomProductDetailsContainer extends StatelessWidget {
                           child: Container(
                             width: 50,
                             height: 5,
-                            margin: const EdgeInsets.only(bottom: 20),
+                            margin: const EdgeInsetsDirectional.only(
+                              bottom: 20,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(12),
@@ -109,7 +111,10 @@ class CustomProductDetailsContainer extends StatelessWidget {
         ),
         if (hasDiscount && product.discountedPrice > 0)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 10,
+              vertical: 6,
+            ),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [Color(0xFFFFB74D), Color(0xFFFFA000)],
@@ -200,7 +205,10 @@ class CustomProductDetailsContainer extends StatelessWidget {
     required Color color,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 12,
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),

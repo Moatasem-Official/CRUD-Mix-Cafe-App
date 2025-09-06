@@ -12,7 +12,7 @@ class CustomTitleOfPopularItems extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -28,7 +28,7 @@ class CustomTitleOfPopularItems extends StatelessWidget {
         items.length > 4
             ? FittedBox(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(

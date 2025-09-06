@@ -33,8 +33,11 @@ class CustomCartItemContainer extends StatelessWidget {
         arguments: product,
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsetsDirectional.symmetric(
+          vertical: 8,
+          horizontal: 4,
+        ),
+        padding: const EdgeInsetsDirectional.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),

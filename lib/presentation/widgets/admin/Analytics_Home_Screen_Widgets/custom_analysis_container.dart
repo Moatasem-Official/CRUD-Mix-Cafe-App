@@ -60,7 +60,9 @@ class CustomAnalysisContainer extends StatelessWidget {
                   } else if (state is HomeAnalyticsSuccess) {
                     final number = state.analyticsData[index].toString();
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 12.0,
+                      ),
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(

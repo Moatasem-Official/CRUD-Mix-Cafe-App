@@ -29,7 +29,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 16, right: 16),
+        padding: const EdgeInsetsDirectional.only(bottom: 16, end: 16),
         child: FloatingActionButton.extended(
           heroTag: 'fab-${widget.categoryId}',
           backgroundColor: const Color(0xFFA0522D),
@@ -87,7 +87,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen>
 
               return ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsetsDirectional.all(8),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   return CustomProductTemplate(

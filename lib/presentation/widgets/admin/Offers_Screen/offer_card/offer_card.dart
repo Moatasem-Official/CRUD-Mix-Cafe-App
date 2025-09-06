@@ -22,7 +22,10 @@ class AdminOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+      margin: const EdgeInsetsDirectional.symmetric(
+        vertical: 10,
+        horizontal: 8,
+      ),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: Colors.white,

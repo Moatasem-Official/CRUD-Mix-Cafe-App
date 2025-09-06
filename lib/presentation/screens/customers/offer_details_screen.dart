@@ -53,7 +53,7 @@ class CustomerOfferDetailsScreen extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsetsDirectional.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -85,7 +85,7 @@ class CustomerOfferDetailsScreen extends StatelessWidget {
 
                 // ✅ التواريخ
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: 12,
                     vertical: 8,
                   ),
@@ -96,7 +96,7 @@ class CustomerOfferDetailsScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(6),
+                        padding: const EdgeInsetsDirectional.all(6),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade300,
                           shape: BoxShape.circle,
@@ -160,7 +160,9 @@ class CustomerOfferDetailsScreen extends StatelessWidget {
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        vertical: 16,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

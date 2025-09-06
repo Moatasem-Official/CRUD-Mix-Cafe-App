@@ -22,7 +22,7 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
       (index) => DateTime.now().year - index,
     );
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+      padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 15),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
                   setState(() => showWeekly = value),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
               child: Text(
                 showWeekly
                     ? 'Track your restaurant\'s weekly sales performance'
@@ -81,7 +81,7 @@ class _CustomAnalysisChartState extends State<CustomAnalysisChart> {
 
             const SizedBox(height: 18),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

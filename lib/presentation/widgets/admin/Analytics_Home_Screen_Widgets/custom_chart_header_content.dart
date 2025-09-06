@@ -25,7 +25,7 @@ class _CustomChartHeaderContentState extends State<CustomChartHeaderContent> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 20, 10, 8),
+      padding: const EdgeInsetsDirectional.fromSTEB(10, 20, 10, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

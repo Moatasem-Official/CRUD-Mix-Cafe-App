@@ -9,8 +9,8 @@ class AdminAccountContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+      padding: const EdgeInsetsDirectional.all(16),
+      margin: const EdgeInsetsDirectional.only(top: 16, start: 16, end: 16),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 165, 101, 56), // خلفية بنية داكنة
         borderRadius: BorderRadius.circular(12),

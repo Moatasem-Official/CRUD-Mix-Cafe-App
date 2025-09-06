@@ -14,7 +14,7 @@ class CustomDotsIndicator extends StatelessWidget {
         AppConstants.onboardingPages.length,
         (index) => AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          margin: const EdgeInsetsDirectional.symmetric(horizontal: 5.0),
           height: 8.0,
           width: currentPage == index ? 24.0 : 8.0,
           decoration: BoxDecoration(

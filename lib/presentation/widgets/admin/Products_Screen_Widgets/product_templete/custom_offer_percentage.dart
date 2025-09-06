@@ -12,7 +12,10 @@ class CustomOfferPercentage extends StatelessWidget {
       top: -4,
       left: -4,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
         decoration: const BoxDecoration(
           color: Color(0xFFC62828),
           borderRadius: BorderRadius.only(

@@ -20,7 +20,10 @@ class CustomDateTimePicker extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 12,
+          vertical: 12,
+        ),
         decoration: BoxDecoration(
           color: const Color(0xFF4E342E).withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),

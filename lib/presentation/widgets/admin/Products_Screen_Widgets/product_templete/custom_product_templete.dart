@@ -34,8 +34,11 @@ class CustomProductTemplate extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsetsDirectional.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
+      padding: const EdgeInsetsDirectional.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),

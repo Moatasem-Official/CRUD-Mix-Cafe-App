@@ -33,7 +33,11 @@ class CustomScreenLowerSection extends StatelessWidget {
                   onTap: () =>
                       Navigator.pushNamed(context, '/aboutMixCafeScreen'),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 16, right: 8),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 16,
+                      top: 16,
+                      end: 8,
+                    ),
                     child: CustomAccountSupportRowItem(
                       title: 'About Mix Cafe',
                       backgroundColor: const Color.fromARGB(255, 225, 225, 225),
@@ -53,7 +57,10 @@ class CustomScreenLowerSection extends StatelessWidget {
                   onTap: () =>
                       Navigator.pushNamed(context, '/contactSupportScreen'),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 16,
+                      end: 16,
+                    ),
                     child: CustomAccountSupportRowItem(
                       title: 'Contact Support',
                       backgroundColor: const Color.fromARGB(255, 225, 225, 225),

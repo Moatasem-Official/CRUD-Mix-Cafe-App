@@ -33,7 +33,7 @@ class CustomSaveButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: mainColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(vertical: 14),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: 14),
       ),
       onPressed: () async {
         final isValid = HelperFunctions.saveForm(

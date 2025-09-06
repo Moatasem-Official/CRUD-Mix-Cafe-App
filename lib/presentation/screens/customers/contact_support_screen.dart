@@ -35,7 +35,7 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Contact Support')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsetsDirectional.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -109,7 +109,7 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
                     label: const Text('Send Message'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepOrange,
-                      padding: const EdgeInsets.symmetric(
+                      padding: const EdgeInsetsDirectional.symmetric(
                         horizontal: 24,
                         vertical: 12,
                       ),

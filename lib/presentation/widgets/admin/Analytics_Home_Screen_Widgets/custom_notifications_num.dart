@@ -9,7 +9,7 @@ class CustomNotificationsNumStack extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsetsDirectional.all(8),
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 237, 237, 237),
             shape: BoxShape.circle,
@@ -23,7 +23,7 @@ class CustomNotificationsNumStack extends StatelessWidget {
           right: -2,
           top: -2,
           child: Container(
-            padding: const EdgeInsets.all(4),
+            padding: const EdgeInsetsDirectional.all(4),
             decoration: const BoxDecoration(
               color: Colors.red,
               shape: BoxShape.circle,

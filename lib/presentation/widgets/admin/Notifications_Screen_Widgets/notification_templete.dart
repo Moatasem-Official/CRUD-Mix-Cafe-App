@@ -20,8 +20,11 @@ class NotificationCard extends StatelessWidget {
     final timeAgo = _formatTimeAgo(timestamp);
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsetsDirectional.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      padding: const EdgeInsetsDirectional.all(16),
       decoration: BoxDecoration(
         color: isRead
             ? const Color(0xFFFDFDFD)

@@ -67,7 +67,9 @@ class CustomProductColumnInfo extends StatelessWidget {
                   label: Text('Edit', style: GoogleFonts.poppins()),
                   style: TextButton.styleFrom(
                     foregroundColor: const Color(0xFF4E342E),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 12,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -77,7 +79,9 @@ class CustomProductColumnInfo extends StatelessWidget {
                   label: Text('Delete', style: GoogleFonts.poppins()),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.red.shade700,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 12,
+                    ),
                   ),
                 ),
               ],

@@ -23,7 +23,7 @@ class CustomScreenUpperSection extends StatelessWidget {
 
     return SizedBox(
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
+        padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -109,7 +109,10 @@ class CustomScreenUpperSection extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 12,
+                vertical: 6,
+              ),
               decoration: BoxDecoration(
                 color: isDarkMode
                     ? const Color.fromARGB(255, 196, 110, 13).withOpacity(0.9)

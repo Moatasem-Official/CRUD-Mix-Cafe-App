@@ -29,7 +29,10 @@ class CustomOfferStatus extends StatelessWidget {
         backgroundColor: HelperFunctions.statusColor(
           HelperFunctions.status(offer),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
       ),
     );
   }

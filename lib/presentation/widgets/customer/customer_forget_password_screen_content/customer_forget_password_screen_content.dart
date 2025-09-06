@@ -31,7 +31,7 @@ class CustomerForgetPasswordScreenContent extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsetsDirectional.all(16.0),
             child: const Text(
               'Enter Your Email Address To Receive A Link To Reset Your Password',
               style: TextStyle(

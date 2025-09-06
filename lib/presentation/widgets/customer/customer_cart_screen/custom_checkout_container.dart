@@ -43,7 +43,10 @@ class CustomCheckoutContainer extends StatelessWidget {
           color: const Color(
             0xFFF9F5EF,
           ), // A slightly darker beige for the ticket
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: 24,
+            vertical: 12,
+          ),
           child:
               Column(
                     mainAxisSize: MainAxisSize.min,
@@ -52,7 +55,7 @@ class CustomCheckoutContainer extends StatelessWidget {
                       Container(
                         width: 50,
                         height: 5,
-                        margin: const EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsetsDirectional.only(bottom: 20),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(12),
@@ -94,7 +97,7 @@ class CustomCheckoutContainer extends StatelessWidget {
 
                       // Total Amount Section
                       Container(
-                        padding: const EdgeInsets.symmetric(
+                        padding: const EdgeInsetsDirectional.symmetric(
                           horizontal: 16,
                           vertical: 12,
                         ),

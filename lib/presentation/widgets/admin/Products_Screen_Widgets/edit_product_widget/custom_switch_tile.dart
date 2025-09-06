@@ -29,7 +29,7 @@ class CustomSwitchTile extends StatelessWidget {
       value: value,
       onChanged: onChanged,
       activeColor: const Color(0xFFC58B3E),
-      contentPadding: EdgeInsets.zero,
+      contentPadding: EdgeInsetsDirectional.zero,
     );
   }
 }

@@ -51,7 +51,7 @@ class CustomAccountLanguageRowItem extends StatelessWidget {
             GestureDetector(
               onTap: onEnglishTap,
               child: Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsetsDirectional.all(8),
                 decoration: BoxDecoration(
                   color: selectedLanguage == 'en'
                       ? const Color(0xFFC58B3E)
@@ -73,7 +73,7 @@ class CustomAccountLanguageRowItem extends StatelessWidget {
             GestureDetector(
               onTap: onArabicTap,
               child: Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsetsDirectional.all(8),
                 decoration: BoxDecoration(
                   color: selectedLanguage == 'ar'
                       ? const Color(0xFFC58B3E)

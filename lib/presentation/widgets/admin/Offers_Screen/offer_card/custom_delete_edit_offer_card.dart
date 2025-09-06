@@ -14,7 +14,10 @@ class CustomDeleteEditOfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color primaryColor = const Color.fromARGB(255, 165, 101, 56);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

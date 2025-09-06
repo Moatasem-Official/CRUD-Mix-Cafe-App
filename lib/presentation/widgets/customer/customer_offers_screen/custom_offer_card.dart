@@ -74,7 +74,7 @@ class _OfferCardState extends State<OfferCard> {
     final offer = widget.offer;
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsetsDirectional.all(16.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () => Navigator.pushNamed(
@@ -114,7 +114,7 @@ class _OfferCardState extends State<OfferCard> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsetsDirectional.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -42,7 +42,10 @@ class ProductCard extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            margin: const EdgeInsetsDirectional.symmetric(
+              vertical: 10,
+              horizontal: 16,
+            ),
             decoration: BoxDecoration(
               color: const Color(0xFFFFFDF9), // Warm off-white
               borderRadius: BorderRadius.circular(20),
@@ -93,8 +96,11 @@ class ProductCard extends StatelessWidget {
         ),
         if (hasDiscount && discountPercentage > 0)
           Container(
-            margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            margin: const EdgeInsetsDirectional.all(8),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 8,
+              vertical: 4,
+            ),
             decoration: BoxDecoration(
               color: const Color(0xFFC62828), // Dark Red
               borderRadius: BorderRadius.circular(12),
@@ -125,7 +131,7 @@ class ProductCard extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsetsDirectional.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,7 +213,7 @@ class ProductCard extends StatelessWidget {
                     onPressed: isAvailable ? onAddToCart : null,
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      padding: EdgeInsets.zero,
+                      padding: EdgeInsetsDirectional.zero,
                       backgroundColor: const Color(0xFF4E342E),
                       foregroundColor: Colors.white,
                       elevation: 4,

@@ -14,7 +14,7 @@ class CustomActionButtons extends StatelessWidget {
       icon: const Icon(IconlyBold.tick_square, color: Colors.white),
       label: const Text('Save Changes', style: TextStyle(color: Colors.white)),
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: 12),
         backgroundColor: const Color(0xFFC58B3E),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 4,

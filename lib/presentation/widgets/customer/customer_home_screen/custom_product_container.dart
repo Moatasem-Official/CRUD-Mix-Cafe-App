@@ -45,7 +45,7 @@ class CustomProductContainer extends StatelessWidget {
         duration: const Duration(milliseconds: 250),
         height: 315,
         width: 190,
-        margin: const EdgeInsets.all(8),
+        margin: const EdgeInsetsDirectional.all(8),
         decoration: BoxDecoration(
           color: const Color(0xFFFFF8F0),
           borderRadius: BorderRadius.circular(20),
@@ -83,7 +83,7 @@ class CustomProductContainer extends StatelessWidget {
                     top: 8,
                     left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: const EdgeInsetsDirectional.symmetric(
                         horizontal: 8,
                         vertical: 4,
                       ),
@@ -117,7 +117,7 @@ class CustomProductContainer extends StatelessWidget {
 
             // الاسم
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
               child: Text(
                 productName,
                 maxLines: 1,
@@ -133,7 +133,7 @@ class CustomProductContainer extends StatelessWidget {
 
             // السعر + الكمية
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
               child: Row(
                 children: [
                   const Icon(
@@ -205,7 +205,7 @@ class CustomProductContainer extends StatelessWidget {
                 offerStartDate != null &&
                 offerEndDate != null)
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 4),
+                padding: const EdgeInsetsDirectional.only(start: 10, top: 4),
                 child: Text(
                   'Offer: ${_formatDate(offerStartDate!)} - ${_formatDate(offerEndDate!)}',
                   style: const TextStyle(
@@ -220,7 +220,7 @@ class CustomProductContainer extends StatelessWidget {
 
             // حالة التوفر
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
               child: Row(
                 children: [
                   Icon(
@@ -246,7 +246,10 @@ class CustomProductContainer extends StatelessWidget {
 
             // زر الإضافة للسلة
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 10,
+                vertical: 8,
+              ),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -258,7 +261,7 @@ class CustomProductContainer extends StatelessWidget {
                         ? const Color(0xFFC58B3E)
                         : Colors.grey,
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsetsDirectional.symmetric(vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
